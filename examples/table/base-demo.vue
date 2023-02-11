@@ -14,7 +14,7 @@ export default defineComponent({
   data () {
     return {
       students: [
-        { name: '张三',  chinese: 10, math: 80,  english: 90 },
+        { name: 'Dwayne Johnson',  chinese: 10, math: 80,  english: 90 },
         { name: '李四', chinese: 86, math: 70,  english: 92 },
         { name: '王五', chinese: 96, math: 90,  english: 80 },
         { name: '小丽', chinese: 83, math: 89,  english: 92 },
