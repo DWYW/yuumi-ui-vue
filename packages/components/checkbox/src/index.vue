@@ -37,13 +37,13 @@ export default defineComponent({
     indeterminateIcon: { type: Object, default: () => ({ icon: 'line-checkbox-indeterminate' })}
   },
   emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
+  setup (props, { emit, attrs }) {
     const { isCheckboxGroup, modelValue, disabled, onChange, updateGroupModelValue } = inject('YuumiCheckboxGroup', {}) as any
 
     const checkboxChecked: ComputedRef<boolean> = computed(() => isCheckboxGroup ? (modelValue.value || []).indexOf(props.unique) > -1 : Boolean(props.modelValue))
     const checkboxDisabled  = computed(() => isCheckboxGroup ? disabled.value : props.disabled)
 
-    function onClick () {
+    function onClick (e: Event) {
       if (checkboxDisabled.value) return
 
       const detail = {
@@ -57,6 +57,10 @@ export default defineComponent({
       } else {
         emit('update:modelValue', detail.checked)
         emit('change', detail)
+      }
+
+      if (attrs.onClick) {
+        (attrs.onClick as Function)(e)
       }
     }
 

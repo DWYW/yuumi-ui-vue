@@ -1,69 +1,54 @@
+import { h, mergeProps, Ref, resolveComponent, withModifiers } from 'vue'
+import { LOAD_STATUS } from './children-helper'
 import { isDescendantElement } from '../../../share/validator'
-import { nextTick, ref } from 'vue'
-import type { Ref } from 'vue'
 
-interface useExpandOption {
-  getNodeExpand: () => boolean
-  beforeExpand?: (e: Event) => void
-  expand?: () => Promise<any>
-  afterExpand?: (expand: boolean) => void
+export interface UseExpandOption {
+  expand: Ref<boolean>
+  updateExpand: (v: boolean) => void
+}
+export interface ExpandHooks {
+  expandBefore?: (e: any) => void
+  expand?: (e: any) => Promise<any>
+  expandAfter?: (e: any) => void
 }
 
-export default function useExpand ({ getNodeExpand, beforeExpand, expand, afterExpand }: useExpandOption) {
-  const checkboxComponent: Ref<any> = ref()
-  const isExpandChildren = ref(getNodeExpand())
+export default function useExpand({ expand, updateExpand }: UseExpandOption, hooks: ExpandHooks) {
+  const _YuumiIcon = resolveComponent('YuumiIcon')
 
-  function toggleExpand (e: Event) {
-    beforeExpand && beforeExpand(e)
+  function expandRender (this: any) {
+    const { loadStatus, isLeaf, expandIcon, expandIconVisible } = this
 
+    let _props: any = null
+    if (loadStatus === LOAD_STATUS.LOADING) {
+      _props = mergeProps({ icon: 'line-loading' })
+    } else if (!isLeaf && expandIconVisible) {
+      _props = mergeProps(expandIcon)
+    }
+
+    return _props &&  h('div', {
+      class: ['expand-icon', {
+        '__active': expand.value,
+        '__loading': loadStatus === LOAD_STATUS.LOADING
+      }],
+      onClick: withModifiers(expandFunc.bind(this), ['stop'])
+    }, [
+      h(_YuumiIcon, _props)
+    ])
+  }
+
+  function expandFunc(this: any, e: Event) {
+    hooks.expandBefore && hooks.expandBefore(e)
+
+    const { checkbox } = this
     const target = e.target as HTMLElement
-    if (checkboxComponent.value && isDescendantElement(target, checkboxComponent.value.$el, checkboxComponent.value.$el.parentElement)) return
+    if (checkbox && isDescendantElement(target, checkbox.$el, checkbox.$el.parentElement)) return
 
-    const promise = expand ? expand() : Promise.resolve()
-
+    const promise = hooks.expand ? hooks.expand(e) : Promise.resolve()
     promise.then(() => {
-      isExpandChildren.value = !isExpandChildren.value
-      afterExpand && afterExpand(isExpandChildren.value)
+      updateExpand(!expand.value)
+      hooks.expandAfter && hooks.expandAfter(e)
     }).catch(() => {})
   }
 
-  function onBeforeEnter (el: any) {
-    el.style.height = '0px'
-  }
-
-  function onEnter (el: any) {
-    nextTick(() => {
-      el.style.height = `${el.scrollHeight}px`
-    })
-  }
-
-  function onAfterEnter (el: any) {
-    el.style.height = ''
-  }
-
-  function onBeforeLeave (el: any) {
-    el.style.height = `${el.scrollHeight}px`
-  }
-
-  function onLeave (el: any) {
-    nextTick(() => {
-      el.style.height = '0px'
-    })
-  }
-
-  function onAfterLeave (el: any) {
-    el.style.height = ''
-  }
-
-  return {
-    checkboxComponent,
-    isExpandChildren,
-    toggleExpand,
-    onBeforeEnter,
-    onEnter,
-    onAfterEnter,
-    onBeforeLeave,
-    onLeave,
-    onAfterLeave
-  }
+  return { expandRender, expandFunc }
 }

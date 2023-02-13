@@ -1,16 +1,19 @@
 <template>
-  <YuumiTree :data="data"
+  <YuumiTree :data="data" ref="tree"
     @checked="onChecked"
     @node-expand="onNodeExpand"
     @node-click="onNodeClick"
   ></YuumiTree>
+  <YuumiButton @click="change" style="margin-right: 10px;">切换数据</YuumiButton>
+  <YuumiButton @click="getTreeData" style="margin-right: 10px;">获取数型数据</YuumiButton>
+  <YuumiButton @click="getCheckedNodes" style="margin-right: 10px;">获取选中的节点</YuumiButton>
 </template>
 <script>
 export default {
   data () {
     return {
       data: [
-        {"label":"一年级","value":1, "children":[
+        {"label":"一年级","value":1, "expand": true, "children":[
           {"label":"1班","value":101, checked: true},
           {"label":"2班","value":102,"disabled":true,"children":[
             {"label":"实验班","value":10201},
@@ -18,7 +21,7 @@ export default {
           ]},
           {"label":"3班","value":103}
         ]},
-        {"label":"二年级","value":2, "children":[
+        {"label":"二年级","value":2, "expand": true, "children":[
           {"label":"1班","value":201},
           {"label":"2班","value":202}
         ]},
@@ -39,6 +42,22 @@ export default {
     },
     onNodeClick (detail) {
       console.log('onNodeClick', detail)
+    },
+    change () {
+      this.data = [
+        {"label":"一年级","value":1, "expand": true, "children":[
+          {"label":"1班","value":101, checked: true}
+        ]},
+        {"label":"三年级","value":3, "expand": false, "children":[
+          {"label":"1班","value":301}
+        ]}
+      ]
+    },
+    getTreeData () {
+      console.log("tree data", this.$refs.tree.getTreeData())
+    },
+    getCheckedNodes() {
+      console.log("slected nodes", this.$refs.tree.getCheckedNodes())
     }
   }
 }
