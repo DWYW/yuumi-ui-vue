@@ -7,6 +7,9 @@
 
   <YuumiInput placeholder="不能输入空白字符" v-model="value3" :limit="notBlank" style="margin: 0 10px 10px 0;"></YuumiInput>
   <span>{{value3}}</span> <br/>
+
+  <YuumiInput placeholder="不能输入空白字符" v-model="value4" trim style="margin: 0 10px 10px 0;"></YuumiInput>
+  <span>{{value4}}</span> <br/>
 </template>
 
 <script>
@@ -15,7 +18,8 @@ export default {
     return {
       value1: '只能输入数字',
       value2: '2222',
-      value3: ''
+      value3: '',
+      value4: ''
     }
   },
   computed: {
