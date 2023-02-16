@@ -1,12 +1,12 @@
 <template>
   <div style="width: 200px;">
-    <YuumiMenu :data="data"
+    <YuumiNavMenu :data="data"
       :selected-node="selectedNode"
       @node-expand="onNodeExpand"
       @node-click="onNodeClick"
       @node-mouseenter="onEvent"
       @node-mouseleave="onEvent"
-    ></YuumiMenu>
+    ></YuumiNavMenu>
   </div>
 </template>
 <script>

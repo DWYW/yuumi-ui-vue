@@ -10,7 +10,7 @@ import DrawerPlug from './components/drawer'
 import EmptyPlug from './components/empty'
 import IconPlug from './components/icon'
 import InputPlug from './components/input'
-import MenuPlug from './components/menu'
+import NavMenuPlug from './components/navmenu'
 import PaginationPlug from './components/pagination'
 import PopperPlug from './components/popper'
 import RadioPlug from './components/radio'
@@ -44,7 +44,7 @@ export * from './components/drawer'
 export * from './components/empty'
 export * from './components/icon'
 export * from './components/input'
-export * from './components/menu'
+export * from './components/navmenu'
 export * from './components/pagination'
 export * from './components/popper'
 export * from './components/radio'
@@ -96,7 +96,7 @@ export default {
     app.use(EmptyPlug)
     app.use(IconPlug)
     app.use(InputPlug)
-    app.use(MenuPlug)
+    app.use(NavMenuPlug)
     app.use(PaginationPlug)
     app.use(PopperPlug)
     app.use(RadioPlug)
