@@ -11,8 +11,7 @@
   }]"
   @mouseenter="onMouseenter"
   @mouseleave="onMouseleave"
-
-  v-bind="$attrs"
+  v-bind="attrs"
 >
 
   <span class="input__prefix" v-if="hasPrefix">
@@ -24,7 +23,7 @@
       <slot name="prefixIcon"></slot>
     </span>
 
-    <input ref="inputEl" :type="type" :value="modelValue" @input="onInput" v-bind="inputListeners"
+    <input ref="inputEl" :type="type" :value="modelValue" @input="onInput" v-bind="listeners"
       :disabled="disabled"
       :readonly="readonly"
       :maxlength="maxlength"
@@ -51,6 +50,7 @@ import { isDefined, isValidComponentSize, isInputType, isValidComponentTheme } f
 import { computed, defineComponent, onMounted, ref, watch, nextTick } from 'vue'
 
 export default defineComponent({
+  inheritAttrs: false,
   name: 'YuumiInput',
   props: {
     modelValue: String,
@@ -76,7 +76,8 @@ export default defineComponent({
       type: String,
       validator: isInputType,
       default: 'text'
-    }
+    },
+    trim: { type: Boolean }
   },
   setup (props, { emit, slots, attrs }) {
     // 是否有插槽
@@ -88,7 +89,7 @@ export default defineComponent({
     const compositionupdating = ref(false)
 
     function valueIsValid (value: string) {
-      const { limit } = props
+      const limit = props.limit ? props.limit : props.trim ? /^\S*$/ : undefined
       if (!value || !limit || compositionupdating.value) return true
 
       return (typeof limit === 'function' && limit(value)) ||
@@ -179,15 +180,15 @@ export default defineComponent({
       }
     }, { immediate: true })
 
-    attrs = (attrs || {})
-    const inputListeners: ComputedRef<{[x:string]: any}> = computed(() => {
+    const { onBlur, onFocus, onChange, onKeydown, onKeyup, onKeypress, ...otherAttrs } = (attrs || {})
+    const listeners: ComputedRef<{[x:string]: any}> = computed(() => {
       return {
-        onBlur: attrs.onBlur,
-        onFocus: attrs.onFocus,
-        onChange: attrs.onChange,
-        onKeydown: attrs.onKeydown,
-        onKeyup: attrs.onKeyup,
-        onKeypress: attrs.onKeypress
+        onBlur: onBlur,
+        onFocus: onFocus,
+        onChange: onChange,
+        onKeydown: onKeydown,
+        onKeyup: onKeyup,
+        onKeypress: onKeypress
       }
     })
 
@@ -205,7 +206,8 @@ export default defineComponent({
       onMouseenter,
       onMouseleave,
       clearValue,
-      inputListeners
+      attrs: otherAttrs,
+      listeners
     }
   }
 })

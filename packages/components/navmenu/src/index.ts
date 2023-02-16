@@ -1,28 +1,25 @@
 import { Ref, VNodeRef, PropType, watchEffect } from 'vue'
 import { defineComponent, h, provide, ref } from 'vue'
-import TreeNode from './tree-node'
+import MenuNode from './menu-node'
 import useProvider, { providerKey, ProviderState } from './provider-helper'
 
 export default defineComponent({
-  name: 'YuumiTree',
+  name: 'YuumiNavMenu',
   props: {
     data: { type: Array, default: () => [] },
     optionKey: { type: Object },
-    expandIcon: { type: Object, default: () => ({ icon: 'flat-arrow-bottom' })},
+    expandIcon: { type: Object, default: () => ({ icon: 'line-arrow-bottom' })},
     expandIconVisible: { type: Boolean, default: true },
-    checkable: { type: Boolean, default: true },
-    loadData: { type: Function as PropType<() => Promise<any>> }
+    loadData: { type: Function as PropType<() => Promise<any>> },
+    selectedNode: { type: Object }
   },
-  components: { TreeNode },
-  emits: ['checked', 'node-expand', 'node-click'],
+  components: { MenuNode },
+  emits: ['node-expand', 'node-click', 'node-mouseenter', 'node-mouseleave'],
   setup (props, { emit, expose }) {
     const nodeRefs: Ref<VNodeRef[]> = ref([])
 
     expose({
-      getTreeData: () => nodeRefs.value.map((item: any) => item.getNodeData()),
-      getCheckedNodes: (ignoreChildren?: boolean) => nodeRefs.value.reduce((nodes: any, item: any) => {
-        return nodes.concat(item.getCheckedNodes(ignoreChildren))
-      }, [])
+      getTreeData: () => nodeRefs.value.map((item: any) => item.getNodeData())
     })
 
     const {
@@ -32,10 +29,6 @@ export default defineComponent({
       getValueKey,
       getNodeChildren,
       getChildrenKey,
-      getNodeDisabled,
-      getDisabledKey,
-      getNodeChecked,
-      getCheckedKey,
       getNodeExpand,
       getExpandKey
     } = useProvider(props.optionKey)
@@ -47,12 +40,9 @@ export default defineComponent({
       getValueKey,
       getNodeChildren,
       getChildrenKey,
-      getNodeDisabled,
-      getDisabledKey,
-      getNodeChecked,
-      getCheckedKey,
       getNodeExpand,
       getExpandKey,
+      getSelectedNode: () => props.selectedNode,
       childrenLoader: props.loadData
     })
 
@@ -66,10 +56,10 @@ export default defineComponent({
     return { nodeRefs, getNodeValue }
   },
   render () {
-    return h('div', { class: 'yuumi-tree' }, this.data.map((item: any, index: number) => {
-      return h(TreeNode as any, {
+    return h('div', { class: 'yuumi-navmenu' }, this.data.map((item: any, index: number) => {
+      return h(MenuNode as any, {
         node: item,
-        checkable: this.checkable,
+        depth: 0,
         expandIcon: this.expandIcon,
         expandIconVisible: this.expandIconVisible,
         ref: (el: any) => this.nodeRefs[index] = el,

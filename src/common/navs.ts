@@ -114,8 +114,8 @@ export default [{
     label: '树形组件',
     path: '/doc/tree'
   }, {
-    name: 'Menu',
+    name: 'NavMenu',
     label: '侧边栏菜单组件',
-    path: '/doc/menus'
+    path: '/doc/navmenu'
   }]
 }]

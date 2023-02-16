@@ -1,11 +1,8 @@
 <template>
   <YuumiTree :data="data" :checkable="false">
-    <template #default="{ node, isExpandChildren }">
-      <div :class="['expand-icon', { '__active': isExpandChildren }]" v-if="node.children && node.children.length > 0">
-        <YuumiIcon icon="flat-arrow-bottom"></YuumiIcon>
-      </div>
+    <template #default="{ node }">
       <YuumiIcon :icon="node.icon"></YuumiIcon>
-      <div>{{node.label}}</div>
+      <span>{{node.label}}</span>
     </template>
   </YuumiTree>
 </template>

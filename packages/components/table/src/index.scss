@@ -66,6 +66,7 @@
       th .column, td .column {
         padding: map-get($_padding, $key) map-get($--space, "xm");
         word-wrap: break-word;
+        word-break: break-word;
       }
     }
   }
