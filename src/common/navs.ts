@@ -84,6 +84,13 @@ export default [{
     path: '/doc/tooltip'
   }]
 }, {
+  label: '布局',
+  children: [{
+    name: "RatioRect",
+    label: "等比矩形",
+    path: '/doc/ratiorect'
+  }]
+}, {
   label: '其他',
   children: [{
     name: 'Pagination',

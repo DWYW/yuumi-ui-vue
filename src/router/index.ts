@@ -82,6 +82,9 @@ const docChildren: RouteRecordRaw[] = [{
   path: 'pagination',
   component: () => import('../../doc/pagination/index.md')
 }, {
+  path: 'ratiorect',
+  component: () => import('../../doc/ratio-rect/index.md')
+}, {
   path: "",
   redirect: "/doc/install"
 }]
