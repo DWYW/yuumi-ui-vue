@@ -15,6 +15,7 @@ import PaginationPlug from './components/pagination'
 import PopperPlug from './components/popper'
 import RadioPlug from './components/radio'
 import RadioGroupPlug from './components/radio-group'
+import RatioRectPlug from './components/ratio-rect'
 import ScrollbarPlug from './components/scrollbar'
 import SelectPlug from './components/select'
 import StepPlug from './components/step'
@@ -49,6 +50,7 @@ export * from './components/pagination'
 export * from './components/popper'
 export * from './components/radio'
 export * from './components/radio-group'
+export * from './components/ratio-rect'
 export * from './components/scrollbar'
 export * from './components/select'
 export * from './components/step'
@@ -101,6 +103,7 @@ export default {
     app.use(PopperPlug)
     app.use(RadioPlug)
     app.use(RadioGroupPlug)
+    app.use(RatioRectPlug)
     app.use(ScrollbarPlug)
     app.use(SelectPlug)
     app.use(StepPlug)

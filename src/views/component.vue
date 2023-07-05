@@ -191,7 +191,7 @@ $header-height: 60px;
     font-size: map-get($--font-size, "xm");
 
     box-sizing: border-box;
-    padding: map-get($--space, "xm") map-get($--space, "md");
+    padding: map-get($--space, "md") map-get($--space, "md") map-get($--space, "xm");
   }
 
   nav {
