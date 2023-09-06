@@ -44,7 +44,7 @@ export default function useOptins (selectedItems: Ref<any[]>) {
     })
   }
 
-  function onSelectItem (data: OptionItem, e?: MouseEvent) {
+  function onSelectItem (data: OptionItem) {
     props.multiple ? _onSelectItemWithMultiple(data) : _onSelectItemWithSingle(data)
   }
 

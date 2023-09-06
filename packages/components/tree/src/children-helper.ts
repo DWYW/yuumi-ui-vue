@@ -1,4 +1,4 @@
-import { ComponentPublicInstance, computed, Ref } from 'vue'
+import { computed, Ref } from 'vue'
 
 export const LOAD_STATUS = {
   DEFAULT: 0,

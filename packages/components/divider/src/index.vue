@@ -1,7 +1,9 @@
 <template>
-<div :class="['yuumi-divider', 'align_' + align]">
-  <div class="divider-content"><slot></slot></div>
-</div>
+  <div :class="['yuumi-divider', 'align_' + align]">
+    <div class="divider-content">
+      <slot />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

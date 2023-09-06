@@ -88,7 +88,7 @@ export function dateParse (value: Date) {
 }
 
 export function clearEmpty (object: { [key: string]: any }): any {
-  let caches: any[] = []
+  const caches: any[] = []
 
   const _deepClear = (_object: { [key: string]: any }) => {
     if (Object.prototype.toString.call(_object).slice(8, -1).toLowerCase() !== 'object') return object
@@ -103,7 +103,7 @@ export function clearEmpty (object: { [key: string]: any }): any {
 
     caches.push(_object)
 
-    for (let key in _object) {
+    for (const key in _object) {
       if (_object[key] === null || _object[key] === undefined || _object[key] === '') {
         delete _object[key]
         continue
@@ -190,14 +190,14 @@ export function createRange (start: number, end: number, cb?: (item: number) => 
   return range
 }
 
-export function debounce(fn: Function, duration: number, ctx?: Function) {
+export function debounce(fn: (...rest: any[]) => any, duration: number, ctx?: (...rest: any[]) => any) {
   let timeout: any
 
-  return function (this: any) {
+  return function (this: any, ...rest: any[]) {
     if (timeout) clearTimeout(timeout)
 
     timeout = setTimeout(() => {
-      fn.apply(ctx || this, arguments)
+      fn.apply(ctx || this, rest)
     }, duration)
   }
 }
@@ -222,12 +222,12 @@ export function equal(target: any, origin: any): boolean {
   } else if (commonType === 'object') {
     const keys: {[x:string]: number} = {}
 
-    for (let key in target) {
+    for (const key in target) {
       if (!equal(target[key], origin[key])) return false
       keys[key] = 1
     }
 
-    for (let key in origin) {
+    for (const key in origin) {
       if (keys[key] === undefined) return false
     }
 

@@ -1,7 +1,19 @@
 <template>
-  <YuumiDatePicker v-model="value1" type="range" disabled @change="log('change', $event)" style="margin: 0 10px 10px 0;"></YuumiDatePicker>
+  <YuumiDatePicker
+    v-model="value1"
+    type="range"
+    disabled
+    style="margin: 0 10px 10px 0;"
+    @change="log('change', $event)"
+  />
 
-  <YuumiDatePicker v-model="value2" type="rangetime" disabled @change="log('change', $event)" style="margin: 0 10px 10px 0;"></YuumiDatePicker>
+  <YuumiDatePicker
+    v-model="value2"
+    type="rangetime"
+    disabled
+    style="margin: 0 10px 10px 0;"
+    @change="log('change', $event)"
+  />
 </template>
 
 <script>

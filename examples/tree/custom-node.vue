@@ -1,8 +1,11 @@
 <template>
-  <YuumiTree :data="data" :checkable="false">
+  <YuumiTree
+    :data="data"
+    :checkable="false"
+  >
     <template #default="{ node }">
-      <YuumiIcon :icon="node.icon"></YuumiIcon>
-      <span>{{node.label}}</span>
+      <YuumiIcon :icon="node.icon" />
+      <span>{{ node.label }}</span>
     </template>
   </YuumiTree>
 </template>

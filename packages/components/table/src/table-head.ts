@@ -52,7 +52,7 @@ export default defineComponent({
         })
       }
 
-      const slotHeader = getValueByPath<Function|undefined>(column, 'children.header')
+      const slotHeader = getValueByPath<(...rest: any[]) => any|undefined>(column, 'children.header')
       if (slotHeader) {
         return slotHeader({ $props: props })
       }

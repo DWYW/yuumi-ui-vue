@@ -129,7 +129,7 @@ export default defineComponent({
 
     const getContentVnode = () => {
       const { $props, isActivedState, labelSpans, keywordPlaceholder, removeSelectedByIndex, onKeywordInput } = this
-      let { keyword } = this
+      const { keyword } = this
 
       if ($props.filterable && !$props.multiple) {
         return h('input', {
@@ -179,7 +179,7 @@ export default defineComponent({
     const getOptionMenus = () => {
       const { $props, validOptions, getOptionItemIndexInSelected, onSelectItem, getLabel } = this
 
-      const children = validOptions.map((item: any, index: number) => {
+      const children = validOptions.map((item: any) => {
         return h('li', {
           class: ['option-item', {
             '__selected': getOptionItemIndexInSelected(item) > -1

@@ -1,22 +1,32 @@
 <template>
-<label :class="['yuumi-checkbox', 'size__' + size, {
-  '__checked': checkboxChecked||indeterminate,
-  '__disabled': checkboxDisabled
-}]" v-bind="$attrs"
-  @click="onClick"
->
-  <span class="checkbox__icon">
-    <transition name="yuumi-checkbox">
-      <YuumiIcon v-if="checkboxChecked" v-bind="checkedIcon"></YuumiIcon>
-      <YuumiIcon v-else-if="indeterminate" v-bind="indeterminateIcon"></YuumiIcon>
-      <YuumiIcon v-else v-bind="uncheckedIcon"></YuumiIcon>
-    </transition>
-  </span>
-  <span class="checkbox__content">
-    <slot></slot>
-  </span>
-</label>
-
+  <label
+    :class="['yuumi-checkbox', 'size__' + size, {
+      '__checked': checkboxChecked||indeterminate,
+      '__disabled': checkboxDisabled
+    }]"
+    v-bind="$attrs"
+    @click="onClick"
+  >
+    <span class="checkbox__icon">
+      <transition name="yuumi-checkbox">
+        <YuumiIcon
+          v-if="checkboxChecked"
+          v-bind="checkedIcon"
+        />
+        <YuumiIcon
+          v-else-if="indeterminate"
+          v-bind="indeterminateIcon"
+        />
+        <YuumiIcon
+          v-else
+          v-bind="uncheckedIcon"
+        />
+      </transition>
+    </span>
+    <span class="checkbox__content">
+      <slot />
+    </span>
+  </label>
 </template>
 
 <script lang="ts">
@@ -60,7 +70,7 @@ export default defineComponent({
       }
 
       if (attrs.onClick) {
-        (attrs.onClick as Function)(e)
+        (<(e: Event) => void>attrs.onClick)(e)
       }
     }
 

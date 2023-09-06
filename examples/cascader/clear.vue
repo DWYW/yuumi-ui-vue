@@ -1,5 +1,11 @@
 <template>
-  <YuumiCascader :options="options" v-model="value" clearable style="margin: 0 10px 10px 0;" placeholder="一键清除"></YuumiCascader>
+  <YuumiCascader
+    v-model="value"
+    :options="options"
+    clearable
+    style="margin: 0 10px 10px 0;"
+    placeholder="一键清除"
+  />
 </template>
 
 <script>

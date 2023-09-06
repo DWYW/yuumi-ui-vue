@@ -13,7 +13,7 @@ export default defineComponent({
     mini: { type: Boolean },
     error: { type: Boolean }
   },
-  setup (props, { slots }) {
+  setup (_, { slots }) {
     const steps: ComputedRef<VNode[]> = computed(() => {
       return getStepItemVnode(slots.default ? slots.default() : [])
     })

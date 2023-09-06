@@ -1,20 +1,28 @@
 <template>
-<label :class="['yuumi-radio', 'size__' + size, {
-  '__checked': radioChecked,
-  '__disabled': radioDisabled
-}]" v-bind="$attrs"
-  @click="onClick"
->
-  <span class="radio__icon">
-    <transition name="yuumi-radio">
-      <YuumiIcon v-if="radioChecked" v-bind="checkedIcon" ></YuumiIcon>
-      <YuumiIcon v-else v-bind="uncheckedIcon" ></YuumiIcon>
-    </transition>
-  </span>
-  <span class="radio__content">
-    <slot></slot>
-  </span>
-</label>
+  <label
+    :class="['yuumi-radio', 'size__' + size, {
+      '__checked': radioChecked,
+      '__disabled': radioDisabled
+    }]"
+    v-bind="$attrs"
+    @click="onClick"
+  >
+    <span class="radio__icon">
+      <transition name="yuumi-radio">
+        <YuumiIcon
+          v-if="radioChecked"
+          v-bind="checkedIcon"
+        />
+        <YuumiIcon
+          v-else
+          v-bind="uncheckedIcon"
+        />
+      </transition>
+    </span>
+    <span class="radio__content">
+      <slot />
+    </span>
+  </label>
 </template>
 
 <script lang="ts">
@@ -48,9 +56,6 @@ export default defineComponent({
       })
     }
   },
-  data() {
-    return {}
-  },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
     const {isRadioGroup, modelValue, disabled, onChange, updateModelValue } = inject('YuumiRadioGroup', {}) as any
@@ -80,6 +85,9 @@ export default defineComponent({
       radioDisabled,
       onClick
     }
+  },
+  data() {
+    return {}
   }
 })
 </script>

@@ -5,12 +5,12 @@ import type { ComputedRef, Ref } from 'vue'
 export interface TableSelection {
   selections: Ref<any[]>
   selectionValue: ComputedRef<number>,
-  selectionChanged: Function
-  toggleRowsSelection: Function
-  clearSelection: Function
+  selectionChanged: (...rest: any[]) => any
+  toggleRowsSelection: (...rest: any[]) => any
+  clearSelection: (...rest: any[]) => any
 }
 
-export function useSelection (props: {[x: string]: any}, emit: Function) {
+export function useSelection (props: {[x: string]: any}, emit: (...rest: any[]) => any) {
   const selections: Ref<any[]> = ref([])
 
   // -1:unchecked  0:partChecked  1: allChecked
@@ -47,10 +47,12 @@ export function useSelection (props: {[x: string]: any}, emit: Function) {
       const index = selections.value.findIndex(item => equal(item, row))
       let selectionChange = false
 
-      if (selectionChange = (value && index === -1)) {
+      if (value && index === -1) {
         selections.value.push(row)
-      } else if (selectionChange = (!value && index > -1)) {
+        selectionChange = true
+      } else if (!value && index > -1) {
         selections.value.splice(index, 1)
+        selectionChange = true
       }
 
       if (selectionChange) {

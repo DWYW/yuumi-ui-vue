@@ -194,7 +194,7 @@ export default defineComponent({
             onInit: onScrollInit,
             ref: el => { if (el) scrollbarComponents[listIndex] = el }
           }, {
-            default: () => h('ul', null, list.map((node: any, index: number) => {
+            default: () => h('ul', null, list.map((node: any) => {
               return h('li', {
                 class: ['menu-item', {
                   '__disabled': getNodeDisabled(node),

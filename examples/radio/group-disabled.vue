@@ -1,9 +1,23 @@
 <template>
-  <YuumiRadioGroup v-model="value" @change="consoleLog" disabled>
-    <YuumiRadio unique="香蕉" style="margin: 0 10px 10px 0;">香蕉</YuumiRadio>
-    <YuumiRadio unique="苹果" style="margin: 0 10px 10px 0;">苹果</YuumiRadio>
+  <YuumiRadioGroup
+    v-model="value"
+    disabled
+    @change="consoleLog"
+  >
+    <YuumiRadio
+      unique="香蕉"
+      style="margin: 0 10px 10px 0;"
+    >
+      香蕉
+    </YuumiRadio>
+    <YuumiRadio
+      unique="苹果"
+      style="margin: 0 10px 10px 0;"
+    >
+      苹果
+    </YuumiRadio>
   </YuumiRadioGroup>
-  <div>当前选择的为：{{value}}</div>
+  <div>当前选择的为：{{ value }}</div>
 </template>
 
 <script>

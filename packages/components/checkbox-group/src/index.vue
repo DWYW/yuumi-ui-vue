@@ -1,20 +1,17 @@
 <template>
-<div class="yuumi-checkbox-group" >
-  <slot></slot>
-</div>
+  <div class="yuumi-checkbox-group">
+    <slot />
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, provide, toRefs, ref, nextTick } from 'vue'
+import { defineComponent, provide, toRefs, nextTick } from 'vue'
 
 export default defineComponent({
   name: 'YuumiCheckboxGroup',
   props: {
     modelValue: Array as any,
     disabled: Boolean
-  },
-  data() {
-    return {}
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
@@ -42,6 +39,9 @@ export default defineComponent({
         })
       }
     })
+  },
+  data() {
+    return {}
   }
 })
 </script>

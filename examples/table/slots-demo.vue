@@ -1,39 +1,92 @@
 <template>
-<div>
-  <YuumiButton @click="toggleMain" style="margin: 0 10px 10px 0;">是否只显示主科</YuumiButton>
-  <YuumiButton @click="toggleSummary" style="margin: 0 10px 10px 0;">是否显示总计</YuumiButton>
-</div>
-<div style="height: 530px; ">
-  <YuumiTable :data="studentScore" border summary :summary-method="getAverages">
-    <YuumiTableColumn title="姓名" prop="name" fixed="left"/>
-    <YuumiTableColumn :width="150" title="语文" prop="chinese"></YuumiTableColumn>
-    <YuumiTableColumn :width="150" title="数学" prop="math"></YuumiTableColumn>
-    <YuumiTableColumn :width="150" title="英语" prop="english"></YuumiTableColumn>
+  <div>
+    <YuumiButton
+      style="margin: 0 10px 10px 0;"
+      @click="toggleMain"
+    >
+      是否只显示主科
+    </YuumiButton>
+    <YuumiButton
+      style="margin: 0 10px 10px 0;"
+      @click="toggleSummary"
+    >
+      是否显示总计
+    </YuumiButton>
+  </div>
+  <div style="height: 530px; ">
+    <YuumiTable
+      :data="studentScore"
+      border
+      summary
+      :summary-method="getAverages"
+    >
+      <YuumiTableColumn
+        title="姓名"
+        prop="name"
+        fixed="left"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="语文"
+        prop="chinese"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="数学"
+        prop="math"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="英语"
+        prop="english"
+      />
 
-    <template v-if="!onlyShowMain">
-      <YuumiTableColumn :width="150" title="物理" prop="physics"></YuumiTableColumn>
-      <YuumiTableColumn :width="150" title="化学" prop="chemistry"></YuumiTableColumn>
-      <YuumiTableColumn :width="150" title="生物" prop="biology"></YuumiTableColumn>
-    </template>
+      <template v-if="!onlyShowMain">
+        <YuumiTableColumn
+          :width="150"
+          title="物理"
+          prop="physics"
+        />
+        <YuumiTableColumn
+          :width="150"
+          title="化学"
+          prop="chemistry"
+        />
+        <YuumiTableColumn
+          :width="150"
+          title="生物"
+          prop="biology"
+        />
+      </template>
 
-    <template v-if="showSummary">
-      <YuumiTableColumn :width="150" title="总分" prop="summary" fixed="right" align="center">
-        <template #header="{$props}">
-          <span>{{$props.title}}(班级)</span>
-        </template>
+      <template v-if="showSummary">
+        <YuumiTableColumn
+          :width="150"
+          title="总分"
+          prop="summary"
+          fixed="right"
+          align="center"
+        >
+          <template #header="{$props}">
+            <span>{{ $props.title }}(班级)</span>
+          </template>
 
-        <template #default="{$props, $attrs, $value}">
-          {{students[$attrs.rowIndex][$props.prop]}}
-          <YuumiIcon icon="flat-praise" v-if="$value > 640" style="color: green;"></YuumiIcon>
-        </template>
+          <template #default="{$props, $attrs, $value}">
+            {{ students[$attrs.rowIndex][$props.prop] }}
+            <YuumiIcon
+              v-if="$value > 640"
+              icon="flat-praise"
+              style="color: green;"
+            />
+          </template>
 
-        <template #footer="{$value}">
-          <span>{{$value}}</span>(班级)
-        </template>
-      </YuumiTableColumn>
-    </template>
-  </YuumiTable>
-</div>
+          <template #footer="{$value}">
+            <span>{{ $value }}</span>(班级)
+          </template>
+        </YuumiTableColumn>
+      </template>
+    </YuumiTable>
+  </div>
 </template>
 
 <script lang="ts">
@@ -59,7 +112,7 @@ export default defineComponent({
   computed: {
     studentScore (): any[] {
       return this.students.map((item: {[key: string]: string|number}) => {
-        const projects = Object.entries(item).filter(([key, value]) => typeof value === 'number') as [string, number][]
+        const projects = Object.entries(item).filter((entry) => typeof entry[1] === 'number') as [string, number][]
         item.summary = projects.reduce((acc, [key, value]) => {
           if (this.onlyShowMain) {
             return /chinese|math|english/.test(key) ? acc + value : acc

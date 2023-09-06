@@ -1,14 +1,28 @@
 <template>
-<div style="margin-bottom: 20px;">
-  <YuumiPagination :page="page1.page" :page-total="page1.pageTotal" :total="page1.total" align="left"></YuumiPagination>
-</div>
-<div style="margin-bottom: 20px;">
-  <YuumiPagination :page="page2.page" :page-total="page2.pageTotal" :total="page2.total" align="right"></YuumiPagination>
-</div>
+  <div style="margin-bottom: 20px;">
+    <YuumiPagination
+      :page="page1.page"
+      :page-total="page1.pageTotal"
+      :total="page1.total"
+      align="left"
+    />
+  </div>
+  <div style="margin-bottom: 20px;">
+    <YuumiPagination
+      :page="page2.page"
+      :page-total="page2.pageTotal"
+      :total="page2.total"
+      align="right"
+    />
+  </div>
 
-<div style="margin-bottom: 20px;">
-  <YuumiPagination :page="page3.page" :page-total="page3.pageTotal" :total="page3.total"></YuumiPagination>
-</div>
+  <div style="margin-bottom: 20px;">
+    <YuumiPagination
+      :page="page3.page"
+      :page-total="page3.pageTotal"
+      :total="page3.total"
+    />
+  </div>
 </template>
 
 <script>

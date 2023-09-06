@@ -101,7 +101,7 @@ function updateMessageTop (vnode: VNode) {
   messages.forEach((item: VNode, index: number) => {
     if (item === vnode) { vnodeIndex = index }
 
-    const { $refs, show, offset }: any = item.component?.proxy
+    const { $refs, show, offset }: any = item.component!.proxy
     if (!show) return
 
     if (vnodeIndex >= 0) {

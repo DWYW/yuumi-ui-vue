@@ -1,10 +1,25 @@
 <template>
-<YuumiTable :data="students">
-  <YuumiTableColumn title="姓名" prop="name"/>
-  <YuumiTableColumn :width="150" title="语文" prop="chinese" />
-  <YuumiTableColumn :width="150" title="数学" prop="math"/>
-  <YuumiTableColumn :width="150" title="英语" prop="english"/>
-</YuumiTable>
+  <YuumiTable :data="students">
+    <YuumiTableColumn
+      title="姓名"
+      prop="name"
+    />
+    <YuumiTableColumn
+      :width="150"
+      title="语文"
+      prop="chinese"
+    />
+    <YuumiTableColumn
+      :width="150"
+      title="数学"
+      prop="math"
+    />
+    <YuumiTableColumn
+      :width="150"
+      title="英语"
+      prop="english"
+    />
+  </YuumiTable>
 </template>
 
 <script lang="ts">

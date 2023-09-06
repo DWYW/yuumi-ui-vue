@@ -5,6 +5,7 @@ import useProvider, { providerKey, ProviderState } from './provider-helper'
 
 export default defineComponent({
   name: 'YuumiTree',
+  components: { TreeNode },
   props: {
     data: { type: Array, default: () => [] },
     optionKey: { type: Object },
@@ -13,7 +14,6 @@ export default defineComponent({
     checkable: { type: Boolean, default: true },
     loadData: { type: Function as PropType<() => Promise<any>> }
   },
-  components: { TreeNode },
   emits: ['checked', 'node-expand', 'node-click'],
   setup (props, { emit, expose }) {
     const nodeRefs: Ref<VNodeRef[]> = ref([])

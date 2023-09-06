@@ -1,47 +1,73 @@
 <template>
-<label :class="['yuumi-input', 'theme__' + theme, 'size__' + size,
-  {
-    '__disabled': disabled,
-    '__readonly': readonly,
-    '__round': round,
-    '__has-prefix-icon': hasPrefixIcon,
-    '__has-suffix-icon': hasSuffixIcon || clearIconVisible,
-    '__has-prefix': hasPrefix,
-    '__has-suffix': hasSuffix
-  }]"
-  @mouseenter="onMouseenter"
-  @mouseleave="onMouseleave"
-  v-bind="attrs"
->
+  <label
+    :class="['yuumi-input', 'theme__' + theme, 'size__' + size,
+             {
+               '__disabled': disabled,
+               '__readonly': readonly,
+               '__round': round,
+               '__has-prefix-icon': hasPrefixIcon,
+               '__has-suffix-icon': hasSuffixIcon || clearIconVisible,
+               '__has-prefix': hasPrefix,
+               '__has-suffix': hasSuffix
+             }]"
+    v-bind="attrs"
+    @mouseenter="onMouseenter"
+    @mouseleave="onMouseleave"
+  >
 
-  <span class="input__prefix" v-if="hasPrefix">
-    <slot name="prefix"></slot>
-  </span>
-
-  <span class="input__content">
-    <span class="input__prefix-icon" v-if="hasPrefixIcon">
-      <slot name="prefixIcon"></slot>
-    </span>
-
-    <input ref="inputEl" :type="type" :value="modelValue" @input="onInput" v-bind="listeners"
-      :disabled="disabled"
-      :readonly="readonly"
-      :maxlength="maxlength"
-      :placeholder="placeholder"
-      @compositionstart="onCompositionstart"
-      @compositionend="onCompositionend"
+    <span
+      v-if="hasPrefix"
+      class="input__prefix"
     >
-
-    <span class="input__suffix-icon" v-if="hasSuffixIcon || clearIconVisible">
-      <YuumiIcon class="clear-btn" v-if="clearIconVisible" icon="line-circle-close" @click="clearValue"></YuumiIcon>
-      <slot name="suffixIcon" v-else></slot>
+      <slot name="prefix" />
     </span>
-  </span>
 
-  <span class="input__suffix" v-if="hasSuffix">
-    <slot name="suffix"></slot>
-  </span>
-</label>
+    <span class="input__content">
+      <span
+        v-if="hasPrefixIcon"
+        class="input__prefix-icon"
+      >
+        <slot name="prefixIcon" />
+      </span>
+
+      <input
+        ref="inputEl"
+        :type="type"
+        :value="modelValue"
+        v-bind="listeners"
+        :disabled="disabled"
+        :readonly="readonly"
+        :maxlength="maxlength"
+        :placeholder="placeholder"
+        @input="onInput"
+        @compositionstart="onCompositionstart"
+        @compositionend="onCompositionend"
+      >
+
+      <span
+        v-if="hasSuffixIcon || clearIconVisible"
+        class="input__suffix-icon"
+      >
+        <YuumiIcon
+          v-if="clearIconVisible"
+          class="clear-btn"
+          icon="line-circle-close"
+          @click="clearValue"
+        />
+        <slot
+          v-else
+          name="suffixIcon"
+        />
+      </span>
+    </span>
+
+    <span
+      v-if="hasSuffix"
+      class="input__suffix"
+    >
+      <slot name="suffix" />
+    </span>
+  </label>
 </template>
 
 <script lang="ts">
@@ -50,8 +76,8 @@ import { isDefined, isValidComponentSize, isInputType, isValidComponentTheme } f
 import { computed, defineComponent, onMounted, ref, watch, nextTick } from 'vue'
 
 export default defineComponent({
-  inheritAttrs: false,
   name: 'YuumiInput',
+  inheritAttrs: false,
   props: {
     modelValue: String,
     disabled: Boolean,
@@ -79,6 +105,7 @@ export default defineComponent({
     },
     trim: { type: Boolean }
   },
+  emits: ['update:modelValue', 'input'],
   setup (props, { emit, slots, attrs }) {
     // 是否有插槽
     const hasPrefixIcon: Ref<boolean> = ref(isDefined(slots.prefixIcon))

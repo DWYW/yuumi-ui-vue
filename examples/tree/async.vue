@@ -1,10 +1,11 @@
 <template>
-  <YuumiTree :data="data"
+  <YuumiTree
+    :data="data"
     :load-data="loadData"
     @checked="onChecked"
     @node-expand="onNodeExpand"
     @node-click="onNodeClick"
-  ></YuumiTree>
+  />
 </template>
 <script>
 export default {

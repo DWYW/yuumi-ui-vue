@@ -1,45 +1,67 @@
 <template>
-<div class="page">
-  <header class="header">
-    <div class="header-main">
-      <div class="logo">
-        <a href="#/">
-          <img class="img" src="../assets/images/logo.png" alt="">
-          <div class="name">YUUMI</div>
-        </a>
+  <div class="page">
+    <header class="header">
+      <div class="header-main">
+        <div class="logo">
+          <a href="#/">
+            <img
+              class="img"
+              src="../assets/images/logo.png"
+              alt=""
+            >
+            <div class="name">YUUMI</div>
+          </a>
+        </div>
+
+        <div class="_expand" />
+
+        <div class="_active">
+          组件
+        </div>
+        <div class="version">
+          {{ appVersion }}
+        </div>
       </div>
+    </header>
 
-      <div class="_expand"></div>
-
-      <div class="_active">组件</div>
-      <div class="version">{{appVersion}}</div>
-    </div>
-  </header>
-
-  <aside class="aside" ref="asideEl">
-    <YuumiScrollbar>
-      <section class="group" v-for="group in navs" :key="group.label">
-        <div class="group-name">{{group.label}}</div>
-
-        <nav :class="{ active: nav.path === $route.path}"
-          v-for="nav in group.children" :key="nav.label"
-          @click="toNavDetail(nav)"
+    <aside
+      ref="asideEl"
+      class="aside"
+    >
+      <YuumiScrollbar>
+        <section
+          v-for="group in navs"
+          :key="group.label"
+          class="group"
         >
-          <span class="nav-name">{{nav.name}}</span>
-          <span class="nav-label">{{nav.label}}</span>
-        </nav>
-      </section>
-    </YuumiScrollbar>
-  </aside>
+          <div class="group-name">
+            {{ group.label }}
+          </div>
 
-  <div class="component">
-    <YuumiScrollbar ref="mainScrollbar">
-      <div class="main" ref="mainEl">
-        <router-view class="component-view"></router-view>
-      </div>
-    </YuumiScrollbar>
+          <nav
+            v-for="nav in group.children"
+            :key="nav.label"
+            :class="{ active: nav.path === $route.path}"
+            @click="toNavDetail(nav)"
+          >
+            <span class="nav-name">{{ nav.name }}</span>
+            <span class="nav-label">{{ nav.label }}</span>
+          </nav>
+        </section>
+      </YuumiScrollbar>
+    </aside>
+
+    <div class="component">
+      <YuumiScrollbar ref="mainScrollbar">
+        <div
+          ref="mainEl"
+          class="main"
+        >
+          <router-view class="component-view" />
+        </div>
+      </YuumiScrollbar>
+    </div>
   </div>
-</div>
 </template>
 
 <script lang="ts">

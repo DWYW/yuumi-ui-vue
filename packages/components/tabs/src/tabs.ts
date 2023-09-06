@@ -75,7 +75,7 @@ export default defineComponent({
         const props = item.props || {}
 
         function getContent () {
-          const labelSlot = getValueByPath<Function>(item, 'children.label')
+          const labelSlot = getValueByPath<(...rest: any[]) => any>(item, 'children.label')
           if (labelSlot) {
             return labelSlot({$props: props})
           }

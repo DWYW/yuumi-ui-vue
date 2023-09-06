@@ -1,19 +1,33 @@
 <template>
   <div class="picker-time-item">
-    <div class="time-item__split" ref="split"></div>
+    <div
+      ref="split"
+      class="time-item__split"
+    />
 
-    <YuumiScrollbar @init="onInit" @scroll="onScroll">
-      <div class="item__prefix" :style="{height: horizontalPadding}"></div>
-      <div :class="['time-item', {
-        selected: selected && selected.value === item.value,
-        disabled: item.disabled
-      }]"
-        v-for="(item, index) in list" :key="item.value"
+    <YuumiScrollbar
+      @init="onInit"
+      @scroll="onScroll"
+    >
+      <div
+        class="item__prefix"
+        :style="{height: horizontalPadding}"
+      />
+      <div
+        v-for="(item, index) in list"
+        :key="item.value"
+        :class="['time-item', {
+          selected: selected && selected.value === item.value,
+          disabled: item.disabled
+        }]"
         @click="onItemSelect(item, index)"
       >
-        {{item.text}}
+        {{ item.text }}
       </div>
-      <div class="item__suffix" :style="{height: horizontalPadding}"></div>
+      <div
+        class="item__suffix"
+        :style="{height: horizontalPadding}"
+      />
     </YuumiScrollbar>
   </div>
 </template>
@@ -37,6 +51,7 @@ export default defineComponent({
       default: () => []
     }
   },
+  emits: ['update:modelValue', 'change'],
   data() {
     return {
       scrollbar: null as any,

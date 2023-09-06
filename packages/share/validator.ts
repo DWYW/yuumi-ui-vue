@@ -1,4 +1,4 @@
-import { Fragment, isVNode, VNode } from 'vue'
+import { Fragment, isVNode } from 'vue'
 
 export function isDefined (value: any) {
   return value !== null && value !== undefined

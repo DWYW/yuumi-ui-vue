@@ -1,24 +1,37 @@
 <template>
-<div class="page">
-  <div class="website">
-    <img src="../assets/images/website.jpg" alt="">
-  </div>
+  <div class="page">
+    <div class="website">
+      <img
+        src="../assets/images/website.jpg"
+        alt=""
+      >
+    </div>
 
-  <div class="main">
-    <div class="name">Yuumi UI</div>
-    <div class="desc">Based on Vue 3.0</div>
+    <div class="main">
+      <div class="name">
+        Yuumi UI
+      </div>
+      <div class="desc">
+        Based on Vue 3.0
+      </div>
 
-    <div class="btns">
-      <a href="#/doc">
-        <YuumiButton theme="primary" round>Quick Start</YuumiButton>
-      </a>
+      <div class="btns">
+        <a href="#/doc">
+          <YuumiButton
+            theme="primary"
+            round
+          >Quick Start</YuumiButton>
+        </a>
 
-      <a target="_blank" href="https://github.com/DWYW/yuumi-ui-vue">
-        <YuumiButton round>Github</YuumiButton>
-      </a>
+        <a
+          target="_blank"
+          href="https://github.com/DWYW/yuumi-ui-vue"
+        >
+          <YuumiButton round>Github</YuumiButton>
+        </a>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script lang="ts">

@@ -6,7 +6,7 @@ function useClear () {
 
   const clearBtnVisible = ref(false)
 
-  function clearHalk (beforeClear?: Function) {
+  function clearHalk (beforeClear?: (...rest: any[]) => any) {
     beforeClear && beforeClear()
 
     instance.emit('update:modelValue', [])

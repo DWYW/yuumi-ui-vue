@@ -148,7 +148,7 @@ function updateNotificationY (vnode: VNode) {
   notifications.forEach((item: VNode, index: number) => {
     if (item === vnode) { vnodeIndex = index }
 
-    const { $refs, show, offset, direction }: any = item.component?.proxy
+    const { $refs, show, offset, direction }: any = item.component!.proxy
     if (!show || direction !== _direction) return
 
     if (vnodeIndex >= 0) {

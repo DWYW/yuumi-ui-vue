@@ -1,13 +1,23 @@
 <template>
-  <button ref="buttonEl" :class="['yuumi-button', 'size__'+size, 'theme__'+theme, {
-    '__outline': outline,
-    '__circle': circle,
-    '__round': round,
-    '__splash': splash
-  }]" :disabled="disabled" @click="onclick" v-bind="$attrs">
-    <span class="button__animation" ref="animationEl" v-if="splash"></span>
+  <button
+    ref="buttonEl"
+    :class="['yuumi-button', 'size__'+size, 'theme__'+theme, {
+      '__outline': outline,
+      '__circle': circle,
+      '__round': round,
+      '__splash': splash
+    }]"
+    :disabled="disabled"
+    v-bind="$attrs"
+    @click="onclick"
+  >
+    <span
+      v-if="splash"
+      ref="animationEl"
+      class="button__animation"
+    />
     <span class="button__content">
-      <slot></slot>
+      <slot />
     </span>
   </button>
 </template>
@@ -35,11 +45,6 @@ export default defineComponent({
     disabled: Boolean,
     circle: Boolean,
     round: Boolean
-  },
-  data () {
-    return {
-      splashs: []
-    }
   },
   emits: ['click'],
   setup (props, { emit }) {
@@ -74,6 +79,11 @@ export default defineComponent({
       buttonEl,
       animationEl,
       onclick
+    }
+  },
+  data () {
+    return {
+      splashs: []
     }
   }
 })

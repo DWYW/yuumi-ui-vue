@@ -1,15 +1,35 @@
 <template>
-  <YuumiInput placeholder="只能输入数字" v-model="value1" :limit="onlyNumber" style="margin: 0 10px 10px 0;"></YuumiInput>
-  <span>{{value1}}</span> <br/>
+  <YuumiInput
+    v-model="value1"
+    placeholder="只能输入数字"
+    :limit="onlyNumber"
+    style="margin: 0 10px 10px 0;"
+  />
+  <span>{{ value1 }}</span> <br>
 
-  <YuumiInput placeholder="不能输入数字" v-model="value2" :limit="excludeNumber" style="margin: 0 10px 10px 0;"></YuumiInput>
-  <span>{{value2}}</span> <br/>
+  <YuumiInput
+    v-model="value2"
+    placeholder="不能输入数字"
+    :limit="excludeNumber"
+    style="margin: 0 10px 10px 0;"
+  />
+  <span>{{ value2 }}</span> <br>
 
-  <YuumiInput placeholder="不能输入空白字符" v-model="value3" :limit="notBlank" style="margin: 0 10px 10px 0;"></YuumiInput>
-  <span>{{value3}}</span> <br/>
+  <YuumiInput
+    v-model="value3"
+    placeholder="不能输入空白字符"
+    :limit="notBlank"
+    style="margin: 0 10px 10px 0;"
+  />
+  <span>{{ value3 }}</span> <br>
 
-  <YuumiInput placeholder="不能输入空白字符" v-model="value4" trim style="margin: 0 10px 10px 0;"></YuumiInput>
-  <span>{{value4}}</span> <br/>
+  <YuumiInput
+    v-model="value4"
+    placeholder="不能输入空白字符"
+    trim
+    style="margin: 0 10px 10px 0;"
+  />
+  <span>{{ value4 }}</span> <br>
 </template>
 
 <script>

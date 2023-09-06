@@ -1,25 +1,40 @@
 <template>
-<div class="date-panel">
-  <slot></slot>
-  <div class="panel__header">
-    <div class="week-item" v-for="item in weeks" :key="item">
-      <div class="item-content">{{item}}</div>
+  <div class="date-panel">
+    <slot />
+    <div class="panel__header">
+      <div
+        v-for="item in weeks"
+        :key="item"
+        class="week-item"
+      >
+        <div class="item-content">
+          {{ item }}
+        </div>
+      </div>
+    </div>
+    <div class="panel__body">
+      <template
+        v-for="item in dates"
+        :key="item.value.toString()"
+      >
+        <div
+          :class="['date-item', item.className, {
+            '_selected': item.isSelected,
+            'in-range': item.inRange,
+            'range_start': item.isRangeStart,
+            'range_end': item.isRangeEnd,
+            '_disabled': item.disabled
+          }]"
+          @click="onSelect(item)"
+          @mouseenter="onMouseenter(item)"
+        >
+          <div class="item-content">
+            {{ item.value.getDate() }}
+          </div>
+        </div>
+      </template>
     </div>
   </div>
-  <div class="panel__body">
-    <template v-for="item in dates" :key="item.value.toString()">
-      <div :class="['date-item', item.className, {
-        '_selected': item.isSelected,
-        'in-range': item.inRange,
-        'range_start': item.isRangeStart,
-        'range_end': item.isRangeEnd,
-        '_disabled': item.disabled
-      }]" @click="onSelect(item)" @mouseenter="onMouseenter(item)">
-        <div class="item-content">{{item.value.getDate()}}</div>
-      </div>
-    </template>
-  </div>
-</div>
 </template>
 
 <script lang="ts">
@@ -29,14 +44,14 @@ export default defineComponent({
   props: {
     dates: Array as any
   },
-  setup (props) {
+  emits: ['select', 'itemEnter'],
+  setup () {
     const weeks = ['日', '一', '二', '三', '四', '五', '六']
 
     return {
       weeks
     }
   },
-  emits: ['select', 'itemEnter'],
   methods: {
     onSelect (item: any) {
       if (item.disabled) return

@@ -1,5 +1,7 @@
 <template>
-  <YuumiButton @click="showLoading">show global loading</YuumiButton>
+  <YuumiButton @click="showLoading">
+    show global loading
+  </YuumiButton>
 </template>
 
 <script>

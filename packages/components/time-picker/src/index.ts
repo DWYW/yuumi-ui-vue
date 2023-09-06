@@ -9,10 +9,10 @@ import useRestore from './restore-helper'
 
 export default defineComponent({
   name: 'YuumiTimePicker',
-  inheritAttrs: false,
   components: {
     [times.name]: times
   },
+  inheritAttrs: false,
   props: {
     modelValue: { type: [Date, Array] as PropType<any[]> },
     placeholder: { type: String, default: '请选择时间' },

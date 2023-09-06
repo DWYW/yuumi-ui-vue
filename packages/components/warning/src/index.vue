@@ -1,7 +1,10 @@
 <template>
-<div :class="['yuumi-warning', 'theme__'+theme]" v-bind="$attrs">
-  <slot></slot>
-</div>
+  <div
+    :class="['yuumi-warning', 'theme__'+theme]"
+    v-bind="$attrs"
+  >
+    <slot />
+  </div>
 </template>
 
 <script lang="ts">

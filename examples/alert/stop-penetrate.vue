@@ -1,9 +1,13 @@
 <template>
-<YuumiButton @click="showAlert()" style="margin: 0 10px 10px 0;">阻止穿透</YuumiButton>
+  <YuumiButton
+    style="margin: 0 10px 10px 0;"
+    @click="showAlert()"
+  >
+    阻止穿透
+  </YuumiButton>
 </template>
 
 <script>
-import { createVNode } from 'vue'
 export default {
   data () {
     return {}

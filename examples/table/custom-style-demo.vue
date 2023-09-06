@@ -1,10 +1,29 @@
 <template>
-<YuumiTable :data="students" :row-class-name="rowClassName" :cell-class-name="cellClassName">
-  <YuumiTableColumn title="姓名" prop="name"/>
-  <YuumiTableColumn :width="150" title="语文" prop="chinese" />
-  <YuumiTableColumn :width="150" title="数学" prop="math"/>
-  <YuumiTableColumn :width="150" title="英语" prop="english"/>
-</YuumiTable>
+  <YuumiTable
+    :data="students"
+    :row-class-name="rowClassName"
+    :cell-class-name="cellClassName"
+  >
+    <YuumiTableColumn
+      title="姓名"
+      prop="name"
+    />
+    <YuumiTableColumn
+      :width="150"
+      title="语文"
+      prop="chinese"
+    />
+    <YuumiTableColumn
+      :width="150"
+      title="数学"
+      prop="math"
+    />
+    <YuumiTableColumn
+      :width="150"
+      title="英语"
+      prop="english"
+    />
+  </YuumiTable>
 </template>
 
 <script lang="ts">
@@ -37,7 +56,7 @@ export default defineComponent({
           return '__info'
       }
     },
-    cellClassName ({ col, colIndex, row, rowIndex}: any) {
+    cellClassName ({ colIndex, rowIndex}: any) {
       switch ((rowIndex + colIndex) % 4) {
         case 0:
           return '__success'

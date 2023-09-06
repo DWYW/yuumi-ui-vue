@@ -1,5 +1,8 @@
 <template>
-  <YuumiTree :data="data" :checkable="false"></YuumiTree>
+  <YuumiTree
+    :data="data"
+    :checkable="false"
+  />
 </template>
 <script>
 export default {

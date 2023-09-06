@@ -1,6 +1,6 @@
 import { getValueByPath } from '../../../share/helper'
 import { injectionKey, ProvideGetters } from './provide-helper'
-import { defineComponent, h, inject, ref } from 'vue'
+import { defineComponent, h, inject } from 'vue'
 import { Scrollbar } from './scollbar-helper'
 
 export default defineComponent({

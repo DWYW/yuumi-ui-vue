@@ -1,7 +1,10 @@
 <template>
-<span :class="[family, 'icon-'+icon]" v-bind="$attrs">
-  <slot></slot>
-</span>
+  <span
+    :class="[family, 'icon-'+icon]"
+    v-bind="$attrs"
+  >
+    <slot />
+  </span>
 </template>
 
 <script lang="ts">

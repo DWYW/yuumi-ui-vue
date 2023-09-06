@@ -81,7 +81,7 @@ export default defineComponent({
         const stickyPosition = this.columnsStickyPosition[colIndex] as any
 
         const getColumnContent = () => {
-          const slotFooter = getValueByPath<Function|undefined>(col, 'children.footer')
+          const slotFooter = getValueByPath<(...rest: any[]) => any|undefined>(col, 'children.footer')
           if (slotFooter) {
             return slotFooter({ $props: props, $value: this.sum[colIndex] })
           }

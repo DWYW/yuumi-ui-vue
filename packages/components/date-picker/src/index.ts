@@ -9,10 +9,10 @@ import useClear from './clear-helper'
 
 export default defineComponent({
   name: 'YuumiDatePicker',
-  inheritAttrs: false,
   components: {
     DatePanel
   },
+  inheritAttrs: false,
   props: {
     modelValue: [Date, Array] as PropType<Date|Date[]>,
     placeholder: { type: String, default: '请选择日期' },
@@ -387,7 +387,7 @@ export default defineComponent({
     }
 
     const getSingleTimeVNodes = () => {
-      const { $props, startSelectDate, startSelectDateText, endSelectDate, onUpdateStartSelectDate } = this
+      const { $props, startSelectDate, startSelectDateText, onUpdateStartSelectDate } = this
 
       return [
         h('span', { class: 'date-text' }, startSelectDateText || $props.placeholder),

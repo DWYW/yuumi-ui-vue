@@ -1,5 +1,11 @@
 <template>
-  <YuumiCascader :options="options" v-model="value" :label-format="labelFormat" style="margin: 0 10px 10px 0;" placeholder="自定义显示"></YuumiCascader>
+  <YuumiCascader
+    v-model="value"
+    :options="options"
+    :label-format="labelFormat"
+    style="margin: 0 10px 10px 0;"
+    placeholder="自定义显示"
+  />
 </template>
 
 <script>

@@ -1,6 +1,15 @@
 <template>
-  <template v-for="theme in ['default', 'primary', 'success', 'warn', 'error']" :key="theme">
-    <YuumiButton style="margin: 0 10px 10px 0;"  @click="createMessage(theme)" :theme="theme">{{theme}} message</YuumiButton>
+  <template
+    v-for="theme in ['default', 'primary', 'success', 'warn', 'error']"
+    :key="theme"
+  >
+    <YuumiButton
+      style="margin: 0 10px 10px 0;"
+      :theme="theme"
+      @click="createMessage(theme)"
+    >
+      {{ theme }} message
+    </YuumiButton>
   </template>
 </template>
 

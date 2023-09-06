@@ -1,5 +1,10 @@
 <template>
-<YuumiButton @click="showAlert()" style="margin: 0 10px 10px 0;">自定义显示</YuumiButton>
+  <YuumiButton
+    style="margin: 0 10px 10px 0;"
+    @click="showAlert()"
+  >
+    自定义显示
+  </YuumiButton>
 </template>
 
 <script>

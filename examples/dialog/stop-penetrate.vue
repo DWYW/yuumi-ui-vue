@@ -1,10 +1,16 @@
 <template>
-<YuumiButton @click="showDialog">阻止穿透</YuumiButton>
+  <YuumiButton @click="showDialog">
+    阻止穿透
+  </YuumiButton>
 
-<YuumiDialog title="dialog title" v-model="show" :stopPenetrate="true">
-  <YuumiIcon icon="line-help" ></YuumiIcon>
-  <span>阻止穿透</span>
-</YuumiDialog>
+  <YuumiDialog
+    v-model="show"
+    title="dialog title"
+    :stop-penetrate="true"
+  >
+    <YuumiIcon icon="line-help" />
+    <span>阻止穿透</span>
+  </YuumiDialog>
 </template>
 
 <script>

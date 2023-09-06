@@ -1,11 +1,19 @@
 <template>
-  <YuumiSelect :options="options" v-model="value" style="margin: 0 10px 0 0; width: 100%;" multiple></YuumiSelect>
-  <YuumiSelect v-for="theme in ['primary', 'success', 'warn', 'error']" :key="theme" multiple
+  <YuumiSelect
+    v-model="value"
+    :options="options"
+    style="margin: 0 10px 0 0; width: 100%;"
+    multiple
+  />
+  <YuumiSelect
+    v-for="theme in ['primary', 'success', 'warn', 'error']"
+    :key="theme"
+    v-model="value"
+    multiple
     style="margin: 0 10px 10px 0;"
     :options="options"
     :theme="theme"
-    v-model="value"
-  ></YuumiSelect>
+  />
 </template>
 
 <script>

@@ -1,32 +1,59 @@
 <template>
-<teleport to="body">
-  <transition name="yuumi-dialog" appear
-    @before-enter="beforeEnter"
-    @after-enter="afterEnter"
-    @before-leave="beforeLeave"
-    @after-leave="afterLeave"
-  >
-    <div class="yuumi-dialog" v-bind="$attrs" v-if="modelValue">
-      <div class="dialog-panel">
-        <div class="dialog--header">
-          <div class="dialog-title">
-            <slot name="title">{{title}}</slot>
+  <teleport to="body">
+    <transition
+      name="yuumi-dialog"
+      appear
+      @before-enter="beforeEnter"
+      @after-enter="afterEnter"
+      @before-leave="beforeLeave"
+      @after-leave="afterLeave"
+    >
+      <div
+        v-if="modelValue"
+        class="yuumi-dialog"
+        v-bind="$attrs"
+      >
+        <div class="dialog-panel">
+          <div class="dialog--header">
+            <div class="dialog-title">
+              <slot name="title">
+                {{ title }}
+              </slot>
+            </div>
+
+            <YuumiIcon
+              v-if="closeEnable"
+              class="dialog-close"
+              icon="line-close"
+              @click="close"
+            />
+          </div>
+          <div :class="['dialog--content', { '_center': alignCenter }]">
+            <slot />
           </div>
 
-          <YuumiIcon v-if="closeEnable" class="dialog-close" icon="line-close" @click="close"></YuumiIcon>
-        </div>
-        <div :class="['dialog--content', { '_center': alignCenter }]">
-          <slot></slot>
-        </div>
-
-        <div class="dialog--footer" v-if="cancelEnable || confirmEnable">
-          <YuumiButton v-if="cancelEnable" @click="cancel">{{cancelText}}</YuumiButton>
-          <YuumiButton v-if="confirmEnable" @click="confirm" theme="primary">{{confirmText}}</YuumiButton>
+          <div
+            v-if="cancelEnable || confirmEnable"
+            class="dialog--footer"
+          >
+            <YuumiButton
+              v-if="cancelEnable"
+              @click="cancel"
+            >
+              {{ cancelText }}
+            </YuumiButton>
+            <YuumiButton
+              v-if="confirmEnable"
+              theme="primary"
+              @click="confirm"
+            >
+              {{ confirmText }}
+            </YuumiButton>
+          </div>
         </div>
       </div>
-    </div>
-  </transition>
-</teleport>
+    </transition>
+  </teleport>
 </template>
 
 <script lang="ts">
@@ -67,6 +94,7 @@ export default defineComponent({
     alignCenter: Boolean,
     stopPenetrate: Boolean
   },
+  emits: ['update:modelValue', 'close', 'cancel', 'confirm', 'beforeEnter', 'afterEnter', 'beforeLeave', 'afterLeave'],
   data () {
     return {
       store: {
@@ -76,7 +104,6 @@ export default defineComponent({
       }
     }
   },
-  emits: ['update:modelValue', 'close', 'cancel', 'confirm', 'beforeEnter', 'afterEnter', 'beforeLeave', 'afterLeave'],
   methods: {
     hide () {
       if (!this.sync) return

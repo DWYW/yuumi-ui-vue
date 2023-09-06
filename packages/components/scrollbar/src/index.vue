@@ -1,12 +1,25 @@
 <template>
-<div :class="['yuumi-scrollbar', 'behavior_' + behavior]">
-  <div class="scrollbar__body" ref="body">
-    <slot></slot>
-  </div>
+  <div :class="['yuumi-scrollbar', 'behavior_' + behavior]">
+    <div
+      ref="body"
+      class="scrollbar__body"
+    >
+      <slot />
+    </div>
 
-  <section class="scrollbar" horizontal ref="horizontal" @mousedown.stop="dragstart"></section>
-  <section class="scrollbar" vertical ref="vertical" @mousedown.stop="dragstart"></section>
-</div>
+    <section
+      ref="horizontal"
+      class="scrollbar"
+      horizontal
+      @mousedown.stop="dragstart"
+    />
+    <section
+      ref="vertical"
+      class="scrollbar"
+      vertical
+      @mousedown.stop="dragstart"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -21,6 +34,7 @@ export default defineComponent({
       validator: (value: string) => ['hover', 'always'].indexOf(value) > -1
     }
   },
+  emits: ['init', 'scroll'],
   data() {
     return {
       cache: null as any
@@ -31,7 +45,6 @@ export default defineComponent({
       return 20
     }
   },
-  emits: ['init', 'scroll'],
   mounted () {
     nextTick(() => {
       this.updateBodyStyle()

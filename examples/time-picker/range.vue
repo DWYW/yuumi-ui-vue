@@ -1,6 +1,16 @@
 <template>
-  <YuumiTimePicker v-model="value" @change="onChange" range style="margin: 0 10px 10px 0;"></YuumiTimePicker>
-  <YuumiTimePicker v-model="value1" @change="onChange" range style="margin: 0 10px 10px 0;"></YuumiTimePicker>
+  <YuumiTimePicker
+    v-model="value"
+    range
+    style="margin: 0 10px 10px 0;"
+    @change="onChange"
+  />
+  <YuumiTimePicker
+    v-model="value1"
+    range
+    style="margin: 0 10px 10px 0;"
+    @change="onChange"
+  />
 </template>
 
 <script>

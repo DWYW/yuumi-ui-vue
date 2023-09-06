@@ -1,7 +1,22 @@
 <template>
-<YuumiButton @click="showAlert({closeEnable: false})" style="margin: 0 10px 10px 0;">不显示关闭</YuumiButton>
-<YuumiButton @click="showAlert({cancelEnable: false})" style="margin: 0 10px 10px 0;">不显示取消</YuumiButton>
-<YuumiButton @click="showAlert({confirmEnable: false})" style="margin: 0 10px 10px 0;">不显示确认</YuumiButton>
+  <YuumiButton
+    style="margin: 0 10px 10px 0;"
+    @click="showAlert({closeEnable: false})"
+  >
+    不显示关闭
+  </YuumiButton>
+  <YuumiButton
+    style="margin: 0 10px 10px 0;"
+    @click="showAlert({cancelEnable: false})"
+  >
+    不显示取消
+  </YuumiButton>
+  <YuumiButton
+    style="margin: 0 10px 10px 0;"
+    @click="showAlert({confirmEnable: false})"
+  >
+    不显示确认
+  </YuumiButton>
 </template>
 
 <script>

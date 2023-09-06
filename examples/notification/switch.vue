@@ -1,6 +1,13 @@
 <template>
-<YuumiButton style="margin: 0 10px 10px 0;" @click="createNotification">show notification</YuumiButton>
-<YuumiButton @click="removeNotification(vnode)">hide notification</YuumiButton>
+  <YuumiButton
+    style="margin: 0 10px 10px 0;"
+    @click="createNotification"
+  >
+    show notification
+  </YuumiButton>
+  <YuumiButton @click="removeNotification(vnode)">
+    hide notification
+  </YuumiButton>
 </template>
 
 <script>
@@ -22,7 +29,7 @@ export default {
       }))
     },
 
-    removeNotification (vnode) {
+    removeNotification () {
       this.$yuumi.removeNotification(this.vnodes.shift())
     }
   }

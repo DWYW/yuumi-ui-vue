@@ -1,32 +1,34 @@
 <template>
-<div :class="['yuumi-switch', 'size__' + size, {
-  '__checked': checked,
-  '__readonly': readonly,
-  '__disabled': disabled
-}]" v-bind="$attrs"
-  :style="{ backgroundColor: checked ? openColor : closeColor }"
-  @click="onClick"
->
-  <div class="switch__content">
-    <div class="open">
-      <div class="content__body">
-        <div class="body__slot">
-          <slot name="open"></slot>
+  <div
+    :class="['yuumi-switch', 'size__' + size, {
+      '__checked': checked,
+      '__readonly': readonly,
+      '__disabled': disabled
+    }]"
+    v-bind="$attrs"
+    :style="{ backgroundColor: checked ? openColor : closeColor }"
+    @click="onClick"
+  >
+    <div class="switch__content">
+      <div class="open">
+        <div class="content__body">
+          <div class="body__slot">
+            <slot name="open" />
+          </div>
+        </div>
+      </div>
+
+      <div class="close">
+        <div class="content__body">
+          <div class="body__slot">
+            <slot name="close" />
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="close">
-      <div class="content__body">
-        <div class="body__slot">
-          <slot name="close"></slot>
-        </div>
-      </div>
-    </div>
+    <div class="switch__btn" />
   </div>
-
-  <div class="switch__btn"></div>
-</div>
 </template>
 
 <script lang="ts">
