@@ -52,6 +52,7 @@
 
   .tabs__panel {
     padding: 0 map-get($--space, "xm");
+    position: relative;
   }
 
   @each $key in ("top", "right", "bottom", "left") {
