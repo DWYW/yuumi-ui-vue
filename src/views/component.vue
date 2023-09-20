@@ -119,7 +119,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "../../packages/theme.scss";
+@import "../../packages/styles/mixin.scss";
 
 $header-height: 60px;
 
@@ -133,7 +133,7 @@ $header-height: 60px;
   height: $header-height;
   background-color: #ffffff;
   z-index: 9;
-  box-shadow: 0 0 4px nth($--box-shadow-color, 1);
+  @include Shadow($blur: 4px, $key: "primary");
 
   position: sticky;
   top: 0;
@@ -151,12 +151,12 @@ $header-height: 60px;
     >* {
       flex: 0 0 1px;
       white-space: nowrap;
-      padding: map-get($--space, "xm");
-      font-size: map-get($--font-size, "md");
+      @include Space("padding", "xm");
+      @include FontSize("md");
     }
 
     ._active {
-      color: map-get($--color, "primary");
+      @include ColorWithKey("primary");
     }
 
     >._expand {
@@ -174,9 +174,9 @@ $header-height: 60px;
       }
 
       .name {
-        padding: map-get($--space, "xm");
-        font-size: map-get($--font-size, "lg");
-        color: map-get($--color, "primary");
+        @include Space("padding", "xm");
+        @include FontSize("lg");
+        @include ColorWithKey("primary");
         font-weight: bold;
       }
 
@@ -186,8 +186,8 @@ $header-height: 60px;
     }
 
     .version {
-      font-size: map-get($--font-size, "sm");
-      padding-left: map-get($--font-size, "xl");
+      @include FontSize("sm");
+      @include Space("padding-left", "xl");
     }
   }
 }
@@ -195,39 +195,42 @@ $header-height: 60px;
   position: fixed;
   z-index: 8;
   top: $header-height;
-  font-size: map-get($--font-size, "sm");
+  @include FontSize("sm");
 
   height: calc(100vh - #{$header-height});
   cursor: pointer;
 
   .group {
     &:first-child {
-      padding-top: map-get($--space, "sm");
+      @include Space("padding-top", "sm");
     }
     &:last-child {
-      padding-bottom: map-get($--space, "sm");
+      @include Space("padding-bottom", "sm");
     }
   }
   .group-name {
-    color: map-get($--text-color, "tertiary");
-    font-size: map-get($--font-size, "xm");
-
+    @include TextColor("tertiary");
+    @include FontSize("xm");
     box-sizing: border-box;
-    padding: map-get($--space, "md") map-get($--space, "md") map-get($--space, "xm");
+    @include Space("padding", "md");
+    @include Space("padding-bottom", "xm");
   }
 
   nav {
     box-sizing: border-box;
-    padding: map-get($--space, "xm") map-get($--space, "md");
+    @include Space("padding-top", "xm");
+    @include Space("padding-right", "md");
+    @include Space("padding-bottom", "xm");
+    @include Space("padding-left", "md");
 
     .nav-label {
-      color: map-get($--text-color, "secondary");
-      padding-left: map-get($--space, "xm");
+      @include TextColor("tertiary");
+      @include Space("padding-left", "xm");
       font-size: 0.9em;
     }
 
     &.active, &.active .nav-label {
-      color: map-get($--color, "primary");
+      @include ColorWithKey("primary");
     }
   }
 }
@@ -242,7 +245,7 @@ $header-height: 60px;
 
   .component-view {
     padding-bottom: 100px;
-    padding-right: map-get($--space, "sm");
+    @include Space("padding-right", "sm");
   }
 }
 

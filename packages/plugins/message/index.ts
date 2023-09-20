@@ -7,7 +7,7 @@ import type { VNode } from 'vue'
 export interface CreateMessageOptions {
   message: string
   icon?: VNode
-  theme?: 'primary'|'warn'|'error'|'success'
+  theme?: 'primary'|'warn'|'danger'|'success'
   duration?: number
   align?: boolean
   offset?: number

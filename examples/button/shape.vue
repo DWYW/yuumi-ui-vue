@@ -7,7 +7,7 @@
   </YuumiButton>
   <div>
     <YuumiButton
-      v-for="theme in ['primary', 'success', 'error', 'warn']"
+      v-for="theme in ['primary', 'success', 'danger', 'warn']"
       :key="theme"
       :theme="theme"
       round
@@ -18,7 +18,7 @@
   </div>
   <div>
     <YuumiButton
-      v-for="theme in ['primary', 'success', 'error', 'warn']"
+      v-for="theme in ['primary', 'success', 'danger', 'warn']"
       :key="theme"
       :theme="theme"
       outline
@@ -37,7 +37,7 @@
   </YuumiButton>
   <div>
     <YuumiButton
-      v-for="theme in ['primary', 'success', 'error', 'warn']"
+      v-for="theme in ['primary', 'success', 'danger', 'warn']"
       :key="theme"
       :theme="theme"
       circle
@@ -48,7 +48,7 @@
   </div>
   <div>
     <YuumiButton
-      v-for="theme in ['primary', 'success', 'error', 'warn']"
+      v-for="theme in ['primary', 'success', 'danger', 'warn']"
       :key="theme"
       :theme="theme"
       outline

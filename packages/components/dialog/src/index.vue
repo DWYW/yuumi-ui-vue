@@ -173,7 +173,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 $panel-top: 50%;
 
@@ -183,7 +183,7 @@ $panel-top: 50%;
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: nth($--index, 2);
+  @include Level(2);
 
   font-size: 14px;
 
@@ -197,7 +197,7 @@ $panel-top: 50%;
     top: 0;
     bottom: 0;
 
-    background-color: rgba(map-get($--color, "black"), 0.3);
+    @include BackgroundColorWithKey("mask");
   }
 
   .dialog-panel {
@@ -206,26 +206,26 @@ $panel-top: 50%;
     left: 50%;
     top: $panel-top;
     transform: translate3d(-50%, -50%, 0);
-    background-color: map-get($--color, "white");
-    border-radius: map-get($--border-radius, "primary");
+    @include BackgroundColorWithKey("white");
+    @include BorderRadius();
     overflow: hidden;
-    box-shadow: 0 0 map-get($--space, "sm") nth($--box-shadow-color, 3);
+    @include Shadow($blur: getSpaceWithKey("sm"), $key: "tertiary");
   }
 
   .dialog--header {
-    padding: map-get($--height, "sm")*0.5 map-get($--space, "sm");
-    background-color: map-get($--color, "light");
+    @include Space("padding", "sm");
+    @include BackgroundColorWithKey("light");
     position: relative;
 
     .dialog-title {
-      padding-right: map-get($--space, "xm");
+      @include Space("padding-right", "xm");
       font-size: 1.14em;
     }
 
     .dialog-close {
       display: block;
       position: absolute;
-      right: map-get($--space, "xm");
+      @include Space("right", "xm");
       top: 50%;
       transform: translateY(-50%);
       cursor: pointer;
@@ -235,7 +235,7 @@ $panel-top: 50%;
 
   .dialog--content {
     min-height: 128px;
-    padding: map-get($--space, "sm");
+    @include Space("padding", "sm");
 
     &._center {
       text-align: center;
@@ -243,7 +243,8 @@ $panel-top: 50%;
   }
 
   .dialog--footer {
-    padding: 0 map-get($--space, "sm") map-get($--space, "sm");
+    @include Space("padding", "sm");
+    padding-top: 0;
     text-align: center;
 
     .yuumi-button {
@@ -251,7 +252,7 @@ $panel-top: 50%;
     }
 
     :not(:last-child) {
-      margin-right: map-get($--space, "sm");
+      @include Space("margin-right", "sm");
     }
   }
 }

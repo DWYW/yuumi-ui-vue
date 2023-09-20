@@ -1,18 +1,18 @@
-@import '../../theme.scss';
+@import "../../styles/mixin.scss";
 
 .yuumi-notification {
   width: 300px;
-  background-color: map-get($--color, "white");
-  border-radius: map-get($--border-radius, "primary");
-  padding: map-get($--space, "sm");
-  box-shadow: 0 0 map-get($--space, "sm") nth($--box-shadow-color, 2);
+  @include BackgroundColorWithKey("white");
+  @include BorderRadius();
+  @include Space("padding", "sm");
+  @include Shadow($blur: getSpaceWithKey("sm"), $key: "secondary");
   position: fixed;
-  z-index: nth($--index, 2);
+  @include Level(2);
 
-  @each $key in ("primary", "warn", "success", "error") {
+  @each $key in $--theme {
     &.theme__#{$key} {
       .notification-icon {
-        color: map-get($--color, $key);
+        @include ColorWithKey($key);
       }
     }
   }
@@ -23,28 +23,28 @@
 
   &.direction__tl {
     top: 0;
-    left: map-get($--space, "sm");
+    @include Space("left", "sm");
   }
 
   &.direction__tr {
     top: 0;
-    right: map-get($--space, "sm");
+    @include Space("right", "sm");
   }
 
   &.direction__bl {
     bottom: 0;
-    left: map-get($--space, "sm");
+    @include Space("left", "sm");
   }
 
   &.direction__br {
     bottom: 0;
-    right: map-get($--space, "sm");
+    @include Space("right", "sm");
   }
 
   .notification-close {
     position: absolute;
-    top: map-get($--space, "xm");
-    right: map-get($--space, "xm");
+    @include Space("top", "xm");
+    @include Space("right", "xm");
     cursor: pointer;
   }
 
@@ -56,18 +56,19 @@
 
   .notification-content {
     overflow: hidden;
-    padding: 0 map-get($--space, "sm");
+    @include Space("padding-left", "sm");
+    @include Space("padding-right", "sm");
     line-height: 24px;
 
     .content-title {
       font-weight: bold;
       font-size: 16px;
-      margin-bottom: map-get($--space, "xm");
+      @include Space("margin-bottom", "xm");
     }
 
     .content-body {
       font-size: 14px;
-      color: map-get($--text-color, "secondary");
+      @include TextColor("secondary");
     }
   }
 }

@@ -138,7 +138,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
+
 .yuumi-pagination {
   display: flex;
   align-items: center;
@@ -157,7 +158,8 @@ export default defineComponent({
   }
 
   .yuumi-button, .yuumi-input {
-    margin: 0 map-get($--space, "xm")*0.5;
+    @include Space("margin-left", "xxm");
+    @include Space("margin-right", "xxm");
   }
 
   .yuumi-input {
@@ -170,10 +172,11 @@ export default defineComponent({
 
   .total {
     white-space: nowrap;
-    margin: 0 map-get($--space, "xm")*0.5;
+    @include Space("margin-left", "xxm");
+    @include Space("margin-right", "xxm");
 
     span {
-      color: map-get($--color, "primary");
+      @include ColorWithKey("primary");
     }
   }
 }

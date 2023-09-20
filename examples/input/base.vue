@@ -6,7 +6,7 @@
     @keyup="onKeyup"
   />
   <YuumiInput
-    v-for="theme in ['primary', 'success', 'error', 'warn']"
+    v-for="theme in ['primary', 'success', 'danger', 'warn']"
     :key="theme"
     v-model="value"
     placeholder="请输入"

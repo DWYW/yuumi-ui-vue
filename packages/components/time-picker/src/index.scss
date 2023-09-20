@@ -1,11 +1,10 @@
-
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-time-picker {
   display: inline-table;
   box-sizing: border-box;
-  border: 1px solid map-get($--color, "border");
-  border-radius: map-get($--border-radius, "primary");
+  @include Border();
+  @include BorderRadius();
   cursor: pointer;
   transition: border-color 0.3s;
 
@@ -15,12 +14,13 @@
   }
 
   .picker__icon, .placeholder, .picker__suffix {
-    color: map-get($--color, "placeholder");
+    @include ColorWithKey("placeholder");
   }
 
   .picker__content {
     .content-hyphen {
-      padding: 0 map-get($--space, "sm") * 0.5;
+      @include Space("padding-left", "xm");
+      @include Space("padding-right", "xm");
     }
 
     .content-time {
@@ -46,12 +46,12 @@
   }
 
   &.__focus {
-    border-color: map-get($--color, "primary");
+    @include BorderColorWithKey("primary");
   }
 
   &.__disabled {
-    border-color: map-get($--color, "disabled");
-    color: map-get($--text-color, "secondary");
+    @include BorderColorWithKey("disabled");
+    @include TextColor("secondary");
     cursor: no-drop;
     opacity: 0.5;
     user-select: none;
@@ -60,16 +60,19 @@
 
 .time-picker-btns {
   text-align: right;
-  border-top: 1px solid map-get($--color, "border");
-  padding: map-get($--space, "xm") * 0.5 map-get($--space, "sm");
+  @include Border($attr: "border-top");
+  @include Space("padding-top", "xxm");
+  @include Space("padding-right", "sm");
+  @include Space("padding-bottom", "xxm");
+  @include Space("padding-left", "sm");
 
   >span {
-    margin-left: map-get($--space, "sm");
+    @include Space("margin-left", "sm");
     cursor: pointer;
     font-size: 14px;
 
     &:nth-child(2) {
-      color: map-get($--color, "primary");
+      @include ColorWithKey("primary");
     }
   }
 }

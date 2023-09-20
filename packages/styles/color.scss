@@ -1,0 +1,29 @@
+$--color: (
+  "primary": #0d6efd,
+  "success": #00b450,
+  "danger": #dc3545,
+  "warn": #ffc107,
+  "info": #0dcaf0,
+  "white": #ffffff,
+  "black": #000000,
+  "light": mix(#000000, #FFFFFF, 4%),
+  "dark": mix(#000000, #FFFFFF, 96%),
+  "disabled": mix(#000000, #FFFFFF, 25%),
+  "border": mix(#000000, #FFFFFF, 15%),
+  "placeholder": mix(#000000, #FFFFFF, 15%),
+  "divider": mix(#000000, #FFFFFF, 6%),
+  "mask": rgba(#000000, 0.3),
+);
+
+$--text-color: (
+  "primary": mix(#000000, #FFFFFF, 85%),
+  "secondary": mix(#000000, #FFFFFF, 65%),
+  "tertiary": mix(#000000, #FFFFFF, 45%),
+);
+
+$--shadow-color: (
+  "primary":  rgba(0, 0, 0, 0.16),
+  "secondary":rgba(0, 0, 0, 0.12),
+  "tertiary": rgba(0, 0, 0, 0.08),
+);
+

@@ -8,7 +8,7 @@ export interface CreateNotificationOptions {
   title: string|VNode
   message: string|VNode
   icon?: VNode
-  theme?: 'default'|'primary'|'warn'|'error'|'succss'
+  theme?: 'default'|'primary'|'warn'|'danger'|'succss'
   duration?: number
   offset?: number
   direction: 'bl'|'br'|'tl'|'tr'

@@ -1,28 +1,28 @@
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 .yuumi-tooltip {
   display: inline-block;
 
   &.yuumi-popper {
     .popper__content {
-      border-radius: map-get($--border-radius, "primary");
-      padding: map-get($--space, "xm");
+      @include BorderRadius();
+      @include Space("padding", "xm");
     }
   }
 
   &.theme__dark {
     .popper__content {
-      border-color: map-get($--color, "dark");
-      background-color: map-get($--color, "dark");
-      color: map-get($--color, "white");
+      @include BorderColorWithKey("dark");
+      @include BackgroundColorWithKey("dark");
+      @include ColorWithKey("white");
     }
 
-    @each $key in ('top', 'bottom', 'left', 'right') {
-      &[data-popper-placement^=#{$key}] {
+    @each $type in ('top', 'bottom', 'left', 'right') {
+      &[data-popper-placement^=#{$type}] {
         .popper__arrow {
-          border-#{$key}-color: map-get($--color, "dark");
+          @include BorderColorPartail($attr: $type, $key: "dark");
 
           &::after {
-            border-#{$key}-color: map-get($--color, "dark");
+            @include BorderColorPartail($attr: $type, $key: "dark");
           }
         }
       }

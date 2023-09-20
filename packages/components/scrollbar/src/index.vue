@@ -180,7 +180,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-scrollbar {
   position: relative;
@@ -199,8 +199,8 @@ export default defineComponent({
   }
 
   .scrollbar {
-    background-color: rgba(#000000, .3);
-    border-radius: map-get($--border-radius, "round");
+    @include AlphaBackgroundColorWithKey("black", 0.3);
+    @include BorderRadius("round");
     cursor: pointer;
     position: absolute;
     z-index: 1;
@@ -228,7 +228,7 @@ export default defineComponent({
     opacity: 1;
 
     &:hover {
-      background-color: rgba(#000000, .6);
+      @include AlphaBackgroundColorWithKey("black", 0.6);
     }
   }
 }

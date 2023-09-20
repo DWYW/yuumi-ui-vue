@@ -43,7 +43,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "../../packages/theme.scss";
+@import "../../packages/styles/mixin.scss";
 
 .page {
   width: 100vw;
@@ -57,7 +57,7 @@ export default defineComponent({
     width: 150vw;
     height: 150vw;
     border-radius: 50%;
-    background: map-get($--color, "primary");
+    @include BackgroundColorWithKey("primary");
 
     position: absolute;
     left: 0;
@@ -89,15 +89,15 @@ export default defineComponent({
   line-height: 2;
 
   .name {
-    font-size: map-get($--font-size, "md")*2;
+    @include FontSize("md", 2);
     font-weight: bold;
   }
 
   .btns {
-    margin-top: map-get($--space, "lg");
+    @include Space("margin-top", "lg");
 
     :not(:first-child) {
-      margin-left: map-get($--space, "sm");
+      @include Space("margin-left", "sm");
     }
 
     a {

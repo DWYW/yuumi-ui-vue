@@ -6,7 +6,7 @@
     @change="log"
   />
   <YuumiSelect
-    v-for="theme in ['primary', 'success', 'warn', 'error']"
+    v-for="theme in ['primary', 'success', 'warn', 'danger']"
     :key="theme"
     v-model="value"
     style="margin: 0 10px 10px 0;"

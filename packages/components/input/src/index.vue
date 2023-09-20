@@ -241,11 +241,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-input {
   display: inline-table;
-  border: 0px solid map-get($--color, "border");
+  @include Border($width: 0);
 
   .input__content {
     line-height: 0;
@@ -262,7 +262,7 @@ export default defineComponent({
     border-width: 1px;
     border-style: solid;
     border-color: inherit;
-    border-radius: map-get($--border-radius, "primary");
+    @include BorderRadius();
     background-color: inherit;
     color: inherit;
     box-sizing: border-box;
@@ -270,24 +270,25 @@ export default defineComponent({
     transition: border-color 0.2s;
 
     &::placeholder {
-      color: map-get($--color, "placeholder");
+      @include ColorWithKey("placeholder");
     }
 
     &:focus {
-      border-color: map-get($--color, 'primary');
+      @include BorderColorWithKey("primary");
     }
   }
 
   .input__prefix, .input__suffix {
-    background-color: map-get($--color, "light");
+    @include BackgroundColorWithKey("light");
     width: 0;
     display: table-cell;
     vertical-align: middle;
-    padding: 0 map-get($--space, "xm");
+    @include Space("padding-left", "xm");
+    @include Space("padding-right", "xm");
     border-width: 1px;
     border-style: solid;
     border-color: inherit;
-    border-radius: map-get($--border-radius, "primary");
+    @include BorderRadius();
   }
 
   .input__prefix-icon, .input__suffix-icon {
@@ -307,7 +308,7 @@ export default defineComponent({
 
   .clear-btn {
     cursor: pointer;
-    color: map-get($--text-color, "secondary");
+    @include TextColor("secondary");
   }
 
   &.__has-prefix {
@@ -375,19 +376,19 @@ export default defineComponent({
 
   @each $key in $--theme {
     &.theme__#{$key} {
-      border-color: map-get($--color, $key);
-      color: map-get($--color, $key);
+      @include BorderColorWithKey($key);
+      @include ColorWithKey($key);
 
       .input__prefix, .input__suffix {
-        background-color: mix(map-get($--color, $key), map-get($--color, "white"), 25%);
+        background-color: getMixColorWithKey($key, "white", 25%);
       }
 
       input::placeholder {
-        color: mix(map-get($--color, $key), map-get($--color, "white"), 45%);
+        color: getMixColorWithKey($key, "white", 45%);
       }
 
       input:focus {
-        border-color: map-get($--color, $key);
+        @include BorderColorWithKey($key);
       }
     }
   }

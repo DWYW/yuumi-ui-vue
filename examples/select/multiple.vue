@@ -6,7 +6,7 @@
     multiple
   />
   <YuumiSelect
-    v-for="theme in ['primary', 'success', 'warn', 'error']"
+    v-for="theme in ['primary', 'success', 'warn', 'danger']"
     :key="theme"
     v-model="value"
     multiple

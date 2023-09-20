@@ -93,7 +93,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-radio {
   cursor: pointer;
@@ -110,17 +110,17 @@ export default defineComponent({
 
     .yuumi-icon {
       display: block;
-      color: map-get($--color, "border");
+      @include ColorWithKey("border");
     }
   }
 
   .radio__content {
-    padding-left: map-get($--space, "xm");
+    @include Space("padding-left", "xm");
   }
 
   &.__checked {
     .radio__icon .yuumi-icon {
-      color: map-get($--color, "primary");
+      @include ColorWithKey("primary");
     }
   }
 
@@ -129,7 +129,7 @@ export default defineComponent({
     cursor: no-drop;
 
     .radio__icon .yuumi-icon {
-      color: map-get($--color, "disabled");
+      @include ColorWithKey("disabled");
     }
   }
 

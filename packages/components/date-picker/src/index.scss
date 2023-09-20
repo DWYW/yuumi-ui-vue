@@ -1,11 +1,11 @@
 
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-date-picker {
   display: inline-table;
   box-sizing: border-box;
-  border: 1px solid map-get($--color, "border");
-  border-radius: map-get($--border-radius, "primary");
+  @include Border();
+  @include BorderRadius();
   cursor: pointer;
 
   .picker__icon, .picker__content, .picker__suffix {
@@ -14,12 +14,15 @@
   }
 
   .picker__icon, .placeholder, .picker__suffix {
-    color: map-get($--color, "placeholder");
+    @include ColorWithKey("placeholder");
   }
 
   .picker__content {
     .content-hyphen {
-      padding: 0 map-get($--space, "sm") * 0.5;
+      @include Space("padding-top", 0);
+      @include Space("padding-right", "xm");
+      @include Space("padding-bottom", 0);
+      @include Space("padding-left", "xm");
     }
 
     .content-date {
@@ -45,12 +48,12 @@
   }
 
   &.__focus {
-    border-color: map-get($--color, "primary");
+    @include BorderColorWithKey("primary");
   }
 
   &.__disabled {
-    border-color: map-get($--color, "disabled");
-    color: map-get($--text-color, "secondary");
+    @include BorderColorWithKey("disabled");
+    @include TextColor("secondary");
     cursor: no-drop;
     opacity: 0.5;
     user-select: none;
@@ -61,8 +64,11 @@
   .panel__times {
     display: table;
     width: 100%;
-    border-bottom: 1px solid map-get($--color, "border");
-    padding: map-get($--space, "xm") * 0.5 map-get($--space, "sm");
+    @include Border($attr: "border-bottom");
+    @include Space("padding-top", "xxm");
+    @include Space("padding-right", "sm");
+    @include Space("padding-bottom", "xxm");
+    @include Space("padding-left", "sm");
     box-sizing: border-box;
 
     >span {
@@ -81,7 +87,7 @@
 
     &._disabled {
       .date-text {
-        color: map-get($--color, "placeholder");
+        @include ColorWithKey("placeholder");
         opacity: 0.5;
       }
     }
@@ -93,7 +99,7 @@
     .panel__slot {
       position: relative;
       text-align: center;
-      padding: map-get($--space, "sm");
+      @include Space("padding", "sm");
       font-size: 16px;
 
       .slot__content {
@@ -102,27 +108,30 @@
 
       .prev-year, .prev-month {
         float: left;
-        margin-right: map-get($--space, "sm");
+        @include Space("margin-right", "sm");
         cursor: pointer;
 
         &:hover {
-          color: map-get($--color, "primary");
+          @include ColorWithKey("primary");
         }
       }
 
       .next-year, .next-month {
         float: right;
-        margin-left: map-get($--space, "sm");
+        @include Space("margin-left", "sm");
         cursor: pointer;
 
         &:hover {
-          color: map-get($--color, "primary");
+          @include ColorWithKey("primary");
         }
       }
 
       .render__year, .render__month {
         display: inline-block;
-        padding: 0 map-get($--space, "xm");
+        @include Space("padding-top", 0);
+        @include Space("padding-right", "xm");
+        @include Space("padding-bottom", 0);
+        @include Space("padding-left", "xm");
         font-weight: bold;
       }
 
@@ -133,24 +142,27 @@
   }
 
   .date-picker-btns {
-    border-top: 1px solid map-get($--color, "border");
+    @include Border($attr: "border-top");
     text-align: right;
-    padding: map-get($--space, "xm") * 0.5 map-get($--space, "sm");
+    @include Space("padding-top", "xxm");
+    @include Space("padding-right", "sm");
+    @include Space("padding-bottom", "xxm");
+    @include Space("padding-left", "sm");
 
     >span {
-      margin-left: map-get($--space, "sm");
+      @include Space("margin-left", "sm");
       cursor: pointer;
       font-size: 14px;
       line-height: 30px;
 
       &:nth-child(2) {
-        color: map-get($--color, "primary");
+        @include ColorWithKey("primary");
       }
 
       &.err-msg {
         float: left;
         margin-left: 0;
-        color: map-get($--color, "error");
+        @include ColorWithKey("danger");
       }
     }
   }

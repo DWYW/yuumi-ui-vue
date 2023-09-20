@@ -9,7 +9,7 @@ export function isValidComponentSize (value: string) {
 }
 
 export function isValidComponentTheme (value: string) {
-  return ['default', 'primary', 'success', 'error', 'warn'].indexOf(value) >= 0
+  return ['default', 'primary', 'success', 'danger', 'warn'].indexOf(value) >= 0
 }
 
 export function isValidDatePickerType (value: string) {
@@ -17,11 +17,11 @@ export function isValidDatePickerType (value: string) {
 }
 
 export function isValidWarningTheme (value: string) {
-  return ['default', 'primary', 'success', 'warn', 'error'].indexOf(value) >= 0
+  return ['default', 'primary', 'success', 'warn', 'danger'].indexOf(value) >= 0
 }
 
 export function isValidNotificationTheme (value: string) {
-  return ['default', 'primary', 'success', 'warn', 'error'].indexOf(value) >= 0
+  return ['default', 'primary', 'success', 'warn', 'danger'].indexOf(value) >= 0
 }
 
 export function isValidNotificationDirection (value: string) {

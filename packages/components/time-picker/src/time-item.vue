@@ -165,7 +165,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .picker-time-item {
   display: table-cell;
@@ -183,26 +183,27 @@ export default defineComponent({
   left: 0;
   transform: translateY(-50%);
   width: 100%;
-  height: map-get($--height, "sm");
+  height: getHeightWithKey("sm");
   box-sizing: border-box;
   border: 1px solid transparent;
-  border-top-color: map-get($--color, "border");
-  border-bottom-color: map-get($--color, "border");
+  @include BorderColorPartail($attr: "top", $key: "border");
+  @include BorderColorPartail($attr: "bottom", $key: "border");
 }
 
 .time-item {
-  line-height: map-get($--height, "sm");
-  padding: 0 map-get($--space, "sm");
+  line-height: getHeightWithKey("sm");
+  @include Space("padding-left", "sm");
+  @include Space("padding-right", "sm");
   text-align: center;
   cursor: pointer;
 
   &:hover {
-    background-color: rgba(map-get($--color, "border"), .5);
+    @include AlphaBackgroundColorWithKey("border", 0.5);
   }
 
   &.selected {
     font-weight: bold;
-    color: map-get($--color, "primary");
+    @include ColorWithKey("primary");
 
     &:hover {
       background-color: transparent;
@@ -210,7 +211,7 @@ export default defineComponent({
   }
 
   &.disabled {
-    color: map-get($--color, "disabled");
+    @include ColorWithKey("disabled");
 
     &:hover {
       background-color: transparent;

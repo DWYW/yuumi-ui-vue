@@ -6,7 +6,7 @@
   </div>
   <div>
     <YuumiButton
-      v-for="theme in ['primary', 'success', 'error', 'warn']"
+      v-for="theme in ['primary', 'success', 'danger', 'warn']"
       :key="theme"
       :theme="theme"
       style="margin: 0 10px 10px 0;"
@@ -16,7 +16,7 @@
   </div>
   <div>
     <YuumiButton
-      v-for="theme in ['primary', 'success', 'error', 'warn']"
+      v-for="theme in ['primary', 'success', 'danger', 'warn']"
       :key="theme"
       :theme="theme"
       outline

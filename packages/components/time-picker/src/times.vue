@@ -92,14 +92,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .picker-times {
   width: 160px;
   display: inline-table;
 
   &:not(:first-child) {
-    border-left: 1px solid map-get($--color, "border");
+    @include Border($attr: "border-left");
   }
 }
 </style>

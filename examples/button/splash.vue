@@ -7,7 +7,7 @@
   </YuumiButton>
   <div>
     <YuumiButton
-      v-for="theme in ['primary', 'success', 'error', 'warn']"
+      v-for="theme in ['primary', 'success', 'danger', 'warn']"
       :key="theme"
       :theme="theme"
       splash
@@ -18,7 +18,7 @@
   </div>
   <div>
     <YuumiButton
-      v-for="theme in ['primary', 'success', 'error', 'warn']"
+      v-for="theme in ['primary', 'success', 'danger', 'warn']"
       :key="theme"
       :theme="theme"
       outline

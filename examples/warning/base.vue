@@ -8,7 +8,7 @@
   </YuumiWarning>
 
   <template
-    v-for="theme in ['primary', 'success', 'warn', 'error']"
+    v-for="theme in ['primary', 'success', 'warn', 'danger']"
     :key="theme"
   >
     <YuumiWarning
@@ -31,7 +31,7 @@ export default {
         primary: 'line-help',
         warn: 'line-info',
         success: 'line-circle-correct',
-        error: 'line-circle-close',
+        danger: 'line-circle-close',
       }
     }
   }

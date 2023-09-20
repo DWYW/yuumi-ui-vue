@@ -1,10 +1,10 @@
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-select {
   display: inline-table;
   box-sizing: border-box;
-  border: 1px solid map-get($--color, "border");
-  border-radius: map-get($--border-radius, "primary");
+  @include Border();
+  @include BorderRadius();
   cursor: pointer;
   min-width: 90px;
   transition: border-color 0.3s;
@@ -12,11 +12,11 @@
   .select__content {
     display: table-cell;
     vertical-align: middle;
-    padding-left: map-get($--space, "xm");
+    @include Space("padding-left", "xm");
     position: relative;
 
     .select__placeholder {
-      color: map-get($--color, "placeholder");
+      @include ColorWithKey("placeholder");
     }
 
     input {
@@ -32,14 +32,14 @@
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    width: map-get($--space, "md");
-    color: map-get($--color, "border");
+    @include Space("width", "md");
+    @include ColorWithKey("border");
     transition: transform 0.3s;
     line-height: 0;
   }
 
   &.__focus {
-    border-color: map-get($--color, "primary");
+    @include BorderColorWithKey("primary");
 
     .select__icon.__arrow {
       transform: rotate(-180deg);
@@ -50,16 +50,16 @@
     display: inline-block;
     margin: 2px 4px 2px 0;
     padding: 2px 4px;
-    background-color: rgba(map-get($--color, "border"), .4);
-    border-radius: map-get($--border-radius, "primary");
+    @include AlphaBackgroundColorWithKey("border", 0.4);
+    @include BorderRadius();
     white-space: nowrap;
 
     .yuumi-icon {
-      color: map-get($--color, "border");
+      @include ColorWithKey("border");
       padding-left: 2px;
 
       &:hover {
-        color: map-get($--text-color, "secondary")
+        @include TextColor("secondary");
       }
     }
   }
@@ -72,21 +72,21 @@
 
   @each $key in $--theme {
     &.theme__#{$key}  {
-      border-color: map-get($--color, $key);
-      color: map-get($--color, $key);
+      @include BorderColorWithKey($key);
+      @include ColorWithKey($key);
 
       .select__placeholder {
-        color: rgba(map-get($--color, $key), .5);
+        @include AlphaColorWithKey($key, 0.5);
       }
 
       &.__multiple .content-item {
-        background-color: rgba(map-get($--color, $key), .2);
+        @include AlphaBackgroundColorWithKey($key, 0.2);
 
         .yuumi-icon {
-          color: rgba(map-get($--color, $key), .5);
+          @include AlphaColorWithKey($key, 0.5);
 
           &:hover {
-            color: rgba(map-get($--color, $key), .8);
+            @include AlphaColorWithKey($key, 0.8);
           }
         }
       }
@@ -94,14 +94,14 @@
   }
 
   &.__disabled {
-    border-color: map-get($--color, "disabled");
-    color: map-get($--text-color, "secondary");
+    @include BorderColorWithKey("disabled");
+    @include TextColor("secondary");
     cursor: no-drop;
     opacity: 0.5;
     user-select: none;
 
     &.__multiple .content-item {
-      background-color: rgba(map-get($--color, "disabled"), .3);
+      @include AlphaBackgroundColorWithKey("disabled", 0.3);
     }
   }
 }
@@ -122,8 +122,10 @@
 
   .option-item {
     list-style: none;
-    padding: map-get($--space, "xm") map-get($--space, "sm");
-    padding-right: map-get($--space, "md");
+    @include Space("padding-top", "xm");
+    @include Space("padding-right", "md");
+    @include Space("padding-bottom", "xm");
+    @include Space("padding-left", "sm");
     cursor: pointer;
     position: relative;
     white-space: nowrap;
@@ -132,16 +134,16 @@
       display: none;
       position: absolute;
       top: 50%;
-      right: map-get($--space, "md");
+      @include Space("right", "md");
       transform: translate3d(100%, -50%,0);
     }
 
     &:hover {
-      background-color: rgba(map-get($--color, "border"), .5);
+      @include AlphaBackgroundColorWithKey("border", 0.5);
     }
 
     &.__selected {
-      color: map-get($--color, 'primary');
+      @include ColorWithKey("primary");
 
       .yuumi-icon {
         display: block;
@@ -149,7 +151,7 @@
     }
 
     &.placeholder {
-      color: map-get($--color, "placeholder");
+      @include ColorWithKey("placeholder");
       &:hover {
         background-color: transparent;
       }
@@ -159,7 +161,7 @@
   @each $key in $--theme {
     &.theme__#{$key} {
       .option-item.__selected {
-        color: map-get($--color, $key);
+        @include ColorWithKey($key);
       }
     }
   }

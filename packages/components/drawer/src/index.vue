@@ -117,7 +117,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-drawer {
   position: fixed;
@@ -125,18 +125,18 @@ export default defineComponent({
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: nth($--index, 2);
+  @include Level(2);
 
   .drawer-mask {
     width: 100%;
     height: 100%;
-    background-color: rgba(map-get($--color, "black"), 0.3);
+    @include BackgroundColorWithKey("mask");
   }
 
   .drawer-body {
     position: absolute;
-    background-color: map-get($--color, "white");
-    box-shadow: 0 0 map-get($--space, "sm") nth($--box-shadow-color, 3);
+    @include BackgroundColorWithKey("white");
+    @include Shadow($blur: getSpaceWithKey("sm"), $key: "tertiary");
   }
 
   &.postion_ {

@@ -22,8 +22,10 @@ export default defineComponent({
     const tabItems = computed(() => getTabItemsFromSlot(YuumiTabItem.name, slots.default))
 
     onMounted(() => {
-      updateRectPosition()
-      onResize()
+      nextTick(() => {
+        updateRectPosition()
+        onResize()
+      })
 
       window.addEventListener('resize', onResize, false)
     })

@@ -1,6 +1,6 @@
 <template>
   <template
-    v-for="theme in ['default', 'primary', 'success', 'warn', 'error']"
+    v-for="theme in ['default', 'primary', 'success', 'warn', 'danger']"
     :key="theme"
   >
     <YuumiButton

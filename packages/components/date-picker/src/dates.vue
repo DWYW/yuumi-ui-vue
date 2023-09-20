@@ -67,25 +67,26 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 $item-size: 24px;
 $item-space: 5px;
 
 .date-panel {
   display: inline-block;
-  padding: map-get($--space, "sm") map-get($--space, "sm");
+  @include Space("padding", "sm");
 
   &:not(:last-child) {
-    border-right: 1px solid map-get($--color, "border");
+    @include Border($attr: "border-right");
   }
 
   .panel__header, .panel__body {
     overflow: hidden;
-    width: ($item-size + $item-space * 2) * 7;
+    width: ($item-size + $item-space*2)*7;
+    margin: 0 auto;
   }
 
   .panel__header {
-    border-bottom: 1px solid map-get($--color, "border");
+    @include Border($attr: "border-bottom");
   }
 
   .week-item, .date-item {
@@ -93,7 +94,7 @@ $item-space: 5px;
     float: left;
     text-align: center;
     padding: $item-space;
-    margin: $item-space * 0.5 0;
+    margin: $item-space*0.5 0;
 
     .item-content {
       width: $item-size;
@@ -106,34 +107,34 @@ $item-space: 5px;
     font-size: 12px;
 
     &._prev-month, &._next-month {
-      color: map-get($--color, "placeholder");
+      @include ColorWithKey("placeholder");
     }
 
     &._current-month {
       &.in-range {
-        background-color: rgba(map-get($--color, "primary"), 0.1);
+        @include AlphaBackgroundColorWithKey("primary", 0.1);
       }
 
       &._selected, &.range_start, &.range_end {
         .item-content {
-          color: map-get($--color, "white");
-          background-color: map-get($--color, "primary");
-          border-radius: map-get($--border-radius, "circle");
+          @include ColorWithKey("white");
+          @include BackgroundColorWithKey("primary");
+          @include BorderRadius("circle");
         }
       }
 
       &.range_start {
-        border-top-left-radius: map-get($--border-radius, "round");
-        border-bottom-left-radius: map-get($--border-radius, "round");
+        @include BorderRadiusPartail("top-left", "round");
+        @include BorderRadiusPartail("bottom-left", "round");
       }
 
       &.range_end {
-        border-top-right-radius: map-get($--border-radius, "round");
-        border-bottom-right-radius: map-get($--border-radius, "round");
+        @include BorderRadiusPartail("top-right", "round");
+        @include BorderRadiusPartail("bottom-right", "round");
       }
 
       &._disabled {
-        color: map-get($--color, "placeholder");
+        @include ColorWithKey("placeholder");
       }
     }
   }
