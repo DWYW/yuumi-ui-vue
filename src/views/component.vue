@@ -52,7 +52,10 @@
     </aside>
 
     <div class="component">
-      <YuumiScrollbar ref="mainScrollbar">
+      <YuumiScrollbar
+        ref="mainScrollbar"
+        dynamic
+      >
         <div
           ref="mainEl"
           class="main"
