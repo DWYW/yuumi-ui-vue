@@ -1,14 +1,31 @@
 <template>
-<div class="yuumi-empty" v-bind="$attrs">
-  <div class="empty__image">
-    <img v-if="image" :src="image" :style="{ width: imageSize + 'px' }" alt="empty">
-    <YuumiIcon v-else icon="line-empty" :style="{ fontSize: imageSize + 'px' }"></YuumiIcon>
+  <div
+    class="yuumi-empty"
+    v-bind="$attrs"
+  >
+    <div class="empty__image">
+      <img
+        v-if="image"
+        :src="image"
+        :style="{ width: imageSize + 'px' }"
+        alt="empty"
+      >
+      <YuumiIcon
+        v-else
+        icon="line-empty"
+        :style="{ fontSize: imageSize + 'px' }"
+      />
+    </div>
+
+    <div
+      v-if="description"
+      class="empty__description"
+    >
+      {{ description }}
+    </div>
+
+    <slot />
   </div>
-
-  <div class="empty__description" v-if="description">{{description}}</div>
-
-  <slot></slot>
-</div>
 </template>
 
 <script lang="ts">
@@ -25,7 +42,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-empty {
   width: 100%;
@@ -37,12 +54,13 @@ export default defineComponent({
   flex-direction: column;
 
   .empty__image {
-    color: map-get($--color, "placeholder");
+    @include ColorWithKey("placeholder");
   }
 
   .empty__description {
-    color: map-get($--text-color, "tertiary");
-    padding: map-get($--space, "xm") 0 map-get($--space, "sm");
+    @include TextColor("tertiary");
+    @include Space("padding-top", "xm");
+    @include Space("padding-bottom", "sm");
   }
 }
 </style>

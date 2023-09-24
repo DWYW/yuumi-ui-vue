@@ -1,6 +1,6 @@
 {
   "name": "yuumi-ui-vue",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "files": [
     "packages/**/*"
   ],
@@ -9,7 +9,8 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "build:lib": "vue-tsc --noEmit && vite build --mode lib",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint-fix": "eslint src packages examples --ext .vue,.js,.ts,.jsx,.tsx --fix"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.0",
@@ -19,12 +20,17 @@
   "devDependencies": {
     "@babel/types": "^7.19.3",
     "@types/node": "^18.7.23",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
     "@vitejs/plugin-vue": "^2.3.3",
     "debug": "^4.3.4",
+    "eslint": "^8.48.0",
+    "eslint-plugin-vue": "^9.17.0",
     "markdown-it": "^13.0.1",
     "sass": "^1.55.0",
     "typescript": "^4.5.4",
     "vite": "^2.9.9",
+    "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-vuedoc": "^3.1.3",
     "vue-tsc": "^0.34.7"
   }

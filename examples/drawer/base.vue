@@ -1,9 +1,22 @@
 <template>
-  <template v-for="item in ['right', 'left', 'top', 'bottom']" :key="item">
-    <YuumiButton @click="showDrawer(item)" style="margin: 0 10px 10px 0;">{{item}}</YuumiButton>
+  <template
+    v-for="item in ['right', 'left', 'top', 'bottom']"
+    :key="item"
+  >
+    <YuumiButton
+      style="margin: 0 10px 10px 0;"
+      @click="showDrawer(item)"
+    >
+      {{ item }}
+    </YuumiButton>
   </template>
 
-  <YuumiDrawer :position="position" v-model="show">{{position}}</YuumiDrawer>
+  <YuumiDrawer
+    v-model="show"
+    :position="position"
+  >
+    {{ position }}
+  </YuumiDrawer>
 </template>
 
 <script>

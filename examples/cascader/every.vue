@@ -1,6 +1,11 @@
 <template>
-  <YuumiCascader :options="options" v-model="value" every placeholder="选择即变化"></YuumiCascader>
-  <div>{{value}}</div>
+  <YuumiCascader
+    v-model="value"
+    :options="options"
+    every
+    placeholder="选择即变化"
+  />
+  <div>{{ value }}</div>
 </template>
 
 <script>

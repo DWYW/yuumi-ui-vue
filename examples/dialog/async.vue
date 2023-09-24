@@ -1,9 +1,18 @@
 <template>
-<YuumiButton @click="showDialog">异步操作</YuumiButton>
-<YuumiDialog title="dialog title" v-model="show" :sync="false" @close="onclose" @cancel="oncancel" @confirm="onconfirm">
-  <YuumiIcon icon="line-help" ></YuumiIcon>
-  <span>异步操作</span>
-</YuumiDialog>
+  <YuumiButton @click="showDialog">
+    异步操作
+  </YuumiButton>
+  <YuumiDialog
+    v-model="show"
+    title="dialog title"
+    :sync="false"
+    @close="onclose"
+    @cancel="oncancel"
+    @confirm="onconfirm"
+  >
+    <YuumiIcon icon="line-help" />
+    <span>异步操作</span>
+  </YuumiDialog>
 </template>
 
 <script>

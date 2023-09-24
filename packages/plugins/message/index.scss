@@ -1,4 +1,4 @@
-@import '../../theme.scss';
+@import "../../styles/mixin.scss";
 
 .yuumi-message {
   width: 320px;
@@ -8,14 +8,15 @@
   position: fixed;
   left: 50%;
   transform: translate3d(-50%, 0, 0);
-  z-index: nth($--index, 2);
+  @include Level(2);
 
   &.appeared {
     transition: top 0.3s;
   }
 
   .message-content {
-    padding: 0 map-get($--space, "xm");
+    @include Space("padding-left", "xm");
+    @include Space("padding-right", "xm");
   }
 }
 

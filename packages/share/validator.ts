@@ -1,4 +1,4 @@
-import { Fragment, isVNode, VNode } from 'vue'
+import { Fragment, isVNode } from 'vue'
 
 export function isDefined (value: any) {
   return value !== null && value !== undefined
@@ -9,7 +9,7 @@ export function isValidComponentSize (value: string) {
 }
 
 export function isValidComponentTheme (value: string) {
-  return ['default', 'primary', 'success', 'error', 'warn'].indexOf(value) >= 0
+  return ['default', 'primary', 'success', 'danger', 'warn'].indexOf(value) >= 0
 }
 
 export function isValidDatePickerType (value: string) {
@@ -17,11 +17,11 @@ export function isValidDatePickerType (value: string) {
 }
 
 export function isValidWarningTheme (value: string) {
-  return ['default', 'primary', 'success', 'warn', 'error'].indexOf(value) >= 0
+  return ['default', 'primary', 'success', 'warn', 'danger'].indexOf(value) >= 0
 }
 
 export function isValidNotificationTheme (value: string) {
-  return ['default', 'primary', 'success', 'warn', 'error'].indexOf(value) >= 0
+  return ['default', 'primary', 'success', 'warn', 'danger'].indexOf(value) >= 0
 }
 
 export function isValidNotificationDirection (value: string) {
@@ -45,7 +45,7 @@ export function isValidTableColumnFixed (value: string) {
 }
 
 export function isValidPopperType (value: string) {
-  return ['click', 'hover'].indexOf(value) >= 0
+  return ['click', 'hover', 'custom'].indexOf(value) >= 0
 }
 
 export function isInputType (value: string) {

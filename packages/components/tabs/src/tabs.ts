@@ -22,8 +22,10 @@ export default defineComponent({
     const tabItems = computed(() => getTabItemsFromSlot(YuumiTabItem.name, slots.default))
 
     onMounted(() => {
-      updateRectPosition()
-      onResize()
+      nextTick(() => {
+        updateRectPosition()
+        onResize()
+      })
 
       window.addEventListener('resize', onResize, false)
     })
@@ -75,7 +77,7 @@ export default defineComponent({
         const props = item.props || {}
 
         function getContent () {
-          const labelSlot = getValueByPath<Function>(item, 'children.label')
+          const labelSlot = getValueByPath<(...rest: any[]) => any>(item, 'children.label')
           if (labelSlot) {
             return labelSlot({$props: props})
           }

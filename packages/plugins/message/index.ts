@@ -7,7 +7,7 @@ import type { VNode } from 'vue'
 export interface CreateMessageOptions {
   message: string
   icon?: VNode
-  theme?: 'primary'|'warn'|'error'|'success'
+  theme?: 'primary'|'warn'|'danger'|'success'
   duration?: number
   align?: boolean
   offset?: number
@@ -101,7 +101,7 @@ function updateMessageTop (vnode: VNode) {
   messages.forEach((item: VNode, index: number) => {
     if (item === vnode) { vnodeIndex = index }
 
-    const { $refs, show, offset }: any = item.component?.proxy
+    const { $refs, show, offset }: any = item.component!.proxy
     if (!show) return
 
     if (vnodeIndex >= 0) {

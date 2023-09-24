@@ -18,6 +18,7 @@ import RadioGroupPlug from './components/radio-group'
 import RatioRectPlug from './components/ratio-rect'
 import ScrollbarPlug from './components/scrollbar'
 import SelectPlug from './components/select'
+import SliderPlug from './components/slider'
 import StepPlug from './components/step'
 import SwitchPlug from './components/switch'
 import TablePlug from './components/table'
@@ -53,6 +54,7 @@ export * from './components/radio-group'
 export * from './components/ratio-rect'
 export * from './components/scrollbar'
 export * from './components/select'
+export * from './components/slider'
 export * from './components/step'
 export * from './components/switch'
 export * from './components/table'
@@ -106,6 +108,7 @@ export default {
     app.use(RatioRectPlug)
     app.use(ScrollbarPlug)
     app.use(SelectPlug)
+    app.use(SliderPlug)
     app.use(StepPlug)
     app.use(SwitchPlug)
     app.use(TablePlug)

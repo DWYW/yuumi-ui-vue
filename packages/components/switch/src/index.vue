@@ -1,32 +1,34 @@
 <template>
-<div :class="['yuumi-switch', 'size__' + size, {
-  '__checked': checked,
-  '__readonly': readonly,
-  '__disabled': disabled
-}]" v-bind="$attrs"
-  :style="{ backgroundColor: checked ? openColor : closeColor }"
-  @click="onClick"
->
-  <div class="switch__content">
-    <div class="open">
-      <div class="content__body">
-        <div class="body__slot">
-          <slot name="open"></slot>
+  <div
+    :class="['yuumi-switch', 'size__' + size, {
+      '__checked': checked,
+      '__readonly': readonly,
+      '__disabled': disabled
+    }]"
+    v-bind="$attrs"
+    :style="{ backgroundColor: checked ? openColor : closeColor }"
+    @click="onClick"
+  >
+    <div class="switch__content">
+      <div class="open">
+        <div class="content__body">
+          <div class="body__slot">
+            <slot name="open" />
+          </div>
+        </div>
+      </div>
+
+      <div class="close">
+        <div class="content__body">
+          <div class="body__slot">
+            <slot name="close" />
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="close">
-      <div class="content__body">
-        <div class="body__slot">
-          <slot name="close"></slot>
-        </div>
-      </div>
-    </div>
+    <div class="switch__btn" />
   </div>
-
-  <div class="switch__btn"></div>
-</div>
 </template>
 
 <script lang="ts">
@@ -83,12 +85,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
-$space: 2px;
+@import "../../../styles/mixin.scss";
+$_space: 2px;
 
 .yuumi-switch {
   display: inline-block;
-  border-radius: map-get($--border-radius, "round");
+  @include BorderRadius("round");
   overflow: hidden;
   position: relative;
   transition: background .15s;
@@ -117,7 +119,7 @@ $space: 2px;
           display: table-cell;
           vertical-align: middle;
           text-align: center;
-          color: map-get($--color, "white");
+          @include ColorWithKey("white");
         }
       }
     }
@@ -125,10 +127,10 @@ $space: 2px;
 
   .switch__btn {
     display: block;
-    background-color: map-get($--color, "white");
+    @include BackgroundColorWithKey("white");
     position: absolute;
-    top: $space;
-    left: $space;
+    top: $_space;
+    left: $_space;
     transition: all .15s;
   }
 
@@ -150,23 +152,23 @@ $space: 2px;
 
       .switch__content {
         .open {
-          padding-right: $value - $space;
+          padding-right: $value - $_space;
         }
 
         .close {
-          padding-left: $value - $space;
+          padding-left: $value - $_space;
         }
       }
 
       .switch__btn {
-        width: $value - ($space * 2);
-        height: $value - ($space * 2);
-        border-radius: map-get($--border-radius, "circle");
+        width: $value - ($_space * 2);
+        height: $value - ($_space * 2);
+        @include BorderRadius("circle");
       }
 
       &.__checked {
         .switch__btn {
-          left: calc(100% - #{$value - $space});
+          left: calc(100% - #{$value - $_space});
         }
       }
     }

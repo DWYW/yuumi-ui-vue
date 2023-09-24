@@ -1,10 +1,10 @@
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-cascader {
   display: inline-table;
-  border: 1px solid map-get($--color, "border");
+  @include Border();
   box-sizing: border-box;
-  border-radius: map-get($--border-radius, "primary");
+  @include BorderRadius();
   cursor: pointer;
   transition: border-color 0.3s;
 
@@ -14,23 +14,23 @@
   }
 
   .cascader__label, .cascader__placeholder {
-    padding-left: map-get($--space, "xm");
+    @include Space("padding-left", "xm");
   }
 
   .cascader__placeholder {
-    color: map-get($--color, "placeholder");
+    @include ColorWithKey("placeholder");
   }
 
   .cascader__icon {
     text-align: center;
-    width: map-get($--space, "md");
-    color: map-get($--color, "border");
+    @include Space("width", "md");
+    @include ColorWithKey("border");
     transition: transform 0.3s;
     line-height: 0;
   }
 
   &.__focus {
-    border-color: map-get($--color, "primary");
+    @include BorderColorWithKey("primary");
 
     .cascader__icon.__arrow {
       transform: rotate(-180deg);
@@ -55,11 +55,11 @@
 
   @each $key in $--theme {
     &.theme__#{$key}  {
-      border-color: map-get($--color, $key);
-      color: map-get($--color, $key);
+      @include BorderColorWithKey($key);
+      @include ColorWithKey($key);
 
       .cascader__placeholder {
-        color: rgba(map-get($--color, $key), .5);
+        @include AlphaColorWithKey($key, 0.5);
       }
     }
   }
@@ -74,13 +74,13 @@
   @each $key in $--theme {
     &.theme__#{$key}  {
       .menu-item.__active {
-        color: map-get($--color, $key);
+        @include ColorWithKey($key);
       }
     }
   }
 
   &:not(:first-child) {
-    border-left: 1px solid map-get($--color, "border");
+    @include Border($attr: "border-left");
   }
 
   ul {
@@ -89,7 +89,10 @@
 
     li {
       list-style: none;
-      padding: map-get($--space, "xm") map-get($--space, "lg") map-get($--space, "xm") map-get($--space, "sm");
+      @include Space("padding-top", "xm");
+      @include Space("padding-bottom", "xm");
+      @include Space("padding-left", "sm");
+      @include Space("padding-right", "lg");
       cursor: pointer;
     }
   }
@@ -98,12 +101,12 @@
     position: relative;
 
     &:hover {
-      background-color: rgba(map-get($--color, "border"), .5);
+      @include AlphaBackgroundColorWithKey("border", 0.5);
     }
 
     &.__active {
-      background-color: rgba(map-get($--color, "border"), .5);
-      color: map-get($--color, "primary");
+      @include AlphaBackgroundColorWithKey("border", 0.5);
+      @include ColorWithKey("primary");
     }
 
     &.__disabled {
@@ -113,10 +116,10 @@
     }
 
     .item__icon {
-      font-size: map-get($--font-size, "xm");
+      @include FontSize("xm");
       display: block;
       position: absolute;
-      right: map-get($--space, "xm");
+      @include Space("right", "xm");
       top: 50%;
       transform: translateY(-50%);
     }

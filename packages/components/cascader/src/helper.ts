@@ -1,6 +1,5 @@
 import { getValueByPath } from '../../../share/helper'
 import { getCurrentInstance } from 'vue'
-import type { ComponentInternalInstance } from 'vue'
 
 export interface SelectedItem {
   [x: string]: string

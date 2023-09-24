@@ -1,17 +1,46 @@
 <template>
-<div class="yuumi-pagination" :class="['_'+align]">
-  <template v-for="item in buttons" :key="item.text">
-    <YuumiButton v-if="item.type === 'btn'" size="sm" outline :theme="item.selected ? 'primary' : 'default' "
-      :disabled="item.disabled"
-      @click="onClick(item)"
-    >{{item.text}}</YuumiButton>
-    <div v-else>{{item.text}}</div>
-  </template>
+  <div
+    class="yuumi-pagination"
+    :class="['_'+align]"
+  >
+    <template
+      v-for="item in buttons"
+      :key="item.text"
+    >
+      <YuumiButton
+        v-if="item.type === 'btn'"
+        size="sm"
+        outline
+        :theme="item.selected ? 'primary' : 'default' "
+        :disabled="item.disabled"
+        @click="onClick(item)"
+      >
+        {{ item.text }}
+      </YuumiButton>
+      <div v-else>
+        {{ item.text }}
+      </div>
+    </template>
 
-  <div class="total" v-if="totalVisible && total > 0">共 <span>{{total}}</span> 条</div>
-  <YuumiInput size="sm" v-model="skipValue" :limit="skipValueLimit"></YuumiInput>
-  <YuumiButton size="sm" theme="primary" @click="onSkip">确认</YuumiButton>
-</div>
+    <div
+      v-if="totalVisible && Number(total) > 0"
+      class="total"
+    >
+      共 <span>{{ total }}</span> 条
+    </div>
+    <YuumiInput
+      v-model="skipValue"
+      size="sm"
+      :limit="skipValueLimit"
+    />
+    <YuumiButton
+      size="sm"
+      theme="primary"
+      @click="onSkip"
+    >
+      确认
+    </YuumiButton>
+  </div>
 </template>
 
 <script lang="ts">
@@ -109,7 +138,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
+
 .yuumi-pagination {
   display: flex;
   align-items: center;
@@ -128,7 +158,8 @@ export default defineComponent({
   }
 
   .yuumi-button, .yuumi-input {
-    margin: 0 map-get($--space, "xm")*0.5;
+    @include Space("margin-left", "xxm");
+    @include Space("margin-right", "xxm");
   }
 
   .yuumi-input {
@@ -141,10 +172,11 @@ export default defineComponent({
 
   .total {
     white-space: nowrap;
-    margin: 0 map-get($--space, "xm")*0.5;
+    @include Space("margin-left", "xxm");
+    @include Space("margin-right", "xxm");
 
     span {
-      color: map-get($--color, "primary");
+      @include ColorWithKey("primary");
     }
   }
 }

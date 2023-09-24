@@ -1,4 +1,4 @@
-import { computed, ComputedRef, defineComponent, getCurrentInstance, h, inject, nextTick, Ref, ref, resolveComponent, Transition, VNodeRef, vShow, watch, watchEffect, withDirectives } from 'vue'
+import { computed, defineComponent, getCurrentInstance, h, inject, nextTick, Ref, ref, resolveComponent, Transition, VNodeRef, vShow, watch, watchEffect, withDirectives } from 'vue'
 import { providerKey, ProviderState } from './provider-helper'
 import useChildren, { LOAD_STATUS } from './children-helper'
 import useExpand from './expand-helper'
@@ -236,14 +236,18 @@ export default defineComponent({
       isLeaf ? null : h(Transition, {
         name: 'node-children',
         onBeforeEnter: (el: any) => { el.style.height = '0px' },
-        onEnter: (el: any) => nextTick(() => {
-          el.style.height = `${el.scrollHeight}px`
-        }),
+        onEnter: (el: any) => {
+          nextTick(() => {
+            el.style.height = `${el.scrollHeight}px`
+          })
+        },
         onAfterEnter: (el: any) => el.style.height = '',
         onBeforeLeave: (el: any) => el.style.height = `${el.scrollHeight}px`,
-        onLeave: (el: any) => nextTick(() => {
-          el.style.height = '0px'
-        }),
+        onLeave: (el: any) => {
+          nextTick(() => {
+            el.style.height = '0px'
+          })
+        },
         onAfterLeave: (el: any) => el.style.height = ''
       }, {
         default: () => withDirectives(

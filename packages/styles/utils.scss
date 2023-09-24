@@ -1,0 +1,33 @@
+@import "./color.scss";
+
+@function getMixColorWithKey($key1, $key2, $percent) {
+  @return mix(map-get($--color, $key1), map-get($--color, $key2), $percent);
+}
+
+@function getAlphaColorWithKey($key, $alpha: 1) {
+  @return rgba(map-get($--color, $key), $alpha);
+}
+
+@function getShadowColorWithKey($key) {
+  @return map-get($--shadow-color, $key);
+}
+
+@function getSpaceWithKey($key, $scale: 1) {
+  $value: map-get($--space, $key);
+
+  @if $value != null {
+    @return $value*$scale;
+  } @else {
+    @return 0;
+  }
+}
+
+
+@function getHeightWithKey($key) {
+  $value: map-get($--height, $key);
+  @if $value != null {
+    @return $value;
+  } @else {
+    @return 0;
+  }
+}

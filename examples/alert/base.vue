@@ -1,5 +1,10 @@
 <template>
-<YuumiButton @click="showAlert" style="margin: 0 10px 10px 0;">基本用法</YuumiButton>
+  <YuumiButton
+    style="margin: 0 10px 10px 0;"
+    @click="showAlert"
+  >
+    基本用法
+  </YuumiButton>
 </template>
 
 <script>

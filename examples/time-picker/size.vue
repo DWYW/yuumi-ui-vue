@@ -1,8 +1,12 @@
 <template>
-  <YuumiTimePicker style="margin: 0 10px 10px 0;" v-model="value"
-    v-for="size in ['xl', 'lg', 'md', 'sm', 'xm']" :key="size"
-    :size="size" @change="onChange"
-  ></YuumiTimePicker>
+  <YuumiTimePicker
+    v-for="size in ['xl', 'lg', 'md', 'sm', 'xm']"
+    :key="size"
+    v-model="value"
+    style="margin: 0 10px 10px 0;"
+    :size="size"
+    @change="onChange"
+  />
 </template>
 
 <script>

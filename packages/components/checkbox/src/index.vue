@@ -1,22 +1,32 @@
 <template>
-<label :class="['yuumi-checkbox', 'size__' + size, {
-  '__checked': checkboxChecked||indeterminate,
-  '__disabled': checkboxDisabled
-}]" v-bind="$attrs"
-  @click="onClick"
->
-  <span class="checkbox__icon">
-    <transition name="yuumi-checkbox">
-      <YuumiIcon v-if="checkboxChecked" v-bind="checkedIcon"></YuumiIcon>
-      <YuumiIcon v-else-if="indeterminate" v-bind="indeterminateIcon"></YuumiIcon>
-      <YuumiIcon v-else v-bind="uncheckedIcon"></YuumiIcon>
-    </transition>
-  </span>
-  <span class="checkbox__content">
-    <slot></slot>
-  </span>
-</label>
-
+  <label
+    :class="['yuumi-checkbox', 'size__' + size, {
+      '__checked': checkboxChecked||indeterminate,
+      '__disabled': checkboxDisabled
+    }]"
+    v-bind="$attrs"
+    @click="onClick"
+  >
+    <span class="checkbox__icon">
+      <transition name="yuumi-checkbox">
+        <YuumiIcon
+          v-if="checkboxChecked"
+          v-bind="checkedIcon"
+        />
+        <YuumiIcon
+          v-else-if="indeterminate"
+          v-bind="indeterminateIcon"
+        />
+        <YuumiIcon
+          v-else
+          v-bind="uncheckedIcon"
+        />
+      </transition>
+    </span>
+    <span class="checkbox__content">
+      <slot />
+    </span>
+  </label>
 </template>
 
 <script lang="ts">
@@ -60,7 +70,7 @@ export default defineComponent({
       }
 
       if (attrs.onClick) {
-        (attrs.onClick as Function)(e)
+        (<(e: Event) => void>attrs.onClick)(e)
       }
     }
 
@@ -74,7 +84,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-checkbox {
   cursor: pointer;
@@ -91,17 +101,17 @@ export default defineComponent({
 
     .yuumi-icon {
       display: block;
-      color: map-get($--color, "border");
+      @include ColorWithKey("border");
     }
   }
 
   .checkbox__content {
-    padding-left: map-get($--space, "xm");
+    @include Space("padding-left", "xm");
   }
 
   &.__checked {
     .checkbox__icon .yuumi-icon {
-      color: map-get($--color, "primary");
+      @include ColorWithKey("primary");
     }
   }
 
@@ -110,7 +120,7 @@ export default defineComponent({
     cursor: no-drop;
 
     .checkbox__icon .yuumi-icon {
-      color: map-get($--color, "disabled");
+      @include ColorWithKey("disabled");
     }
   }
 

@@ -1,17 +1,51 @@
 <template>
-<span>size:</span>
-<YuumiRadioGroup v-model="size">
-  <YuumiRadio unique="default" style="margin: 0 10px 10px 0;">default</YuumiRadio>
-  <YuumiRadio unique="middle" style="margin: 0 10px 10px 0;">middle</YuumiRadio>
-  <YuumiRadio unique="small" style="margin: 0 10px 10px 0;">small</YuumiRadio>
-</YuumiRadioGroup>
+  <span>size:</span>
+  <YuumiRadioGroup v-model="size">
+    <YuumiRadio
+      unique="default"
+      style="margin: 0 10px 10px 0;"
+    >
+      default
+    </YuumiRadio>
+    <YuumiRadio
+      unique="middle"
+      style="margin: 0 10px 10px 0;"
+    >
+      middle
+    </YuumiRadio>
+    <YuumiRadio
+      unique="small"
+      style="margin: 0 10px 10px 0;"
+    >
+      small
+    </YuumiRadio>
+  </YuumiRadioGroup>
 
-<YuumiTable :data="students" stripe :size="size">
-  <YuumiTableColumn title="姓名" prop="name"/>
-  <YuumiTableColumn :width="150" title="语文" prop="chinese" />
-  <YuumiTableColumn :width="150" title="数学" prop="math"/>
-  <YuumiTableColumn :width="150" title="英语" prop="english"/>
-</YuumiTable>
+  <YuumiTable
+    :data="students"
+    stripe
+    :size="size"
+  >
+    <YuumiTableColumn
+      title="姓名"
+      prop="name"
+    />
+    <YuumiTableColumn
+      :width="150"
+      title="语文"
+      prop="chinese"
+    />
+    <YuumiTableColumn
+      :width="150"
+      title="数学"
+      prop="math"
+    />
+    <YuumiTableColumn
+      :width="150"
+      title="英语"
+      prop="english"
+    />
+  </YuumiTable>
 </template>
 
 <script lang="ts">

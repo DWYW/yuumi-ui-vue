@@ -1,6 +1,17 @@
 <template>
-  <YuumiCascader :options="options" v-model="value" style="margin: 0 10px 10px 0;" placeholder="部分选项不可用"></YuumiCascader>
-  <YuumiCascader :options="options" v-model="value" disabled style="margin: 0 10px 10px 0;" placeholder="disabled"></YuumiCascader>
+  <YuumiCascader
+    v-model="value"
+    :options="options"
+    style="margin: 0 10px 10px 0;"
+    placeholder="部分选项不可用"
+  />
+  <YuumiCascader
+    v-model="value"
+    :options="options"
+    disabled
+    style="margin: 0 10px 10px 0;"
+    placeholder="disabled"
+  />
 </template>
 
 <script>

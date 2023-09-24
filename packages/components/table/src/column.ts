@@ -21,7 +21,7 @@ export default defineComponent({
       validator: isValidTableColumnType
     }
   },
-  setup (props, { attrs }) {
+  setup (_, { attrs }) {
     const { getters, selection } = inject(injectionKey) as { getters: ProvideGetters, selection: TableSelection }
     const { rootProps } = getters
     const { selections, selectionChanged } = selection

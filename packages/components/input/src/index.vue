@@ -1,47 +1,73 @@
 <template>
-<label :class="['yuumi-input', 'theme__' + theme, 'size__' + size,
-  {
-    '__disabled': disabled,
-    '__readonly': readonly,
-    '__round': round,
-    '__has-prefix-icon': hasPrefixIcon,
-    '__has-suffix-icon': hasSuffixIcon || clearIconVisible,
-    '__has-prefix': hasPrefix,
-    '__has-suffix': hasSuffix
-  }]"
-  @mouseenter="onMouseenter"
-  @mouseleave="onMouseleave"
-  v-bind="attrs"
->
+  <label
+    :class="['yuumi-input', 'theme__' + theme, 'size__' + size,
+             {
+               '__disabled': disabled,
+               '__readonly': readonly,
+               '__round': round,
+               '__has-prefix-icon': hasPrefixIcon,
+               '__has-suffix-icon': hasSuffixIcon || clearIconVisible,
+               '__has-prefix': hasPrefix,
+               '__has-suffix': hasSuffix
+             }]"
+    v-bind="attrs"
+    @mouseenter="onMouseenter"
+    @mouseleave="onMouseleave"
+  >
 
-  <span class="input__prefix" v-if="hasPrefix">
-    <slot name="prefix"></slot>
-  </span>
-
-  <span class="input__content">
-    <span class="input__prefix-icon" v-if="hasPrefixIcon">
-      <slot name="prefixIcon"></slot>
-    </span>
-
-    <input ref="inputEl" :type="type" :value="modelValue" @input="onInput" v-bind="listeners"
-      :disabled="disabled"
-      :readonly="readonly"
-      :maxlength="maxlength"
-      :placeholder="placeholder"
-      @compositionstart="onCompositionstart"
-      @compositionend="onCompositionend"
+    <span
+      v-if="hasPrefix"
+      class="input__prefix"
     >
-
-    <span class="input__suffix-icon" v-if="hasSuffixIcon || clearIconVisible">
-      <YuumiIcon class="clear-btn" v-if="clearIconVisible" icon="line-circle-close" @click="clearValue"></YuumiIcon>
-      <slot name="suffixIcon" v-else></slot>
+      <slot name="prefix" />
     </span>
-  </span>
 
-  <span class="input__suffix" v-if="hasSuffix">
-    <slot name="suffix"></slot>
-  </span>
-</label>
+    <span class="input__content">
+      <span
+        v-if="hasPrefixIcon"
+        class="input__prefix-icon"
+      >
+        <slot name="prefixIcon" />
+      </span>
+
+      <input
+        ref="inputEl"
+        :type="type"
+        :value="modelValue"
+        v-bind="listeners"
+        :disabled="disabled"
+        :readonly="readonly"
+        :maxlength="maxlength"
+        :placeholder="placeholder"
+        @input="onInput"
+        @compositionstart="onCompositionstart"
+        @compositionend="onCompositionend"
+      >
+
+      <span
+        v-if="hasSuffixIcon || clearIconVisible"
+        class="input__suffix-icon"
+      >
+        <YuumiIcon
+          v-if="clearIconVisible"
+          class="clear-btn"
+          icon="line-circle-close"
+          @click="clearValue"
+        />
+        <slot
+          v-else
+          name="suffixIcon"
+        />
+      </span>
+    </span>
+
+    <span
+      v-if="hasSuffix"
+      class="input__suffix"
+    >
+      <slot name="suffix" />
+    </span>
+  </label>
 </template>
 
 <script lang="ts">
@@ -50,8 +76,8 @@ import { isDefined, isValidComponentSize, isInputType, isValidComponentTheme } f
 import { computed, defineComponent, onMounted, ref, watch, nextTick } from 'vue'
 
 export default defineComponent({
-  inheritAttrs: false,
   name: 'YuumiInput',
+  inheritAttrs: false,
   props: {
     modelValue: String,
     disabled: Boolean,
@@ -79,6 +105,7 @@ export default defineComponent({
     },
     trim: { type: Boolean }
   },
+  emits: ['update:modelValue', 'input'],
   setup (props, { emit, slots, attrs }) {
     // 是否有插槽
     const hasPrefixIcon: Ref<boolean> = ref(isDefined(slots.prefixIcon))
@@ -214,11 +241,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-input {
   display: inline-table;
-  border: 0px solid map-get($--color, "border");
+  @include Border($width: 0);
 
   .input__content {
     line-height: 0;
@@ -235,7 +262,7 @@ export default defineComponent({
     border-width: 1px;
     border-style: solid;
     border-color: inherit;
-    border-radius: map-get($--border-radius, "primary");
+    @include BorderRadius();
     background-color: inherit;
     color: inherit;
     box-sizing: border-box;
@@ -243,24 +270,25 @@ export default defineComponent({
     transition: border-color 0.2s;
 
     &::placeholder {
-      color: map-get($--color, "placeholder");
+      @include ColorWithKey("placeholder");
     }
 
     &:focus {
-      border-color: map-get($--color, 'primary');
+      @include BorderColorWithKey("primary");
     }
   }
 
   .input__prefix, .input__suffix {
-    background-color: map-get($--color, "light");
+    @include BackgroundColorWithKey("light");
     width: 0;
     display: table-cell;
     vertical-align: middle;
-    padding: 0 map-get($--space, "xm");
+    @include Space("padding-left", "xm");
+    @include Space("padding-right", "xm");
     border-width: 1px;
     border-style: solid;
     border-color: inherit;
-    border-radius: map-get($--border-radius, "primary");
+    @include BorderRadius();
   }
 
   .input__prefix-icon, .input__suffix-icon {
@@ -280,7 +308,7 @@ export default defineComponent({
 
   .clear-btn {
     cursor: pointer;
-    color: map-get($--text-color, "secondary");
+    @include TextColor("secondary");
   }
 
   &.__has-prefix {
@@ -348,19 +376,19 @@ export default defineComponent({
 
   @each $key in $--theme {
     &.theme__#{$key} {
-      border-color: map-get($--color, $key);
-      color: map-get($--color, $key);
+      @include BorderColorWithKey($key);
+      @include ColorWithKey($key);
 
       .input__prefix, .input__suffix {
-        background-color: mix(map-get($--color, $key), map-get($--color, "white"), 25%);
+        background-color: getMixColorWithKey($key, "white", 25%);
       }
 
       input::placeholder {
-        color: mix(map-get($--color, $key), map-get($--color, "white"), 45%);
+        color: getMixColorWithKey($key, "white", 45%);
       }
 
       input:focus {
-        border-color: map-get($--color, $key);
+        @include BorderColorWithKey($key);
       }
     }
   }

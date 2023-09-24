@@ -7,6 +7,9 @@ let pluginApp: App|null = null
 let pluginAppComponentInstance: ComponentInternalInstance|null = null
 
 export const pluginAppComponent = defineComponent({
+  setup () {
+    pluginAppComponentInstance = getCurrentInstance()
+  },
   data () {
     return {
       alerts: [] as VNode[],
@@ -14,9 +17,6 @@ export const pluginAppComponent = defineComponent({
       notifications: [] as VNode[],
       loadings: [] as VNode[]
     }
-  },
-  setup () {
-    pluginAppComponentInstance = getCurrentInstance()
   },
   render () {
     return [this.alerts, this.messages, this.notifications, this.loadings]

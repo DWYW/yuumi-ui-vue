@@ -1,6 +1,6 @@
 ### 基本用法
 
-theme 可选值为 `primary`、 `success`、 `warn`、 `error`。
+theme 可选值为 `primary`、 `success`、 `warn`、 `danger`。
 
 ```vue demo src="../../examples/button/base.vue"
 ```

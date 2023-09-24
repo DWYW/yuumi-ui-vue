@@ -1,13 +1,23 @@
 <template>
-  <button ref="buttonEl" :class="['yuumi-button', 'size__'+size, 'theme__'+theme, {
-    '__outline': outline,
-    '__circle': circle,
-    '__round': round,
-    '__splash': splash
-  }]" :disabled="disabled" @click="onclick" v-bind="$attrs">
-    <span class="button__animation" ref="animationEl" v-if="splash"></span>
+  <button
+    ref="buttonEl"
+    :class="['yuumi-button', 'size__'+size, 'theme__'+theme, {
+      '__outline': outline,
+      '__circle': circle,
+      '__round': round,
+      '__splash': splash
+    }]"
+    :disabled="disabled"
+    v-bind="$attrs"
+    @click="onclick"
+  >
+    <span
+      v-if="splash"
+      ref="animationEl"
+      class="button__animation"
+    />
     <span class="button__content">
-      <slot></slot>
+      <slot />
     </span>
   </button>
 </template>
@@ -35,11 +45,6 @@ export default defineComponent({
     disabled: Boolean,
     circle: Boolean,
     round: Boolean
-  },
-  data () {
-    return {
-      splashs: []
-    }
   },
   emits: ['click'],
   setup (props, { emit }) {
@@ -75,12 +80,17 @@ export default defineComponent({
       animationEl,
       onclick
     }
+  },
+  data () {
+    return {
+      splashs: []
+    }
   }
 })
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-button {
   position: relative;
@@ -88,12 +98,13 @@ export default defineComponent({
   overflow: hidden;
   user-select: none;
   outline: none;
-  border-radius: map-get($--border-radius, "primary");
-  border: 1px solid map-get($--color, "border");
+  @include BorderRadius();
+  @include Border();
   background-color: transparent;
   color: inherit;
   box-sizing: border-box;
-  padding: 0 map-get($--space, "xm");
+  @include Space("padding-left", "xm");
+  @include Space("padding-right", "xm");
   transition: borderColor 0.2s, color 0.2s, background 0.2s;
   cursor: pointer;
   // line-height: 0;
@@ -111,7 +122,7 @@ export default defineComponent({
       transform-origin: center;
       animation: splash .3s;
       border-radius: 100%;
-      background-color: rgba(map-get($--color, "primary"), 0.15);
+      @include AlphaBackgroundColorWithKey("primary", 0.15);
     }
   }
 
@@ -144,97 +155,99 @@ export default defineComponent({
 
   &.theme__default {
     &:hover {
-      border-color: mix(map-get($--color, "primary"), map-get($--color, "white"), 85%);
-      color: mix(map-get($--color, "primary"), map-get($--color, "white"), 85%);
+      border-color: getMixColorWithKey("primary", "white", 85%);
+      color: getMixColorWithKey("primary", "white", 85%);
     }
 
     &:active {
-      border-color: mix(map-get($--color, "primary"), map-get($--color, "dark"), 85%);
-      color: mix(map-get($--color, "primary"), map-get($--color, "dark"), 85%);
+      border-color: getMixColorWithKey("primary", "dark", 85%);
+      color: getMixColorWithKey("primary", "dark", 85%);
     }
 
     &.__splash{
       &:hover, &:active {
-        border-color: map-get($--color, "primary");
-        color: map-get($--color, "primary");
+        @include BorderColorWithKey("primary");
+        @include ColorWithKey("primary");
       }
     }
 
     &[disabled] {
-      border-color: map-get($--color, "border");
+      @include BorderColorWithKey("primary");
       color: inherit;
     }
   }
 
   @each $key in $--theme {
     &.theme__#{$key} {
-      background-color: map-get($--color, $key);
-      border-color: map-get($--color, $key);
+      @include BackgroundColorWithKey($key);
+      @include BorderColorWithKey($key);
+
       @if $key == "warn" {
         color: inherit;
       } @else {
-        color: map-get($--color, "white");
+        @include ColorWithKey("white");
       }
 
       &:hover {
-        border-color: mix(map-get($--color, $key), map-get($--color, "white"), 85%);
-        background-color: mix(map-get($--color, $key), map-get($--color, "white"), 85%);
+        border-color: getMixColorWithKey($key, "white", $percent: 85%);
+        background-color: getMixColorWithKey($key, "white", $percent: 85%);
       }
 
       &:active {
-        border-color: mix(map-get($--color, $key), map-get($--color, "dark"), 85%);
-        background-color: mix(map-get($--color, $key), map-get($--color, "dark"), 85%);
+        border-color: getMixColorWithKey($key, "dark", 85%);
+        background-color: getMixColorWithKey($key, "dark", 85%);
       }
 
       &.__splash{
         .button__animation > span {
-          background-color: rgba(map-get($--color, "white"), 0.25);
+          @include AlphaBackgroundColorWithKey("white", 0.25);
         }
 
         &:hover, &:active {
-          border-color: map-get($--color, $key);
-          background-color: map-get($--color, $key);
+          @include BackgroundColorWithKey($key);
+          @include BorderColorWithKey($key);
         }
       }
 
       &[disabled] {
-        background-color: map-get($--color, $key);
-        border-color: map-get($--color, $key);
+        @include BackgroundColorWithKey($key);
+        @include BorderColorWithKey($key);
       }
 
       &.__outline {
         background-color: transparent;
-        color: map-get($--color, $key);
+        @include ColorWithKey($key);
 
         &:hover {
-          background-color: mix(map-get($--color, $key), map-get($--color, "white"), 10%);
-          color: mix(map-get($--color, $key), map-get($--color, "white"), 85%);
+          background-color: getMixColorWithKey($key, "white", 10%);
+          color: getMixColorWithKey($key, "white", 85%);
         }
 
         &:active {
-          border-color: map-get($--color, $key);
-          background-color: map-get($--color, $key);
+          @include BackgroundColorWithKey($key);
+          @include BorderColorWithKey($key);
+
           @if $key == "warn" {
             color: inherit;
           } @else {
-            color: map-get($--color, "white");
+            @include ColorWithKey("white");
           }
         }
 
         &.__splash{
           .button__animation > span {
-            background-color: rgba(map-get($--color, $key), 0.15);
+            @include AlphaBackgroundColorWithKey($key, 0.15);
           }
 
           &:hover, &:active {
             background-color: transparent;
-            color: map-get($--color, $key);
+            @include ColorWithKey($key);
           }
         }
 
         &[disabled] {
           background-color: transparent;
-          color: map-get($--color, $key);
+          @include ColorWithKey($key);
         }
       }
     }

@@ -1,5 +1,8 @@
 <template>
-  <YuumiTree :data="data" :expand-icon-visible="false"></YuumiTree>
+  <YuumiTree
+    :data="data"
+    :expand-icon-visible="false"
+  />
 </template>
 <script>
 export default {

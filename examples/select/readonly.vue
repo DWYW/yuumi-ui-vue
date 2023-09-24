@@ -1,7 +1,19 @@
 <template>
   <div>
-    <YuumiSelect :options="options" v-model="value1" style="margin: 0 10px 10px 0;" readonly ></YuumiSelect>
-    <YuumiSelect :options="options" v-model="value" style="margin: 0 10px 10px 0;" theme="success" readonly multiple></YuumiSelect>
+    <YuumiSelect
+      v-model="value1"
+      :options="options"
+      style="margin: 0 10px 10px 0;"
+      readonly
+    />
+    <YuumiSelect
+      v-model="value"
+      :options="options"
+      style="margin: 0 10px 10px 0;"
+      theme="success"
+      readonly
+      multiple
+    />
   </div>
 </template>
 

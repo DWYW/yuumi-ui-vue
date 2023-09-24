@@ -1,5 +1,11 @@
 <template>
-  <YuumiCascader :options="options" v-model="value" readonly style="margin: 0 10px 10px 0;" placeholder="readonly"></YuumiCascader>
+  <YuumiCascader
+    v-model="value"
+    :options="options"
+    readonly
+    style="margin: 0 10px 10px 0;"
+    placeholder="readonly"
+  />
 </template>
 
 <script>

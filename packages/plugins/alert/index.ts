@@ -4,18 +4,18 @@ import { getPluginAppComponentInstance } from '..'
 import type { VNode } from 'vue'
 
 export interface CreateAlertOptions {
-  title?: String|VNode
-  content?: String|VNode
-  alignCenter?: Boolean
-  closeEnable?: Boolean
-  cancelText?: String,
-  cancelEnable?: Boolean
-  confirmText?: String
-  confirmEnable?: Boolean
-  stopPenetrate?: Boolean
-  onClose?: Function
-  onCancel?: Function
-  onConfirm?: Function
+  title?: string|VNode
+  content?: string|VNode
+  alignCenter?: boolean
+  closeEnable?: boolean
+  cancelText?: string,
+  cancelEnable?: boolean
+  confirmText?: string
+  confirmEnable?: boolean
+  stopPenetrate?: boolean
+  onClose?: (...rest: any[]) => any
+  onCancel?: (...rest: any[]) => any
+  onConfirm?: (...rest: any[]) => any
 }
 
 function getPartialAlert (options: CreateAlertOptions) {

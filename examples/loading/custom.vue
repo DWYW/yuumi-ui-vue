@@ -1,13 +1,32 @@
 <template>
-  <YuumiTabs v-model="spinner" v-loading="loadingData" @change="showLoading">
-    <YuumiTabItem label="圆环" value="circle">{{loadingData}}</YuumiTabItem>
-    <YuumiTabItem label="方块" value="rect">{{loadingData}}</YuumiTabItem>
-    <YuumiTabItem label="自定义" value="custom">{{loadingData}}</YuumiTabItem>
+  <YuumiTabs
+    v-model="spinner"
+    v-loading="loadingData"
+    @change="showLoading"
+  >
+    <YuumiTabItem
+      label="圆环"
+      value="circle"
+    >
+      {{ loadingData }}
+    </YuumiTabItem>
+    <YuumiTabItem
+      label="方块"
+      value="rect"
+    >
+      {{ loadingData }}
+    </YuumiTabItem>
+    <YuumiTabItem
+      label="自定义"
+      value="custom"
+    >
+      {{ loadingData }}
+    </YuumiTabItem>
   </YuumiTabs>
 </template>
 
 <script>
-import { h, withDirectives, resolveDirective } from 'vue'
+import { h } from 'vue'
 
 export default {
   data () {

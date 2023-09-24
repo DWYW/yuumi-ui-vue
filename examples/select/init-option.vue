@@ -1,7 +1,18 @@
 <template>
-  <YuumiSelect :options="options" :default-value-options="defaultValueOptions" v-model="value1" style="margin: 0 10px 10px 0;" ></YuumiSelect>
-  {{value1}}<br/>
-  <YuumiSelect :options="options" :default-value-options="defaultValueOptions" v-model="value" style="margin: 0 10px 10px 0;" multiple></YuumiSelect>{{value}}
+  <YuumiSelect
+    v-model="value1"
+    :options="options"
+    :default-value-options="defaultValueOptions"
+    style="margin: 0 10px 10px 0;"
+  />
+  {{ value1 }}<br>
+  <YuumiSelect
+    v-model="value"
+    :options="options"
+    :default-value-options="defaultValueOptions"
+    style="margin: 0 10px 10px 0;"
+    multiple
+  />{{ value }}
 </template>
 
 <script>

@@ -1,8 +1,10 @@
 <template>
-  <YuumiSwitch v-for="size in ['xl', 'lg', 'md', 'sm', 'xm']" :key="size"
+  <YuumiSwitch
+    v-for="size in ['xl', 'lg', 'md', 'sm', 'xm']"
+    :key="size"
     style="margin: 0 10px 10px 0;"
     :size="size"
-  ></YuumiSwitch>
+  />
 </template>
 
 <script>

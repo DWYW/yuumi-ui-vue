@@ -1,6 +1,17 @@
 <template>
-  <YuumiDatePicker v-model="value1" clearable @change="log('change', $event)" style="margin: 0 10px 10px 0;"></YuumiDatePicker>
-  <YuumiDatePicker v-model="value2" type="range" clearable @change="log('change', $event)" style="margin: 0 10px 10px 0;"></YuumiDatePicker>
+  <YuumiDatePicker
+    v-model="value1"
+    clearable
+    style="margin: 0 10px 10px 0;"
+    @change="log('change', $event)"
+  />
+  <YuumiDatePicker
+    v-model="value2"
+    type="range"
+    clearable
+    style="margin: 0 10px 10px 0;"
+    @change="log('change', $event)"
+  />
 </template>
 
 <script>

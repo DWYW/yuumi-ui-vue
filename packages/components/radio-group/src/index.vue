@@ -1,7 +1,7 @@
 <template>
-<div class="yuumi-radio-group" >
-  <slot></slot>
-</div>
+  <div class="yuumi-radio-group">
+    <slot />
+  </div>
 </template>
 
 <script lang="ts">
@@ -12,9 +12,6 @@ export default defineComponent({
   props: {
     modelValue: [String, Number, Boolean],
     disabled: Boolean
-  },
-  data() {
-    return {}
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
@@ -33,6 +30,9 @@ export default defineComponent({
         })
       }
     })
+  },
+  data() {
+    return {}
   }
 })
 </script>

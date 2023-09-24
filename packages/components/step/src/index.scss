@@ -1,9 +1,7 @@
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
-$size: (
-  default: map-get($--height, "sm"),
-  mini: map-get($--height, "xm"),
-);
+$_size_default: getHeightWithKey("sm");
+$_size_mini: getHeightWithKey("xm");
 
 .yuumi-step {
   display: flex;
@@ -22,43 +20,43 @@ $size: (
 
     &.__completed {
       .step-item__icon {
-        border-color: map-get($--color, "primary");
-        color: map-get($--color, "primary");
+        @include BorderColorWithKey("primary");
+        @include ColorWithKey("primary");
       }
     }
 
     &.__processing {
       .step-item__icon {
-        border-color: map-get($--color, "primary");
-        background-color: map-get($--color, "primary");
-        color: map-get($--color, "white");
+        @include BorderColorWithKey("primary");
+        @include BackgroundColorWithKey("primary");
+        @include ColorWithKey("white");
 
         &.__custom {
-          color: map-get($--color, "primary");
+          @include ColorWithKey("primary");
         }
       }
 
       .step-item__body {
-        color: map-get($--text-color, "primary");
+        @include TextColor();
       }
     }
 
     &.__waiting {
       .step-item__icon {
-        color: map-get($--color, "border");
-        border-color: map-get($--color, "border");
+        @include ColorWithKey("border");
+        @include BorderColorWithKey("border");
       }
     }
 
     &.__error {
       .step-item__icon {
-        color: map-get($--color, "error");
-        border-color: map-get($--color, "error");
-        background-color: map-get($--color, "white");;
+        @include ColorWithKey("danger");
+        @include BorderColorWithKey("danger");
+        @include BackgroundColorWithKey("white");
       }
 
       .step-item__body {
-        color: map-get($--color, "error");
+        @include ColorWithKey("danger");
       }
     }
 
@@ -67,10 +65,10 @@ $size: (
       position: relative;
       z-index: 1;
 
-      width: map-get($size, "default");
-      height: map-get($size, "default");
+      width: $_size_default;
+      height: $_size_default;
       border: 1px solid transparent;
-      background-color: map-get($--color, "white");
+      @include BackgroundColorWithKey("white");
       border-radius: 50%;
       box-sizing: border-box;
 
@@ -82,8 +80,8 @@ $size: (
 
       &.__custom {
         font-size: 1.14em;
-        background-color: map-get($--color, "white");
-        border-color: map-get($--color, "white");
+        @include BackgroundColorWithKey("white");
+        @include BorderColorWithKey("white");
       }
     }
 
@@ -92,7 +90,7 @@ $size: (
       z-index: 1;
 
       display: table-cell;
-      color: mix(map-get($--color, "black"), map-get($--color, "white"), 45%);
+      color: getMixColorWithKey("black", "white", 45%);
     }
 
     .step-item__line {
@@ -102,22 +100,24 @@ $size: (
       &::before {
         content: " ";
         display: block;
-        background-color: map-get($--color, "border");
+        @include BackgroundColorWithKey("border");
       }
     }
 
     .step-item__title {
       display: inline-block;
-      padding: 0 map-get($--space, "xm");
+      @include Space("padding-left", "xm");
+      @include Space("padding-right", "xm");
       font-weight: bold;
-      line-height: map-get($size, "default");
-      font-size: map-get($--font-size, "sm");
-      background-color: map-get($--color, "white");
+      line-height: $_size_default;
+      @include FontSize("sm");
+      @include BackgroundColorWithKey("white");
     }
 
     .step-item__description  {
-      padding: 0 map-get($--space, "xm");
-      font-size: map-get($--font-size, "xm");
+      @include Space("padding-left", "xm");
+      @include Space("padding-right", "xm");
+      @include FontSize("xm");
     }
   }
 
@@ -125,14 +125,14 @@ $size: (
     flex-direction: row;
 
     .yuumi-step-item:not(:last-child) {
-      padding-right: map-get($--space, "sm");
+      @include Space("padding-right", "sm");
     }
 
     .step-item__line {
-      padding-left: map-get($--space, "xm") + map-get($size, "default");
-      padding-right: map-get($--space, "xm");
+      padding-left: getSpaceWithKey("xm") + $_size_default;
+      @include Space("padding-right", "xm");
       width: 100%;
-      top: map-get($size, "default")*0.5;
+      top: $_size_default*0.5;
       left: 0;
       transform: translateY(-50%);
 
@@ -148,15 +148,15 @@ $size: (
     flex-direction: column;
 
     .yuumi-step-item:not(:last-child) {
-      padding-bottom: map-get($--space, "sm");
+      @include Space("padding-bottom", "sm");
     }
 
     .step-item__line {
-      padding-top: map-get($--space, "xm") + map-get($size, "default");
-      padding-bottom: map-get($--space, "xm");
+      padding-top: getSpaceWithKey("xm") + $_size_default;
+      @include Space("padding-bottom", "xm");
       height: 100%;
       top: 0;
-      left: map-get($size, "default")*0.5;
+      left: $_size_default*0.5;
       transform: translateX(-50%);
 
       &::before {
@@ -169,23 +169,23 @@ $size: (
   &.__mini {
     .yuumi-step-item {
       .step-item__icon {
-        width: map-get($size, "mini");
-        height: map-get($size, "mini");
+        width: $_size_mini;
+        height: $_size_mini;
       }
 
       .step-item__title {
-        line-height: map-get($size, "mini");
+        line-height: $_size_mini;
       }
     }
 
     &.__horizontal .yuumi-step-item .step-item__line {
-      padding-left: map-get($--space, "xm") + map-get($size, "mini");
-      top: map-get($size, "mini")*0.5;
+      padding-left: getSpaceWithKey("xm") + $_size_mini;
+      top: $_size_mini*0.5;
     }
 
     &.__vertical .yuumi-step-item .step-item__line {
-      padding-top: map-get($--space, "xm") + map-get($size, "mini");
-      left: map-get($size, "mini")*0.5;
+      padding-top: getSpaceWithKey("xm") + $_size_mini;
+      left: $_size_mini*0.5;
     }
   }
 }

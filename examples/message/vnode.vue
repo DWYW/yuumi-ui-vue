@@ -1,5 +1,7 @@
 <template>
-<YuumiButton @click="createMessage">使用VNode</YuumiButton>
+  <YuumiButton @click="createMessage">
+    使用VNode
+  </YuumiButton>
 </template>
 
 <script>

@@ -1,5 +1,11 @@
 <template>
-  <YuumiSelect :options="options" v-model="value" :option-key="optionKey" clearable style="margin: 0 10px 10px 0;"></YuumiSelect> <span>{{value}}</span>
+  <YuumiSelect
+    v-model="value"
+    :options="options"
+    :option-key="optionKey"
+    clearable
+    style="margin: 0 10px 10px 0;"
+  /> <span>{{ value }}</span>
 </template>
 
 <script>

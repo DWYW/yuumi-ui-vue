@@ -1,27 +1,83 @@
 <template>
-<div style="height: 320px; margin: 0 0 10px;">
-  <YuumiTable :data="students" summary ref="table"
-    @select="logSelectionEventDetail($event, 'select')"
-    @selectAll="logSelectionEventDetail($event, 'selectAll')"
-    @selectionChange="logSelectionEventDetail($event, 'selectionChange')"
-  >
-    <YuumiTableColumn :width="45" type="selection" fixed="left"/>
-    <YuumiTableColumn title="姓名" prop="name" fixed="left"/>
-    <YuumiTableColumn :width="150" title="语文" prop="chinese" />
-    <YuumiTableColumn :width="150" title="数学" prop="math"/>
-    <YuumiTableColumn :width="150" title="英语" prop="english"/>
-    <YuumiTableColumn :width="150" title="物理" prop="physics"/>
-    <YuumiTableColumn :width="150" title="化学" prop="chemistry"/>
-    <YuumiTableColumn :width="150" title="生物" prop="biology"/>
-    <YuumiTableColumn :width="150" title="总分" prop="summary" fixed="right" align="center"/>
-  </YuumiTable>
-</div>
+  <div style="height: 320px; margin: 0 0 10px;">
+    <YuumiTable
+      ref="table"
+      :data="students"
+      summary
+      @select="logSelectionEventDetail($event, 'select')"
+      @selectAll="logSelectionEventDetail($event, 'selectAll')"
+      @selectionChange="logSelectionEventDetail($event, 'selectionChange')"
+    >
+      <YuumiTableColumn
+        :width="45"
+        type="selection"
+        fixed="left"
+      />
+      <YuumiTableColumn
+        title="姓名"
+        prop="name"
+        fixed="left"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="语文"
+        prop="chinese"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="数学"
+        prop="math"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="英语"
+        prop="english"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="物理"
+        prop="physics"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="化学"
+        prop="chemistry"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="生物"
+        prop="biology"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="总分"
+        prop="summary"
+        fixed="right"
+        align="center"
+      />
+    </YuumiTable>
+  </div>
 
-<div>
-  <YuumiButton @click="toggleRowsSelected(true)" style="margin: 0 10px 10px 0;">设置第二和第三行选中</YuumiButton>
-  <YuumiButton @click="toggleRowsSelected(false)" style="margin: 0 10px 10px 0;">取消第二和第三行选中</YuumiButton>
-  <YuumiButton @click="getSelections" style="margin: 0 10px 10px 0;">获取选中的行</YuumiButton>
-</div>
+  <div>
+    <YuumiButton
+      style="margin: 0 10px 10px 0;"
+      @click="toggleRowsSelected(true)"
+    >
+      设置第二和第三行选中
+    </YuumiButton>
+    <YuumiButton
+      style="margin: 0 10px 10px 0;"
+      @click="toggleRowsSelected(false)"
+    >
+      取消第二和第三行选中
+    </YuumiButton>
+    <YuumiButton
+      style="margin: 0 10px 10px 0;"
+      @click="getSelections"
+    >
+      获取选中的行
+    </YuumiButton>
+  </div>
 </template>
 
 <script lang="ts">

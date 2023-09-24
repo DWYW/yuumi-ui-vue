@@ -8,7 +8,7 @@ export interface CreateNotificationOptions {
   title: string|VNode
   message: string|VNode
   icon?: VNode
-  theme?: 'default'|'primary'|'warn'|'error'|'succss'
+  theme?: 'default'|'primary'|'warn'|'danger'|'succss'
   duration?: number
   offset?: number
   direction: 'bl'|'br'|'tl'|'tr'
@@ -148,7 +148,7 @@ function updateNotificationY (vnode: VNode) {
   notifications.forEach((item: VNode, index: number) => {
     if (item === vnode) { vnodeIndex = index }
 
-    const { $refs, show, offset, direction }: any = item.component?.proxy
+    const { $refs, show, offset, direction }: any = item.component!.proxy
     if (!show || direction !== _direction) return
 
     if (vnodeIndex >= 0) {

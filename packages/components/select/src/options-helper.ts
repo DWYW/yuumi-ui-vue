@@ -39,12 +39,12 @@ export default function useOptins (selectedItems: Ref<any[]>) {
     instance.emit('change', data)
 
     nextTick(() => {
-      const { hidePoper } = proxy.popperComponent
-      hidePoper && hidePoper()
+      const { hidePopper } = proxy.popperComponent
+      hidePopper && hidePopper()
     })
   }
 
-  function onSelectItem (data: OptionItem, e?: MouseEvent) {
+  function onSelectItem (data: OptionItem) {
     props.multiple ? _onSelectItemWithMultiple(data) : _onSelectItemWithSingle(data)
   }
 

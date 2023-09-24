@@ -1,4 +1,4 @@
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-tabs {
   .tabs__header {
@@ -7,12 +7,15 @@
     align-items: center;
 
     .navs__prev, .navs__next {
-      padding: 0 map-get($--space, "xm")*0.5;
+      padding-top: 0;
+      padding-bottom: 0;
+      @include Space("padding-right", "xxm");
+      @include Space("padding-left", "xxm");
       flex: 0 0 auto;
       cursor: pointer;
 
       &:active {
-        color: map-get($--color, "primary");
+        @include ColorWithKey("primary");
       }
     }
   }
@@ -28,30 +31,34 @@
       white-space: nowrap;
 
       .nav-item {
-        padding: map-get($--space, "xm");
+        @include Space("padding", "xm");
         cursor: pointer;
         transition: all 0.3s;
 
         &.__active {
-          color: map-get($--color, "primary");
+          @include ColorWithKey("primary");
         }
       }
     }
 
     .navs__line {
-      background-color: map-get($--color, "border");
+      @include BackgroundColorWithKey("border");
       border-radius: 2px;
       overflow: hidden;
 
       .line-rect {
         transition: transform 0.3s, width 0.3s;
-        background-color: map-get($--color, "primary");
+        @include BackgroundColorWithKey("primary");
       }
     }
   }
 
   .tabs__panel {
-    padding: 0 map-get($--space, "xm");
+    padding-top: 0;
+    padding-bottom: 0;
+    @include Space("padding-left", "xm");
+    @include Space("padding-right", "xm");
+    position: relative;
   }
 
   @each $key in ("top", "right", "bottom", "left") {
@@ -70,7 +77,7 @@
           }
 
           .navs__prev, .navs__next {
-            padding: map-get($--space, "xm");
+            @include Space("padding", "xm");
           }
         }
 
@@ -95,46 +102,46 @@
 
         .tabs__panel {
           overflow: hidden;
-          padding: map-get($--space, "xm");
+          @include Space("padding", "xm");
         }
 
         &.__card {
           .navs .navs__body {
             box-sizing: border-box;
             @if $key == "left" {
-              border-right: 1px solid map-get($--color, "border");
+              @include Border($attr: "border-right");
             } @else {
-              border-left: 1px solid map-get($--color, "border");
+              @include Border($attr: "border-left");
             }
 
             .nav-item {
               position: relative;
-              border: 1px solid map-get($--color, "border");
+              @include Border();
               box-sizing: border-box;
-              background-color: map-get($--color, "light");
+              @include BackgroundColorWithKey("light");
 
               @if $key == "left" {
-                border-top-left-radius: map-get($--border-radius, "primary");
-                border-bottom-left-radius: map-get($--border-radius, "primary");
+                @include BorderRadiusPartail($attr: "top-left");
+                @include BorderRadiusPartail($attr: "bottom-left");
                 margin-right: -1px;
               } @else {
-                border-top-right-radius: map-get($--border-radius, "primary");
-                border-bottom-right-radius: map-get($--border-radius, "primary");
+                @include BorderRadiusPartail($attr: "top-right");
+                @include BorderRadiusPartail($attr: "bottom-right");
                 margin-left: -1px;
               }
 
 
               &:not(:last-child) {
-                margin-bottom: map-get($--space, "xm")*0.5;
+                @include Space("margin-bottom", "xxm");
               }
 
               &.__active {
                 @if $key == "left" {
-                  border-right-color: map-get($--color, "white");
+                  @include BorderColorPartail($attr: "right", $key: "white");
                 } @else {
-                  border-left-color: map-get($--color, "white");
+                  @include BorderColorPartail($attr: "left", $key: "white");
                 }
-                background-color: map-get($--color, "white");
+                @include BackgroundColorWithKey("white");
               }
             }
           }
@@ -146,9 +153,9 @@
           flex-direction: row;
 
           @if $key == "top" {
-            margin-bottom: map-get($--space, "sm");
+            @include Space("margin-bottom", "sm");
           } @else {
-            margin-top: map-get($--space, "sm");
+            @include Space("margin-top", "sm");
           }
         }
 
@@ -172,39 +179,39 @@
           .navs .navs__body {
             box-sizing: border-box;
             @if $key == "top" {
-              border-bottom: 1px solid map-get($--color, "border");
+              @include Border($attr: "border-bottom");
             } @else {
-              border-top: 1px solid map-get($--color, "border");
+              @include Border($attr: "border-top");
             }
 
             .nav-item {
               position: relative;
-              border: 1px solid map-get($--color, "border");
+              @include Border();
               box-sizing: border-box;
-              background-color: map-get($--color, "light");
+              @include BackgroundColorWithKey("light");
 
               @if $key == "top" {
-                border-top-left-radius: map-get($--border-radius, "primary");
-                border-top-right-radius: map-get($--border-radius, "primary");
+                @include BorderRadiusPartail($attr: "top-left");
+                @include BorderRadiusPartail($attr: "top-right");
                 margin-bottom: -1px;
               } @else {
-                border-bottom-left-radius: map-get($--border-radius, "primary");
-                border-bottom-right-radius: map-get($--border-radius, "primary");
+                @include BorderRadiusPartail($attr: "bottom-left");
+                @include BorderRadiusPartail($attr: "bottom-right");
                 margin-top: -1px;
               }
 
 
               &:not(:last-child) {
-                margin-right: map-get($--space, "xm")*0.5;
+                @include Space("margin-right", "xxm");
               }
 
               &.__active {
                 @if $key == "top" {
-                  border-bottom-color: map-get($--color, "white");
+                  @include BorderColorPartail($attr: "bottom", $key: "white");
                 } @else {
-                  border-top-color: map-get($--color, "white");
+                  @include BorderColorPartail($attr: "top", $key: "white");
                 }
-                background-color: map-get($--color, "white");
+                @include BackgroundColorWithKey("white");
               }
             }
           }

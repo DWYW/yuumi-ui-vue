@@ -1,12 +1,29 @@
 <template>
-  <YuumiTree :data="data" ref="tree"
+  <YuumiTree
+    ref="tree"
+    :data="data"
     @checked="onChecked"
     @node-expand="onNodeExpand"
     @node-click="onNodeClick"
-  ></YuumiTree>
-  <YuumiButton @click="change" style="margin-right: 10px;">切换数据</YuumiButton>
-  <YuumiButton @click="getTreeData" style="margin-right: 10px;">获取数型数据</YuumiButton>
-  <YuumiButton @click="getCheckedNodes" style="margin-right: 10px;">获取选中的节点</YuumiButton>
+  />
+  <YuumiButton
+    style="margin-right: 10px;"
+    @click="change"
+  >
+    切换数据
+  </YuumiButton>
+  <YuumiButton
+    style="margin-right: 10px;"
+    @click="getTreeData"
+  >
+    获取数型数据
+  </YuumiButton>
+  <YuumiButton
+    style="margin-right: 10px;"
+    @click="getCheckedNodes"
+  >
+    获取选中的节点
+  </YuumiButton>
 </template>
 <script>
 export default {

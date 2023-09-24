@@ -1,29 +1,105 @@
 <template>
-<div style="height: 320px; margin: 0 0 40px;">
-  <YuumiTable :data="students" summary>
-    <YuumiTableColumn title="姓名" prop="name" fixed="left"/>
-    <YuumiTableColumn :width="150" title="语文" prop="chinese" />
-    <YuumiTableColumn :width="150" title="数学" prop="math"/>
-    <YuumiTableColumn :width="150" title="英语" prop="english"/>
-    <YuumiTableColumn :width="150" title="物理" prop="physics"/>
-    <YuumiTableColumn :width="150" title="化学" prop="chemistry"/>
-    <YuumiTableColumn :width="150" title="生物" prop="biology"/>
-    <YuumiTableColumn :width="150" title="总分" prop="summary" fixed="right" align="center"/>
-  </YuumiTable>
-</div>
+  <div style="height: 320px; margin: 0 0 40px;">
+    <YuumiTable
+      :data="students"
+      summary
+    >
+      <YuumiTableColumn
+        title="姓名"
+        prop="name"
+        fixed="left"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="语文"
+        prop="chinese"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="数学"
+        prop="math"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="英语"
+        prop="english"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="物理"
+        prop="physics"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="化学"
+        prop="chemistry"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="生物"
+        prop="biology"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="总分"
+        prop="summary"
+        fixed="right"
+        align="center"
+      />
+    </YuumiTable>
+  </div>
 
-<div style="height: 320px; ">
-  <YuumiTable :data="students" border summary :summary-method="getAverages">
-    <YuumiTableColumn title="姓名" prop="name" fixed="left"/>
-    <YuumiTableColumn :width="150" title="语文" prop="chinese" />
-    <YuumiTableColumn :width="150" title="数学" prop="math"/>
-    <YuumiTableColumn :width="150" title="英语" prop="english"/>
-    <YuumiTableColumn :width="150" title="物理" prop="physics"/>
-    <YuumiTableColumn :width="150" title="化学" prop="chemistry"/>
-    <YuumiTableColumn :width="150" title="生物" prop="biology"/>
-    <YuumiTableColumn :width="150" title="总分" prop="summary" fixed="right" align="center"/>
-  </YuumiTable>
-</div>
+  <div style="height: 320px; ">
+    <YuumiTable
+      :data="students"
+      border
+      summary
+      :summary-method="getAverages"
+    >
+      <YuumiTableColumn
+        title="姓名"
+        prop="name"
+        fixed="left"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="语文"
+        prop="chinese"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="数学"
+        prop="math"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="英语"
+        prop="english"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="物理"
+        prop="physics"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="化学"
+        prop="chemistry"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="生物"
+        prop="biology"
+      />
+      <YuumiTableColumn
+        :width="150"
+        title="总分"
+        prop="summary"
+        fixed="right"
+        align="center"
+      />
+    </YuumiTable>
+  </div>
 </template>
 
 <script lang="ts">

@@ -13,6 +13,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-line-drag:before {
+  content: "\e76f";
+}
+
+.icon-flat-drag:before {
+  content: "\e770";
+}
+
 .icon-flat-finger:before {
   content: "\e763";
 }

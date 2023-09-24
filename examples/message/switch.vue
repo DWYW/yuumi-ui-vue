@@ -1,6 +1,10 @@
 <template>
-<YuumiButton @click="createMessage">show message</YuumiButton>
-<YuumiButton @click="removeMessage(vnode)">hide message</YuumiButton>
+  <YuumiButton @click="createMessage">
+    show message
+  </YuumiButton>
+  <YuumiButton @click="removeMessage(vnode)">
+    hide message
+  </YuumiButton>
 </template>
 
 <script>

@@ -1,5 +1,10 @@
 <template>
-  <YuumiInput placeholder="一键清除" v-model="value" clearable style="width: 100%;"></YuumiInput>
+  <YuumiInput
+    v-model="value"
+    placeholder="一键清除"
+    clearable
+    style="width: 100%;"
+  />
 </template>
 <script>
 export default {

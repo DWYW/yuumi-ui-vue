@@ -1,33 +1,56 @@
 <template>
-<div style="overflow: hidden;">
-  <div class="group-item" v-for="group,index in icons" :key="group.name">
-    <div class="group-name" style="font-weight: bold; padding-bottom: 10px;">{{group.name}}</div>
+  <div style="overflow: hidden;">
+    <div
+      v-for="group,index in icons"
+      :key="group.name"
+      class="group-item"
+    >
+      <div
+        class="group-name"
+        style="font-weight: bold; padding-bottom: 10px;"
+      >
+        {{ group.name }}
+      </div>
 
-    <YuumiTabs v-model="type[index]">
-      <YuumiTabItem label="线性" value="line">
-        <div class="group-icons">
-          <div style="display: inline-block; width: 20%; height: 100px; font-size: 28px; vertical-align: text-bottom; text-align: center; font-weight: bold;"
-          v-for="icon in group.line" :key="icon"
-          >
-            <YuumiIcon :icon="icon"></YuumiIcon>
-            <div style="font-size: 12px;">{{icon}}</div>
+      <YuumiTabs v-model="type[index]">
+        <YuumiTabItem
+          label="线性"
+          value="line"
+        >
+          <div class="group-icons">
+            <div
+              v-for="icon in group.line"
+              :key="icon"
+              style="display: inline-block; width: 20%; height: 100px; font-size: 28px; vertical-align: text-bottom; text-align: center; font-weight: bold;"
+            >
+              <YuumiIcon :icon="icon" />
+              <div style="font-size: 12px;">
+                {{ icon }}
+              </div>
+            </div>
           </div>
-        </div>
-      </YuumiTabItem>
+        </YuumiTabItem>
 
-      <YuumiTabItem label="扁平" value="flat">
-        <div class="group-icons">
-          <div style="display: inline-block; width: 20%; height: 100px; font-size: 28px; vertical-align: text-bottom; text-align: center; font-weight: bold;"
-          v-for="icon in group.flat" :key="icon"
-          >
-            <YuumiIcon :icon="icon"></YuumiIcon>
-            <div style="font-size: 12px;">{{icon}}</div>
+        <YuumiTabItem
+          label="扁平"
+          value="flat"
+        >
+          <div class="group-icons">
+            <div
+              v-for="icon in group.flat"
+              :key="icon"
+              style="display: inline-block; width: 20%; height: 100px; font-size: 28px; vertical-align: text-bottom; text-align: center; font-weight: bold;"
+            >
+              <YuumiIcon :icon="icon" />
+              <div style="font-size: 12px;">
+                {{ icon }}
+              </div>
+            </div>
           </div>
-        </div>
-      </YuumiTabItem>
-    </YuumiTabs>
+        </YuumiTabItem>
+      </YuumiTabs>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -121,7 +144,8 @@ export default {
           "line-shield-correct",
           "line-calendar",
           "line-clock",
-          "line-mail"
+          "line-mail",
+          "line-drag"
         ],
         flat: [
           "flat-checkbox-indeterminate",
@@ -142,7 +166,8 @@ export default {
           "flat-shield-correct",
           "flat-calendar",
           "flat-clock",
-          "flat-mail"
+          "flat-mail",
+          "flat-drag"
         ]
       }, {
         name: "方向",

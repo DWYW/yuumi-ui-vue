@@ -1,16 +1,35 @@
 <template>
-<div>
-  <YuumiButton @click="createNotification('tl')" style="margin: 0 10px 10px 0;">top left</YuumiButton>
-  <YuumiButton @click="createNotification('tr')" style="margin: 0 10px 10px 0;">top right</YuumiButton>
-</div>
-<div>
-  <YuumiButton @click="createNotification('bl')" style="margin: 0 10px 10px 0;">bottom left</YuumiButton>
-  <YuumiButton @click="createNotification('br')" style="margin: 0 10px 10px 0;">bottom right</YuumiButton>
-</div>
+  <div>
+    <YuumiButton
+      style="margin: 0 10px 10px 0;"
+      @click="createNotification('tl')"
+    >
+      top left
+    </YuumiButton>
+    <YuumiButton
+      style="margin: 0 10px 10px 0;"
+      @click="createNotification('tr')"
+    >
+      top right
+    </YuumiButton>
+  </div>
+  <div>
+    <YuumiButton
+      style="margin: 0 10px 10px 0;"
+      @click="createNotification('bl')"
+    >
+      bottom left
+    </YuumiButton>
+    <YuumiButton
+      style="margin: 0 10px 10px 0;"
+      @click="createNotification('br')"
+    >
+      bottom right
+    </YuumiButton>
+  </div>
 </template>
 
 <script>
-import { h } from 'vue'
 export default {
   methods: {
     createNotification (direction) {

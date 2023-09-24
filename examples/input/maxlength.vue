@@ -1,5 +1,9 @@
 <template>
-  <YuumiInput placeholder="maxlength = 5" :maxlength="5" v-model="value"></YuumiInput>
+  <YuumiInput
+    v-model="value"
+    placeholder="maxlength = 5"
+    :maxlength="5"
+  />
 </template>
 <script>
 export default {

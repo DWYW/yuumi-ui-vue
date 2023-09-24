@@ -5,6 +5,7 @@ import useProvider, { providerKey, ProviderState } from './provider-helper'
 
 export default defineComponent({
   name: 'YuumiNavMenu',
+  components: { MenuNode },
   props: {
     data: { type: Array, default: () => [] },
     optionKey: { type: Object },
@@ -13,7 +14,6 @@ export default defineComponent({
     loadData: { type: Function as PropType<() => Promise<any>> },
     selectedNode: { type: Object }
   },
-  components: { MenuNode },
   emits: ['node-expand', 'node-click', 'node-mouseenter', 'node-mouseleave'],
   setup (props, { emit, expose }) {
     const nodeRefs: Ref<VNodeRef[]> = ref([])

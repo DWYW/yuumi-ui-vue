@@ -85,6 +85,9 @@ const docChildren: RouteRecordRaw[] = [{
   path: 'ratiorect',
   component: () => import('../../doc/ratio-rect/index.md')
 }, {
+  path: 'slider',
+  component: () => import('../../doc/slider/index.md')
+}, {
   path: "",
   redirect: "/doc/install"
 }]

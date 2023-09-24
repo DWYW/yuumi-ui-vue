@@ -12,7 +12,7 @@ export default defineComponent({
     depth: { type: Number, default: 0 }
   },
   emits: ['change'],
-  setup (props, { emit, expose }) {
+  setup (props, { expose }) {
     const instance = getCurrentInstance()!
     const {
       dispatch,
@@ -127,7 +127,6 @@ export default defineComponent({
 
     const getNodeContentVNode = () => {
       const { dispatch, expandRender, selectedNodeValue, value, label, expandFunc } = this
-      const _YuumiCheckbox = resolveComponent('YuumiCheckbox') as any
 
       return h('div', {
         class: ['node-content', { __selected: selectedNodeValue === value}],
@@ -176,14 +175,18 @@ export default defineComponent({
       isLeaf ? null : h(Transition, {
         name: 'node-children',
         onBeforeEnter: (el: any) => { el.style.height = '0px' },
-        onEnter: (el: any) => nextTick(() => {
-          el.style.height = `${el.scrollHeight}px`
-        }),
+        onEnter: (el: any) => {
+          nextTick(() => {
+            el.style.height = `${el.scrollHeight}px`
+          })
+        },
         onAfterEnter: (el: any) => el.style.height = '',
         onBeforeLeave: (el: any) => el.style.height = `${el.scrollHeight}px`,
-        onLeave: (el: any) => nextTick(() => {
-          el.style.height = '0px'
-        }),
+        onLeave: (el: any) => {
+          nextTick(() => {
+            el.style.height = '0px'
+          })
+        },
         onAfterLeave: (el: any) => el.style.height = ''
       }, {
         default: () => withDirectives(

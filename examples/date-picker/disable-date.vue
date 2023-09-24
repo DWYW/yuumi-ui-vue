@@ -1,7 +1,18 @@
 <template>
-  <YuumiDatePicker v-model="value1" :disabled-dates="disabledBeforeDates" @change="log('change', $event)" style="margin: 0 10px 10px 0;"></YuumiDatePicker>
+  <YuumiDatePicker
+    v-model="value1"
+    :disabled-dates="disabledBeforeDates"
+    style="margin: 0 10px 10px 0;"
+    @change="log('change', $event)"
+  />
 
-  <YuumiDatePicker v-model="value2" type="range" :disabled-dates="disabledAfterDates" @change="log('change', $event)" style="margin: 0 10px 10px 0;"></YuumiDatePicker>
+  <YuumiDatePicker
+    v-model="value2"
+    type="range"
+    :disabled-dates="disabledAfterDates"
+    style="margin: 0 10px 10px 0;"
+    @change="log('change', $event)"
+  />
 </template>
 
 <script>

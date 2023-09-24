@@ -1,7 +1,9 @@
 <template>
-<div :class="['yuumi-divider', 'align_' + align]">
-  <div class="divider-content"><slot></slot></div>
-</div>
+  <div :class="['yuumi-divider', 'align_' + align]">
+    <div class="divider-content">
+      <slot />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -23,14 +25,15 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-divider {
   display: flex;
   align-items: center;
-  border: 0 solid map-get($--color, "border");
-  color: map-get($--text-color, "secondary");
-  margin: map-get($--space, "sm") 0;
+  @include Border($width: 0);
+  @include TextColor("secondary");
+  @include Space("margin-top", "sm");
+  @include Space("margin-bottom", "sm");
 
   &::before, &::after {
     content: ' ';
@@ -42,7 +45,8 @@ export default defineComponent({
   }
 
   .divider-content {
-    padding: 0 map-get($--space, "sm");
+    @include Space("padding-left", "sm");
+    @include Space("padding-right", "sm");
   }
 
   &.align_left {

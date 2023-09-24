@@ -1,13 +1,20 @@
 <template>
-  <YuumiCascader :options="options" v-model="value" style="margin: 0 10px 10px 0;" placeholder="请选择"></YuumiCascader>
-  <YuumiCascader v-for="theme in ['primary', 'success', 'warn', 'error']" :key="theme"
+  <YuumiCascader
+    v-model="value"
+    :options="options"
+    style="margin: 0 10px 10px 0;"
+    placeholder="请选择"
+  />
+  <YuumiCascader
+    v-for="theme in ['primary', 'success', 'warn', 'danger']"
+    :key="theme"
+    v-model="value"
     style="margin: 0 10px 10px 0;"
     :options="options"
     :theme="theme"
-    v-model="value"
     placeholder="请选择"
-  ></YuumiCascader>
-  <div>{{value}}</div>
+  />
+  <div>{{ value }}</div>
 </template>
 
 <script>

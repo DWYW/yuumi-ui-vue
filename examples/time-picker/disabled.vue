@@ -1,10 +1,32 @@
 <template>
-  <YuumiTimePicker disabled style="margin: 0 10px 10px 0;"></YuumiTimePicker>
-  <YuumiTimePicker disabled v-model="value" style="margin: 0 10px 10px 0;"></YuumiTimePicker>
+  <YuumiTimePicker
+    disabled
+    style="margin: 0 10px 10px 0;"
+  />
+  <YuumiTimePicker
+    v-model="value"
+    disabled
+    style="margin: 0 10px 10px 0;"
+  />
 
-  <YuumiTimePicker v-model="value1" :disabled-hours="disabledHours" style="margin: 0 10px 10px 0;"></YuumiTimePicker>
-  <YuumiTimePicker v-model="value2" :disabled-hours="disabledHours" :disabled-minutes="disabledMinutes" style="margin: 0 10px 10px 0;"></YuumiTimePicker>
-  <YuumiTimePicker v-model="value3" :disabled-hours="disabledHours" :disabled-minutes="disabledMinutes" :disabled-seconds="disabledSeconds" style="margin: 0 10px 10px 0;"></YuumiTimePicker>
+  <YuumiTimePicker
+    v-model="value1"
+    :disabled-hours="disabledHours"
+    style="margin: 0 10px 10px 0;"
+  />
+  <YuumiTimePicker
+    v-model="value2"
+    :disabled-hours="disabledHours"
+    :disabled-minutes="disabledMinutes"
+    style="margin: 0 10px 10px 0;"
+  />
+  <YuumiTimePicker
+    v-model="value3"
+    :disabled-hours="disabledHours"
+    :disabled-minutes="disabledMinutes"
+    :disabled-seconds="disabledSeconds"
+    style="margin: 0 10px 10px 0;"
+  />
 </template>
 
 <script>

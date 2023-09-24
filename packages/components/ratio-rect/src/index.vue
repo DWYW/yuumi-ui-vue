@@ -1,12 +1,18 @@
 <template>
-<div class="yuumi-ratio-rect" :style="{ paddingTop: paddingTop }">
-  <div class="rect">
-    <!-- 防止自定义样式污染布局 -->
-    <div class="rect-content" v-bind="$attrs">
-      <slot></slot>
+  <div
+    class="yuumi-ratio-rect"
+    :style="{ paddingTop: paddingTop }"
+  >
+    <div class="rect">
+      <!-- 防止自定义样式污染布局 -->
+      <div
+        class="rect-content"
+        v-bind="$attrs"
+      >
+        <slot />
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script lang="ts">

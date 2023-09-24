@@ -1,12 +1,17 @@
 <template>
-  <YuumiButton @click="showDrawer()">默认(right)</YuumiButton>
+  <YuumiButton @click="showDrawer()">
+    默认(right)
+  </YuumiButton>
 
-  <YuumiDrawer v-model="show"
+  <YuumiDrawer
+    v-model="show"
     @before-open="eventLog($event, 'before-open')"
     @after-open="eventLog($event, 'after-open')"
     @before-close="eventLog($event, 'before-close')"
     @after-close="eventLog($event, 'after-close')"
-  >events</YuumiDrawer>
+  >
+    events
+  </YuumiDrawer>
 </template>
 
 <script>

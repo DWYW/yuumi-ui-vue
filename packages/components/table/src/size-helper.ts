@@ -1,5 +1,3 @@
-import { VNode } from "vue"
-
 export function updateTableCellSize(tableBody: any, tableHead: any, tableFoot?: any) {
   const bodyCols = tableBody.$el.querySelectorAll("colgroup col")
   const headCols = tableHead.$el.querySelectorAll("colgroup col")

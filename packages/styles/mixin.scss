@@ -1,0 +1,97 @@
+@import "./color.scss";
+@import "./variables.scss";
+@import "./size.scss";
+@import "./utils.scss";
+
+@mixin AlphaBackgroundColorWithKey($key, $alpha: 1) {
+  background-color: getAlphaColorWithKey($key, $alpha);
+}
+
+@mixin BackgroundColorWithKey($key) {
+  background-color: map-get($--color, $key);
+}
+
+@mixin AlphaColorWithKey($key, $alpha: 1) {
+  color: getAlphaColorWithKey($key, $alpha);
+}
+
+@mixin ColorWithKey($key) {
+  color: map-get($--color, $key);
+}
+
+@mixin Border($attr: border, $width: 1px, $type: solid, $key: null) {
+  $color:map-get($--color, $key);
+  @if $color != null {
+    #{$attr}: $width $type $color;
+  } @else {
+    #{$attr}: $width $type map-get($--color, "border");
+  }
+}
+
+@mixin BorderRadius($key: default) {
+  border-radius: map-get($--border-radius, $key);
+}
+
+@mixin BorderRadiusPartail($attr, $key: default) {
+  border-#{$attr}-radius: map-get($--border-radius, $key);
+}
+
+@mixin BorderColorWithKey($key) {
+  $_color: map-get($--color, $key);
+
+  @if $_color != null {
+    border-color: $_color;
+  } @else {
+    border-color: map($--color, "border");
+  }
+}
+
+@mixin BorderColorPartail($attr, $key) {
+  $_color: map-get($--color, $key);
+
+  @if $_color != null {
+    border-#{$attr}-color: $_color;
+  } @else {
+    border-#{$attr}-color: map($--color, "border");
+  }
+}
+
+@mixin TextColor($key: primary) {
+  color: map-get($--text-color, $key);
+}
+
+@mixin FontSize($key: md, $scale: 1) {
+  $size:map-get($--font-size, $key);
+  @if $size != null {
+    font-size: $size*$scale;
+  } @else {
+    font-size: map-get($--font-size, "md");
+  }
+}
+
+@mixin Level($nth: 1) {
+  z-index: nth($--level, $nth);
+}
+
+@mixin Space($attr, $value, $scale: 1) {
+  $_value: map-get($--space, $value);
+  @if $_value != null {
+    #{$attr}: $_value*$scale;
+  } @else {
+    #{$attr}: $value*$scale;
+  }
+}
+
+@mixin Shadow($x: 0, $y: 0, $blur: 10px, $spread: 0, $key: primary, $inset: null) {
+  $color: map-get($--shadow-color, $key);
+
+  @if $color == null {
+    $color: map-get($--shadow-color, "primary");
+  }
+
+  @if $inset != null {
+    box-shadow: $x $y $blur $spread $color inset;
+  } @else {
+    box-shadow: $x $y $blur $spread $color;
+  }
+}

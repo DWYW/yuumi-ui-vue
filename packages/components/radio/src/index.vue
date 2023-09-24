@@ -1,20 +1,28 @@
 <template>
-<label :class="['yuumi-radio', 'size__' + size, {
-  '__checked': radioChecked,
-  '__disabled': radioDisabled
-}]" v-bind="$attrs"
-  @click="onClick"
->
-  <span class="radio__icon">
-    <transition name="yuumi-radio">
-      <YuumiIcon v-if="radioChecked" v-bind="checkedIcon" ></YuumiIcon>
-      <YuumiIcon v-else v-bind="uncheckedIcon" ></YuumiIcon>
-    </transition>
-  </span>
-  <span class="radio__content">
-    <slot></slot>
-  </span>
-</label>
+  <label
+    :class="['yuumi-radio', 'size__' + size, {
+      '__checked': radioChecked,
+      '__disabled': radioDisabled
+    }]"
+    v-bind="$attrs"
+    @click="onClick"
+  >
+    <span class="radio__icon">
+      <transition name="yuumi-radio">
+        <YuumiIcon
+          v-if="radioChecked"
+          v-bind="checkedIcon"
+        />
+        <YuumiIcon
+          v-else
+          v-bind="uncheckedIcon"
+        />
+      </transition>
+    </span>
+    <span class="radio__content">
+      <slot />
+    </span>
+  </label>
 </template>
 
 <script lang="ts">
@@ -48,9 +56,6 @@ export default defineComponent({
       })
     }
   },
-  data() {
-    return {}
-  },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
     const {isRadioGroup, modelValue, disabled, onChange, updateModelValue } = inject('YuumiRadioGroup', {}) as any
@@ -80,12 +85,15 @@ export default defineComponent({
       radioDisabled,
       onClick
     }
+  },
+  data() {
+    return {}
   }
 })
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .yuumi-radio {
   cursor: pointer;
@@ -102,17 +110,17 @@ export default defineComponent({
 
     .yuumi-icon {
       display: block;
-      color: map-get($--color, "border");
+      @include ColorWithKey("border");
     }
   }
 
   .radio__content {
-    padding-left: map-get($--space, "xm");
+    @include Space("padding-left", "xm");
   }
 
   &.__checked {
     .radio__icon .yuumi-icon {
-      color: map-get($--color, "primary");
+      @include ColorWithKey("primary");
     }
   }
 
@@ -121,7 +129,7 @@ export default defineComponent({
     cursor: no-drop;
 
     .radio__icon .yuumi-icon {
-      color: map-get($--color, "disabled");
+      @include ColorWithKey("disabled");
     }
   }
 

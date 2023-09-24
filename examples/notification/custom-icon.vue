@@ -1,15 +1,14 @@
 <template>
-<YuumiButton @click="createNotification">自定义图标</YuumiButton>
+  <YuumiButton @click="createNotification">
+    自定义图标
+  </YuumiButton>
 </template>
 
 <script>
-import { h, defineComponent } from 'vue'
+import { h } from 'vue'
 import { YuumiIcon } from '../../packages'
 
 export default {
-  components: {
-    YuumiIcon
-  },
   methods: {
     createNotification () {
       this.$yuumi.createNotification({

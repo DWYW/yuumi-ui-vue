@@ -1,9 +1,11 @@
 <template>
-  <YuumiSelect v-for="size in ['xl', 'lg', 'md', 'sm', 'xm']" :key="size"
+  <YuumiSelect
+    v-for="size in ['xl', 'lg', 'md', 'sm', 'xm']"
+    :key="size"
     style="margin: 0 10px 10px 0;"
     :options="options"
     :size="size"
-  ></YuumiSelect>
+  />
 </template>
 
 <script>

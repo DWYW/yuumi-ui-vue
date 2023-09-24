@@ -1,6 +1,17 @@
 <template>
-  <YuumiSelect :options="options" v-model="value" filterable style="width: 100px;margin: 0 10px 10px 0;"></YuumiSelect>
-  <YuumiSelect :options="options" v-model="value" filterable :filter-method="filterMethod" style="width: 100px;margin: 0 10px 10px 0;"></YuumiSelect>
+  <YuumiSelect
+    v-model="value"
+    :options="options"
+    filterable
+    style="width: 100px;margin: 0 10px 10px 0;"
+  />
+  <YuumiSelect
+    v-model="value"
+    :options="options"
+    filterable
+    :filter-method="filterMethod"
+    style="width: 100px;margin: 0 10px 10px 0;"
+  />
 </template>
 
 <script>

@@ -38,7 +38,7 @@ export default defineComponent({
       const { popper } = instance.refs as any
 
       if (visible.value && !isDescendantElement(e.target as HTMLElement, popper)) {
-        hidePoper()
+        hidePopper()
       } else if (!visible.value) {
         const { props } = triggerNode.value as VNode
         if (props && (props.disabled || props.readonly)) return
@@ -54,7 +54,7 @@ export default defineComponent({
     }
 
     function onMouseleave () {
-      hidePoper()
+      hidePopper()
     }
 
     function showPopper () {
@@ -62,7 +62,7 @@ export default defineComponent({
       visible.value = true
     }
 
-    function hidePoper () {
+    function hidePopper () {
       visible.value = false
     }
 
@@ -129,7 +129,7 @@ export default defineComponent({
       visible,
       popper,
       showPopper,
-      hidePoper
+      hidePopper
     })
 
     return {
@@ -157,10 +157,13 @@ export default defineComponent({
 
     const { $props, triggerNode, transitionLifeCycleHalk, onClick, onMouseenter, onMouseleave } = this
 
-    const handlers = $props.type === 'click' ? { onClick } : { onMouseenter, onMouseleave }
+    const handler: {[x:string]: any} = {
+      'click': { onClick },
+      'hover': { onMouseenter, onMouseleave }
+    }
     const _triggerProps = mergeProps({
       ref: 'trigger'
-    }, handlers)
+    }, handler[$props.type])
 
     return h(Fragment, null, [
       h(triggerNode, _triggerProps),

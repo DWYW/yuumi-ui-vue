@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import path from 'path'
 import vue from '@vitejs/plugin-vue'
 import vitePluginVuedoc, { vueDocFiles } from 'vite-plugin-vuedoc'
+import eslintPlugin from "vite-plugin-eslint"
 
 function getDefaultConfig () {
   return {
@@ -15,6 +16,12 @@ function getDefaultConfig () {
       }),
       vue({
         include: [...vueDocFiles]
+      }),
+      eslintPlugin({
+        include: [
+          '{src,packages,examples}/**/*.{j,t}s?(x)',
+          '{src,packages,examples}/**/*.vue'
+        ]
       })
     ]
   }
@@ -46,7 +53,7 @@ function getLibraryConfig () {
 }
 
 export default defineConfig(({ mode }) => {
-  let config = {
+  const config = {
     define: {
       __APP_VERSION__: `"${pkg.version}"`
     }

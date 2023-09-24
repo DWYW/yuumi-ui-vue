@@ -1,9 +1,13 @@
 <template>
-<YuumiButton @click="showAlert()" style="margin: 0 10px 10px 0;">居中显示</YuumiButton>
+  <YuumiButton
+    style="margin: 0 10px 10px 0;"
+    @click="showAlert()"
+  >
+    居中显示
+  </YuumiButton>
 </template>
 
 <script>
-import { createVNode } from 'vue'
 export default {
   data () {
     return {}

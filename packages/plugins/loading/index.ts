@@ -1,6 +1,6 @@
 import './index.scss';
 import { createRange } from '../../share/helper';
-import { createVNode, h, isVNode, mergeProps, resolveComponent, Teleport, Transition } from 'vue'
+import { createVNode, h, isVNode, Teleport, Transition } from 'vue'
 import { getPluginAppComponentInstance } from '..'
 import type { VNode } from 'vue'
 

@@ -1,13 +1,28 @@
 <template>
   <div class="picker-times">
-    <picker-time-item v-if="hourEnabled" type="hours" v-model="hoursValue" :disabled="disabledHours && disabledHours()"></picker-time-item>
-    <picker-time-item v-if="minuteEnabled" type="minutes" v-model="minutesValue" :disabled="disabledMinutes && disabledMinutes({hours})"></picker-time-item>
-    <picker-time-item v-if="secondEnabled" type="seconds" v-model="secondsValue" :disabled="disabledSeconds && disabledSeconds({hours, minutes})"></picker-time-item>
+    <picker-time-item
+      v-if="hourEnabled"
+      v-model="hoursValue"
+      type="hours"
+      :disabled="disabledHours && disabledHours()"
+    />
+    <picker-time-item
+      v-if="minuteEnabled"
+      v-model="minutesValue"
+      type="minutes"
+      :disabled="disabledMinutes && disabledMinutes({hours})"
+    />
+    <picker-time-item
+      v-if="secondEnabled"
+      v-model="secondsValue"
+      type="seconds"
+      :disabled="disabledSeconds && disabledSeconds({hours, minutes})"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, toRefs, watch } from 'vue'
+import { computed, defineComponent } from 'vue'
 import TimeItem from './time-item.vue'
 
 export default defineComponent({
@@ -27,17 +42,7 @@ export default defineComponent({
     minutes: Number,
     seconds: Number
   },
-  computed: {
-    hourEnabled (): boolean {
-      return /h/.test(this.format)
-    },
-    minuteEnabled (): boolean {
-      return /m/.test(this.format)
-    },
-    secondEnabled (): boolean {
-      return /s/.test(this.format)
-    }
-  },
+  emits: ['change'],
   setup (props, { emit }) {
     const hoursValue = computed({
       get: () => props.hours,
@@ -71,19 +76,30 @@ export default defineComponent({
       minutesValue,
       secondsValue
     }
+  },
+  computed: {
+    hourEnabled (): boolean {
+      return /h/.test(this.format)
+    },
+    minuteEnabled (): boolean {
+      return /m/.test(this.format)
+    },
+    secondEnabled (): boolean {
+      return /s/.test(this.format)
+    }
   }
 })
 </script>
 
 <style lang="scss">
-@import "../../../theme.scss";
+@import "../../../styles/mixin.scss";
 
 .picker-times {
   width: 160px;
   display: inline-table;
 
   &:not(:first-child) {
-    border-left: 1px solid map-get($--color, "border");
+    @include Border($attr: "border-left");
   }
 }
 </style>

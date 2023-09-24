@@ -116,7 +116,7 @@ export default function useHelper ({
     return _disabled
   }
 
-  function endDisabledSeconds ({hours, minutes}: any) {
+  function endDisabledSeconds ({minutes}: any) {
     let _disabled = props.disabledSeconds ? props.disabledSeconds(minutes) : []
 
     if (dateFormat(startSelectDate.value, 'YYYYMMDD hhmm') === dateFormat(endSelectDate.value, 'YYYYMMDD hhmm')) {

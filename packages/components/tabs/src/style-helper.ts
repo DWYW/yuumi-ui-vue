@@ -1,4 +1,4 @@
-import { getCurrentInstance, ref, watch } from 'vue'
+import { getCurrentInstance, ref } from 'vue'
 import type { ComponentInternalInstance } from 'vue'
 
 function useStyle () {
