@@ -45,7 +45,7 @@ export function isValidTableColumnFixed (value: string) {
 }
 
 export function isValidPopperType (value: string) {
-  return ['click', 'hover'].indexOf(value) >= 0
+  return ['click', 'hover', 'custom'].indexOf(value) >= 0
 }
 
 export function isInputType (value: string) {

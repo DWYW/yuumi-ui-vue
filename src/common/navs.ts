@@ -55,6 +55,10 @@ export default [{
     name: 'Warning',
     label: '警告框',
     path: '/doc/warning'
+  },{
+    name: 'Slider',
+    label: '滑块',
+    path: '/doc/slider'
   }]
 }, {
   label: '弹出层',

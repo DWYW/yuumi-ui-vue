@@ -39,8 +39,8 @@ export default function useOptins (selectedItems: Ref<any[]>) {
     instance.emit('change', data)
 
     nextTick(() => {
-      const { hidePoper } = proxy.popperComponent
-      hidePoper && hidePoper()
+      const { hidePopper } = proxy.popperComponent
+      hidePopper && hidePopper()
     })
   }
 

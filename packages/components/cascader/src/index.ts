@@ -91,7 +91,7 @@ export default defineComponent({
 
       if (isLeaf(node)) {
         nextTick(() => {
-          popperComponent.value?.hidePoper()
+          popperComponent.value?.hidePopper()
         })
       }
     }
