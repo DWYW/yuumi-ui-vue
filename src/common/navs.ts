@@ -20,6 +20,10 @@ export default [{
     label: '输入框',
     path: '/doc/input'
   }, {
+    name: 'NumberInput',
+    label: '计数器',
+    path: '/doc/number-input'
+  }, {
     name: 'Select',
     label: '选项',
     path: '/doc/select'

@@ -11,6 +11,7 @@ import EmptyPlug from './components/empty'
 import IconPlug from './components/icon'
 import InputPlug from './components/input'
 import NavMenuPlug from './components/navmenu'
+import NumberInput from './components/number-input'
 import PaginationPlug from './components/pagination'
 import PopperPlug from './components/popper'
 import RadioPlug from './components/radio'
@@ -47,6 +48,7 @@ export * from './components/empty'
 export * from './components/icon'
 export * from './components/input'
 export * from './components/navmenu'
+export * from './components/number-input'
 export * from './components/pagination'
 export * from './components/popper'
 export * from './components/radio'
@@ -101,6 +103,7 @@ export default {
     app.use(IconPlug)
     app.use(InputPlug)
     app.use(NavMenuPlug)
+    app.use(NumberInput)
     app.use(PaginationPlug)
     app.use(PopperPlug)
     app.use(RadioPlug)
