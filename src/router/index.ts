@@ -88,6 +88,9 @@ const docChildren: RouteRecordRaw[] = [{
   path: 'slider',
   component: () => import('../../doc/slider/index.md')
 }, {
+  path: 'number-input',
+  component: () => import('../../doc/number-input/index.md')
+}, {
   path: "",
   redirect: "/doc/install"
 }]

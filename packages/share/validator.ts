@@ -91,3 +91,7 @@ export function isDescendantElement (element: HTMLElement, ancestor: HTMLElement
 
   return _el !== null && _el !== undefined && _el !== root
 }
+
+export function isNumberInputPlacement(value: string) {
+  return ['default', 'left', 'right'].indexOf(value) >= 0
+}
