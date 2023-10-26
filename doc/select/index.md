@@ -42,3 +42,8 @@
 
 ```vue demo src="../../examples/select/option-key.vue"
 ```
+
+### 空选项的提示词
+
+```vue demo src="../../examples/select/empty-placeholder.vue"
+```

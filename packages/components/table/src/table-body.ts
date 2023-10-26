@@ -1,6 +1,6 @@
 import { getValueByPath } from '../../../share/helper'
 import { injectionKey, ProvideGetters } from './provide-helper'
-import { defineComponent, h, inject } from 'vue'
+import { defineComponent, h, inject, resolveComponent } from 'vue'
 import { Scrollbar } from './scollbar-helper'
 
 export default defineComponent({
@@ -22,6 +22,40 @@ export default defineComponent({
     const { rowClassName, cellClassName } = this.rootProps
     const { hasX } = this.scrollbar
 
+    const renderTbody = () => {
+      return rootProps.data.map((row: any, rowIndex: number) => {
+        return h('tr', {
+          class: [rowClassName && rowClassName({ row, rowIndex })]
+        }, columns.map((col: any, colIndex: number) => {
+          const stickyPosition = columnsStickyPosition[colIndex] as any
+
+          return h('td', {
+            class: [cellClassName && cellClassName({ col, colIndex, row, rowIndex }), hasX.value && {
+              'sticky__left': /left/.test(col.props!.fixed),
+              'sticky__right': /right/.test(col.props!.fixed),
+              'sticky__first': stickyPosition?.isFirst,
+              'sticky__last': stickyPosition?.isLast
+            }],
+            style: {
+              left: /left/.test(col.props!.fixed) ? `${stickyPosition.left}px` : null,
+              right: /right/.test(col.props!.fixed) ? `${stickyPosition.right}px` : null,
+            }
+          }, h(col, { rowIndex, colIndex }))
+        }))
+      })
+    }
+
+    const renderEmpty = () => {
+      return h('tr', null, [
+        h('td', {
+          class: ['__empty'],
+          colspan: columns.length
+        }, [
+          h(resolveComponent("YuumiEmpty"), { description: rootProps.emptyPlaceholder })
+        ])
+      ])
+    }
+
     return h('div', {
       class: ['table--body']
     }, [
@@ -42,26 +76,7 @@ export default defineComponent({
             width:  props.width || typeProps.width.default
           })
         })),
-        h('tbody', {}, rootProps.data.map((row: any, rowIndex: number) => {
-          return h('tr', {
-            class: [rowClassName && rowClassName({ row, rowIndex })]
-          }, columns.map((col: any, colIndex: number) => {
-            const stickyPosition = columnsStickyPosition[colIndex] as any
-
-            return h('td', {
-              class: [cellClassName && cellClassName({ col, colIndex, row, rowIndex }), hasX.value && {
-                'sticky__left': /left/.test(col.props!.fixed),
-                'sticky__right': /right/.test(col.props!.fixed),
-                'sticky__first': stickyPosition?.isFirst,
-                'sticky__last': stickyPosition?.isLast
-              }],
-              style: {
-                left: /left/.test(col.props!.fixed) ? `${stickyPosition.left}px` : null,
-                right: /right/.test(col.props!.fixed) ? `${stickyPosition.right}px` : null,
-              }
-            }, h(col, { rowIndex, colIndex }))
-          }))
-        }))
+        h('tbody', {}, rootProps.data.length ? renderTbody() : renderEmpty())
       ])
     ])
   }

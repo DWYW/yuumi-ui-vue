@@ -23,7 +23,8 @@ export default defineComponent({
     optionKey: { type: Object, default: () => ({ label: 'label', value: 'value'}) },
     filterable: Boolean,
     filterMethod: Function,
-    clearable: Boolean
+    clearable: Boolean,
+    emptyPlaceholder: { type: String, default: '暂无可选项'}
   },
   setup (props) {
     const { getLabel, getValue } = useHelper()
@@ -177,7 +178,7 @@ export default defineComponent({
     }
 
     const getOptionMenus = () => {
-      const { $props, validOptions, getOptionItemIndexInSelected, onSelectItem, getLabel } = this
+      const { $props, validOptions, emptyPlaceholder, getOptionItemIndexInSelected, onSelectItem, getLabel } = this
 
       const children = validOptions.map((item: any) => {
         return h('li', {
@@ -194,7 +195,7 @@ export default defineComponent({
       if (!validOptions.length) {
         children.push(h('li', {
           class: 'option-item placeholder'
-        }, ['暂无可选项']))
+        }, [emptyPlaceholder]))
       }
 
       return h('ul', {

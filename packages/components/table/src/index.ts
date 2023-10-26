@@ -31,7 +31,8 @@ export default defineComponent({
       default: '合计'
     },
     summaryMethod: Function,
-    resetScroll: { type: Boolean }
+    resetScroll: { type: Boolean },
+    emptyPlaceholder: { type: String, default: "暂无数据" }
   },
   emits: ['select', 'selectAll', 'selectionChange','scroll'],
   setup (props, { emit, expose }) {
