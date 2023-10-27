@@ -19,12 +19,12 @@ export default defineComponent({
     size: { type: String, validator: isValidComponentSize, default: 'md' },
     theme: { type: String, validator: isValidComponentTheme, default: 'default' },
     defaultValueOptions: (Array as unknown) as any[],
-    options: { type: Array, default: () => [] },
+    options: { type: [Array, Function], default: () => [] },
     optionKey: { type: Object, default: () => ({ label: 'label', value: 'value'}) },
     filterable: Boolean,
     filterMethod: Function,
     clearable: Boolean,
-    emptyPlaceholder: { type: String, default: '暂无可选项'}
+    emptyPlaceholder: { type: String, default: '暂无可选项' }
   },
   setup (props) {
     const { getLabel, getValue } = useHelper()
@@ -39,6 +39,16 @@ export default defineComponent({
       if (!popperComponent.value) return false
       return popperComponent.value.visible as boolean
     })
+
+    const optionItems: Ref<any[]> = ref([])
+    if (typeof props.options === 'function') {
+      Promise.resolve(props.options()).then((res) => {
+        optionItems.value = res
+        updateSelectedItems()
+      })
+    } else {
+      optionItems.value = props.options
+    }
 
     const { getOptionItemIndexInSelected, onSelectItem, removeSelectedByIndex, onScrollInit, optionsMinWidth, updateOptionsMinWidth } = useOptins(selectedItems)
     const { keywordPlaceholder, keyword, onKeywordInput, validOptions, keywordInputFocus, restoreKeywordValue } = useKeyword()
@@ -57,10 +67,11 @@ export default defineComponent({
       nextTick(updateOptionsMinWidth)
     })
 
-    watch(() => props.modelValue, () =>{
+
+    function updateSelectedItems() {
       let _selectedItems: any[] = []
 
-      const _options = [].concat(props.options as any, props.defaultValueOptions as any)
+      const _options = [].concat(optionItems.value as any, props.defaultValueOptions as any)
       if (props.modelValue instanceof Array && props.multiple) {
         _selectedItems = _options.filter((option: any) => {
           return (props.modelValue as any).find((item: any) => item === getValue(option))
@@ -70,6 +81,10 @@ export default defineComponent({
       }
 
       arrayPatch(selectedItems.value, _selectedItems)
+    }
+
+    watch(() => props.modelValue, () =>{
+      updateSelectedItems()
 
       // 更新keyword
       if (props.filterable) {
@@ -84,6 +99,7 @@ export default defineComponent({
     return {
       getLabel,
       getValue,
+      optionItems,
       popperComponent,
       selectElement,
       selectedItems,

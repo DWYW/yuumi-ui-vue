@@ -17,9 +17,9 @@ function useKeyword () {
   }
 
   const validOptions = computed(() => {
-    if (!keyword.value) return props.options
+    if (!keyword.value) return proxy.optionItems
 
-    return props.options.filter((item: any) => {
+    return proxy.optionItems.filter((item: any) => {
       return props.filterMethod ? props.filterMethod(item, keyword.value) : proxy.getLabel(item).indexOf(keyword.value) > -1
     })
   })
