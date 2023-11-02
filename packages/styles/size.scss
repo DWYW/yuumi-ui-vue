@@ -4,7 +4,7 @@ $--height: (
   "md": 32px,
   "lg": 38px,
   "xl": 46px
-);
+) !default;
 
 $--font-size: (
   "xm": 12px,
@@ -12,7 +12,7 @@ $--font-size: (
   "md": 16px,
   "lg": 20px,
   "xl": 24px
-);
+) !default;
 
 $--space: (
   "xxm": 4px,
@@ -21,11 +21,11 @@ $--space: (
   "md": 24px,
   "lg": 32px,
   "xl": 40px
-);
+) !default;
 
 $--border-radius: (
   "default": 4px,
   "mini": 2px,
   "round": 9999px,
   "circle": 100%
-);
+) !default;

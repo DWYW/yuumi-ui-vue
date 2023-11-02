@@ -13,17 +13,17 @@ $--color: (
   "placeholder": mix(#000000, #FFFFFF, 15%),
   "divider": mix(#000000, #FFFFFF, 6%),
   "mask": rgba(#000000, 0.3),
-);
+) !default;
 
 $--text-color: (
   "primary": mix(#000000, #FFFFFF, 85%),
   "secondary": mix(#000000, #FFFFFF, 65%),
   "tertiary": mix(#000000, #FFFFFF, 45%),
-);
+) !default;
 
 $--shadow-color: (
   "primary":  rgba(0, 0, 0, 0.16),
   "secondary":rgba(0, 0, 0, 0.12),
   "tertiary": rgba(0, 0, 0, 0.08),
-);
+) !default;
 
