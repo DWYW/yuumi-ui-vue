@@ -4,6 +4,10 @@ export default [{
     name: "Install",
     label: "安装",
     path: '/doc/install'
+  }, {
+    name: "Theme",
+    label: "主题",
+    path: '/doc/theme'
   }]
 }, {
   label: '基础组件',

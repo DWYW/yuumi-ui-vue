@@ -1,6 +1,6 @@
 {
   "name": "yuumi-ui-vue",
-  "version": "1.4.0",
+  "version": "1.5.0-beta1",
   "files": [
     "packages/**/*"
   ],
@@ -11,6 +11,10 @@
     "build:lib": "vue-tsc --noEmit && vite build --mode lib",
     "preview": "vite preview",
     "lint-fix": "eslint src packages examples --ext .vue,.js,.ts,.jsx,.tsx --fix"
+  },
+  "peerDependencies": {
+    "vue": ">=3.0.0",
+    "sass": ">=1.23.0"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.0",

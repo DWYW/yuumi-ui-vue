@@ -1,9 +1,7 @@
-import { getFirstValidNode } from '../../../share/helper'
 import { isDescendantElement, isValidComponentPlacement, isValidPopperType } from '../../../share/validator'
-import { computed, createVNode, defineComponent, Fragment, getCurrentInstance, h, mergeProps, ref, Teleport, Text, Transition } from 'vue'
-import { createPopper } from '@popperjs/core'
-import type { VNode } from 'vue'
-import type { Placement } from '@popperjs/core'
+import { defineComponent, Fragment, getCurrentInstance, h, mergeProps, ref, Teleport, Transition, VNode } from 'vue'
+import { usePopperHelper } from "./popper-helper"
+import { useSlotsHelper } from "./slots-helper"
 
 export default defineComponent({
   name: 'YuumiPopper',
@@ -16,38 +14,25 @@ export default defineComponent({
   },
   emits: ['before-open', 'before-enter', 'enter', 'after-enter', 'before-leave', 'leave', 'after-leave'],
   setup (props, { emit, expose }) {
-    const instance = getCurrentInstance()!
-
-    const triggerNode = computed(() => {
-      const { trigger: triggerSlots } = instance.slots
-      if (!triggerSlots) return createVNode('span')
-
-      const node = getFirstValidNode(triggerSlots())
-
-      if (node && node.type === Text) {
-        return createVNode('span', {}, [node])
-      }
-
-      return node as VNode
-    })
-
-    const popper = ref()
+    const instance: any = getCurrentInstance()!
+    const { popper, initailizePopper, destroyPopper } = usePopperHelper()
+    const { getTriggerNode } = useSlotsHelper()
     const visible = ref(false)
 
     function onClick (e: MouseEvent) {
-      const { popper } = instance.refs as any
+      const { popper } = instance.refs
 
       if (visible.value && !isDescendantElement(e.target as HTMLElement, popper)) {
         hidePopper()
       } else if (!visible.value) {
-        const { props } = triggerNode.value as VNode
+        const { props } = getTriggerNode() as VNode
         if (props && (props.disabled || props.readonly)) return
         showPopper()
       }
     }
 
     function onMouseenter () {
-      const { props } = (instance.slots.trigger!() as any)
+      const { props } = instance.slots.trigger!()
       if (props && (props.disabled || props.readonly)) return
 
       showPopper()
@@ -66,17 +51,21 @@ export default defineComponent({
       visible.value = false
     }
 
-    function transitionLifeCycleHalk (eventName: any) {
-      return (data: any) => {
-        emit(eventName, data)
-
-        if (eventName === 'before-enter') {
-          initailizePopper(data)
-        }
+    function transitionEventHalk (eventName: any) {
+      return (el: any) => {
+        emit(eventName, el)
 
         switch (eventName) {
           case 'before-enter':
-            initailizePopper(data)
+            const { trigger } = instance.refs as any
+            // 防止是一个组件
+            const reference = trigger.$el || trigger
+
+            initailizePopper(el, reference, {
+              placement: props.placement,
+              offset: [0, props.space],
+              fallbackPlacements: <string[]>(props.fallbackPlacements)
+            })
             break
           case 'after-enter':
             if (props.type === 'click') {
@@ -95,36 +84,6 @@ export default defineComponent({
       }
     }
 
-    function initailizePopper (el: HTMLElement) {
-      const { trigger } = instance.refs as any
-      const reference = trigger.$el || trigger
-
-      popper.value = createPopper(reference, el, {
-        placement: props.placement as Placement,
-        modifiers: [{
-          name: 'offset',
-          options: {
-            offset: [0, props.space]
-          },
-        }, {
-          name: 'arrow',
-          options: {
-            element: el.querySelector('.popper__arrow')
-          },
-        }, {
-          name: 'flip',
-          options: {
-            fallbackPlacements: props.fallbackPlacements
-          }
-        }]
-      })
-    }
-
-    function destroyPopper () {
-      popper.value.destroy()
-      popper.value = null
-    }
-
     expose({
       visible,
       popper,
@@ -133,12 +92,12 @@ export default defineComponent({
     })
 
     return {
-      triggerNode,
+      getTriggerNode,
       visible,
       onClick,
       onMouseenter,
       onMouseleave,
-      transitionLifeCycleHalk
+      transitionEventHalk
     }
   },
   render () {
@@ -155,7 +114,7 @@ export default defineComponent({
       ])
     }
 
-    const { $props, triggerNode, transitionLifeCycleHalk, onClick, onMouseenter, onMouseleave } = this
+    const { $props, getTriggerNode, transitionEventHalk, onClick, onMouseenter, onMouseleave } = this
 
     const handler: {[x:string]: any} = {
       'click': { onClick },
@@ -166,16 +125,16 @@ export default defineComponent({
     }, handler[$props.type])
 
     return h(Fragment, null, [
-      h(triggerNode, _triggerProps),
+      h(getTriggerNode(), _triggerProps),
       h(Teleport, { to: 'body' }, [
         h(Transition, {
           name: 'yuumi-popper',
-          onBeforeEnter: transitionLifeCycleHalk('before-enter'),
-          onEnter: transitionLifeCycleHalk('enter'),
-          onAfterEnter: transitionLifeCycleHalk('after-enter'),
-          onBeforeLeave: transitionLifeCycleHalk('before-leave'),
-          onLeave: transitionLifeCycleHalk('leave'),
-          onAfterLeave: transitionLifeCycleHalk('after-leave')
+          onBeforeEnter: transitionEventHalk('before-enter'),
+          onEnter: transitionEventHalk('enter'),
+          onAfterEnter: transitionEventHalk('after-enter'),
+          onBeforeLeave: transitionEventHalk('before-leave'),
+          onLeave: transitionEventHalk('leave'),
+          onAfterLeave: transitionEventHalk('after-leave')
         }, {
           default: renderPopper
         })

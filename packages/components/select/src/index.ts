@@ -1,7 +1,7 @@
 import { arrayPatch } from '../../../share/helper'
 import { isValidComponentSize, isValidComponentTheme } from '../../../share/validator'
 import { computed, createVNode, defineComponent, Fragment, h, mergeProps, nextTick, onMounted, ref, resolveComponent, watch } from 'vue'
-import type { Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 import useClear from './clear-helper'
 import useHelper from './helper'
 import useKeyword from './keyword-helper'
@@ -23,7 +23,9 @@ export default defineComponent({
     optionKey: { type: Object, default: () => ({ label: 'label', value: 'value'}) },
     filterable: Boolean,
     filterMethod: Function,
-    clearable: Boolean
+    clearable: Boolean,
+    emptyPlaceholder: { type: String, default: '暂无可选项' },
+    initLoadData: { type: Function as PropType<() => Promise<any>> }
   },
   setup (props) {
     const { getLabel, getValue } = useHelper()
@@ -37,6 +39,25 @@ export default defineComponent({
     const isActivedState = computed(() =>{
       if (!popperComponent.value) return false
       return popperComponent.value.visible as boolean
+    })
+
+    const optionItems: Ref<any[]> = ref(props.options)
+
+    const isLoading = ref(false)
+    // 初始化时如果有initLoadData则选择自动加载
+    if (typeof props.initLoadData === 'function') {
+      isLoading.value = true
+      Promise.resolve(props.initLoadData()).then((res) => {
+        optionItems.value = res
+        updateSelectedItems()
+      }).finally(() => {
+        isLoading.value = false
+      })
+    }
+
+    // 同步options
+    watch(() => props.options, () => {
+      optionItems.value = props.options
     })
 
     const { getOptionItemIndexInSelected, onSelectItem, removeSelectedByIndex, onScrollInit, optionsMinWidth, updateOptionsMinWidth } = useOptins(selectedItems)
@@ -56,10 +77,11 @@ export default defineComponent({
       nextTick(updateOptionsMinWidth)
     })
 
-    watch(() => props.modelValue, () =>{
+
+    function updateSelectedItems() {
       let _selectedItems: any[] = []
 
-      const _options = [].concat(props.options as any, props.defaultValueOptions as any)
+      const _options = [].concat(optionItems.value as any, props.defaultValueOptions as any)
       if (props.modelValue instanceof Array && props.multiple) {
         _selectedItems = _options.filter((option: any) => {
           return (props.modelValue as any).find((item: any) => item === getValue(option))
@@ -69,6 +91,10 @@ export default defineComponent({
       }
 
       arrayPatch(selectedItems.value, _selectedItems)
+    }
+
+    watch(() => props.modelValue, () =>{
+      updateSelectedItems()
 
       // 更新keyword
       if (props.filterable) {
@@ -83,6 +109,8 @@ export default defineComponent({
     return {
       getLabel,
       getValue,
+      isLoading,
+      optionItems,
       popperComponent,
       selectElement,
       selectedItems,
@@ -114,17 +142,31 @@ export default defineComponent({
     const _YuumiScrollbar = resolveComponent('YuumiScrollbar')
 
     const getIcon = () => {
-      const { clearBtnVisible, onClear } = this
-      const _props = clearBtnVisible ? {
-        class: 'select__icon',
-        icon: 'line-circle-close',
-        onClick: onClear
-      } : {
-        class: 'select__icon __arrow',
-        icon: 'flat-arrow-bottom'
+      const { clearBtnVisible, onClear, isLoading } = this
+
+      const getIconProp = () => {
+        if (isLoading) {
+          return {
+            class: 'select__icon',
+            icon: 'line-loading'
+          }
+        }
+
+        if (clearBtnVisible) {
+          return {
+            class: 'select__icon',
+            icon: 'line-circle-close',
+            onClick: onClear
+          }
+        }
+
+        return {
+          class: 'select__icon __arrow',
+          icon: 'flat-arrow-bottom'
+        }
       }
 
-      return h(createVNode(_YuumiIcon, _props))
+      return h(createVNode(_YuumiIcon, getIconProp()))
     }
 
     const getContentVnode = () => {
@@ -177,7 +219,7 @@ export default defineComponent({
     }
 
     const getOptionMenus = () => {
-      const { $props, validOptions, getOptionItemIndexInSelected, onSelectItem, getLabel } = this
+      const { $props, validOptions, emptyPlaceholder, getOptionItemIndexInSelected, onSelectItem, getLabel } = this
 
       const children = validOptions.map((item: any) => {
         return h('li', {
@@ -194,7 +236,7 @@ export default defineComponent({
       if (!validOptions.length) {
         children.push(h('li', {
           class: 'option-item placeholder'
-        }, ['暂无可选项']))
+        }, [emptyPlaceholder]))
       }
 
       return h('ul', {

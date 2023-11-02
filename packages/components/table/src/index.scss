@@ -146,6 +146,14 @@
       &.__scrollbar, &.__scrollbar {
         @include Border($attr: "border-left");
       }
+
+      &.__empty {
+        @include Space("padding-top", "lg");
+        @include Space("padding-bottom", "sm");
+        &:hover {
+          background-color: unset
+        }
+      }
     }
 
     th.__scrollbar {

@@ -36,6 +36,11 @@
     @include ColorWithKey("border");
     transition: transform 0.3s;
     line-height: 0;
+
+    &.icon-line-loading {
+     animation: yuumiSelectOptionLoading 1s ease infinite;
+     line-height: 0;
+    }
   }
 
   &.__focus {
@@ -164,5 +169,11 @@
         @include ColorWithKey($key);
       }
     }
+  }
+}
+
+@keyframes yuumiSelectOptionLoading {
+  100% {
+    transform: rotate(1turn);
   }
 }

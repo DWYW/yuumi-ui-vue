@@ -182,6 +182,9 @@ export default defineComponent({
 
     function clearValue () {
       emit('update:modelValue', '')
+      // 防止直接点击清除后不触发change事件
+      // 但是如果在聚焦的过程中点击，会触发2次change事件
+      inputEl.value.dispatchEvent(new Event("change"))
 
       nextTick(() => {
         updateClearIconVisible()
@@ -207,12 +210,23 @@ export default defineComponent({
       }
     }, { immediate: true })
 
+    let changeTimer: any = null
     const { onBlur, onFocus, onChange, onKeydown, onKeyup, onKeypress, ...otherAttrs } = (attrs || {})
     const listeners: ComputedRef<{[x:string]: any}> = computed(() => {
       return {
         onBlur: onBlur,
         onFocus: onFocus,
-        onChange: onChange,
+        onChange: (e: Event) => {
+          // 启用防抖策略消除 clearValue 的影响
+          if (changeTimer) clearTimeout(changeTimer)
+
+          changeTimer = setTimeout(() => {
+            changeTimer = null
+            if (typeof onChange === 'function') {
+              onChange(e)
+            }
+          }, 120)
+        },
         onKeydown: onKeydown,
         onKeyup: onKeyup,
         onKeypress: onKeypress

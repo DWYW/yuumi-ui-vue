@@ -37,6 +37,11 @@
 ```vue demo src="../../examples/table/selection-demo.vue"
 ```
 
+### 空表格
+
+```vue demo src="../../examples/table/empty-demo.vue"
+```
+
 ### 使用插槽实现更多
 
 ```vue demo src="../../examples/table/slots-demo.vue"
