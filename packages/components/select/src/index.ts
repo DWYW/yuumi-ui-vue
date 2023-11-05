@@ -74,7 +74,10 @@ export default defineComponent({
 
     onMounted(() => {
       // fixed: 弹出层和目标层宽度不一致
-      nextTick(updateOptionsMinWidth)
+      // fixed: 当在drawer中,由于display：none, 宽度为0的问题,使用setTimeout替代nextTick
+      setTimeout(() => {
+        nextTick(updateOptionsMinWidth)
+      })
     })
 
 

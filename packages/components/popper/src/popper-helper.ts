@@ -19,7 +19,19 @@ export function usePopperHelper() {
       }, {
         name: 'arrow',
         options: {
-          element: el.querySelector('.popper__arrow')
+          element: el.querySelector('.popper__arrow'),
+          padding: ({ popper, reference, placement }: any) => {
+            // fix: poper尺寸小于reference时，arrow显示问题
+            if (/^(top|bottom)/.test(placement) && popper.width < reference.width) {
+              return popper.width / 2
+            }
+
+            if (/^(left|right)/.test(placement) && popper.height < reference.height) {
+              return popper.height / 2
+            }
+
+            return 6
+          }
         },
       }, {
         name: 'flip',

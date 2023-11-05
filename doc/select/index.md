@@ -43,12 +43,12 @@
 ```vue demo src="../../examples/select/option-key.vue"
 ```
 
-### 空选项的提示词
+### 空选项的提示词 (v1.5.0)
 
 ```vue demo src="../../examples/select/empty-placeholder.vue"
 ```
 
-### 异步选项
+### 异步选项 (v1.5.0)
 
 ```vue demo src="../../examples/select/async-options.vue"
 ```

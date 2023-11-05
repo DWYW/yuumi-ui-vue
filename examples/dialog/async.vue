@@ -5,7 +5,7 @@
   <YuumiDialog
     v-model="show"
     title="dialog title"
-    :sync="false"
+    async
     @close="onclose"
     @cancel="oncancel"
     @confirm="onconfirm"

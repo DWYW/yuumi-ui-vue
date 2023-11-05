@@ -259,6 +259,13 @@ $header-height: 60px;
     }
   }
 
+  blockquote  {
+    margin: 0;
+    padding: map-get($--space, "xm") map-get($--space, "md");
+    border-left: 6px solid map-get($--color, "border");
+    background-color: rgba(map-get($--color, "border"), 0.2);
+  }
+
   .vuedoc-demo__preview {
     color: #333333;
   }

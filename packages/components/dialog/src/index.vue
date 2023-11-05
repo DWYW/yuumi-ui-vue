@@ -13,7 +13,10 @@
         class="yuumi-dialog"
         v-bind="$attrs"
       >
-        <div class="dialog-panel">
+        <div
+          class="dialog-panel"
+          :style="panelStyle"
+        >
           <div class="dialog--header">
             <div class="dialog-title">
               <slot name="title">
@@ -57,7 +60,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { getCss } from '../../../share/helper'
 
 export default defineComponent({
@@ -65,6 +68,9 @@ export default defineComponent({
   props: {
     modelValue: Boolean,
     title: {
+      type: String
+    },
+    width: {
       type: String
     },
     closeEnable: {
@@ -87,26 +93,36 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    sync: {
+    async: {
       type: Boolean,
-      default: true
+      default: false
     },
     alignCenter: Boolean,
     stopPenetrate: Boolean
   },
   emits: ['update:modelValue', 'close', 'cancel', 'confirm', 'beforeEnter', 'afterEnter', 'beforeLeave', 'afterLeave'],
-  data () {
-    return {
-      store: {
-        overflow: '',
-        scrollLeft: 0,
-        scrollTop: 0
+  setup(props) {
+    const store = {
+      overflow: '',
+      scrollLeft: 0,
+      scrollTop: 0
+    }
+
+    const panelStyle = computed(() => {
+      return {
+        width: props.width
       }
+    })
+
+    return {
+      store,
+      panelStyle
     }
   },
   methods: {
     hide () {
-      if (!this.sync) return
+      // 兼容原来的sync写法，推荐使用async
+      if (this.async || this.$attrs.sync === false) return
       this.$emit('update:modelValue', false)
     },
     close () {
@@ -201,6 +217,7 @@ $panel-top: 50%;
   }
 
   .dialog-panel {
+    max-width: 100%;
     width: 500px;
     position: absolute;
     left: 50%;
