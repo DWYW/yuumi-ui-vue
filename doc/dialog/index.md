@@ -27,7 +27,7 @@
 
 ### 阻止穿透
 
-`close`、`cancel`、`confirm`、`beforeEnter`、`afterEnter`、`beforeLeave`、`afterLeave`
+阻止 window 的滚动
 
 ```vue demo src="../../examples/dialog/stop-penetrate.vue"
 ```
@@ -35,4 +35,9 @@
 ### 自定义标题VNode
 
 ```vue demo src="../../examples/dialog/custom-vnode.vue"
+```
+
+### 自定义宽度 (v1.5.0)
+
+```vue demo src="../../examples/dialog/custom-width.vue"
 ```
