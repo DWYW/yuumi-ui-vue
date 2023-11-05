@@ -1,6 +1,7 @@
 <template>
   <YuumiCascader
     v-model="value"
+    style="width: 100%;"
     :options="options"
     every
     placeholder="选择即变化"

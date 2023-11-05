@@ -1,3 +1,6 @@
+### 说明
+> v1.4.0 开始支持
+
 ### 基本用法
 
 ```vue demo src="../../examples/slider/base.vue"

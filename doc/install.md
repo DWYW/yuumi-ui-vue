@@ -1,10 +1,10 @@
-## 快速开始
+### 快速开始
 
 ```bash
 npm install yuumi-ui-vue@latest
 ```
 
-## 全局使用
+### 全局使用
 
 ```js
 // main.js
@@ -16,7 +16,7 @@ app.use(YuumiUIVue)
 
 ```
 
-## 按需引入
+### 按需引入
 
 ```js
 // main.js
