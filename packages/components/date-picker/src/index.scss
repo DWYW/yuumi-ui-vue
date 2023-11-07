@@ -60,7 +60,9 @@
   }
 }
 
-.date-picker-popper {
+.yuumi-date-picker__popper {
+  @include Shadow();
+
   .panel__times {
     display: table;
     width: 100%;

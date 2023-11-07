@@ -483,7 +483,7 @@ export default defineComponent({
     }
 
     return h(_YuumiPopper, {
-      class: "date-picker-popper",
+      class: "yuumi-date-picker__popper",
       onBeforeOpen: this.onBeforeOpen,
       onBeforeLeave: this.onBeforeLeave,
       ref: 'popperComponent'

@@ -1,5 +1,9 @@
 @import "../../../styles/mixin.scss";
 
+.yuumi-time-picker__popper {
+  @include Shadow();
+}
+
 .yuumi-time-picker {
   display: inline-table;
   box-sizing: border-box;

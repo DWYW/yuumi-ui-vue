@@ -262,6 +262,7 @@ export default defineComponent({
     const { onBeforeEnter, onBeforeLeave } = this
 
     return createVNode(_YuumiPopper, {
+      class: "yuumi-select__popper",
       placement: 'bottom-start',
       fallbackPlacements: ['top-start'],
       onBeforeEnter,

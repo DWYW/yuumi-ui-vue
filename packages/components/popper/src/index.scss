@@ -7,6 +7,7 @@ $border-width: 6px;
   left: 0;
   top: 0;
   @include Level(2);
+  @include BorderRadius();
 
   .popper__content {
     @include Border();

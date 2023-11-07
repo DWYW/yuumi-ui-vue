@@ -279,6 +279,7 @@ export default defineComponent({
     }
 
     return h(_YuumiPopper, {
+      class: 'yuumi-time-picker__popper',
       onBeforeOpen: this.onBeforeOpen,
       onBeforeLeave: this.onBeforeLeave,
       ref: 'popperComponent'

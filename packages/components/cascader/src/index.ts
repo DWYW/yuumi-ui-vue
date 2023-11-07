@@ -215,6 +215,7 @@ export default defineComponent({
     }
 
     return h(_YuumiPopper, {
+      class: 'yuumi-cascader__popper',
       placement: 'bottom-start',
       fallbackPlacements: ['top-start'],
       ref: 'popperComponent'
