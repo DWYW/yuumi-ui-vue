@@ -95,3 +95,7 @@ export function isDescendantElement (element: HTMLElement, ancestor: HTMLElement
 export function isNumberInputPlacement(value: string) {
   return ['default', 'left', 'right'].indexOf(value) >= 0
 }
+
+export function isRatioImageMode (value: string) {
+  return ['scaleToFill', 'aspectFit', 'aspectFill', 'top', 'bottom', 'center', 'left', 'right', 'top left', 'top right', 'bottom left', 'bottom right'].indexOf(value) > -1
+}
