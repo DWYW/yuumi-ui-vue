@@ -13,6 +13,62 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-line-video:before {
+  content: "\e77d";
+}
+
+.icon-flat-video:before {
+  content: "\e77e";
+}
+
+.icon-flat-music:before {
+  content: "\e77c";
+}
+
+.icon-line-music:before {
+  content: "\e77b";
+}
+
+.icon-line-upload:before {
+  content: "\e779";
+}
+
+.icon-flat-upload:before {
+  content: "\e77a";
+}
+
+.icon-flat-cloud-download:before {
+  content: "\e777";
+}
+
+.icon-flat-cloud-upload:before {
+  content: "\e778";
+}
+
+.icon-line-cloud-download:before {
+  content: "\e775";
+}
+
+.icon-line-cloud-upload:before {
+  content: "\e776";
+}
+
+.icon-flat-download:before {
+  content: "\e773";
+}
+
+.icon-line-download:before {
+  content: "\e774";
+}
+
+.icon-flat-image:before {
+  content: "\e772";
+}
+
+.icon-line-image:before {
+  content: "\e771";
+}
+
 .icon-line-drag:before {
   content: "\e76f";
 }

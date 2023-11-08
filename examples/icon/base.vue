@@ -190,12 +190,26 @@ export default {
         line: [
           "line-file",
           "line-file-add",
-          "line-file-setting"
+          "line-file-setting",
+          "line-image",
+          "line-video",
+          "line-music",
+          "line-upload",
+          "line-download",
+          "line-cloud-upload",
+          "line-cloud-download"
         ],
         flat: [
           "flat-file",
           "flat-file-add",
-          "flat-file-setting"
+          "flat-file-setting",
+          "flat-image",
+          "flat-video",
+          "flat-music",
+          "flat-upload",
+          "flat-download",
+          "flat-cloud-upload",
+          "flat-cloud-download"
         ]
       }, {
         name: "文件夹",
