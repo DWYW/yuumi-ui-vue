@@ -1,5 +1,9 @@
 @import "../../../styles/mixin.scss";
 
+.yuumi-cascader__popper {
+  @include Shadow();
+}
+
 .yuumi-cascader {
   display: inline-table;
   @include Border();

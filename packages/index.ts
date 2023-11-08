@@ -16,6 +16,7 @@ import PaginationPlug from './components/pagination'
 import PopperPlug from './components/popper'
 import RadioPlug from './components/radio'
 import RadioGroupPlug from './components/radio-group'
+import RatioImagePlug from './components/ratio-image'
 import RatioRectPlug from './components/ratio-rect'
 import ScrollbarPlug from './components/scrollbar'
 import SelectPlug from './components/select'
@@ -53,6 +54,7 @@ export * from './components/pagination'
 export * from './components/popper'
 export * from './components/radio'
 export * from './components/radio-group'
+export * from './components/ratio-image'
 export * from './components/ratio-rect'
 export * from './components/scrollbar'
 export * from './components/select'
@@ -108,6 +110,7 @@ export default {
     app.use(PopperPlug)
     app.use(RadioPlug)
     app.use(RadioGroupPlug)
+    app.use(RatioImagePlug)
     app.use(RatioRectPlug)
     app.use(ScrollbarPlug)
     app.use(SelectPlug)

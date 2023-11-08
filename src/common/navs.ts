@@ -101,6 +101,10 @@ export default [{
     name: "RatioRect",
     label: "等比矩形",
     path: '/doc/ratiorect'
+  }, {
+    name: "RatioImage",
+    label: "等比图片",
+    path: '/doc/ratioimage'
   }]
 }, {
   label: '其他',

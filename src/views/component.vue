@@ -259,6 +259,33 @@ $header-height: 60px;
     }
   }
 
+  >table {
+    width: 100%;
+    border-spacing: 0;
+    line-height: 24px;
+
+    th {
+      padding: 8px 16px;
+      word-break: keep-all;
+      text-align: left;
+      background-color: #f5f5f5;
+    }
+
+    td {
+      padding: 8px 16px;
+      border-bottom: 1px solid #ebedf0;
+
+      >span.delete {
+        text-decoration: line-through;
+        color: rgb(204, 204, 204);
+      }
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+  }
+
   blockquote  {
     margin: 0;
     padding: map-get($--space, "xm") map-get($--space, "md");

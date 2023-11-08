@@ -1,5 +1,9 @@
 @import "../../../styles/mixin.scss";
 
+.yuumi-select__popper {
+  @include Shadow();
+}
+
 .yuumi-select {
   display: inline-table;
   box-sizing: border-box;

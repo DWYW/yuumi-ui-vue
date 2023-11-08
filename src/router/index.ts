@@ -91,6 +91,9 @@ const docChildren: RouteRecordRaw[] = [{
   path: 'number-input',
   component: () => import('../../doc/number-input/index.md')
 }, {
+  path: 'ratioimage',
+  component: () => import('../../doc/ratio-image/index.md')
+}, {
   path: 'theme',
   component: () => import('../../doc/theme.md')
 }, {
