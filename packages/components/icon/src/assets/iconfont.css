@@ -1,9 +1,9 @@
 @font-face {
   font-family: "yuumi-icon"; /* Project id 2947314 */
-  src: url('yuumifont.woff2?t=1647419546424') format('woff2'),
-    url('yuumifont.woff?t=1647419546424') format('woff'),
-    url('yuumifont.ttf?t=1647419546424') format('truetype'),
-    url('yuumifont.svg?t=1647419546424#yuumi-icon') format('svg');
+  src: url('yuumifont.woff2?t=1699432327563') format('woff2'),
+    url('yuumifont.woff?t=1699432327563') format('woff'),
+    url('yuumifont.ttf?t=1699432327563') format('truetype'),
+    url('yuumifont.svg?t=1699432327563#yuumi-icon') format('svg');
 }
 
 .yuumi-icon {
