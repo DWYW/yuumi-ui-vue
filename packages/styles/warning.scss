@@ -1,0 +1,36 @@
+:root {
+  --yuumi-warning-border-color_default: #{getMixColorWithKey("border", "white", 50%)};
+  --yuumi-warning-background_default: #{getAlphaColorWithKey("light")};
+
+  @each $key in $--themes {
+    --yuumi-warning-border-color_#{$key}: #{getMixColorWithKey($key, "white", 45%)};
+    --yuumi-warning-background_#{$key}: #{getMixColorWithKey($key, "white", 15%)};
+  }
+}
+
+$namespace: "yuumi-warning";
+
+.#{$namespace} {
+  color: var(--text-color-secondary);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  padding-top: var(--space-vertical-sm);
+  padding-bottom: var(--space-vertical-sm);
+  padding-right: var(--space-vertical-sm);
+  padding-left: var(--space-horizontal-sm);
+
+  &--default {
+    border-color: var(--yuumi-warning-border-color_default);
+    background-color: var(--yuumi-warning-background_default);
+  }
+
+  @each $key in $--themes {
+    &--#{$key} {
+      @if $key != "warn" {
+        color: var(--color-#{$key});
+      }
+      border-color: var(--yuumi-warning-border-color_#{$key});
+      background-color: var(--yuumi-warning-background_#{$key});
+    }
+  }
+}

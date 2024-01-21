@@ -1,27 +1,48 @@
+<script setup>
+import BaseExample from "../../examples/notification/base.vue"
+import BaseExampleCode from "../../examples/notification/base.vue?raw"
+
+import SwitchExample from "../../examples/notification/switch.vue"
+import SwitchExampleCode from "../../examples/notification/switch.vue?raw"
+
+import PositionExample from "../../examples/notification/position.vue"
+import PositionExampleCode from "../../examples/notification/position.vue?raw"
+
+import VNodeExample from "../../examples/notification/vnode.vue"
+import VNodeExampleCode from "../../examples/notification/vnode.vue?raw"
+
+import CustomIconExample from "../../examples/notification/custom-icon.vue"
+import CustomIconExampleCode from "../../examples/notification/custom-icon.vue?raw"
+</script>
+
 ### 基本用法
 
-```vue demo src="../../examples/notification/base.vue"
-```
+<ExamplePreview :code="BaseExampleCode">
+  <BaseExample />
+</ExamplePreview>
 
 ### 非自动关闭
 
 默认 `3s` 后自动关闭
 
-```vue demo src="../../examples/notification/switch.vue"
-
-```
+<ExamplePreview :code="SwitchExampleCode">
+  <SwitchExample />
+</ExamplePreview>
 
 ### 选择位置
 
-```vue demo src="../../examples/notification/position.vue"
-```
+<ExamplePreview :code="PositionExampleCode">
+  <PositionExample />
+</ExamplePreview>
 
 ### 使用VNode
 
-```vue demo src="../../examples/notification/vnode.vue"
-```
+<ExamplePreview :code="VNodeExampleCode">
+  <VNodeExample />
+</ExamplePreview>
 
-### 自定义图标
+### 自定图标
 
-```vue demo src="../../examples/notification/custom-icon.vue"
-```
+<ExamplePreview :code="CustomIconExampleCode">
+  <CustomIconExample />
+</ExamplePreview>

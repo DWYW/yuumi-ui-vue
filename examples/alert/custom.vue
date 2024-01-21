@@ -1,25 +1,20 @@
 <template>
-  <YuumiButton
-    style="margin: 0 10px 10px 0;"
-    @click="showAlert()"
-  >
-    自定义显示
-  </YuumiButton>
+  <YuumiButton style="margin: 0 10px 10px 0" @click="showAlert()"> 自定义显示 </YuumiButton>
 </template>
 
 <script>
-import { createVNode } from 'vue'
+import { createVNode } from "vue"
 export default {
-  data () {
+  data() {
     return {}
   },
   methods: {
     showAlert() {
       this.$yuumi.createAlert({
-        title: createVNode('span', {style: {color: 'red'}}, '自定义标题'),
-        content: createVNode('span', {style: {color: 'green'}}, '自定义内容'),
-        concanText: '撤销',
-        confirmText: '保存',
+        title: createVNode("span", { style: { color: "red" } }, "自定义标题"),
+        content: createVNode("span", { style: { color: "green" } }, "自定义内容"),
+        cancelText: "撤销",
+        confirmText: "保存"
       })
     }
   }

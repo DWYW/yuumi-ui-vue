@@ -1,4 +1,10 @@
+<script setup>
+import BaseExample from "../../examples/warning/base.vue"
+import BaseExampleCode from "../../examples/warning/base.vue?raw"
+</script>
+
 ### 基本用法
 
-```vue demo src="../../examples/warning/base.vue"
-```
+<ExamplePreview :code="BaseExampleCode">
+  <BaseExample />
+</ExamplePreview>

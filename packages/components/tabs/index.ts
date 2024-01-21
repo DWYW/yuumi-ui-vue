@@ -1,6 +1,6 @@
-import type { App } from 'vue'
-import Tabs from './src/tabs'
-import TabItem from './src/tab-item'
+import type { App } from "vue"
+import Tabs from "./src/Index.vue"
+import TabItem from "./src/Item.vue"
 
 export default {
   install: (app: App): void => {

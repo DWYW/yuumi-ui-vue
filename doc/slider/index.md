@@ -1,52 +1,88 @@
-### 说明
-> v1.4.0 开始支持
+<script setup>
+import BaseExample from "../../examples/slider/base.vue"
+import BaseExampleCode from "../../examples/slider/base.vue?raw"
+
+import StepExample from "../../examples/slider/step.vue"
+import StepExampleCode from "../../examples/slider/step.vue?raw"
+
+import ScopeExample from "../../examples/slider/scope.vue"
+import ScopeExampleCode from "../../examples/slider/scope.vue?raw"
+
+import TooltipExample from "../../examples/slider/tooltip.vue"
+import TooltipExampleCode from "../../examples/slider/tooltip.vue?raw"
+
+import FormatterExample from "../../examples/slider/formatter.vue"
+import FormatterExampleCode from "../../examples/slider/formatter.vue?raw"
+
+import CustomExample from "../../examples/slider/custom.vue"
+import CustomExampleCode from "../../examples/slider/custom.vue?raw"
+
+import RangeExample from "../../examples/slider/range.vue"
+import RangeExampleCode from "../../examples/slider/range.vue?raw"
+
+import VerticalExample from "../../examples/slider/vertical.vue"
+import VerticalExampleCode from "../../examples/slider/vertical.vue?raw"
+
+import ReverseExample from "../../examples/slider/reverse.vue"
+import ReverseExampleCode from "../../examples/slider/reverse.vue?raw"
+
+import PlacementExample from "../../examples/slider/placement.vue"
+import PlacementExampleCode from "../../examples/slider/placement.vue?raw"
+</script>
 
 ### 基本用法
 
-```vue demo src="../../examples/slider/base.vue"
-```
+<ExamplePreview :code="BaseExampleCode">
+  <BaseExample />
+</ExamplePreview>
 
 ### 设置步长
 
-```vue demo src="../../examples/slider/step.vue"
-```
+<ExamplePreview :code="StepExampleCode">
+  <StepExample />
+</ExamplePreview>
 
 ### 设置最大值/最小值
 
-```vue demo src="../../examples/slider/scope.vue"
-```
-
+<ExamplePreview :code="ScopeExampleCode">
+  <ScopeExample />
+</ExamplePreview>
 
 ### 隐藏tooltip
 
-```vue demo src="../../examples/slider/tooltip.vue"
-```
-
+<ExamplePreview :code="TooltipExampleCode">
+  <TooltipExample />
+</ExamplePreview>
 
 ### 自定义显示
 
-```vue demo src="../../examples/slider/formatter.vue"
-```
+<ExamplePreview :code="FormatterExampleCode">
+  <FormatterExample />
+</ExamplePreview>
 
 ### 自定义颜色
 
-```vue demo src="../../examples/slider/custom.vue"
-```
+<ExamplePreview :code="CustomExampleCode">
+  <CustomExample />
+</ExamplePreview>
 
 ### 选择范围
 
-```vue demo src="../../examples/slider/range.vue"
-```
+<ExamplePreview :code="RangeExampleCode">
+  <RangeExample />
+</ExamplePreview>
 
 ### 垂直模式
 
-```vue demo src="../../examples/slider/vertical.vue"
-```
+<ExamplePreview :code="VerticalExampleCode">
+  <VerticalExample />
+</ExamplePreview>
 
 ### 反转模式
 
-```vue demo src="../../examples/slider/reverse.vue"
-```
+<ExamplePreview :code="ReverseExampleCode">
+  <ReverseExample />
+</ExamplePreview>
 
 ### 设置tooltip位置
 
@@ -64,5 +100,6 @@
 
 默认值为 `top|right`
 
-```vue demo src="../../examples/slider/placement.vue"
-```
+<ExamplePreview :code="PlacementExampleCode">
+  <PlacementExample />
+</ExamplePreview>

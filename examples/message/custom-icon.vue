@@ -1,25 +1,23 @@
 <template>
-  <YuumiButton @click="createMessage">
-    自定义图标
-  </YuumiButton>
+  <YuumiButton @click="createMessage"> 自定义图标 </YuumiButton>
 </template>
 
 <script>
-import { h } from 'vue'
-import { YuumiIcon } from '../../packages'
+import { h } from "vue"
+import { YuumiIcon } from "../../packages"
 
 export default {
-  data () {
+  data() {
     return {
       vnode: null
     }
   },
   methods: {
-    createMessage () {
+    createMessage() {
       this.vnode = this.$yuumi.createMessage({
         message: "custom icon",
         icon: h(YuumiIcon, {
-          icon: 'line-shield-info'
+          icon: "line-shield-info"
         })
       })
     }

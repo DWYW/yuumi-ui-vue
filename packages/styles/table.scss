@@ -1,0 +1,183 @@
+:root {
+  --yuumi-table-background_hover: #{getMixColorWithKey("primary", "white", 6%)};
+  --yuumi-table-background_stripe: #{getMixColorWithKey("light", "white", 45%)};
+  --yuumi-table-shadow-blur: 8px;
+  --yuumi-table-shadow-spread: -8px;
+}
+
+$namespace: "yuumi-table";
+
+$_padding: (
+  "default": var(--space-vertical-md),
+  "middle": calc(var(--space-vertical-md) * 0.75),
+  "small": var(--space-vertical-sm)
+);
+
+.#{$namespace} {
+  position: relative;
+  width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+
+  table {
+    width: 100%;
+    height: 100%;
+
+    th,
+    td {
+      background-color: var(--color-white);
+      border-bottom: var(--border-width) solid var(--color-border);
+      color: var(--text-color-secondary);
+      box-sizing: border-box;
+      transition: background 0.2s;
+
+      &.sticky-left,
+      &.sticky-right {
+        position: sticky;
+      }
+
+      &.sticky-left.sticky-last,
+      &.sticky-right.sticky-first {
+        z-index: 2;
+
+        &::after {
+          display: block;
+          content: "";
+          width: var(--yuumi-table-shadow-blur);
+          height: 100%;
+          position: absolute;
+          top: 0;
+        }
+      }
+
+      &.sticky-left.sticky-last {
+        border-right-color: transparent;
+
+        &::after {
+          right: var(--yuumi-table-shadow-spread);
+          box-shadow: var(--yuumi-table-shadow-blur) 0 var(--yuumi-table-shadow-blur)
+            var(--yuumi-table-shadow-spread) var(--shadow-color-primary) inset;
+        }
+      }
+
+      &.sticky-right.sticky-first {
+        border-left-color: transparent;
+
+        &::after {
+          left: var(--yuumi-table-shadow-spread);
+          box-shadow: var(--yuumi-table-shadow-spread) 0 var(--yuumi-table-shadow-blur)
+            var(--yuumi-table-shadow-spread) var(--shadow-color-primary) inset;
+        }
+      }
+    }
+
+    tr {
+      &:hover td {
+        background-color: var(--yuumi-table-background_hover);
+      }
+    }
+  }
+
+  &__head,
+  &__foot {
+    width: 100%;
+    overflow: hidden;
+
+    table th,
+    table td {
+      background-color: var(--color-light);
+    }
+  }
+
+  &__body {
+    overflow: auto;
+  }
+
+  &__scrollbar {
+    background-color: var(--color-white);
+    border-bottom: none;
+  }
+
+  &__cell {
+    box-sizing: border-box;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+
+  &__cell--left {
+    text-align: left;
+  }
+
+  &__cell--center {
+    text-align: center;
+  }
+
+  &__cell--right {
+    text-align: right;
+  }
+
+  &__empty {
+    padding-top: var(--space-vertical-lg);
+    padding-bottom: var(--space-vertical-sm);
+
+    &:hover {
+      background-color: unset !important;
+    }
+  }
+
+  &--border {
+    border: var(--border-width) solid var(--color-border);
+    border-bottom: none;
+
+    table {
+      th,
+      td {
+        &:not(:first-child) {
+          border-left: var(--border-width) solid var(--color-border);
+        }
+      }
+    }
+  }
+
+  &--stripe {
+    table tr:nth-child(even) {
+      td {
+        background-color: var(--yuumi-table-background_stripe);
+      }
+
+      &:hover td {
+        background-color: var(--yuumi-table-background_hover);
+      }
+    }
+  }
+
+  &--scroll-start {
+    table td,
+    table th {
+      &.sticky-left.sticky-last::after {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &--scroll-end {
+    table td,
+    table th {
+      &.sticky-right.sticky-first {
+        border-left-color: var(--color-border);
+      }
+
+      &.sticky-right.sticky-first::after {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+@each $key, $value in $_padding {
+  .#{$namespace}--#{$key} {
+    .#{$namespace}__cell {
+      padding: $value var(--space-horizontal-xm);
+    }
+  }
+}

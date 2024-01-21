@@ -1,0 +1,217 @@
+:root {
+  --yuumi-datepicker-background_range: #{getAlphaColorWithKey("primary", 0.1)};
+  --yuumi-datepicker-background_selected: #{getAlphaColorWithKey("primary")};
+  --yuumi-datepicker-color_selected: #{getAlphaColorWithKey("white")};
+}
+
+$namespace: "yuumi-datepicker";
+$--size: 24px;
+$--padding: 5px;
+
+.#{$namespace} {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: border-color 0.3s;
+
+  &__popper {
+    box-shadow: 0 0 10px var(--shadow-color-primary);
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__placeholder,
+  &__icon,
+  &__hyphen {
+    color: var(--color-placeholder);
+  }
+
+  &__hyphen {
+    padding: 0 var(--space-horizontal-xm);
+  }
+
+  &__picker-start,
+  &__picker-end {
+    display: inline-block;
+    padding: var(--space-vertical-sm) var(--space-horizontal-sm);
+  }
+
+  &__picker-end {
+    border-left: 1px solid var(--color-border);
+  }
+
+  &__time {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-vertical-sm) var(--space-horizontal-sm);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  &__picker-header {
+    padding: var(--space-vertical-md) var(--space-horizontal-xm);
+    text-align: center;
+    font-size: var(--font-size-md);
+    line-height: 20px;
+
+    .line-prev,
+    .line-arrow-left {
+      float: left;
+      margin-right: var(--space-horizontal-sm);
+      cursor: pointer;
+    }
+
+    .line-arrow-right,
+    .line-next {
+      float: right;
+      margin-left: var(--space-horizontal-sm);
+      cursor: pointer;
+    }
+  }
+
+  &__picker-header-content {
+    margin: 0 60px;
+    white-space: nowrap;
+  }
+
+  &__picker-header-year,
+  &__picker-header-month {
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  &__picker-header-year {
+    width: 4em;
+  }
+
+  &__picker-header-month {
+    width: 2em;
+  }
+
+  &__dates {
+    text-align: center;
+  }
+
+  &__dates-header,
+  &__dates-body {
+    width: ($--size + $--padding * 2) * 7;
+    overflow: hidden;
+  }
+
+  &__dates-header {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  &__date-item {
+    float: left;
+    display: block;
+    margin: $--padding * 0.5 0;
+    padding: $--padding;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  &__date-item-content {
+    width: $--size;
+    line-height: $--size;
+  }
+
+  &__btn {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-vertical-xm) var(--space-horizontal-sm);
+    text-align: right;
+
+    > span {
+      cursor: pointer;
+      margin-left: var(--space-horizontal-sm);
+      &:nth-child(2) {
+        color: var(--color-primary);
+      }
+    }
+  }
+
+  &__msg--err {
+    color: var(--color-danger);
+    float: left;
+    margin-left: 0 !important;
+  }
+
+  &--focus {
+    border-color: var(--color-primary);
+  }
+
+  &--disabled {
+    border-color: var(--color-disabled);
+    color: var(--text-color-secondary);
+    cursor: no-drop;
+    opacity: 0.5;
+    user-select: none;
+  }
+}
+
+.#{$namespace}__dates-body {
+  .#{$namespace}__date-item {
+    font-size: 12px;
+  }
+}
+
+.#{$namespace}__date-item {
+  &._range {
+    background-color: var(--yuumi-datepicker-background_range);
+  }
+
+  &._selected {
+    background-color: transparent;
+  }
+
+  &._range-start {
+    border-top-left-radius: var(--border-radius-round);
+    border-bottom-left-radius: var(--border-radius-round);
+  }
+
+  &._range-end {
+    border-top-right-radius: var(--border-radius-round);
+    border-bottom-right-radius: var(--border-radius-round);
+  }
+
+  &._range-start,
+  &._range-end,
+  &._selected {
+    .#{$namespace}__date-item-content {
+      color: var(--yuumi-datepicker-color_selected);
+      background-color: var(--yuumi-datepicker-background_selected);
+      border-radius: var(--border-radius-round);
+    }
+  }
+
+  &._prev,
+  &._next,
+  &._disabled {
+    color: var(--color-placeholder);
+  }
+
+  &._disabled {
+    cursor: no-drop;
+  }
+}
+
+@each $key, $value in $--height {
+  .#{$namespace}--#{$key} {
+    height: var(--height-#{$key});
+
+    .#{$namespace}__icon {
+      width: var(--height-#{$key});
+      text-align: center;
+
+      .line-clock {
+        font-size: calc(var(--height-#{$key}) * 0.5);
+      }
+    }
+  }
+}

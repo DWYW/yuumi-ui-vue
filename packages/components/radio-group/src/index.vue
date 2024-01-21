@@ -1,41 +1,33 @@
 <template>
-  <div class="yuumi-radio-group">
+  <div :class="[ns.n(), ns.is(ns.m('block'), block)]">
     <slot />
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, nextTick, provide, toRefs } from 'vue'
+<script lang="ts" setup>
+import { nextTick, provide, toRefs } from "vue"
+import { useNameSpace } from "../../../share/useApi"
 
-export default defineComponent({
-  name: 'YuumiRadioGroup',
-  props: {
-    modelValue: [String, Number, Boolean],
-    disabled: Boolean
+defineOptions({ name: "YuumiRadioGroup" })
+const props = defineProps({
+  modelValue: [String, Number, Boolean],
+  disabled: Boolean,
+  block: Boolean
+})
+const emit = defineEmits(["update:modelValue", "change"])
+const ns = useNameSpace("radio-group")
+const { disabled, modelValue } = toRefs(props)
+
+provide("YuumiRadioGroup", {
+  modelValue,
+  disabled,
+  updateModelValue: ({ value }: any) => {
+    emit("update:modelValue", value)
   },
-  emits: ['update:modelValue', 'change'],
-  setup (props, { emit }) {
-    const { disabled, modelValue } = toRefs(props)
-
-    provide('YuumiRadioGroup', {
-      isRadioGroup: true,
-      modelValue,
-      disabled,
-      updateModelValue: ({value}: any) => {
-        emit('update:modelValue', value)
-      },
-      onChange: (detail: any) => {
-        nextTick(() => {
-          emit('change', { detail, value: detail.value })
-        })
-      }
+  onChange: (detail: any) => {
+    nextTick(() => {
+      emit("change", { detail, value: detail.value })
     })
-  },
-  data() {
-    return {}
   }
 })
 </script>
-
-<style lang="scss">
-</style>

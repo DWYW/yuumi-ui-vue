@@ -1,0 +1,12 @@
+$namespace: "yuumi-alert";
+
+.#{$namespace} {
+  .yuumi-dialog__panel {
+    width: 400px;
+    transform: translate3d(-50%, -70%, 0);
+  }
+
+  .yuumi-dialog__content {
+    min-height: 0;
+  }
+}

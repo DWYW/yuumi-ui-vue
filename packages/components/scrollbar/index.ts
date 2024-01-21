@@ -1,5 +1,5 @@
-import type { App } from 'vue'
-import Scrollbar from './src/index.vue'
+import type { App } from "vue"
+import Scrollbar from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {

@@ -1,19 +1,37 @@
+<script setup>
+import BaseExample from "../../examples/message/base.vue"
+import BaseExampleCode from "../../examples/message/base.vue?raw"
+
+import SwitchExample from "../../examples/message/switch.vue"
+import SwitchExampleCode from "../../examples/message/switch.vue?raw"
+
+import VNodeExample from "../../examples/message/vnode.vue"
+import VNodeExampleCode from "../../examples/message/vnode.vue?raw"
+
+import CustomIconExample from "../../examples/message/custom-icon.vue"
+import CustomIconExampleCode from "../../examples/message/custom-icon.vue?raw"
+</script>
+
 ### 基本用法
 
-```vue demo src="../../examples/message/base.vue"
-```
+<ExamplePreview :code="BaseExampleCode">
+  <BaseExample />
+</ExamplePreview>
 
 ### 非自动关闭
 
-```vue demo src="../../examples/message/switch.vue"
-```
+<ExamplePreview :code="SwitchExampleCode">
+  <SwitchExample />
+</ExamplePreview>
 
 ### 使用VNode
 
-```vue demo src="../../examples/message/vnode.vue"
-```
+<ExamplePreview :code="VNodeExampleCode">
+  <VNodeExample />
+</ExamplePreview>
 
 ### 自定义图标
 
-```vue demo src="../../examples/message/custom-icon.vue"
-```
+<ExamplePreview :code="CustomIconExampleCode">
+  <CustomIconExample />
+</ExamplePreview>

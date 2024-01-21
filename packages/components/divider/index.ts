@@ -1,5 +1,5 @@
-import type { App } from 'vue'
-import Divider from './src/index.vue'
+import type { App } from "vue"
+import Divider from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {

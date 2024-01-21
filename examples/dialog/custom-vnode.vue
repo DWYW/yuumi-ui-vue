@@ -1,28 +1,23 @@
 <template>
-  <YuumiButton @click="showDialog">
-    自定义标题VNode
-  </YuumiButton>
+  <YuumiButton @click="showDialog"> 自定义标题VNode </YuumiButton>
 
   <YuumiDialog v-model="show">
     <template #title>
-      <YuumiIcon
-        icon="line-help"
-        style="vertical-align: middle; margin-right: 5px;"
-      />
-      <span style="color: red;">自定义标题VNode</span>
+      <YuumiIcon icon="line-help" style="vertical-align: middle; margin-right: 5px" />
+      <span style="color: red">自定义标题VNode</span>
     </template>
   </YuumiDialog>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       show: false
     }
   },
   methods: {
-    showDialog () {
+    showDialog() {
       this.show = true
     }
   }

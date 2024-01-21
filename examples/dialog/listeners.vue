@@ -1,7 +1,5 @@
 <template>
-  <YuumiButton @click="showDialog">
-    事件监听
-  </YuumiButton>
+  <YuumiButton @click="showDialog"> 事件监听 </YuumiButton>
 
   <YuumiDialog
     v-model="show"
@@ -21,16 +19,16 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       show: false
     }
   },
   methods: {
-    showDialog () {
+    showDialog() {
       this.show = true
     },
-    onEvent (e, type) {
+    onEvent(e, type) {
       console.log(`on ${type} event.`, e)
     }
   }

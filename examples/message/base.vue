@@ -1,13 +1,6 @@
 <template>
-  <template
-    v-for="theme in ['default', 'primary', 'success', 'warn', 'danger']"
-    :key="theme"
-  >
-    <YuumiButton
-      style="margin: 0 10px 10px 0;"
-      :theme="theme"
-      @click="createMessage(theme)"
-    >
+  <template v-for="theme in ['default', 'primary', 'success', 'warn', 'danger']" :key="theme">
+    <YuumiButton style="margin: 0 10px 10px 0" :theme="theme" @click="createMessage(theme)">
       {{ theme }} message
     </YuumiButton>
   </template>
@@ -16,9 +9,9 @@
 <script>
 export default {
   methods: {
-    createMessage (theme) {
+    createMessage(theme) {
       this.$yuumi.createMessage({
-        message: 'this is a message',
+        message: "this is a message",
         theme: theme
       })
     }

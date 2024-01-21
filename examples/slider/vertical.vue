@@ -1,20 +1,16 @@
 <template>
-  <div style="display: flex; justify-content: space-around;">
-    <div style="flex: 1 1 100px;">
-      <div style=" height: 300px; text-align: center;">
-        <YuumiSlider
-          v-model="value"
-          vertical
-          @change="onChange"
-        />
+  <div style="display: flex; justify-content: space-around">
+    <div style="flex: 1 1 100px">
+      <div style="height: 300px; text-align: center">
+        <YuumiSlider v-model="value" vertical @change="onChange" />
       </div>
-      <div style="text-align: center;">
+      <div style="text-align: center">
         {{ value }}
       </div>
     </div>
 
-    <div style="flex: 1 1 100px;">
-      <div style=" height: 300px; text-align: center;">
+    <div style="flex: 1 1 100px">
+      <div style="height: 300px; text-align: center">
         <YuumiSlider
           v-model="value"
           vertical
@@ -25,56 +21,40 @@
           @changing="onChanging"
         />
       </div>
-      <div style="text-align: center;">
+      <div style="text-align: center">
         {{ value }}
       </div>
     </div>
 
-    <div style="flex: 1 1 100px;">
-      <div style=" height: 300px;text-align: center;">
-        <YuumiSlider
-          v-model="value"
-          vertical
-          disabled
-          @change="onChange"
-        />
+    <div style="flex: 1 1 100px">
+      <div style="height: 300px; text-align: center">
+        <YuumiSlider v-model="value" vertical disabled @change="onChange" />
       </div>
-      <div style="text-align: center;">
+      <div style="text-align: center">
         {{ value }}
       </div>
     </div>
 
-    <div style="flex: 1 1 100px;">
-      <div style=" height: 300px;text-align: center;">
-        <YuumiSlider
-          v-model="value1"
-          vertical
-          range
-          @change="onChange"
-        />
+    <div style="flex: 1 1 100px">
+      <div style="height: 300px; text-align: center">
+        <YuumiSlider v-model="value1" vertical range @change="onChange" />
       </div>
-      <div style="text-align: center;">
+      <div style="text-align: center">
         {{ value1 }}
       </div>
     </div>
 
-    <div style="flex: 1 1 100px;">
-      <div style=" height: 300px;text-align: center;">
-        <YuumiSlider
-          v-model="value2"
-          vertical
-          range
-          :step="10"
-          @change="onChange"
-        />
+    <div style="flex: 1 1 100px">
+      <div style="height: 300px; text-align: center">
+        <YuumiSlider v-model="value2" vertical range :step="10" @change="onChange" />
       </div>
-      <div style="text-align: center;">
+      <div style="text-align: center">
         {{ value2 }}
       </div>
     </div>
 
-    <div style="flex: 1 1 100px;">
-      <div style=" height: 300px;text-align: center;">
+    <div style="flex: 1 1 100px">
+      <div style="height: 300px; text-align: center">
         <YuumiSlider
           v-model="value2"
           vertical
@@ -84,7 +64,7 @@
           @change="onChange"
         />
       </div>
-      <div style="text-align: center;">
+      <div style="text-align: center">
         {{ value2 }}
       </div>
     </div>
@@ -108,7 +88,7 @@ export default {
       console.log(value)
     },
     onChanging(value) {
-      this.btnColor = value > 50 ? "red": "yellow"
+      this.btnColor = value > 50 ? "red" : "yellow"
     }
   }
 }

@@ -1,0 +1,30 @@
+$namespace: "yuumi-tooltip";
+
+.#{$namespace} {
+  &__popper {
+    display: inline-block;
+    .yuumi-popper__content {
+      padding: var(--space-vertical-sm) var(--space-horizontal-xm);
+    }
+  }
+
+  &--dark {
+    .yuumi-popper__content {
+      color: var(--color-white);
+      background-color: var(--color-dark);
+      border-color: var(--color-dark);
+    }
+
+    @each $type in ("top", "bottom", "left", "right") {
+      &[data-popper-placement^="#{$type}"] {
+        .yuumi-popper__arrow {
+          border-#{$type}-color: var(--color-dark);
+
+          &::after {
+            border-#{$type}-color: var(--color-dark);
+          }
+        }
+      }
+    }
+  }
+}

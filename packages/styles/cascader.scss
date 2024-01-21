@@ -1,0 +1,134 @@
+:root {
+  --yuumi-cascader-options-height: 210px;
+  --yuumi-cascader-option-item-background_selected: #{getAlphaColorWithKey("border", 0.5)};
+
+  @each $key in $--themes {
+    --yuumi-cascader-placeholder-color_#{$key}: #{getAlphaColorWithKey($key, 0.5)};
+  }
+}
+
+$namespace: "yuumi-cascader";
+
+.#{$namespace} {
+  display: inline-table;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: border-color 0.3s;
+
+  &__popper {
+    box-shadow: 0 0 10px var(--shadow-color-primary);
+  }
+
+  &__content {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: var(--space-horizontal-xm);
+    position: relative;
+  }
+
+  &__placeholder {
+    color: var(--color-placeholder);
+  }
+
+  &__icon {
+    display: table-cell;
+    vertical-align: middle;
+    width: var(--space-horizontal-md);
+    text-align: center;
+    color: var(--color-border);
+
+    .yuumi-icon {
+      display: block;
+      transition: transform 0.3s;
+      line-height: 0;
+    }
+  }
+
+  &__icon--loading {
+    animation: yuumiSelectOptionLoading 1s ease infinite;
+  }
+
+  &__group-item {
+    vertical-align: top;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 210px;
+    min-width: 80px;
+
+    &:not(:first-child) {
+      border-left: var(--border-width) solid var(--color-border);
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+
+      li {
+        list-style: none;
+        padding-top: var(--space-vertical-sm);
+        padding-bottom: var(--space-vertical-sm);
+        padding-left: var(--space-horizontal-sm);
+        padding-right: var(--space-horizontal-lg);
+        cursor: pointer;
+        position: relative;
+
+        &:hover {
+          background-color: var(--yuumi-cascader-option-item-background_selected);
+        }
+
+        &._selected {
+          background-color: var(--yuumi-cascader-option-item-background_selected);
+          color: var(--color-primary);
+        }
+
+        &._disabled {
+          opacity: 0.5;
+          cursor: no-drop;
+          background-color: transparent;
+        }
+
+        .yuumi-icon {
+          display: block;
+          font-size: var(--font-size-xm);
+          position: absolute;
+          right: var(--space-vertical-sm);
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+}
+
+@each $key, $value in $--height {
+  .#{$namespace}--#{$key} {
+    height: var(--height-#{$key});
+  }
+}
+
+@each $key in $--themes {
+  .#{$namespace}--#{$key} {
+    &.#{$namespace} {
+      border-color: var(--color-#{$key});
+      color: var(--color-#{$key});
+
+      .#{$namespace}__placeholder {
+        color: var(--yuumi-cascader-placeholder-color_#{$key});
+      }
+    }
+
+    &.#{$namespace}__group-item {
+      ul li._selected {
+        color: var(--color-#{$key});
+      }
+    }
+  }
+}
+
+.#{$namespace}__popper {
+  .#{$namespace}__placeholder {
+    padding: var(--space-vertical-sm) var(--space-horizontal-sm);
+  }
+}

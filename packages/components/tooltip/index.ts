@@ -1,6 +1,5 @@
-import type { App } from 'vue'
-import Tooltip from './src/index'
-import './src/index.scss'
+import type { App } from "vue"
+import Tooltip from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {

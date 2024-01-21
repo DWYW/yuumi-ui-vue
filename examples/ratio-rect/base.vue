@@ -1,12 +1,16 @@
 <template>
-  <YuumiInput
-    v-model="ratio"
-    :limit="/^\d+(\.\d*)?$/"
-  />
-  <div style="width: 300px;">
+  <YuumiInput v-model="ratio" :limit="/^\d+(\.\d*)?$/" />
+  <div style="width: 300px">
     <YuumiRatioRect
-      :ratio="ratio"
-      style="background-color: blue; border-radius: 4px; display: flex; justify-content: center; align-items: center; color: #ffffff;"
+      :ratio="Number(ratio)"
+      style="
+        background-color: blue;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+      "
     >
       ratio: {{ ratio }}
     </YuumiRatioRect>
@@ -14,13 +18,13 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue"
 
 export default defineComponent({
- data() {
-  return {
-    ratio: 1
+  data() {
+    return {
+      ratio: "1"
+    }
   }
- }
 })
 </script>

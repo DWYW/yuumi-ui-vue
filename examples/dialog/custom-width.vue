@@ -1,24 +1,18 @@
 <template>
-  <YuumiButton @click="showDialog">
-    自定义宽度
-  </YuumiButton>
+  <YuumiButton @click="showDialog"> 自定义宽度 </YuumiButton>
 
-  <YuumiDialog
-    v-model="show"
-    title="自定义宽度"
-    width="900px"
-  />
+  <YuumiDialog v-model="show" title="自定义宽度" width="900px" />
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       show: false
     }
   },
   methods: {
-    showDialog () {
+    showDialog() {
       this.show = true
     }
   }

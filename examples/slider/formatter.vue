@@ -1,13 +1,9 @@
 <template>
-  <div style="display: flex; align-items: center;">
-    <div style="flex: 1 1 auto;">
-      <YuumiSlider
-        v-model="value"
-        :formatter="formatter"
-        @change="onChange"
-      />
+  <div style="display: flex; align-items: center">
+    <div style="flex: 1 1 auto">
+      <YuumiSlider v-model="value" :formatter="formatter" @change="onChange" />
     </div>
-    <div style="flex: 0 0 60px;">
+    <div style="flex: 0 0 60px">
       {{ formatter(value) }}
     </div>
   </div>
@@ -21,7 +17,7 @@ export default {
     }
   },
   methods: {
-    formatter (value) {
+    formatter(value) {
       return (value / 100).toFixed(2)
     },
     onChange(value) {

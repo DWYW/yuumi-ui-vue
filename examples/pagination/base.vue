@@ -1,33 +1,36 @@
 <template>
-  <div style="margin-bottom: 20px;">
+  <div style="margin-bottom: 20px">
     <YuumiPagination
       :page="page1.page"
       :page-total="page1.pageTotal"
       :total="page1.total"
       align="left"
+      @change="page => (page1.page = page)"
     />
   </div>
-  <div style="margin-bottom: 20px;">
+  <div style="margin-bottom: 20px">
     <YuumiPagination
       :page="page2.page"
       :page-total="page2.pageTotal"
       :total="page2.total"
       align="right"
+      @change="page => (page2.page = page)"
     />
   </div>
 
-  <div style="margin-bottom: 20px;">
+  <div style="margin-bottom: 20px">
     <YuumiPagination
       :page="page3.page"
       :page-total="page3.pageTotal"
       :total="page3.total"
+      @change="page => (page3.page = page)"
     />
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       page1: {
         page: 1,
@@ -47,7 +50,7 @@ export default {
     }
   },
   methods: {
-    consoleLog (value) {
+    consoleLog(value) {
       console.log(value)
     }
   }

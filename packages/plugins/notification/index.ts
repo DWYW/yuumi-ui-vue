@@ -1,185 +1,105 @@
-import './index.scss';
-import { h, createVNode, resolveComponent, Transition, Teleport } from 'vue'
-import { getPluginAppComponentInstance } from '..';
-import { isValidNotificationDirection, isValidNotificationTheme } from '../../share/validator';
-import type { VNode } from 'vue'
+import { defineComponent, h, nextTick, ref } from "vue"
+import { pluginMount, pluginUnmount } from "../instance"
+import Notification from "./Notification.vue"
+import type { VNode } from "vue"
 
-export interface CreateNotificationOptions {
-  title: string|VNode
-  message: string|VNode
+export interface CreateNotificationOption {
+  title: string | VNode
+  message: string | VNode
+  direction: "bl" | "br" | "tl" | "tr"
   icon?: VNode
-  theme?: 'default'|'primary'|'warn'|'danger'|'succss'
+  theme?: "default" | "primary" | "warn" | "danger" | "success"
   duration?: number
   offset?: number
-  direction: 'bl'|'br'|'tl'|'tr'
 }
 
-function getPartialNotification (options: CreateNotificationOptions) {
-  let vnode = createVNode({
-    props: {
-      theme: {
-        type: String,
-        validator: isValidNotificationTheme,
-        default: 'default'
-      },
-      direction: {
-        type: String,
-        validator: isValidNotificationDirection,
-        default: 'tr'
-      },
-      duration: {
-        type: Number,
-        default: 3000
-      },
-      offset: {
-        type: Number,
-        default: 10
-      }
-    },
-    data () {
-      return {
-        show: true,
-        y: 0,
-        timeout: 0
-      }
-    },
-    computed: {
-      iconMap () {
-        return {
-          primary: 'line-info',
-          warn: 'flat-info',
-          success: 'flat-circle-correct',
-          error: 'flat-circle-close'
-        }
-      }
-    },
-    beforeMount () {
-      updateNotificationY(vnode)
-    },
-    mounted () {
-      this.addTimeout()
-      this.$nextTick(() => {
-        this.$refs.notification.classList.add('appeared')
-      })
-    },
-    methods: {
-      hide () {
-        this.show = false
-        updateNotificationY(vnode)
-      },
-      addTimeout () {
-        if (!this.duration) return
+export interface YuumiNotification {
+  createNotification: (option: CreateNotificationOption) => VNode
+  removeNotification: (vnode: VNode) => void
+  removeAllNotification: () => void
+}
 
-        this.timeout = window.setTimeout(() => {
-          this.timeout = 0
-          this.hide()
-        }, this.duration)
-      },
-      removeTimeout () {
-        if (this.timeout) clearTimeout(this.timeout)
-        this.timeout = 0
-      }
-    },
-    render () {
-      const { direction, theme } = this
+const notifications = new Map()
 
-      return h(Teleport, { to: 'body' }, [
-        h(Transition, {
-          name: 'yuumi-notification',
-          appear: true,
-          onAfterLeave: () => {
-            const { notifications } = (getPluginAppComponentInstance()?.proxy) || {} as any
-            const index = notifications.findIndex((item: VNode) => item === vnode)
-            if (index > -1) { notifications.splice(index, 1) }
-            vnode = null as any
-          }
-        }, {
-          default: () => this.show ? h('div', {
-            class: ['yuumi-notification', `direction__${direction}`, `theme__${theme}`],
-            style: {
-              top: /t/.test(direction) ? `${this.y}px` : null,
-              bottom: /b/.test(direction) ? `${this.y}px` : null,
+export function createNotification(option: CreateNotificationOption) {
+  const { title, message, icon, ..._option } = Object.assign({ offset: 10 }, option)
+
+  const _component = defineComponent({
+    setup() {
+      const notificationEl = ref()
+      const position = ref(_option.offset)
+
+      const lastKey = Array.from(notifications.keys()).pop()
+      if (lastKey) {
+        const { props, refs } = notifications.get(lastKey)
+        position.value += props.position + refs.el.value.getBoundingClientRect().height
+      }
+
+      return () =>
+        h(
+          Notification,
+          Object.assign({}, _option, {
+            position: position.value,
+            onBeforeEnter: () => {
+              nextTick(() => {
+                notifications.set(
+                  vnode,
+                  Object.assign(
+                    {
+                      updatePosition: (v: number) => (position.value = v)
+                    },
+                    notificationEl.value
+                  )
+                )
+
+                updateNotificationTop(notificationEl.value.props.direction)
+              })
             },
-            onMouseenter: this.removeTimeout,
-            onMouseleave: this.addTimeout,
-            ref: 'notification'
-          }, [
-            h('div', { class: 'notification-body' }, [
-              h('div', { class: 'notification-icon' }, [
-                options.icon || h(resolveComponent('YuumiIcon'), { icon: this.iconMap[theme] || this.iconMap.primary })
-              ]),
-              h('div', { class: 'notification-content' }, [
-                options.title ? h('div', { class: 'content-title' }, options.title) : null,
-                h('div', { class: 'content-body' }, options.message),
-              ]),
-            ]),
-            h(resolveComponent('YuumiIcon'), {
-              class: 'notification-close',
-              icon: 'line-close',
-              onClick: () => {
-                this.removeTimeout()
-                this.hide()
-              }
-            })
-          ]) : null
-        })
-      ])
+            onBeforeLeave: () => {
+              const { direction } = notifications.get(vnode).props
+              notifications.delete(vnode)
+              updateNotificationTop(direction)
+            },
+            onAfterLeave: () => {
+              pluginUnmount(vnode)
+            },
+            ref: (el: any) => (notificationEl.value = el)
+          }),
+          {
+            title: () => title,
+            icon: () => icon,
+            default: () => message
+          }
+        )
     }
-  }, {
-    theme: options.theme,
-    direction: options.direction,
-    duration: options.duration,
-    offset: options.offset
   })
-
+  const vnode = h(_component)
+  pluginMount(vnode, Notification.name)
   return vnode
 }
 
-function updateNotificationY (vnode: VNode) {
-  if (!vnode) return
+export function removeNotification(node: VNode) {
+  const target = notifications.get(node)
+  if (!target) return
+  target.hide()
+}
 
-  const { notifications } = (getPluginAppComponentInstance()?.proxy) || {} as any
-  if (!notifications) return
+export function removeAllNotification() {
+  nextTick(() => notifications.forEach(item => item.hide()))
+}
 
-  const _direction = vnode.component?.props?.direction
-  let vnodeIndex = -1
-  let y = 0
+function updateNotificationTop(direction: string) {
+  let position = 0
 
-  notifications.forEach((item: VNode, index: number) => {
-    if (item === vnode) { vnodeIndex = index }
+  notifications.forEach(item => {
+    const { props, refs, isVisible } = item
+    if (!isVisible || props.direction !== direction) return
 
-    const { $refs, show, offset, direction }: any = item.component!.proxy
-    if (!show || direction !== _direction) return
+    const rect = refs.el.value.getBoundingClientRect()
+    if (!rect) return
 
-    if (vnodeIndex >= 0) {
-      item.component!.data.y = y + offset
-    }
-
-    if ($refs.notification) {
-      const rect = $refs.notification.getBoundingClientRect()
-      y += (offset + rect.height)
-    }
+    position += props.offset
+    item.updatePosition(position)
+    position += rect.height
   })
-}
-
-export const createNotification = function (options: CreateNotificationOptions) {
-  const vnode = getPartialNotification(options)
-  const { notifications } = (getPluginAppComponentInstance()?.proxy) || {} as any
-
-  if (notifications) { notifications.push(vnode) }
-
-  return vnode
-}
-
-export const removeNotification = function (vnode: VNode) {
-  if (vnode && vnode.component?.proxy) {
-    (vnode.component.proxy as any).hide()
-  }
-}
-
-export const removeAllNotification = function () {
-  const { notifications } = (getPluginAppComponentInstance()?.proxy) || {} as any
-  if (notifications) {
-    notifications.forEach((item: VNode) => removeNotification(item))
-  }
 }

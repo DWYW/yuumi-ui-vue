@@ -1,44 +1,12 @@
 ### 说明
+
 > v1.5.0 开始支持
 
 ### 自定义主题
 
-基于 sass 的 Default Values;
+基于 css 的 var;
 
-``` js
-// vite.config.js
-{
-  //...
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@import 'path/global-variables.scss';`
-      }
-    }
-  }
-  //...
-}
-```
-
-
-``` js
-// vue.config.js
-{
-  //...
-  css: {
-    loaderOptions: {
-      sass: {
-        prependData: `import 'path/global-variables.scss';`
-      }
-    }
-  },
-  //...
-}
-```
-
-``` scss
-// global-variables.scss
-
+```scss
 $--color: (
   "primary": #0d6efd,
   "success": #00b450,
@@ -47,56 +15,44 @@ $--color: (
   "info": #0dcaf0,
   "white": #ffffff,
   "black": #000000,
-  "light": mix(#000000, #FFFFFF, 4%),
-  "dark": mix(#000000, #FFFFFF, 96%),
-  "disabled": mix(#000000, #FFFFFF, 25%),
-  "border": mix(#000000, #FFFFFF, 15%),
-  "placeholder": mix(#000000, #FFFFFF, 15%),
-  "divider": mix(#000000, #FFFFFF, 6%),
-  "mask": rgba(#000000, 0.3),
+  "light": mix(#000000, #ffffff, 4%),
+  "dark": mix(#000000, #ffffff, 96%),
+  "disabled": mix(#000000, #ffffff, 25%),
+  "border": mix(#000000, #ffffff, 15%),
+  "placeholder": mix(#000000, #ffffff, 15%),
+  "divider": mix(#000000, #ffffff, 6%),
+  "mask": rgba(#000000, 0.3)
 );
 
-$--text-color: (
-  "primary": mix(#000000, #FFFFFF, 85%),
-  "secondary": mix(#000000, #FFFFFF, 65%),
-  "tertiary": mix(#000000, #FFFFFF, 45%),
-);
+// 主题色
+:root {
+  --color-primary: #{map-get($--color, "primary")};
+  --color-success: #{map-get($--color, "success")};
+  --color-danger: #{map-get($--color, "danger")};
+  --color-warn: #{map-get($--color, "warn")};
+  --color-info: #{map-get($--color, "info")};
+  --color-white: #{map-get($--color, "white")};
+  --color-black: #{map-get($--color, "black")};
+  --color-light: #{map-get($--color, "light")};
+  --color-dark: #{map-get($--color, "dark")};
+  --color-disabled: #{map-get($--color, "disabled")};
+  --color-border: #{map-get($--color, "border")};
+  --color-placeholder: #{map-get($--color, "placeholder")};
+  --color-divider: #{map-get($--color, "divider")};
+  --color-mask: #{map-get($--color, "mask")};
+}
 
-$--shadow-color: (
-  "primary":  rgba(0, 0, 0, 0.16),
-  "secondary":rgba(0, 0, 0, 0.12),
-  "tertiary": rgba(0, 0, 0, 0.08),
-);
+// 字体颜色
+:root {
+  --text-color-primary: #{map-get($--color, "black")};
+  --text-color-secondary: #{mix(map-get($--color, "black"), map-get($--color, "white"), 65%)};
+  --text-color-tertiary: #{mix(map-get($--color, "black"), map-get($--color, "white"), 45%)};
+}
 
-$--height: (
-  "xm": 24px,
-  "sm": 28px,
-  "md": 32px,
-  "lg": 38px,
-  "xl": 46px
-);
-
-$--font-size: (
-  "xm": 12px,
-  "sm": 14px,
-  "md": 16px,
-  "lg": 20px,
-  "xl": 24px
-);
-
-$--space: (
-  "xxm": 4px,
-  "xm": 8px,
-  "sm": 16px,
-  "md": 24px,
-  "lg": 32px,
-  "xl": 40px
-);
-
-$--border-radius: (
-  "default": 4px,
-  "mini": 2px,
-  "round": 9999px,
-  "circle": 100%
-);
+// 阴影颜色
+:root {
+  --shadow-color-primary: #{rgba(map-get($--color, "black"), 0.16)};
+  --shadow-color-secondary: #{rgba(map-get($--color, "black"), 0.12)};
+  --shadow-color-tertiary: #{rgba(map-get($--color, "black"), 0.08)};
+}
 ```

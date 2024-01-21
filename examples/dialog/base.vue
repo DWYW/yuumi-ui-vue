@@ -1,7 +1,5 @@
 <template>
-  <YuumiButton @click="showDialog">
-    show dialog
-  </YuumiButton>
+  <YuumiButton @click="showDialog"> show dialog </YuumiButton>
   <YuumiDialog
     v-model="show"
     title="dialog title"
@@ -16,23 +14,23 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       show: false
     }
   },
   methods: {
-    showDialog () {
+    showDialog() {
       this.show = true
     },
-    onclose () {
-      console.log('on close')
+    onclose() {
+      console.log("on close")
     },
-    oncancel () {
-      console.log('on cancel')
+    oncancel() {
+      console.log("on cancel")
     },
-    onconfirm () {
-      console.log('on confirm')
+    onconfirm() {
+      console.log("on confirm")
     }
   }
 }

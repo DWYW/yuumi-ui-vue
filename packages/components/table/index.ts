@@ -1,6 +1,6 @@
-import type { App } from 'vue'
-import Table from './src/index'
-import TableColumn from './src/column'
+import type { App } from "vue"
+import Table from "./src/Index.vue"
+import TableColumn from "./src/Column.vue"
 
 export default {
   install: (app: App): void => {

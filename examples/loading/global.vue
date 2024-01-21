@@ -1,13 +1,11 @@
 <template>
-  <YuumiButton @click="showLoading">
-    show global loading
-  </YuumiButton>
+  <YuumiButton @click="showLoading"> show global loading </YuumiButton>
 </template>
 
 <script>
 export default {
   methods: {
-    showLoading () {
+    showLoading() {
       const { createLoading, removeLoading } = this.$yuumi
       const vnode = createLoading()
 

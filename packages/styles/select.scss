@@ -1,0 +1,210 @@
+:root {
+  --yuumi-select-options-height: 210px;
+  --yuumi-select-option-item-bg_selected: #{getAlphaColorWithKey("border", 0.5)};
+  --yuumi-select-content-background: #{getAlphaColorWithKey("border", 0.4)};
+  --yuumi-select-content-background_disabled: #{getAlphaColorWithKey("disabled", 0.3)};
+
+  @each $key in $--themes {
+    --yuumi-select-content-background-#{$key}: #{getAlphaColorWithKey($key, 0.2)};
+    --yuumi-select-content-icon-color-#{$key}: #{getAlphaColorWithKey($key, 0.5)};
+    --yuumi-select-content-icon-color_hover-#{$key}: #{getAlphaColorWithKey($key, 0.8)};
+  }
+}
+
+$namespace: "yuumi-select";
+
+.#{$namespace} {
+  display: inline-table;
+  box-sizing: border-box;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  min-width: 90px;
+  transition: border-color 0.3s;
+
+  &__popper {
+    box-shadow: 0 0 10px var(--shadow-color-primary);
+    .yuumi-scrollbar__body {
+      max-height: var(--yuumi-select-options-height);
+      overflow-x: hidden;
+    }
+  }
+
+  &__content {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: var(--space-horizontal-xm);
+    position: relative;
+
+    input {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
+      outline: none;
+      padding: 0;
+      font-size: inherit;
+      &::placeholder {
+        color: var(--color-placeholder);
+      }
+    }
+  }
+
+  &__placeholder {
+    color: var(--color-placeholder);
+  }
+
+  &__icon {
+    display: table-cell;
+    vertical-align: middle;
+    width: var(--space-horizontal-md);
+    text-align: center;
+    color: var(--color-border);
+
+    .yuumi-icon {
+      display: block;
+      transition: transform 0.3s;
+      line-height: 0;
+    }
+  }
+
+  &__icon--loading {
+    animation: yuumiSelectOptionLoading 1s ease infinite;
+  }
+
+  &__options {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__options--placeholder {
+    color: var(--color-placeholder);
+    list-style: none;
+    padding: var(--space-vertical-sm) var(--space-horizontal-md) var(--space-vertical-sm)
+      var(--space-horizontal-sm);
+  }
+
+  &__options-item {
+    list-style: none;
+    padding: var(--space-vertical-sm) var(--space-horizontal-md) var(--space-vertical-sm)
+      var(--space-horizontal-sm);
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: var(--yuumi-select-option-item-bg_selected);
+    }
+
+    .yuumi-icon {
+      display: none;
+      position: absolute;
+      top: 50%;
+      right: var(--space-horizontal-md);
+      transform: translate3d(100%, -50%, 0);
+    }
+
+    &._selected {
+      color: var(--color-primary);
+      .yuumi-icon {
+        display: block;
+      }
+    }
+  }
+}
+
+.#{$namespace}--disabled {
+  border-color: var(--color-disabled) !important;
+  color: var(---text-color-secondary) !important;
+  cursor: no-drop;
+  opacity: 0.5;
+  user-select: none;
+
+  &.#{$namespace}--multiple {
+    .#{$namespace}__content-text {
+      background-color: var(--yuumi-select-content-background_disabled) !important;
+    }
+  }
+}
+
+.#{$namespace}--focus {
+  &.#{$namespace}--default {
+    border-color: var(--color-primary);
+  }
+
+  .#{$namespace}__icon--default {
+    transform: rotate(-180deg);
+  }
+}
+
+.#{$namespace}--multiple {
+  .#{$namespace}__content-text {
+    display: inline-block;
+    margin: 2px 4px 2px 0;
+    padding: 2px 4px;
+    background-color: var(--yuumi-select-content-background);
+    border-radius: var(--border-radius);
+    white-space: nowrap;
+
+    .yuumi-icon {
+      color: var(--color-border);
+      padding-left: 2px;
+
+      &:hover {
+        color: var(--text-color-secondary);
+      }
+    }
+  }
+}
+
+@each $key, $value in $--height {
+  .#{$namespace}--#{$key} {
+    height: var(--height-#{$key});
+  }
+}
+
+@each $key in $--themes {
+  .#{$namespace} {
+    &.#{$namespace}--#{$key} {
+      border-color: var(--color-#{$key});
+      color: var(--color-#{$key});
+
+      .#{$namespace}__placeholder {
+        color: var(--color-#{$key});
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .#{$namespace}__options {
+    &.#{$namespace}--#{$key} {
+      .#{$namespace}__options-item {
+        &._selected {
+          color: var(--color-#{$key});
+        }
+      }
+    }
+  }
+
+  .#{$namespace}--multiple {
+    &.#{$namespace}--#{$key} {
+      .#{$namespace}__content-text {
+        background-color: var(--yuumi-select-content-background-#{$key});
+
+        .yuumi-icon {
+          color: var(--yuumi-select-content-icon-color-#{$key});
+
+          &:hover {
+            color: var(--yuumi-select-content-icon-color_hover-#{$key});
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes yuumiSelectOptionLoading {
+  100% {
+    transform: rotate(1turn);
+  }
+}

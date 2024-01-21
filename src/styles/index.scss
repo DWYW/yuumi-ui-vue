@@ -1,0 +1,58 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 14px;
+  touch-action: manipulation;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333333;
+}
+
+div,
+section,
+article,
+p,
+ul,
+ol,
+li,
+button,
+input,
+textarea,
+span,
+i,
+label {
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+input,
+select,
+textarea,
+button {
+  outline: none;
+}
+input {
+  font-size: inherit;
+}
+
+.clearfix {
+  &::before,
+  &::after {
+    content: " ";
+    height: 0;
+    width: 0;
+    display: table;
+  }
+
+  &::after {
+    clear: both;
+  }
+}
+
+@import "./layout.scss";

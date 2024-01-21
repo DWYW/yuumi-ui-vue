@@ -1,0 +1,91 @@
+$namespace: "yuumi-popper";
+$arrow-width: 6px;
+
+.#{$namespace} {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9;
+  border-radius: var(--border-radius);
+
+  &__content {
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius);
+    background-color: var(--color-white);
+  }
+
+  &__arrow {
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border: $arrow-width solid transparent;
+
+    &::after {
+      content: "";
+      border: $arrow-width solid transparent;
+      display: block;
+      position: absolute;
+    }
+  }
+
+  &[data-popper-placement^="top"] {
+    .#{$namespace}__arrow {
+      border-top-color: var(--color-border);
+      top: 100%;
+
+      &::after {
+        border-top-color: var(--color-white);
+        left: -$arrow-width;
+        top: -($arrow-width + 1px);
+      }
+    }
+  }
+
+  &[data-popper-placement^="bottom"] {
+    .#{$namespace}__arrow {
+      border-bottom-color: var(--color-border);
+      top: -$arrow-width * 2;
+
+      &::after {
+        border-bottom-color: var(--color-white);
+        left: -$arrow-width;
+        top: -($arrow-width - 1px);
+      }
+    }
+  }
+
+  &[data-popper-placement^="left"] {
+    .#{$namespace}__arrow {
+      border-left-color: var(--color-border);
+      left: 100%;
+
+      &::after {
+        border-left-color: var(--color-white);
+        left: -($arrow-width + 1px);
+        top: -$arrow-width;
+      }
+    }
+  }
+
+  &[data-popper-placement^="right"] {
+    .#{$namespace}__arrow {
+      border-right-color: var(--color-border);
+      left: -$arrow-width * 2;
+
+      &::after {
+        border-right-color: var(--color-white);
+        left: -($arrow-width - 1px);
+        top: -$arrow-width;
+      }
+    }
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.2s;
+  }
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}

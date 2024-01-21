@@ -1,13 +1,6 @@
 <template>
-  <template
-    v-for="theme in ['default', 'primary', 'success', 'warn', 'danger']"
-    :key="theme"
-  >
-    <YuumiButton
-      style="margin: 0 10px 10px 0;"
-      :theme="theme"
-      @click="createNotification(theme)"
-    >
+  <template v-for="theme in ['default', 'primary', 'success', 'warn', 'danger']" :key="theme">
+    <YuumiButton style="margin: 0 10px 10px 0" :theme="theme" @click="createNotification(theme)">
       {{ theme }} notification
     </YuumiButton>
   </template>
@@ -16,10 +9,10 @@
 <script>
 export default {
   methods: {
-    createNotification (theme) {
+    createNotification(theme) {
       this.$yuumi.createNotification({
-        title: '基本用法',
-        message: '基本用法',
+        title: "基本用法",
+        message: "基本用法",
         theme: theme
       })
     }

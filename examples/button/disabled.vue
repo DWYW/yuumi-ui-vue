@@ -1,17 +1,12 @@
 <template>
-  <YuumiButton
-    disabled
-    style="margin: 0 10px 10px 0;"
-  >
-    默认按钮
-  </YuumiButton>
+  <YuumiButton disabled style="margin: 0 10px 10px 0"> 默认按钮 </YuumiButton>
   <div>
     <YuumiButton
       v-for="theme in ['primary', 'success', 'danger', 'warn']"
       :key="theme"
       :theme="theme"
       disabled
-      style="margin: 0 10px 10px 0;"
+      style="margin: 0 10px 10px 0"
     >
       {{ theme }} button
     </YuumiButton>
@@ -21,11 +16,11 @@
       v-for="theme in ['primary', 'success', 'danger', 'warn']"
       :key="theme"
       :theme="theme"
-      outline
+      plain
       disabled
-      style="margin: 0 10px 10px 0;"
+      style="margin: 0 10px 10px 0"
     >
-      {{ theme }} outline
+      {{ theme }} plain
     </YuumiButton>
   </div>
 </template>

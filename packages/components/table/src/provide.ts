@@ -1,0 +1,6 @@
+export const refsProvideKey = Symbol("refs")
+export const propsProvideKey = Symbol("props")
+export const columnsProvideKey = Symbol("columns")
+export const stickyPositionsProvideKey = Symbol("stickyPositions")
+export const scrollStateProvideKey = Symbol("scrollState")
+export const selectionProvideKey = Symbol("selection")

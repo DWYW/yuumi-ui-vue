@@ -1,146 +1,91 @@
-import { dateParse, dateFormat, createRange } from '../../../share/helper'
-import { computed, getCurrentInstance } from 'vue'
-import type { Ref } from 'vue'
+import { createRange, dateFormatter, dateParse } from "../../../share/helper"
 
-export default function useHelper ({
-  startSelectDate,
-  endSelectDate,
-  wantEndSelectDate,
-  isRange
-}: {[x:string]: Ref<any>}) {
-  const props = getCurrentInstance()!.props as {[x:string]: any}
-
-  function getDateStartStamp (value?: Date) {
-    if (!value) return NaN
-    return new Date(value.getFullYear(), value.getMonth(), value.getDate(), 0, 0, 0).getTime()
-  }
-
-  const startSelectDateStartStamp = computed(() => getDateStartStamp(startSelectDate.value))
-  const endSelectDateStartStemp = computed(() => getDateStartStamp(endSelectDate.value || wantEndSelectDate.value))
-  const points = computed(() => {
-    if (!endSelectDateStartStemp.value) {
-      return [startSelectDateStartStamp.value, endSelectDateStartStemp.value]
-    }
-
-    return [
-      Math.min(startSelectDateStartStamp.value, endSelectDateStartStemp.value),
-      Math.max(startSelectDateStartStamp.value, endSelectDateStartStemp.value)
-    ]
+export function getMonthDates(year: number, month: number) {
+  const currStart = 1
+  const currEnd = new Date(year, month + 1, 0, 0, 0, 0).getDate()
+  const current = createRange(currStart, currEnd, item => {
+    const value = new Date(year, month, item, 0, 0, 0)
+    return { value, label: item.toString(), stamp: value.getTime(), isCurrentMonth: true }
   })
 
-  function getValue (startDate?: Date, endDate?: Date) {
-    let value = null
+  const prevEnd = new Date(year, month, 0, 0, 0, 0).getDate()
+  const prevStart = prevEnd - new Date(year, month, 1, 0, 0, 0).getDay() + 1
+  const prev = createRange(prevStart, prevEnd, item => {
+    const value = new Date(year, month - 1, item, 0, 0, 0)
+    return { value, label: item.toString(), stamp: value.getTime(), isPrevMonth: true }
+  })
 
-    if (isRange.value && startDate && endDate) {
-      value = [new Date(startDate), new Date(endDate)]
-    } else if (!isRange.value && startDate) {
-      value = new Date(startDate)
-    }
+  const nextStart = 1
+  const nextEnd = 6 * 7 - current.length - prev.length
+  const next = createRange(nextStart, nextEnd, item => {
+    const value = new Date(year, month + 1, item, 0, 0, 0)
+    return { value, label: item.toString(), stamp: value.getTime(), isNextMonth: true }
+  })
 
-    return value
+  return ([] as any[]).concat(prev, current, next)
+}
+
+export function getDateZeroTime(value?: Date) {
+  if (!value) return 0
+  const { year, month, date } = dateParse(value)
+  return new Date(year, month, date, 0, 0, 0).getTime()
+}
+
+export function dateMerge(target: Date, origin?: Date) {
+  const res = target
+  if (origin) {
+    const { hours, minutes, seconds } = dateParse(origin)
+    res.setHours(hours)
+    res.setMinutes(minutes)
+    res.setSeconds(seconds)
   }
+  return res
+}
 
-  function mergeDate (origin: Date|undefined, target: Date) {
-    if (!origin) {
-      origin = target
-    } else {
-      const { hours, minutes, seconds } = dateParse(origin)
-      target.setHours(hours)
-      target.setMinutes(minutes)
-      target.setSeconds(seconds)
-      origin = target
-    }
-
-    return origin
+export function getDisabledHours(method?: any, value?: Date, dependence?: Date) {
+  if (!value) return []
+  let suffix: number[] = []
+  if (dependence && dateFormatter(value, "YYYYMMDD") === dateFormatter(dependence, "YYYYMMDD")) {
+    suffix = createRange(0, dependence.getHours() - 1)
   }
-
-  function createMonthDates (value: Date) {
-    const { year, month } = dateParse(value)
-    const lastMonthLastDay = new Date(year, month, 0, 0, 0, 0).getDate()
-    const currentMonthFirstDayWeek = new Date(year, month, 1, 0, 0, 0).getDay()
-    const currentMonthLastDay = new Date(year, month + 1, 0, 0, 0, 0).getDate()
-
-    function creatItemData (year: number, month: number, date: number): {[x:string]: any} {
-      const _value = new Date(year, month, date, 0, 0 , 0)
-      const _stamp = _value.getTime()
-
-      const res = {
-        value: _value,
-        disabled: props.disabledDates ? props.disabledDates(_value) : false
-      }
-
-      if (isRange.value) {
-        const [rangeStart, rangeEnd] = points.value
-
-        return Object.assign(res, {
-          inRange: rangeStart <= _stamp && _stamp <= rangeEnd,
-          isRangeStart: rangeStart === _stamp,
-          isRangeEnd: rangeEnd === _stamp
-        })
-      }
-
-      return Object.assign(res, {
-        isSelected: startSelectDateStartStamp.value === _stamp
-      })
-    }
-
-    return ([] as any[])
-      .concat(createRange(lastMonthLastDay - currentMonthFirstDayWeek + 1, lastMonthLastDay + 1, (item) => Object.assign({
-        className: '_prev-month'
-      }, creatItemData(year, month - 1, item))))
-      .concat(createRange(1, currentMonthLastDay + 1, (item) => Object.assign({
-        className: '_current-month'
-      }, creatItemData(year, month, item))))
-      .concat(createRange(1, 6 * 7 - currentMonthLastDay - currentMonthFirstDayWeek + 1, (item) => Object.assign({
-        className: '_next-month'
-      }, creatItemData(year, month + 1, item))))
+  if (typeof method === "function") {
+    const { year, month, date } = dateParse(value)
+    const res = method({ year, month, date })
+    return res.concat(suffix)
   }
+  return suffix
+}
 
-  function endDisabledHours () {
-    let _disabled = props.disabledHours ? props.disabledHours() : []
-
-    if (dateFormat(startSelectDate.value, 'YYYYMMDD') === dateFormat(endSelectDate.value, 'YYYYMMDD')) {
-      _disabled = createRange(0, startSelectDate.value.getHours()).concat(_disabled)
-    }
-
-    return _disabled
+export function getDisabledMinutes(method?: any, value?: Date, dependence?: Date) {
+  if (!value) return []
+  let suffix: number[] = []
+  if (
+    dependence &&
+    dateFormatter(value, "YYYYMMDDhh") === dateFormatter(dependence, "YYYYMMDDhh")
+  ) {
+    suffix = createRange(0, dependence.getMinutes() - 1)
   }
-
-  function endDisabledMinutes ({hours}: any) {
-    let _disabled = props.disabledMinutes ? props.disabledMinutes(hours) : []
-
-    if (dateFormat(startSelectDate.value, 'YYYYMMDD hh') === dateFormat(endSelectDate.value, 'YYYYMMDD hh')) {
-      _disabled = createRange(0, startSelectDate.value.getMinutes()).concat(_disabled)
-    }
-
-    return _disabled
+  if (typeof method === "function") {
+    const { year, month, date, hours } = dateParse(value)
+    const res = method({ year, month, date, hours })
+    return res.concat(suffix)
   }
+  return suffix
+}
 
-  function endDisabledSeconds ({minutes}: any) {
-    let _disabled = props.disabledSeconds ? props.disabledSeconds(minutes) : []
-
-    if (dateFormat(startSelectDate.value, 'YYYYMMDD hhmm') === dateFormat(endSelectDate.value, 'YYYYMMDD hhmm')) {
-      _disabled = createRange(0, startSelectDate.value.getSeconds()).concat(_disabled)
-    }
-    return _disabled
+export function getDisabledSeconds(method?: any, value?: Date, dependence?: Date) {
+  if (!value) return []
+  let suffix: number[] = []
+  if (
+    dependence &&
+    dateFormatter(value, "YYYYMMDDhhmm") === dateFormatter(dependence, "YYYYMMDDhhmm")
+  ) {
+    suffix = createRange(0, dependence.getSeconds() - 1)
   }
-
-  function createPanelData (value: Date) {
-    return {
-      year: value.getFullYear(),
-      month: value.getMonth(),
-      monthText: `0${value.getMonth() + 1}`.slice(-2),
-      data: createMonthDates(value)
-    }
+  if (typeof method === "function") {
+    const { year, month, date, hours, minutes } = dateParse(value)
+    const res = method({ year, month, date, hours, minutes })
+    return res.concat(suffix)
   }
-
-  return {
-    getValue,
-    mergeDate,
-    createMonthDates,
-    createPanelData,
-    endDisabledHours,
-    endDisabledMinutes,
-    endDisabledSeconds
-  }
+  return suffix
 }

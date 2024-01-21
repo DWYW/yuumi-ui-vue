@@ -1,37 +1,69 @@
-const pkg = require("./package.json")
-import { defineConfig } from 'vite'
-import path from 'path'
-import vue from '@vitejs/plugin-vue'
-import vitePluginVuedoc, { vueDocFiles } from 'vite-plugin-vuedoc'
-import eslintPlugin from "vite-plugin-eslint"
+import { defineConfig, loadEnv } from "vite"
+import { resolve } from "path"
+import pkg from "./package.json"
+import vue from "@vitejs/plugin-vue"
+import eslint from "vite-plugin-eslint"
+import Markdown from "vite-plugin-md"
+import MarkdownItprism from "markdown-it-prism"
 
-function getDefaultConfig () {
+// https://vitejs.dev/config/
+export default defineConfig((config) => {
+  const baseConfig = {
+    define: {
+      __APP_VERSION__: `"${pkg.version}"`
+    },
+    resolve: {
+      alias: {
+        "@": resolve(__dirname, "src"),
+        events: "rollup-plugin-node-polyfills/polyfills/events"
+      }
+    },
+  }
+
+  switch (config.mode) {
+    case 'lib':
+      return Object.assign(baseConfig, getLibraryConfig())
+    default:
+      return Object.assign(baseConfig, getDefaultConfig(config))
+  }
+})
+
+function getDefaultConfig(config) {
+  const env = loadEnv(config.mode, process.cwd())
+
   return {
-    base: '/yuumi-ui-vue/latest',
+    base: env.VITE_APP_PUBLIC_PATH,
     plugins: [
-      vitePluginVuedoc({
-        highlight: {
-          theme: "one-light"
-        }
-      }),
       vue({
-        include: [...vueDocFiles]
+        include: [/\.vue$/, /\.md$/]
       }),
-      eslintPlugin({
-        include: [
-          '{src,packages,examples}/**/*.{j,t}s?(x)',
-          '{src,packages,examples}/**/*.vue'
-        ]
+      eslint({
+        include: ["{src,packages,examples}/**/*.{j,t}s?(x)", "{src,packages,examples}/**/*.vue"]
+      }),
+      Markdown({
+        markdownItOptions: {
+          html: true,
+          linkify: true,
+          typographer: true,
+        },
+        markdownItSetup(md) {
+          // add code syntax highlighting with Prism
+          md.use(MarkdownItprism)
+        }
       })
-    ]
+    ],
+    build: {
+      assetsDir: pkg.version,
+      cssTarget: "chrome61"
+    }
   }
 }
 
-function getLibraryConfig () {
+function getLibraryConfig() {
   return {
     build: {
       lib: {
-        entry: path.resolve(__dirname, 'packages/index.ts'),
+        entry: resolve(__dirname, 'packages/index.ts'),
         name: 'YuumiUiVue',
         fileName: (format) => `yuumi-${format}.js`
       },
@@ -51,18 +83,3 @@ function getLibraryConfig () {
     ]
   }
 }
-
-export default defineConfig(({ mode }) => {
-  const config = {
-    define: {
-      __APP_VERSION__: `"${pkg.version}"`
-    }
-  }
-
-  switch (mode) {
-    case 'lib':
-      return Object.assign(config, getLibraryConfig())
-    default:
-      return Object.assign(config, getDefaultConfig())
-  }
-})

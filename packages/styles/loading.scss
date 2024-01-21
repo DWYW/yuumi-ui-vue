@@ -1,0 +1,118 @@
+:root {
+  --yuumi-loading-background: #{getAlphaColorWithKey("white", 0.7)};
+  --yuumi-loading-pie-size: var(--height-lg);
+  --yuumi-loading-pie-stroke-width: 2px;
+  --yuumi-loading-rect-size: var(--height-md);
+  --yuumi-loading-rect-background: var(--color-primary);
+}
+
+$namespace: "yuumi-loading";
+
+[data-loading-id] {
+  position: relative !important;
+}
+
+.#{$namespace} {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: var(--yuumi-loading-background);
+
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  &--fixed {
+    position: fixed;
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.3s;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}
+
+.#{$namespace}__pie {
+  display: inline-block;
+  width: var(--yuumi-loading-pie-size);
+  height: var(--yuumi-loading-pie-size);
+  animation: spinnerRotate 1.6s linear infinite;
+
+  circle {
+    animation: spinnerPie 1.6s ease infinite;
+    stroke-linecap: round;
+    stroke: getAlphaColorWithKey("primary");
+    stroke-width: var(--yuumi-loading-pie-stroke-width);
+  }
+}
+
+@keyframes spinnerRotate {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes spinnerPie {
+  0% {
+    stroke-dasharray: 0%, 400%;
+    stroke-dashoffset: 0%;
+  }
+  50% {
+    stroke-dasharray: 200%, 400%;
+    stroke-dashoffset: -20%;
+  }
+  100% {
+    stroke-dasharray: 0%, 400%;
+    stroke-dashoffset: -250%;
+  }
+}
+
+.#{$namespace}__rect {
+  display: inline-block;
+  height: var(--yuumi-loading-rect-size);
+  text-align: center;
+
+  $duration: 1.2s;
+
+  .#{$namespace}__rect-item {
+    display: inline-block;
+    width: 3px;
+    height: 100%;
+    margin-right: 3px;
+    animation: spinnerRect $duration infinite ease-in-out;
+    border-radius: 500px;
+    background-color: var(--yuumi-loading-rect-background);
+
+    @each $key in (2, 3, 4, 5) {
+      &:nth-child(#{$key}) {
+        animation-delay: $key * 0.1s - $duration;
+      }
+    }
+  }
+}
+
+@keyframes spinnerRect {
+  0% {
+    transform: scaleY(0.5);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+  40% {
+    transform: scaleY(0.5);
+  }
+  100% {
+    transform: scaleY(0.5);
+  }
+}

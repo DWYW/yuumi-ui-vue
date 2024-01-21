@@ -1,6 +1,6 @@
-import { Comment, Fragment, VNode } from 'vue'
+import { Comment, Fragment, VNode } from "vue"
 
-export function getValueByPath<T = any> (data: any, path: string, resolve?: any): T {
+export function getValueByPath<T = any>(data: any, path: string, resolve?: any): T {
   if (!path) return resolve !== undefined ? resolve : undefined
 
   const attrs = path.match(/\w+/g) || []
@@ -14,7 +14,7 @@ export function getValueByPath<T = any> (data: any, path: string, resolve?: any)
   return (data === null || data === undefined) && resolve !== undefined ? resolve : data
 }
 
-export function getCss (element: any, attr: string) {
+export function getCss(element: any, attr: string) {
   if (element.currentStyle) {
     return element.currentStyle[attr]
   } else if (window.getComputedStyle && window.getComputedStyle(element, null)) {
@@ -24,25 +24,25 @@ export function getCss (element: any, attr: string) {
   }
 }
 
-export function getParentElementWithScroll (element: any): HTMLElement|Window {
+export function getParentElementWithScroll(element: any): HTMLElement | Window {
   if (!(element instanceof HTMLElement)) return window
 
   switch (element.nodeName) {
-    case 'HTML':
-    case '#document':
+    case "HTML":
+    case "#document":
       return window
   }
 
-  const overflow = getCss(element, 'overflow')
-  const overflowX = getCss(element, 'overflowX')
-  const overflowY = getCss(element, 'overflowY')
+  const overflow = getCss(element, "overflow")
+  const overflowX = getCss(element, "overflowX")
+  const overflowY = getCss(element, "overflowY")
 
   if (/auto|scroll/.test(overflow + overflowX + overflowY)) return element
 
   return getParentElementWithScroll(element.parentNode)
 }
 
-export function dateFormat (value: Date, rule: string) {
+export function dateFormatter(value: Date, rule: string) {
   const year = value.getFullYear()
   const month = value.getMonth() + 1
   const date = value.getDate()
@@ -64,11 +64,11 @@ export function dateFormat (value: Date, rule: string) {
     [/s{2,}/, `0${seconds}`.slice(-2)],
     [/s/, seconds]
   ].reduce((str, [reg, item]: any) => {
-    return str = str.replace(reg, item)
+    return (str = str.replace(reg, item))
   }, rule)
 }
 
-export function dateParse (value: Date) {
+export function dateParse(value: Date) {
   const year = value.getFullYear()
   const month = value.getMonth()
   const date = value.getDate()
@@ -87,11 +87,35 @@ export function dateParse (value: Date) {
   }
 }
 
-export function clearEmpty (object: { [key: string]: any }): any {
+export function timeParse(value: string | undefined, format: string): number[] {
+  value = value || ""
+  const values: number[] = (value.match(/\d+/g) || []).map((item: string) => Number(item))
+
+  const idxs = format.match(/(h+)|(m+)|(s+)/g)?.reduce(
+    (acc, item, index) => {
+      const key = item.slice(0, 1)
+      if (!acc[key]) {
+        acc[key] = index
+      }
+      return acc
+    },
+    {} as { [x: string]: number }
+  )
+  if (!idxs) return []
+
+  return [
+    Math.min(values[idxs.h], 23) || 0,
+    Math.min(values[idxs.m], 59) || 0,
+    Math.min(values[idxs.s], 59) || 0
+  ]
+}
+
+export function clearEmpty(object: { [key: string]: any }): any {
   const caches: any[] = []
 
   const _deepClear = (_object: { [key: string]: any }) => {
-    if (Object.prototype.toString.call(_object).slice(8, -1).toLowerCase() !== 'object') return object
+    if (Object.prototype.toString.call(_object).slice(8, -1).toLowerCase() !== "object")
+      return object
 
     let index = caches.length
 
@@ -104,7 +128,7 @@ export function clearEmpty (object: { [key: string]: any }): any {
     caches.push(_object)
 
     for (const key in _object) {
-      if (_object[key] === null || _object[key] === undefined || _object[key] === '') {
+      if (_object[key] === null || _object[key] === undefined || _object[key] === "") {
         delete _object[key]
         continue
       }
@@ -118,19 +142,26 @@ export function clearEmpty (object: { [key: string]: any }): any {
   return _deepClear(object)
 }
 
-export function getFirstValidNode (nodes: VNode|VNode[], maxdeep = 3): VNode|undefined {
-  const node: VNode = nodes instanceof Array ? nodes[0] : nodes
+export function getFirstValidNode(nodes: VNode | VNode[], maxdeep = 3): VNode | undefined {
+  if (maxdeep < 0) return
 
-  if (node.type === Comment) return
-
-  if (node.type === Fragment || node.type === 'template') {
-    return maxdeep > 0 ? getFirstValidNode(node.children as VNode[], maxdeep - 1) : undefined
+  if (!(nodes instanceof Array)) {
+    nodes = [nodes]
   }
 
-  return node
+  for (let i = 0; i < nodes.length; i++) {
+    const item = nodes[i]
+    if (item.type === Comment) continue
+    if (item.type === Fragment || item.type === "template") {
+      const target = getFirstValidNode(item.children as VNode[], maxdeep - 1)
+      if (target) return target
+    }
+
+    return item
+  }
 }
 
-export function arrayPatch (oldValue: any[], newValue: any[]) {
+export function arrayPatch(oldValue: any[], newValue: any[]) {
   const equalFun = (value1: any, value2: any) => value1 === value2
 
   let oldStartIndex = 0
@@ -181,16 +212,20 @@ export function arrayPatch (oldValue: any[], newValue: any[]) {
   return oldValue
 }
 
-export function createRange (start: number, end: number, cb?: (item: number) => any) {
-  const range = []
-  for (let i = start; i < end; i++) {
-    range.push(cb ? cb(i) : i)
+export function createRange<T = any>(start: number, end: number, cb?: (item: number) => T): T[] {
+  const range: T[] = []
+  for (let i = start; i <= end; i++) {
+    range.push(cb ? cb(i) : (i as T))
   }
 
   return range
 }
 
-export function debounce(fn: (...rest: any[]) => any, duration: number, ctx?: (...rest: any[]) => any) {
+export function debounce(
+  fn: (...rest: any[]) => any,
+  duration: number,
+  ctx?: (...rest: any[]) => any
+) {
   let timeout: any
 
   return function (this: any, ...rest: any[]) {
@@ -198,6 +233,7 @@ export function debounce(fn: (...rest: any[]) => any, duration: number, ctx?: (.
 
     timeout = setTimeout(() => {
       fn.apply(ctx || this, rest)
+      timeout = null
     }, duration)
   }
 }
@@ -210,17 +246,17 @@ export function equal(target: any, origin: any): boolean {
   if (targetType !== originType) return false
 
   const commonType = targetType
-  if (commonType === 'array') {
+  if (commonType === "array") {
     let index = target.length
     if (index !== origin.length) return false
 
-    while(index--) {
+    while (index--) {
       if (!equal(target[index], origin[index])) return false
     }
 
     return true
-  } else if (commonType === 'object') {
-    const keys: {[x:string]: number} = {}
+  } else if (commonType === "object") {
+    const keys: { [x: string]: number } = {}
 
     for (const key in target) {
       if (!equal(target[key], origin[key])) return false

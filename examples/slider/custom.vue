@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div style="display: flex; align-items: center;">
-      <div style="flex: 1 1 auto;">
+    <div style="display: flex; align-items: center">
+      <div style="flex: 1 1 auto">
         <YuumiSlider
           v-model="value"
           :btn-color="btnColor"
@@ -11,13 +11,13 @@
           @changing="onChanging"
         />
       </div>
-      <div style="flex: 0 0 60px;">
+      <div style="flex: 0 0 60px">
         {{ value }}
       </div>
     </div>
 
-    <div style="display: flex; align-items: center;">
-      <div style="flex: 1 1 auto;">
+    <div style="display: flex; align-items: center">
+      <div style="flex: 1 1 auto">
         <YuumiSlider
           v-model="value"
           :btn-color="btnColor"
@@ -26,7 +26,7 @@
           disabled
         />
       </div>
-      <div style="flex: 0 0 60px;">
+      <div style="flex: 0 0 60px">
         {{ value }}
       </div>
     </div>
@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     onChanging(value) {
-      this.btnColor = value > 50 ? "red": "yellow"
+      this.btnColor = value > 50 ? "red" : "yellow"
     },
     onChange(value) {
       console.log(value)

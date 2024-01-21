@@ -1,69 +1,60 @@
 <template>
   <YuumiInput
-    style="margin: 0 10px 10px 0;"
-    placeholder="mobile"
-  >
-    <template #prefixIcon>
-      <YuumiIcon
-        icon="line-mobile"
-        style="color: #aaa;font-size: 16px;"
-      />
-    </template>
-  </YuumiInput>
+    v-model="mobile"
+    style="margin: 0 10px 10px 0"
+    placeholder="keyword"
+    prefix-icon="line-mobile"
+    @change="onChange"
+  />
 
   <YuumiInput
-    style="margin: 0 10px 10px 0;"
-    placeholder="search"
-  >
-    <template #suffixIcon>
-      <YuumiIcon
-        icon="line-search"
-        style="color: green;font-size: 16px;"
-      />
-    </template>
-  </YuumiInput>
+    v-model="keyword"
+    style="margin: 0 10px 10px 0"
+    placeholder="keyword"
+    suffix-icon="line-search"
+    @change="onChange"
+  />
 
   <YuumiInput
-    style="margin: 0 10px 10px 0; width: 100%;"
-    placeholder="search"
+    v-model="keyword"
+    style="margin: 0 10px 10px 0; width: 100%"
+    placeholder="keyword"
+    @change="onChange"
   >
     <template #suffix>
-      <YuumiButton
-        style="line-height: 0; margin: -1px -8px; border:none; border-top-left-radius: 0px; border-bottom-left-radius: 0px;"
-        theme="primary"
-      >
-        <YuumiIcon
-          icon="line-search"
-          style="font-size: 16px;"
-        />
+      <YuumiButton style="line-height: 0; border: none; border-radius: 0px" type="primary">
+        <YuumiIcon icon="line-search" style="font-size: 16px" />
       </YuumiButton>
     </template>
   </YuumiInput>
 
-
   <YuumiInput
-    v-model="value"
-    style="margin: 0 10px 10px 0; width: 100%;"
-    placeholder="correct"
-    clearable
+    v-model="keyword"
+    style="margin: 0 10px 10px 0; width: 100%"
+    placeholder="keyword"
+    @change="onChange"
   >
     <template #prefix>
       <YuumiSelect
-        style="display: table; margin: -1px -8px; border:none; border-top-right-radius: 0px; border-bottom-right-radius: 0px;"
-        :options="[{label: '百度', value: '百度'}, {label: 'Google', value: 'Google'}]"
-        model-value="Google"
+        v-model="type"
+        style="
+          border-right: none;
+          border-color: var(--color-border);
+          background: #f5f5f5;
+          display: table;
+          border-top-right-radius: 0px;
+          border-bottom-right-radius: 0px;
+        "
+        :options="[
+          { label: '百度', value: '百度' },
+          { label: 'Google', value: 'Google' }
+        ]"
       />
     </template>
 
     <template #suffix>
-      <YuumiButton
-        style="line-height: 0; margin: -1px -8px; border:none; border-top-left-radius: 0px; border-bottom-left-radius: 0px;"
-        theme="primary"
-      >
-        <YuumiIcon
-          icon="line-search"
-          style="font-size: 16px;"
-        />
+      <YuumiButton style="border-radius: 0px" type="primary">
+        <YuumiIcon icon="line-search" style="font-size: 16px" />
       </YuumiButton>
     </template>
   </YuumiInput>
@@ -71,9 +62,16 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      value: ''
+      mobile: "",
+      keyword: "",
+      type: "Google"
+    }
+  },
+  methods: {
+    onChange(e) {
+      console.log("onchange", e)
     }
   }
 }

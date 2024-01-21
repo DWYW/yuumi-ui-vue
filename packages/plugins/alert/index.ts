@@ -1,14 +1,14 @@
-import './index.scss';
-import { createVNode, h, mergeProps, resolveComponent } from 'vue'
-import { getPluginAppComponentInstance } from '..'
-import type { VNode } from 'vue'
+import { defineComponent, h, nextTick } from "vue"
+import { pluginMount, pluginUnmount } from "../instance"
+import Alert from "./Alert.vue"
+import type { VNode } from "vue"
 
-export interface CreateAlertOptions {
-  title?: string|VNode
-  content?: string|VNode
+export interface CreateAlertOption {
+  title?: string | VNode
+  content?: string | VNode
   alignCenter?: boolean
   closeEnable?: boolean
-  cancelText?: string,
+  cancelText?: string
   cancelEnable?: boolean
   confirmText?: string
   confirmEnable?: boolean
@@ -18,61 +18,40 @@ export interface CreateAlertOptions {
   onConfirm?: (...rest: any[]) => any
 }
 
-function getPartialAlert (options: CreateAlertOptions) {
-  const {content, title, ..._props} = options
-  let vnode: VNode|null = createVNode({
-    data () {
-      return {
-        show: true
-      }
-    },
-    render () {
-      const _YuumiDialog = resolveComponent('YuumiDialog')
-      const props = mergeProps({
-        modelValue: this.show,
-        'onUpdate:modelValue': (value: boolean) => {
-          this.show = value
-        },
-        'onAfterLeave': () => {
-          const { alerts } = (getPluginAppComponentInstance()?.proxy) || {} as any
-          const index = alerts.findIndex((item: any) => item === vnode)
-          if (index > -1) { alerts.splice(index, 1)}
-          vnode = null
-        }
-      }, _props as any)
+export interface YuumiAlert {
+  createAlert: (option?: CreateAlertOption) => VNode
+  removeAlert: (vnode: VNode) => void
+  removeAllAlert: () => void
+}
 
-      return h(createVNode(_YuumiDialog, props), {
-        class: 'yuumi-alert',
-      }, {
-        title: () => title,
-        default: () => content
-      })
+const alerts = new Map()
+
+export function createAlert(option?: CreateAlertOption) {
+  const _component = defineComponent({
+    setup() {
+      return () =>
+        h(
+          Alert,
+          Object.assign({}, option, {
+            onAfterLeave: () => pluginUnmount(vnode),
+            ref: (e: any) => {
+              e ? alerts.set(vnode, e) : alerts.delete(vnode)
+            }
+          })
+        )
     }
   })
-
+  const vnode = h(_component)
+  pluginMount(vnode, Alert.name)
   return vnode
 }
 
-export const createAlert = function (options: CreateAlertOptions) {
-  const vnode = getPartialAlert(options)
-  const { alerts } = (getPluginAppComponentInstance()?.proxy) || {} as any
-
-  if (alerts) {
-    alerts.push(vnode)
-  }
-
-  return vnode
+export function removeAlert(node: VNode) {
+  const target = alerts.get(node)
+  if (!target) return
+  target.hide()
 }
 
-export const removeAlert = function (vnode: VNode) {
-  if (vnode && vnode.component) {
-    vnode.component.data.show = false
-  }
-}
-
-export const removeAllAlert = function () {
-  const { alerts } = (getPluginAppComponentInstance()?.proxy) || {} as any
-  if (alerts) {
-    alerts.forEach((item: VNode) => removeAlert(item))
-  }
+export function removeAllAlert() {
+  nextTick(() => alerts.forEach(item => item.hide()))
 }

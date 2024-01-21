@@ -1,0 +1,188 @@
+:root {
+  --yuumi-button-border-width: var(--border-width);
+  --yuumi-button-border-style: solid;
+  --yuumi-button-border-radius: var(--border-radius);
+  --yuumi-button_hover-color: #{getMixColorWithKey("primary", "white", 85%)};
+  --yuumi-button_active-color: #{getMixColorWithKey("primary", "dark", 85%)};
+  --yuumi-button-splash-background: #{getAlphaColorWithKey("primary", 0.15)};
+  --yuumi-button-splash-color_white: #{getAlphaColorWithKey("white", 0.25)};
+
+  @each $key in $--themes {
+    --yuumi-button-splash-color_#{$key}: #{getAlphaColorWithKey($key, 0.25)};
+    --yuumi-button_hover-color_#{$key}: #{getMixColorWithKey($key, "white", 85%)};
+    --yuumi-button_active-color_#{$key}: #{getMixColorWithKey($key, "dark", 85%)};
+    --yuumi-button-plain_hover-color_#{$key}: #{getAlphaColorWithKey($key, 0.15)};
+  }
+}
+
+$namespace: "yuumi-button";
+
+.#{$namespace} {
+  & {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    user-select: none;
+    outline: none;
+    border-radius: var(--yuumi-button-border-radius);
+    border: var(--yuumi-button-border-width) var(--yuumi-button-border-style) var(--color-border);
+    background-color: transparent;
+    color: inherit;
+    box-sizing: border-box;
+    padding-left: var(--space-horizontal-xm);
+    padding-right: var(--space-horizontal-xm);
+    transition:
+      borderColor 0.2s,
+      color 0.2s,
+      background 0.2s;
+    cursor: pointer;
+  }
+
+  &__animation {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    > span {
+      position: absolute;
+      display: block;
+      transform-origin: center;
+      animation: splash 0.3s;
+      border-radius: 100%;
+      background-color: var(--yuumi-button-splash-background);
+    }
+  }
+
+  &__content {
+    position: relative;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: no-drop;
+  }
+
+  &--default {
+    &:hover {
+      border-color: var(--yuumi-button_hover-color);
+      color: var(--yuumi-button_hover-color);
+    }
+
+    &:active {
+      border-color: var(--yuumi-button_active-color);
+      color: var(--yuumi-button_active-color);
+    }
+
+    &[disabled] {
+      border-color: var(--color-border);
+      color: inherit;
+    }
+  }
+}
+
+@each $key, $value in $--height {
+  .#{$namespace}--#{$key} {
+    height: $value;
+    padding: 0 $value * 0.4;
+
+    &.#{$namespace}--round {
+      border-radius: $value;
+    }
+
+    &.#{$namespace}--circle {
+      width: $value;
+      padding: 0;
+      overflow: hidden;
+      border-radius: $value;
+    }
+  }
+}
+
+@each $key in $--themes {
+  .#{$namespace}--#{$key} {
+    background-color: var(--color-#{$key});
+    border-color: var(--color-#{$key});
+
+    @if $key == "warn" {
+      color: inherit;
+    } @else {
+      color: var(--color-white);
+    }
+
+    &:hover {
+      border-color: var(--yuumi-button_hover-color_#{$key});
+      background-color: var(--yuumi-button_hover-color_#{$key});
+    }
+
+    &:active {
+      border-color: var(--yuumi-button_active-color_#{$key});
+      background-color: var(--yuumi-button_active-color_#{$key});
+    }
+
+    &.#{$namespace}--splash {
+      .#{$namespace}__animation > span {
+        background-color: var(--yuumi-button-splash-color_white);
+      }
+
+      &:hover,
+      &:active {
+        background-color: var(--color-#{$key});
+        border-color: var(--color-#{$key});
+      }
+    }
+
+    &[disabled] {
+      background-color: var(--color-#{$key});
+      border-color: var(--color-#{$key});
+    }
+
+    &.#{$namespace}--plain {
+      background-color: transparent;
+      color: var(--color-#{$key});
+
+      &:hover {
+        background-color: var(--yuumi-button-plain_hover-color_#{$key});
+        color: var(--yuumi-button_hover-color_#{$key});
+      }
+
+      &:active {
+        background-color: var(--color-#{$key});
+        border-color: var(--color-#{$key});
+
+        @if $key == "warn" {
+          color: inherit;
+        } @else {
+          color: var(--color-white);
+        }
+      }
+
+      &.#{$namespace}--splash {
+        .#{$namespace}__animation > span {
+          background-color: var(--yuumi-button-plain_hover-color_#{$key});
+        }
+
+        &:hover,
+        &:active {
+          background-color: transparent;
+          color: var(--color-#{$key});
+        }
+      }
+
+      &[disabled] {
+        background-color: transparent;
+        color: var(--color-#{$key});
+      }
+    }
+  }
+}
+
+@keyframes splash {
+  0% {
+    transform: scale(0.1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}

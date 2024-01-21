@@ -1,0 +1,103 @@
+:root {
+  --yuumi-drawer-background: var(--color-white);
+  --yuumi-drawer-width: 400px;
+  --yuumi-drawer-height: 300px;
+}
+
+$namespace: "yuumi-drawer";
+$--panel-top: 50%;
+
+.#{$namespace} {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 9;
+
+  &__mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-mask);
+  }
+
+  &__body {
+    position: absolute;
+    background-color: var(--yuumi-drawer-background);
+    box-shadow: 0 0 16px var(--shadow-color-tertiary);
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition: transform 0.3s;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-mask-enter-active,
+  &-mask-leave-active {
+    transition: opacity 0.3s;
+    opacity: 1;
+  }
+
+  &-mask-enter-from,
+  &-mask-leave-to {
+    opacity: 0;
+  }
+}
+
+.#{$namespace}--left {
+  .#{$namespace}__body {
+    width: var(--yuumi-drawer-width);
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .#{$namespace}-enter-from,
+  .#{$namespace}-leave-to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.#{$namespace}--right {
+  .#{$namespace}__body {
+    width: var(--yuumi-drawer-width);
+    height: 100%;
+    top: 0;
+    right: 0;
+  }
+
+  .#{$namespace}-enter-from,
+  .#{$namespace}-leave-to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+.#{$namespace}--top {
+  .#{$namespace}__body {
+    width: 100%;
+    height: var(--yuumi-drawer-height);
+    left: 0;
+    top: 0;
+  }
+
+  .#{$namespace}-enter-from,
+  .#{$namespace}-leave-to {
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+.#{$namespace}--bottom {
+  .#{$namespace}__body {
+    width: 100%;
+    height: var(--yuumi-drawer-height);
+    left: 0;
+    bottom: 0;
+  }
+
+  .#{$namespace}-enter-from,
+  .#{$namespace}-leave-to {
+    transform: translate3d(0, 100%, 0);
+  }
+}

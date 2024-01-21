@@ -1,0 +1,81 @@
+:root {
+  --switch-space: 2px;
+}
+
+$namespace: "yuumi-switch";
+
+.#{$namespace} {
+  display: inline-block;
+  border-radius: var(--border-radius-round);
+  overflow: hidden;
+  position: relative;
+  transition: background 0.15s;
+  cursor: pointer;
+  user-select: none;
+
+  &__content {
+    width: 200%;
+    height: 100%;
+    transform: translateX(-50%);
+    transition: transform 0.15s;
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-white);
+  }
+  &__content-open,
+  &__content-close {
+    flex: 0 0 25%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  &__content-open {
+    justify-content: flex-start;
+    padding-left: var(--space-horizontal-xm);
+  }
+
+  &__content-close {
+    justify-content: flex-end;
+    padding-right: var(--space-horizontal-xm);
+  }
+
+  &__btn {
+    display: block;
+    background-color: var(--color-white);
+    position: absolute;
+    top: var(--switch-space);
+    left: var(--switch-space);
+    transition: all 0.15s;
+    border-radius: var(--border-radius-circle);
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: no-drop;
+  }
+}
+
+.#{$namespace}--checked {
+  .#{$namespace}__content {
+    transform: translateX(0%);
+  }
+}
+
+@each $key, $value in $--height {
+  .#{$namespace}--#{$key} {
+    height: var(--height-#{$key});
+    width: calc(var(--height-#{$key}) * 2);
+
+    .#{$namespace}__btn {
+      width: calc(var(--height-#{$key}) - var(--switch-space) * 2);
+      height: calc(var(--height-#{$key}) - var(--switch-space) * 2);
+    }
+
+    &.#{$namespace}--checked {
+      .#{$namespace}__btn {
+        left: calc(100% - var(--height-#{$key}) + var(--switch-space));
+      }
+    }
+  }
+}

@@ -1,0 +1,170 @@
+$namespace: "yuumi-number-input";
+
+.#{$namespace} {
+  display: inline-block;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: border 0.3s;
+  position: relative;
+
+  &--focus {
+    border-color: var(--color-primary);
+  }
+
+  &__content {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+
+    input {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0 var(--space-horizontal-xm);
+      text-align: center;
+      border: none;
+      outline: none;
+      box-sizing: border-box;
+      lighting-color: unset;
+      font-size: inherit;
+
+      &[disabled] {
+        opacity: 0.5;
+        cursor: no-drop;
+      }
+    }
+  }
+
+  &__btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__btn-decrease,
+  &__btn-increase {
+    position: absolute;
+    z-index: 1;
+    color: var(--text-color-tertiary);
+    background-color: var(--color-light);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    &._disabled {
+      color: var(--text-color-tertiary);
+      background-color: var(--color-light);
+      cursor: no-drop;
+    }
+  }
+}
+
+.#{$namespace}-placement--default {
+  .#{$namespace}__btn-decrease,
+  .#{$namespace}__btn-increase {
+    height: 100%;
+    font-size: var(--font-size-lg);
+  }
+
+  .#{$namespace}__btn-decrease {
+    left: 0;
+  }
+  .#{$namespace}__btn-increase {
+    right: 0;
+  }
+}
+
+.#{$namespace}-placement--left,
+.#{$namespace}-placement--right {
+  .#{$namespace}__btn-decrease,
+  .#{$namespace}__btn-increase {
+    font-size: var(--font-size-xm);
+  }
+
+  .#{$namespace}__btn-increase::after {
+    display: block;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: var(--border-width) solid var(--color-border);
+    transform: translateY(50%);
+  }
+}
+
+.#{$namespace}-placement--left {
+  .#{$namespace}__btn-decrease {
+    left: 0;
+    bottom: 0;
+    height: 50%;
+  }
+
+  .#{$namespace}__btn-increase {
+    left: 0;
+    top: 0;
+    height: 50%;
+  }
+}
+
+.#{$namespace}-placement--right {
+  .#{$namespace}__btn-decrease {
+    right: 0;
+    bottom: 0;
+    height: 50%;
+  }
+
+  .#{$namespace}__btn-increase {
+    right: 0;
+    top: 0;
+    height: 50%;
+  }
+}
+
+@each $key, $value in $--height {
+  .#{$namespace}--#{$key} {
+    width: calc(var(--height-#{$key}) * 4);
+    height: var(--height-#{$key});
+
+    .#{$namespace}__content {
+      padding: 0 var(--height-#{$key});
+    }
+
+    .#{$namespace}__btn-decrease,
+    .#{$namespace}__btn-increase {
+      width: var(--height-#{$key});
+    }
+
+    &.#{$namespace}--btn-hidden {
+      .#{$namespace}__content {
+        padding: 0;
+      }
+    }
+
+    &.#{$namespace}-placement--left {
+      .#{$namespace}__content {
+        padding-right: 0;
+      }
+    }
+
+    &.#{$namespace}-placement--right {
+      .#{$namespace}__content {
+        padding-left: 0;
+      }
+    }
+  }
+}

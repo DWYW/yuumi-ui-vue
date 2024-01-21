@@ -1,0 +1,35 @@
+$namespace: "yuumi-message";
+
+.#{$namespace} {
+  position: fixed;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  z-index: 99;
+
+  &__body {
+    width: 320px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__content {
+    padding-left: var(--space-horizontal-xm);
+    padding-right: var(--space-horizontal-xm);
+  }
+
+  &--appeared {
+    transition: top 0.3s;
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition:
+      opacity 0.3s,
+      top 0.3s !important;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}

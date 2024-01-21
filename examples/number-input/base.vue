@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom: 16px;">
+  <div style="margin-bottom: 16px">
     <YuumiNumberInput
       v-model="value"
       @change="onChange"
@@ -9,10 +9,7 @@
     />
   </div>
   <div>
-    <YuumiNumberInput
-      v-model="value"
-      disabled
-    />
+    <YuumiNumberInput v-model="value" disabled />
   </div>
 </template>
 
@@ -24,7 +21,7 @@ export default {
     }
   },
   methods: {
-    onChange (value) {
+    onChange(value) {
       console.log("`change` event: ", value)
     },
     onInput(value) {

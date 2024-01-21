@@ -1,54 +1,26 @@
 <template>
-  <div
-    class="yuumi-ratio-rect"
-    :style="{ paddingTop: paddingTop }"
-  >
-    <div class="rect">
+  <div :class="ns.n()" :style="{ paddingTop: paddingTop }">
+    <div :class="ns.e('wrap')">
       <!-- 防止自定义样式污染布局 -->
-      <div
-        class="rect-content"
-        v-bind="$attrs"
-      >
+      <div :class="ns.e('content')" v-bind="$attrs">
         <slot />
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed, defineProps } from "vue"
+import { useNameSpace } from "../../../share/useApi"
 
-export default defineComponent({
-  name: "YuumiRatioRect",
-  props: {
-    ratio: { type: Number, default: 1 }
-  },
-  computed: {
-    paddingTop(): string {
-      return `${100 / this.ratio}%`
-    }
+defineOptions({ name: "YuumiRatioRect", inheritAttrs: false })
+const ns = useNameSpace("ratio-rect")
+const props = defineProps({
+  ratio: {
+    type: Number,
+    default: 1
   }
 })
+
+const paddingTop = computed(() => `${100 / props.ratio}%`)
 </script>
-
-<style lang="scss">
-.yuumi-ratio-rect {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-
-  .rect {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    overflow: hidden;
-
-    .rect-content {
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
-</style>

@@ -1,0 +1,9 @@
+$--themes: "primary", "success", "danger", "warn";
+
+@function getAlphaColorWithKey($key, $alpha: 1) {
+  @return rgba(map-get($--color, $key), $alpha);
+}
+
+@function getMixColorWithKey($key1, $key2, $percent) {
+  @return mix(map-get($--color, $key1), map-get($--color, $key2), $percent);
+}

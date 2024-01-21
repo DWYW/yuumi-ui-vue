@@ -1,0 +1,31 @@
+$namespace: "yuumi-ratio-image";
+
+.#{$namespace} {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  &__image {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+
+  &__image--placeholder,
+  &__image--expectant {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+  }
+
+  &__image--placeholder {
+    background-size: contain;
+    background-position: center center;
+  }
+}

@@ -1,6 +1,6 @@
-import type { App } from 'vue'
-import Step from './src/index'
-import StepItem from './src/item'
+import type { App } from "vue"
+import Step from "./src/Index.vue"
+import StepItem from "./src/Item.vue"
 
 export default {
   install: (app: App): void => {

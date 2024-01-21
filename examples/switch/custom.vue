@@ -1,22 +1,13 @@
 <template>
-  <YuumiSwitch
-    v-model="value"
-    style="margin: 0 10px 10px 0;"
-    open-color="green"
-    close-color="red"
-  >
-    <template #open>
-      开
-    </template>
-    <template #close>
-      关
-    </template>
+  <YuumiSwitch v-model="value" style="margin: 0 10px 10px 0" open-color="green" close-color="red">
+    <template #open> 开 </template>
+    <template #close> 关 </template>
   </YuumiSwitch>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       value: false
     }

@@ -1,7 +1,5 @@
 <template>
-  <YuumiButton @click="showDrawer()">
-    默认(right)
-  </YuumiButton>
+  <YuumiButton @click="showDrawer()"> 默认(right) </YuumiButton>
 
   <YuumiDrawer
     v-model="show"
@@ -16,16 +14,16 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       show: false
     }
   },
   methods: {
-    showDrawer () {
+    showDrawer() {
       this.show = true
     },
-    eventLog (el, type) {
+    eventLog(el, type) {
       console.log(type, el)
     }
   }

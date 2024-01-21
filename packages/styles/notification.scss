@@ -1,0 +1,157 @@
+:root {
+  --yuumi-notification-background: var(--color-white);
+  --yuumi-notification-border-radius: var(--border-radius);
+  --yuumi-notification-icon-size: 20px;
+  --yuumi-notification-line-height: 24px;
+  --yuumi-notification-font-size: 14px;
+}
+
+$namespace: "yuumi-notification";
+
+.#{$namespace} {
+  width: 300px;
+  padding: var(--space-vertical-md) var(--space-horizontal-sm);
+  background-color: var(--yuumi-notification-background);
+  border-radius: var(--yuumi-notification-border-radius);
+  box-shadow: 0 0 10px var(--shadow-color-secondary);
+  position: fixed;
+  z-index: 99;
+
+  &__icon {
+    float: left;
+    font-size: var(--yuumi-notification-icon-size);
+    line-height: var(--yuumi-notification-line-height);
+  }
+
+  &__close {
+    position: absolute;
+    top: var(--space-vertical-xm);
+    right: var(--space-horizontal-xm);
+    cursor: pointer;
+  }
+
+  &__content {
+    padding-left: var(--space-horizontal-sm);
+    padding-right: var(--space-horizontal-sm);
+    overflow: hidden;
+    line-height: var(--yuumi-notification-line-height);
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 1.1428em;
+    margin-bottom: var(--space-vertical-xm);
+  }
+
+  &__message {
+    font-size: var(--yuumi-notification-font-size);
+    color: var(--text-color-secondary);
+  }
+
+  &--appeared {
+    transition:
+      top 0.3s,
+      bottom 0.3s;
+  }
+
+  &--tl {
+    top: 0;
+    left: var(--space-horizontal-sm);
+  }
+
+  &--tr {
+    top: 0;
+    right: var(--space-horizontal-sm);
+  }
+
+  &--bl {
+    bottom: 0;
+    left: var(--space-horizontal-sm);
+  }
+
+  &--br {
+    bottom: 0;
+    right: var(--space-horizontal-sm);
+  }
+}
+
+@each $key in $--themes {
+  .#{$namespace}--#{$key} {
+    .#{$namespace}__icon {
+      color: var(--color-#{$key});
+    }
+  }
+}
+
+.#{$namespace} {
+  &.#{$namespace}-enter-active.#{$namespace}--tr,
+  &.#{$namespace}-enter-active.#{$namespace}--br {
+    animation-name: notificationRightEntry;
+  }
+
+  &.#{$namespace}-enter-active.#{$namespace}--tl,
+  &.#{$namespace}-enter-active.#{$namespace}--bl {
+    animation-name: notificationLeftEntry;
+  }
+
+  &.#{$namespace}-enter-active {
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-fill-mode: both;
+  }
+
+  &.#{$namespace}-leave-active {
+    transition:
+      opacity 0.3s,
+      top 0.3s,
+      bottom 0.3s !important;
+  }
+
+  &.#{$namespace}-leave-to {
+    opacity: 0;
+  }
+}
+
+@keyframes notificationRightEntry {
+  0% {
+    transform: translate3d(200%, 0, 0);
+
+    opacity: 0;
+  }
+  60% {
+    transform: translate3d(-25px, 0, 0);
+
+    opacity: 1;
+  }
+  75% {
+    transform: translate3d(10px, 0, 0);
+  }
+  90% {
+    transform: translate3d(-5px, 0, 0);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes notificationLeftEntry {
+  0% {
+    transform: translate3d(-200%, 0, 0);
+
+    opacity: 0;
+  }
+  60% {
+    transform: translate3d(25px, 0, 0);
+
+    opacity: 1;
+  }
+  75% {
+    transform: translate3d(-10px, 0, 0);
+  }
+  90% {
+    transform: translate3d(5px, 0, 0);
+  }
+  100% {
+    transform: none;
+  }
+}

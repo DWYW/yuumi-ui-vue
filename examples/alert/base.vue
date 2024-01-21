@@ -1,30 +1,25 @@
 <template>
-  <YuumiButton
-    style="margin: 0 10px 10px 0;"
-    @click="showAlert"
-  >
-    基本用法
-  </YuumiButton>
+  <YuumiButton style="margin: 0 10px 10px 0" @click="showAlert"> 基本用法 </YuumiButton>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {}
   },
   methods: {
     showAlert() {
       this.$yuumi.createAlert({
-        title: '基本用法',
-        content: '基本用法',
+        title: "基本用法",
+        content: "基本用法",
         onClose: () => {
-          this.$yuumi.createMessage({ message: 'close', theme: 'info' })
+          this.$yuumi.createMessage({ message: "close", theme: "info" })
         },
         onCancel: () => {
-          this.$yuumi.createMessage({ message: 'cancel', theme: 'warn' })
+          this.$yuumi.createMessage({ message: "cancel", theme: "warn" })
         },
         onConfirm: () => {
-          this.$yuumi.createMessage({ message: 'confirm', theme: 'success' })
+          this.$yuumi.createMessage({ message: "confirm", theme: "success" })
         }
       })
     }

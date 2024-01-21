@@ -1,0 +1,45 @@
+$namespace: "yuumi-pagination";
+
+.#{$namespace} {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  &--left {
+    justify-content: flex-start;
+  }
+
+  &--center {
+    justify-content: center;
+  }
+
+  &--right {
+    justify-content: flex-end;
+  }
+
+  &__total {
+    white-space: nowrap;
+    margin: 0 var(--space-vertical-xm);
+
+    span {
+      color: var(--color-primary);
+    }
+  }
+
+  .yuumi-button,
+  .yuumi-input {
+    margin: 0 var(--space-vertical-xm);
+  }
+
+  .yuumi-button {
+    white-space: nowrap;
+  }
+
+  .yuumi-input {
+    width: 50px;
+
+    input {
+      text-align: center;
+    }
+  }
+}

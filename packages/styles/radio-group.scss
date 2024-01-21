@@ -1,0 +1,9 @@
+$namespace: "yuumi-radio-group";
+
+.#{$namespace} {
+  &--block {
+    .yuumi-radio {
+      display: table;
+    }
+  }
+}

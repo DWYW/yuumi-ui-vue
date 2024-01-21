@@ -9,11 +9,10 @@ npm install yuumi-ui-vue@latest
 ```js
 // main.js
 
-import YuumiUIVue from 'yuumi-ui-vue'
+import YuumiUIVue from "yuumi-ui-vue"
 
 const app = createApp(App)
 app.use(YuumiUIVue)
-
 ```
 
 ### 按需引入

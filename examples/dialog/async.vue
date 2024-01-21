@@ -1,7 +1,5 @@
 <template>
-  <YuumiButton @click="showDialog">
-    异步操作
-  </YuumiButton>
+  <YuumiButton @click="showDialog"> 异步操作 </YuumiButton>
   <YuumiDialog
     v-model="show"
     title="dialog title"
@@ -17,36 +15,35 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       show: false,
       timeout: 0
     }
   },
   methods: {
-    showDialog () {
+    showDialog() {
       this.show = true
     },
-    hideDialog () {
+    hideDialog() {
       if (this.timeout) clearTimeout(this.timeout)
 
-      this.$yuumi.createMessage({ message: '3s后关闭', theme: 'warn' })
+      this.$yuumi.createMessage({ message: "3s后关闭", theme: "warn" })
 
       this.timeout = setTimeout(() => {
         this.show = false
       }, 3000)
     },
-    onclose () {
-      console.log('on close')
+    onclose() {
+      console.log("on close")
       this.hideDialog()
     },
-    oncancel () {
-      console.log('on cancel')
+    oncancel() {
+      console.log("on cancel")
       this.hideDialog()
     },
-    onconfirm () {
-      console.log('on confirm'),
-      this.hideDialog()
+    onconfirm() {
+      console.log("on confirm"), this.hideDialog()
     }
   }
 }

@@ -1,13 +1,7 @@
 <template>
-  <YuumiButton @click="showDialog">
-    阻止穿透
-  </YuumiButton>
+  <YuumiButton @click="showDialog"> 阻止穿透 </YuumiButton>
 
-  <YuumiDialog
-    v-model="show"
-    title="dialog title"
-    :stop-penetrate="true"
-  >
+  <YuumiDialog v-model="show" title="dialog title" :stop-penetrate="true">
     <YuumiIcon icon="line-help" />
     <span>阻止穿透</span>
   </YuumiDialog>
@@ -15,13 +9,13 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       show: false
     }
   },
   methods: {
-    showDialog () {
+    showDialog() {
       this.show = true
     }
   }

@@ -1,7 +1,5 @@
-import type { App } from 'vue'
-// import TimePicker from './src/index.vue'
-import TimePicker from './src/index'
-import './src/index.scss'
+import type { App } from "vue"
+import TimePicker from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {

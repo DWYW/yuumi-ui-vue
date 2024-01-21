@@ -2,7 +2,7 @@
   <YuumiCheckbox
     v-model="value"
     unique="all"
-    style="margin: 0 10px 10px 0;"
+    style="margin: 0 10px 10px 0"
     :indeterminate="indeterminate"
     @change="onAllChanged"
   >
@@ -11,18 +11,9 @@
 
   <div>你最喜欢的水果是？（多选）</div>
 
-  <YuumiCheckboxGroup
-    v-model="selected"
-    @change="onGroupChange"
-  >
-    <template
-      v-for="item in fruits"
-      :key="item.key"
-    >
-      <YuumiCheckbox
-        :unique="item.key"
-        style="margin: 0 10px 10px 0;"
-      >
+  <YuumiCheckboxGroup v-model="selected" @change="onGroupChange">
+    <template v-for="item in fruits" :key="item.key">
+      <YuumiCheckbox :unique="item.key" style="margin: 0 10px 10px 0">
         {{ item.key }}. {{ item.name }}
       </YuumiCheckbox>
     </template>
@@ -32,29 +23,29 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       value: false,
       fruits: [
-        { key: 'A', name: '香蕉' },
-        { key: 'B', name: '苹果' },
-        { key: 'C', name: '柚子' },
-        { key: 'D', name: '西瓜' }
+        { key: "A", name: "香蕉" },
+        { key: "B", name: "苹果" },
+        { key: "C", name: "柚子" },
+        { key: "D", name: "西瓜" }
       ],
       selected: []
     }
   },
   computed: {
-    indeterminate () {
+    indeterminate() {
       return this.selected.length !== this.fruits.length && this.selected.length > 0
     }
   },
   methods: {
-    onAllChanged (detail) {
+    onAllChanged(detail) {
       this.selected = detail.checked ? this.fruits.map(item => item.key) : []
     },
 
-    onGroupChange () {
+    onGroupChange() {
       if (this.selected.length === this.fruits.length && !this.value) {
         this.value = true
       } else if (this.selected.length !== this.fruits.length && this.value) {

@@ -1,6 +1,10 @@
-## pagination 分页
+<script setup>
+import BaseExample from "../../examples/pagination/base.vue"
+import BaseExampleCode from "../../examples/pagination/base.vue?raw"
+</script>
 
 ### 基本用法
 
-```vue demo src="../../examples/pagination/base.vue"
-```
+<ExamplePreview :code="BaseExampleCode">
+  <BaseExample />
+</ExamplePreview>

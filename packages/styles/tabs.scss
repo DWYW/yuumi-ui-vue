@@ -1,0 +1,252 @@
+$namespace: "yuumi-tabs";
+
+.#{$namespace} {
+  display: flex;
+
+  &__head {
+    flex: 0 0 auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  &__body {
+    flex: 1 1 auto;
+    overflow: hidden;
+    padding: var(--space-horizontal-sm);
+    position: relative;
+  }
+
+  &__btn--prev,
+  &__btn--next {
+    padding: 0 var(--space-vertical-xm);
+    flex: 0 0 auto;
+    cursor: pointer;
+
+    &:active {
+      color: var(--color-primary);
+    }
+  }
+
+  &__navs {
+    flex: 1 1 1px;
+    overflow: hidden;
+  }
+
+  &__navs-body {
+    display: inline-block;
+    transition: transform 0.3s;
+    min-width: 100%;
+    white-space: nowrap;
+  }
+
+  &__navs-item {
+    padding: var(--space-horizontal-xm);
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &._selected {
+      color: var(--color-primary);
+    }
+  }
+
+  &__navs-line {
+    background-color: var(--color-border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  &__navs-rect {
+    transition:
+      transform 0.3s,
+      width 0.3s;
+    background-color: var(--color-primary);
+  }
+
+  &-enter-active {
+    transition: opacity 0.3s;
+  }
+
+  &-enter-from {
+    opacity: 0;
+  }
+
+  &-leave-active {
+    position: absolute;
+  }
+}
+
+.#{$namespace} {
+  @each $key in ("top", "right", "bottom", "left") {
+    @if $key == "left" or $key == "right" {
+      &--#{$key} {
+        height: 100%;
+
+        @if $key == "left" {
+          flex-direction: row;
+        } @else {
+          flex-direction: row-reverse;
+        }
+      }
+
+      &--#{$key} &__head {
+        flex-direction: column;
+        height: 100%;
+      }
+
+      &--#{$key} &__btn--prev,
+      &--#{$key} &__btn--next {
+        padding: var(--space-horizontal-xm);
+      }
+
+      &--#{$key} &__navs-line {
+        height: 100%;
+        width: 2px;
+        position: absolute;
+        top: 0;
+        @if $key == "left" {
+          right: 0;
+        } @else {
+          left: 0;
+        }
+      }
+
+      &--#{$key} &__navs-rect {
+        width: 100%;
+        height: 0;
+      }
+    } @else {
+      &--#{$key} {
+        width: 100%;
+
+        @if $key == "top" {
+          flex-direction: column;
+        } @else {
+          flex-direction: column-reverse;
+        }
+      }
+
+      &--#{$key} &__head {
+        flex-direction: row;
+      }
+
+      &--#{$key} &__navs-item {
+        display: inline-block;
+      }
+
+      &--#{$key} &__navs-line {
+        width: 100%;
+        height: 2px;
+      }
+
+      &--#{$key} &__navs-rect {
+        width: 0;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.#{$namespace}--top.#{$namespace}--card {
+  .#{$namespace}__navs-body {
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .#{$namespace}__navs-item {
+    position: relative;
+    border: 1px solid var(--color-border);
+    box-sizing: border-box;
+    background-color: var(--color-light);
+    margin-bottom: -1px;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+
+    &:not(:last-child) {
+      margin-right: var(--space-vertical-xm);
+    }
+
+    &._selected {
+      border-bottom-color: var(--color-white);
+      background-color: var(--color-white);
+    }
+  }
+}
+
+.#{$namespace}--bottom.#{$namespace}--card {
+  .#{$namespace}__navs-body {
+    box-sizing: border-box;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .#{$namespace}__navs-item {
+    position: relative;
+    border: 1px solid var(--color-border);
+    box-sizing: border-box;
+    background-color: var(--color-light);
+    margin-top: -1px;
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+
+    &:not(:last-child) {
+      margin-right: var(--space-vertical-xm);
+    }
+
+    &._selected {
+      border-top-color: var(--color-white);
+      background-color: var(--color-white);
+    }
+  }
+}
+
+.#{$namespace}--left.#{$namespace}--card {
+  .#{$namespace}__navs-body {
+    box-sizing: border-box;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .#{$namespace}__navs-item {
+    position: relative;
+    border: 1px solid var(--color-border);
+    box-sizing: border-box;
+    background-color: var(--color-light);
+    margin-right: -1px;
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+
+    &:not(:last-child) {
+      margin-bottom: var(--space-vertical-xm);
+    }
+
+    &._selected {
+      border-right-color: var(--color-white);
+      background-color: var(--color-white);
+    }
+  }
+}
+
+.#{$namespace}--right.#{$namespace}--card {
+  .#{$namespace}__navs-body {
+    box-sizing: border-box;
+    border-left: 1px solid var(--color-border);
+  }
+
+  .#{$namespace}__navs-item {
+    position: relative;
+    border: 1px solid var(--color-border);
+    box-sizing: border-box;
+    background-color: var(--color-light);
+    margin-left: -1px;
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+
+    &:not(:last-child) {
+      margin-bottom: var(--space-vertical-xm);
+    }
+
+    &._selected {
+      border-left-color: var(--color-white);
+      background-color: var(--color-white);
+    }
+  }
+}

@@ -1,0 +1,33 @@
+$namespace: "yuumi-divider";
+
+.#{$namespace} {
+  display: flex;
+  align-items: center;
+  border-width: 0px !important;
+  border-style: solid;
+  border-color: var(--color-border);
+  color: var(--text-color-secondary);
+  margin: var(--space-vertical-md) 0;
+
+  &::before,
+  &::after {
+    content: " ";
+    display: block;
+    border-width: 1px 0 0;
+    border-style: inherit;
+    border-color: inherit;
+    flex: 1 1 auto;
+  }
+
+  &__content {
+    padding: 0 var(--space-horizontal-sm);
+  }
+
+  &--left::before {
+    flex: 0 1 20px;
+  }
+
+  &--right::after {
+    flex: 0 1 20px;
+  }
+}

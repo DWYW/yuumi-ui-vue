@@ -1,5 +1,5 @@
-import type { App } from 'vue'
-import Warning from './src/index.vue'
+import type { App } from "vue"
+import Warning from "./src/index.vue"
 
 export default {
   install: (app: App): void => {

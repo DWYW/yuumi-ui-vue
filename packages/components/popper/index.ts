@@ -1,6 +1,5 @@
-import type { App } from 'vue'
-import Popper from './src/index'
-import './src/index.scss'
+import type { App } from "vue"
+import Popper from "./src/index"
 
 export default {
   install: (app: App): void => {

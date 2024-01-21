@@ -2,7 +2,7 @@
   <YuumiCheckbox
     v-model="value"
     unique="设置"
-    style="margin: 0 10px 10px 0;"
+    style="margin: 0 10px 10px 0"
     :checked-icon="{ icon: 'flat-lock' }"
     :unchecked-icon="{ icon: 'flat-unlock' }"
     @change="consoleLog"
@@ -14,13 +14,13 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       value: null
     }
   },
   methods: {
-    consoleLog (value) {
+    consoleLog(value) {
       console.log(value)
     }
   }

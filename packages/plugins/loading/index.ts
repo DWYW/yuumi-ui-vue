@@ -1,113 +1,97 @@
-import './index.scss';
-import { createRange } from '../../share/helper';
-import { createVNode, h, isVNode, Teleport, Transition } from 'vue'
-import { getPluginAppComponentInstance } from '..'
-import type { VNode } from 'vue'
+import { defineComponent, h, isVNode, nextTick, ref } from "vue"
+import { pluginMount, pluginUnmount } from "../instance"
+import type { VNode } from "vue"
+import Loading from "./Loading.vue"
+import SpinnerPie from "./SpinnerPie.vue"
+import SpinnerRect from "./SpinnerRect.vue"
 
-export interface CreateLoadingOptions {
-  id?: number
+// <SpinnerRect v-if="spinner === 'rect'" />
+// <SpinnerPie v-else/>
+
+export interface CreateLoadingOption {
+  uuid?: string
   teleport?: string
-  spinner?: 'circle'|'rect'|VNode
+  spinner?: "circle" | "rect" | VNode
 }
 
-function getPartialLoading (options: CreateLoadingOptions) {
-  let vnode: VNode|null = createVNode({
-    data () {
-      return {
-        id: options.id,
-        show: true
-      }
+export interface YuumiLoading {
+  createLoading: (option?: CreateLoadingOption) => VNode
+  removeLoading: (vnode: VNode) => void
+  removeAllLoading: () => void
+}
+
+const loadings = new Map()
+let uuid = 0
+
+export function createLoading(option?: CreateLoadingOption) {
+  const { spinner, ..._option } = Object.assign(
+    {
+      uuid: getLoadingId()
     },
-    render () {
-      const rectSpinner = h('div', { class: 'loading__rect' }, createRange(0, 5).map(item => {
-        return h('div', { class: [`rect${item}`] })
-      }))
+    option
+  )
 
-      const circleSpinner = h('svg', { class: 'loading__pie' }, [
-        h('circle', {
-          cx: '50%',
-          cy: '50%',
-          r: '40%',
-          fill: 'none',
-          'stroke-width': 2
-        })
-      ])
+  const _component = defineComponent({
+    setup() {
+      const messageEl = ref()
 
-      const _spinner = () => {
-        if (isVNode(options.spinner)) return options.spinner
-        if (options.spinner === 'rect') return rectSpinner
-        return circleSpinner
-      }
+      return () =>
+        h(
+          Loading,
+          Object.assign({}, _option, {
+            onBeforeEnter: () => {
+              nextTick(() => {
+                loadings.set(vnode, messageEl.value)
+              })
+            },
+            onBeforeLeave: () => {
+              loadings.delete(vnode)
+            },
+            onAfterLeave: () => {
+              pluginUnmount(vnode)
+            },
+            ref: (el: any) => (messageEl.value = el)
+          }),
+          {
+            default: () => {
+              if (spinner && spinner === "rect") {
+                return h(SpinnerRect)
+              }
 
-      const _YuumiLoading = () => {
-        return h('div', {
-          class: ['yuumi-loading', {
-            __fixed: options.teleport === 'body'
-          }]
-        }, [
-          h('div', { class: 'loading-content' }, [_spinner()])
-        ])
-      }
+              if (spinner && spinner === "circle") {
+                return h(SpinnerPie)
+              }
 
-      const { show } = this
-
-      return h(Teleport, { to: options.teleport }, [
-        h(Transition, {
-          name: 'yuumi-loading',
-          appear: true,
-          'onAfterLeave': () => {
-            const loadings = getLoadings()
-            const index = loadings.findIndex((item: VNode) => item === vnode)
-            if (index > -1) { loadings.splice(index, 1) }
-            vnode = null as any
+              return isVNode(spinner) ? spinner : h(SpinnerPie)
+            }
           }
-        }, {
-          default: () => show ? _YuumiLoading() : null
-        })
-      ])
+        )
     }
   })
-
+  const vnode = h(_component)
+  pluginMount(vnode, Loading.name)
   return vnode
 }
 
-let loadingId = 0
+export function removeLoading(node: VNode) {
+  const target = loadings.get(node)
+  if (!target) return
+  target.hide()
+}
+
+export function removeAllLoading() {
+  nextTick(() => loadings.forEach(item => item.hide()))
+}
 
 export const getLoadingId = function () {
-  return ++loadingId
+  return (++uuid).toString()
 }
 
-export const getLoadings = () => {
-  const { loadings } = (getPluginAppComponentInstance()?.proxy) || {} as any
-  return loadings
-}
-
-export const createLoading = function (options: CreateLoadingOptions = {}) {
-  if (!options.teleport) {
-    options.teleport = 'body'
-  }
-
-  if (!options.id) {
-    options.id = ++loadingId
-  }
-
-  const vnode = getPartialLoading(options)
-
-  const loadings = getLoadings()
-  if (loadings) loadings.push(vnode)
-
-  return vnode
-}
-
-export const removeLoading = function (vnode: VNode) {
-  if (vnode && vnode.component) {
-    vnode.component.data.show = false
-  }
-}
-
-export const removeAllLoading = function () {
-  const loadings = getLoadings()
-  if (loadings) {
-    loadings.forEach((item: VNode) => removeLoading(item))
+export const getLoadingWithId = (id: string) => {
+  for (const key of loadings.keys()) {
+    const item = loadings.get(key)
+    if (item.props.uuid === id) {
+      return [key, item]
+    }
   }
 }

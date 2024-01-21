@@ -1,9 +1,19 @@
+<script setup>
+import BaseExample from "../../examples/divider/base.vue"
+import BaseExampleCode from "../../examples/divider/base.vue?raw"
+
+import CustomExample from "../../examples/divider/custom.vue"
+import CustomExampleCode from "../../examples/divider/custom.vue?raw"
+</script>
+
 ### 基本用法
 
-```vue demo src="../../examples/divider/base.vue"
-```
+<ExamplePreview :code="BaseExampleCode">
+  <BaseExample />
+</ExamplePreview>
 
 ### 自定义样式
 
-```vue demo vue demo src="../../examples/divider/custom.vue"
-```
+<ExamplePreview :code="CustomExampleCode">
+  <CustomExample />
+</ExamplePreview>

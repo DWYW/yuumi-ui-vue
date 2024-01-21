@@ -1,0 +1,146 @@
+:root {
+  --yuumi-timepicker-background_hover: #{getMixColorWithKey("border", "white", 45%)};
+}
+
+$namespace: "yuumi-timepicker";
+$_witdh: 50px;
+$_height: 200px;
+$_item-height: 28px;
+
+.#{$namespace} {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: border-color 0.3s;
+
+  &__popper {
+    box-shadow: 0 0 10px var(--shadow-color-primary);
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__placeholder,
+  &__icon,
+  &__hyphen {
+    color: var(--color-placeholder);
+  }
+
+  &__hyphen {
+    padding: 0 var(--space-horizontal-xm);
+  }
+
+  &__picker {
+    position: relative;
+    display: flex;
+  }
+
+  &__picker-start,
+  &__picker-end {
+    display: flex;
+  }
+
+  &__picker-end {
+    border-left: 1px solid var(--color-border);
+  }
+
+  &__btn {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-vertical-xm) var(--space-horizontal-sm);
+    text-align: right;
+
+    > span {
+      cursor: pointer;
+      margin-left: var(--space-horizontal-sm);
+      &:nth-child(2) {
+        color: var(--color-primary);
+      }
+    }
+  }
+
+  &__time {
+    flex: 1 1 auto;
+    width: $_witdh;
+    height: $_height;
+
+    .yuumi-scrollbar {
+      z-index: 2;
+    }
+  }
+
+  &__time-split {
+    height: $_item-height;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-border);
+  }
+
+  &__time-item {
+    padding: 0 var(--space-horizontal-sm);
+    line-height: $_item-height;
+    text-align: center;
+    cursor: pointer;
+
+    &._first {
+      margin-top: $_height * 0.5 - $_item-height * 0.5;
+    }
+
+    &._last {
+      margin-bottom: $_height * 0.5 - $_item-height * 0.5;
+    }
+
+    &:hover {
+      background-color: var(--yuumi-timepicker-background_hover);
+    }
+
+    &._selected {
+      font-weight: bold;
+      color: var(--color-primary);
+    }
+
+    &._disabled {
+      color: var(--color-disabled);
+      cursor: no-drop;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &--focus {
+    border-color: var(--color-primary);
+  }
+
+  &--disabled {
+    border-color: var(--color-disabled);
+    color: var(--text-color-secondary);
+    cursor: no-drop;
+    opacity: 0.5;
+    user-select: none;
+  }
+}
+
+@each $key, $value in $--height {
+  .#{$namespace}--#{$key} {
+    height: var(--height-#{$key});
+
+    .#{$namespace}__icon {
+      width: var(--height-#{$key});
+      text-align: center;
+
+      .line-clock {
+        font-size: calc(var(--height-#{$key}) * 0.5);
+      }
+    }
+  }
+}

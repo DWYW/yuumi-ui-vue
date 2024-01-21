@@ -1,5 +1,5 @@
-import type { App } from 'vue'
-import RadioGroup from './src/index.vue'
+import type { App } from "vue"
+import RadioGroup from "./src/index.vue"
 
 export default {
   install: (app: App): void => {

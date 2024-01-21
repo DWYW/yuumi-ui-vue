@@ -3,7 +3,7 @@
     v-model="value"
     disabled
     unique="香蕉"
-    style="margin: 0 10px 10px 0;"
+    style="margin: 0 10px 10px 0"
     @change="consoleLog"
   >
     香蕉
@@ -12,7 +12,7 @@
     v-model="value"
     disabled
     unique="苹果"
-    style="margin: 0 10px 10px 0;"
+    style="margin: 0 10px 10px 0"
     @change="consoleLog"
   >
     苹果
@@ -21,7 +21,7 @@
     v-model="value"
     disabled
     unique="梨"
-    style="margin: 0 10px 10px 0;"
+    style="margin: 0 10px 10px 0"
     @change="consoleLog"
   >
     梨
@@ -30,7 +30,7 @@
     v-model="value"
     disabled
     unique="橘子"
-    style="margin: 0 10px 10px 0;"
+    style="margin: 0 10px 10px 0"
     @change="consoleLog"
   >
     橘子
@@ -39,7 +39,7 @@
     v-model="value"
     disabled
     unique="柚子"
-    style="margin: 0 10px 10px 0;"
+    style="margin: 0 10px 10px 0"
     @change="consoleLog"
   >
     柚子
@@ -48,13 +48,13 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
-      value: '苹果'
+      value: "苹果"
     }
   },
   methods: {
-    consoleLog (value) {
+    consoleLog(value) {
       console.log(value)
     }
   }

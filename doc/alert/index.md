@@ -1,24 +1,46 @@
+<script setup>
+import BaseExample from "../../examples/alert/base.vue"
+import BaseExampleCode from "../../examples/alert/base.vue?raw"
+
+import HalfExample from "../../examples/alert/half.vue"
+import HalfExampleCode from "../../examples/alert/half.vue?raw"
+
+import CustomExample from "../../examples/alert/custom.vue"
+import CustomExampleCode from "../../examples/alert/custom.vue?raw"
+
+import StopPenetrateExample from "../../examples/alert/stop-penetrate.vue"
+import StopPenetrateExampleCode from "../../examples/alert/stop-penetrate.vue?raw"
+
+import CenterExample from "../../examples/alert/center.vue"
+import CenterExampleCode from "../../examples/alert/center.vue?raw"
+</script>
+
 ### 基本用法
 
-```vue demo src="../../examples/alert/base.vue"
-```
+<ExamplePreview :code="BaseExampleCode">
+  <BaseExample />
+</ExamplePreview>
 
 ### 部分显示
 
-```vue demo src="../../examples/alert/half.vue"
-```
+<ExamplePreview :code="HalfExampleCode">
+  <HalfExample />
+</ExamplePreview>
 
 ### 自定义显示
 
-```vue demo src="../../examples/alert/custom.vue"
-```
+<ExamplePreview :code="CustomExampleCode">
+  <CustomExample />
+</ExamplePreview>
 
 ### 阻止穿透
 
-```vue demo src="../../examples/alert/stop-penetrate.vue"
-```
+<ExamplePreview :code="StopPenetrateExampleCode">
+  <StopPenetrateExample />
+</ExamplePreview>
 
 ### 居中显示
 
-```vue demo src="../../examples/alert/center.vue"
-```
+<ExamplePreview :code="CenterExampleCode">
+  <CenterExample />
+</ExamplePreview>

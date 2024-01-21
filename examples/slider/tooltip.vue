@@ -1,13 +1,9 @@
 <template>
-  <div style="display: flex; align-items: center;">
-    <div style="flex: 1 1 auto;">
-      <YuumiSlider
-        v-model="value"
-        :show-tooltip="false"
-        @change="onChange"
-      />
+  <div style="display: flex; align-items: center">
+    <div style="flex: 1 1 auto">
+      <YuumiSlider v-model="value" :show-tooltip="false" @change="onChange" />
     </div>
-    <div style="flex: 0 0 60px;">
+    <div style="flex: 0 0 60px">
       {{ value }}
     </div>
   </div>

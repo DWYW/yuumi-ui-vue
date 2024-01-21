@@ -9,16 +9,16 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       data: []
     }
   },
-  mounted () {
-    this.data = this.createChildren('')
+  mounted() {
+    this.data = this.createChildren("")
   },
   methods: {
-    createChildren (labelPrefix) {
+    createChildren(labelPrefix) {
       const max = Math.floor(5 * Math.random())
       const children = []
 
@@ -32,21 +32,21 @@ export default {
 
       return children
     },
-    loadData (vm) {
-      return new Promise((resolve) => {
+    loadData(vm) {
+      return new Promise(resolve => {
         setTimeout(() => {
           Math.random() > 0.5 ? resolve(this.createChildren(vm.nodeLabel)) : resolve(null)
         }, 400)
       })
     },
-    onChecked (detail) {
-      console.log('onChecked', detail)
+    onChecked(detail) {
+      console.log("onChecked", detail)
     },
-    onNodeExpand (detail) {
-      console.log('onNodeExpand', detail)
+    onNodeExpand(detail) {
+      console.log("onNodeExpand", detail)
     },
-    onNodeClick (detail) {
-      console.log('onNodeClick', detail)
+    onNodeClick(detail) {
+      console.log("onNodeClick", detail)
     }
   }
 }

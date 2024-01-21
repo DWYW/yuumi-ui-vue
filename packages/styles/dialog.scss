@@ -1,0 +1,110 @@
+:root {
+  --yuumi-dialog-background: var(--color-white);
+  --yuumi-dialog-header-background: var(--color-light);
+}
+
+$namespace: "yuumi-dialog";
+$--panel-top: 50%;
+
+.#{$namespace} {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 9;
+  font-size: var(--font-size-sm);
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: var(--color-mask);
+  }
+
+  &__panel {
+    max-width: 100%;
+    width: 500px;
+    position: absolute;
+    left: 50%;
+    top: $--panel-top;
+    transform: translate3d(-50%, -50%, 0);
+    background-color: var(--yuumi-dialog-background);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 0 16px var(--shadow-color-tertiary);
+  }
+
+  &__header {
+    padding: var(--space-horizontal-sm);
+    background-color: var(--yuumi-dialog-header-background);
+    position: relative;
+  }
+
+  &__title {
+    padding-right: var(--space-horizontal-xm);
+    font-size: 1.14em;
+  }
+
+  &__icon-close {
+    display: block;
+    position: absolute;
+    right: var(--space-horizontal-xm);
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.14em;
+  }
+
+  &__content {
+    min-height: 128px;
+    padding: var(--space-horizontal-sm);
+
+    &.is-center {
+      text-align: center;
+    }
+  }
+
+  &__footer {
+    padding: var(--space-horizontal-sm);
+    padding-top: 0;
+    text-align: center;
+
+    .yuumi-button {
+      min-width: 80px;
+    }
+
+    :not(:last-child) {
+      margin-right: var(--space-horizontal-sm);
+    }
+  }
+}
+
+.#{$namespace} {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.2s;
+  }
+
+  &-enter-active &__panel,
+  &-leave-active &__panel {
+    transition: top 0.2s;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+
+  &-enter-from &__panel {
+    top: $--panel-top - 10%;
+  }
+
+  &-leave-to &__panel {
+    top: $--panel-top + 10%;
+  }
+}

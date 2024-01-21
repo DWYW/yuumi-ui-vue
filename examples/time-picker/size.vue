@@ -3,7 +3,7 @@
     v-for="size in ['xl', 'lg', 'md', 'sm', 'xm']"
     :key="size"
     v-model="value"
-    style="margin: 0 10px 10px 0;"
+    style="margin: 0 10px 10px 0"
     :size="size"
     @change="onChange"
   />
@@ -11,13 +11,13 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       value: null
     }
   },
   methods: {
-    onChange (detail) {
+    onChange(detail) {
       console.log("onChange", detail)
     }
   }

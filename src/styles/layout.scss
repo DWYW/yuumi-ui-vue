@@ -1,0 +1,30 @@
+.flex {
+  display: flex;
+
+  &.is-center {
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.is-column {
+    flex-direction: column;
+  }
+
+  &.is-between {
+    justify-content: space-between;
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;
+
+  .row__prefix,
+  .row__suffix {
+    flex: 0 0 auto;
+  }
+
+  .row__content {
+    flex: 1 1 auto;
+  }
+}

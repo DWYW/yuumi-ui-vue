@@ -1,0 +1,46 @@
+:root {
+  --yuumi-navs-background_hover: #{getAlphaColorWithKey("primary", 0.1)};
+  --yuumi-navs-item-height: var(--height-xm);
+}
+
+$namespace: "yuumi-navs";
+
+.#{$namespace} {
+  &__content {
+    height: var(--yuumi-navs-item-height);
+    display: flex;
+    align-items: center;
+    padding: var(--space-vertical-sm) 0 var(--space-vertical-sm) var(--space-horizontal-xm);
+  }
+
+  &__icon--prefix {
+    font-size: 1.14285em;
+    padding-right: var(--space-horizontal-xm);
+  }
+
+  &__label {
+    flex: 1 1 auto;
+    padding-right: var(--space-horizontal-xm);
+  }
+
+  &__icon--suffix {
+    font-size: 1.14285em;
+    transition: transform 0.3s;
+  }
+
+  .is-expand &__icon--suffix {
+    transform: rotate(90deg);
+  }
+
+  .is-checked &__label {
+    color: var(--color-primary);
+  }
+
+  .yuumi-tree-node__content {
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: var(--yuumi-navs-background_hover);
+    }
+  }
+}

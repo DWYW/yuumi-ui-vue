@@ -1,31 +1,53 @@
+// 字体大小
+:root {
+  --font-size-xm: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+}
+
+// 高度
 $--height: (
   "xm": 24px,
   "sm": 28px,
   "md": 32px,
   "lg": 38px,
   "xl": 46px
-) !default;
+);
 
-$--font-size: (
-  "xm": 12px,
-  "sm": 14px,
-  "md": 16px,
-  "lg": 20px,
-  "xl": 24px
-) !default;
+:root {
+  --height-xm: #{map-get($--height, "xm")};
+  --height-sm: #{map-get($--height, "sm")};
+  --height-md: #{map-get($--height, "md")};
+  --height-lg: #{map-get($--height, "lg")};
+  --height-xl: #{map-get($--height, "xl")};
+}
 
-$--space: (
-  "xxm": 4px,
-  "xm": 8px,
-  "sm": 16px,
-  "md": 24px,
-  "lg": 32px,
-  "xl": 40px
-) !default;
+// 间隙
+:root {
+  --space-horizontal-xm: 8px;
+  --space-horizontal-sm: 16px;
+  --space-horizontal-md: 24px;
+  --space-horizontal-lg: 32px;
+  --space-horizontal-xl: 40px;
 
-$--border-radius: (
-  "default": 4px,
-  "mini": 2px,
-  "round": 9999px,
-  "circle": 100%
-) !default;
+  --space-vertical-xm: 4px;
+  --space-vertical-sm: 8px;
+  --space-vertical-md: 16px;
+  --space-vertical-lg: 24px;
+  --space-vertical-xl: 32px;
+}
+
+// 圆角
+:root {
+  --border-radius: 4px;
+  --border-radius-mini: 2px;
+  --border-radius-round: 9999px;
+  --border-radius-circle: 50%;
+}
+
+// 边框
+:root {
+  --border-width: 1px;
+}

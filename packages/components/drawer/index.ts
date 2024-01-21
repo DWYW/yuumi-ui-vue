@@ -1,5 +1,5 @@
-import type { App } from 'vue'
-import Drawer from './src/index.vue'
+import type { App } from "vue"
+import Drawer from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {

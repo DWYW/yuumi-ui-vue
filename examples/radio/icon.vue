@@ -2,7 +2,7 @@
   <YuumiRadio
     v-model="value"
     :unique="false"
-    style="margin: 0 10px 10px 0;"
+    style="margin: 0 10px 10px 0"
     :checked-icon="{ icon: 'line-unlock' }"
     :unchecked-icon="{ icon: 'line-unlock' }"
     @change="consoleLog"
@@ -12,7 +12,7 @@
   <YuumiRadio
     v-model="value"
     :unique="true"
-    style="margin: 0 10px 10px 0;"
+    style="margin: 0 10px 10px 0"
     :checked-icon="{ icon: 'flat-lock' }"
     :unchecked-icon="{ icon: 'flat-lock' }"
     @change="consoleLog"
@@ -24,13 +24,13 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       value: null
     }
   },
   methods: {
-    consoleLog (value) {
+    consoleLog(value) {
       console.log(value)
     }
   }

@@ -1,0 +1,75 @@
+:root {
+  --yuumi-checkbox-icon-color: var(--color-border);
+}
+
+$namespace: "yuumi-checkbox";
+
+.#{$namespace} {
+  cursor: pointer;
+  display: inline-table;
+
+  &__icon,
+  &__content {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  &__icon {
+    line-height: 0;
+    position: relative;
+
+    .yuumi-icon {
+      color: var(--yuumi-checkbox-icon-color);
+    }
+  }
+
+  &__content {
+    padding-left: var(--space-horizontal-xm);
+  }
+
+  &-leave-from,
+  &-leave-active {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition:
+      opacity 0.2s,
+      color 0.2s;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}
+
+.#{$namespace}--checked,
+.#{$namespace}--indeterminate {
+  .#{$namespace}__icon .yuumi-icon {
+    color: var(--color-primary);
+  }
+}
+
+.#{$namespace}--disabled {
+  opacity: 0.5;
+  cursor: no-drop;
+
+  .#{$namespace}__icon .yuumi-icon {
+    color: var(--color-disabled);
+  }
+}
+
+@each $key, $value in $--height {
+  .#{$namespace}--#{$key} {
+    height: var(--height-#{$key});
+
+    .#{$namespace}__icon {
+      font-size: calc(var(--height-#{$key}) * 0.5);
+    }
+  }
+}
