@@ -27,6 +27,7 @@ import { inject, computed } from "vue"
 import { radioEmits } from "./emits"
 import { radioProps } from "./props"
 import { useNameSpace } from "../../../share/useApi"
+import { YuumiIcon } from "../../icon"
 
 defineOptions({ name: "YuumiRadio", inheritAttrs: false })
 const props = defineProps(radioProps)

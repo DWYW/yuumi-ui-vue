@@ -55,6 +55,7 @@ import ContentComponent from "./Content.vue"
 import OptionsComponent from "./Options.vue"
 import type { Ref } from "vue"
 import type { SelectProps } from "./props"
+import { YuumiPopper } from "../../popper"
 
 defineOptions({ name: "YuumiSelect", inheritAttrs: false })
 const props = defineProps(selectProps)

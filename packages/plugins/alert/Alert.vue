@@ -19,6 +19,7 @@
 <script lang="ts" setup>
 import { ref, useAttrs } from "vue"
 import { useNameSpace } from "../../share/useApi"
+import { YuumiDialog } from "../../components/dialog"
 
 defineOptions({ name: "YuumiAlert", inheritAttrs: false })
 const ns = useNameSpace("alert")

@@ -48,6 +48,7 @@ import { computed, ref } from "vue"
 import { useNameSpace } from "../../share/useApi"
 import { notificationProps } from "./props"
 import { notificationEmits } from "./emits"
+import { YuumiIcon } from "../../components/icon"
 
 const props = defineProps(notificationProps)
 const emit = defineEmits(notificationEmits)

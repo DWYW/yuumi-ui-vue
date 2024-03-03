@@ -39,6 +39,8 @@ import { computed, ref } from "vue"
 import { useNameSpace } from "../../share/useApi"
 import { messageProps } from "./props"
 import { messageEmits } from "./emits"
+import { YuumiIcon } from "../../components/icon"
+import { YuumiWarning } from "../../components/warning"
 
 const props = defineProps(messageProps)
 const emit = defineEmits(messageEmits)

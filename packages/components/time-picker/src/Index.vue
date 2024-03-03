@@ -46,6 +46,7 @@ import { useState } from "./useState"
 import { useSelection } from "./useSelection"
 import ContentComponent from "./Content.vue"
 import PickerComponent from "./Picker.vue"
+import { YuumiPopper } from "../../popper"
 
 defineOptions({ name: "YuumiTimePicker", inheritAttrs: false })
 const props = defineProps(timePickerProps)

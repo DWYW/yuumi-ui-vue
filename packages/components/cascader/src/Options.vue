@@ -38,10 +38,12 @@
 import { computed, inject, nextTick, ref } from "vue"
 import { useNameSpace } from "../../../share/useApi"
 import { optionsProvideKey, propsProvideKey, selectionProvideKey } from "./provide"
+import { useHelper } from "./useHelper"
 import type { ComputedRef, Ref } from "vue"
 import type { CascaderSelection } from "./useSelection"
 import type { CascaderProps } from "./props"
-import { useHelper } from "./useHelper"
+import { YuumiIcon } from "../../icon"
+import { YuumiScrollbar } from "../../scrollbar"
 
 defineOptions({ name: "YuumiCascaderOptions" })
 const emit = defineEmits(["selected"])

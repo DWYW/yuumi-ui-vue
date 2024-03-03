@@ -14,6 +14,7 @@ import { useSlots } from "vue"
 import { getFirstValidNode } from "../../../share/helper"
 import { useNameSpace } from "../../../share/useApi"
 import { tooltipProps } from "./props"
+import { YuumiPopper } from "../../popper"
 
 defineOptions({ name: "YuumiTooltip", inheritAttrs: false })
 const props = defineProps(tooltipProps)

@@ -44,6 +44,7 @@ import { SelectionItem, useSelection } from "./useSelection"
 import ContentComponent from "./Content.vue"
 import OptionsComponent from "./Options.vue"
 import { useHelper } from "./useHelper"
+import { YuumiPopper } from "../../popper"
 
 defineOptions({ name: "YuumiCascader", inheritAttrs: false })
 const props = defineProps(cascaderProps)

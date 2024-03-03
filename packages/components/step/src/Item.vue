@@ -37,6 +37,7 @@ import { stepItemProps } from "./props"
 import { propsProvideKey } from "./provide"
 import type { ComputedRef } from "vue"
 import type { StepProps } from "./props"
+import { YuumiIcon } from "../../icon"
 
 defineOptions({ name: "YuumiStepItem" })
 defineProps(stepItemProps)

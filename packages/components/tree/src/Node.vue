@@ -76,6 +76,8 @@ import type { NodeHelper } from "./useNodeHelper"
 import type { TreeProps } from "./props"
 import type { TreeEmits } from "./emits"
 import type { TreeSelection } from "./useSelection"
+import { YuumiIcon } from "../../icon"
+import { YuumiCheckbox } from "../../checkbox"
 
 defineOptions({ name: "YuumiTreeNode", inheritAttrs: false })
 const props = defineProps({

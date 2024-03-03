@@ -28,6 +28,8 @@
 import { computed, nextTick, ref, watch } from "vue"
 import { useNameSpace } from "../../../share/useApi"
 import { navsProps } from "./props"
+import { YuumiIcon } from "../../icon"
+import { YuumiTree } from "../../tree"
 
 defineOptions({ name: "YuumiNavs" })
 const ns = useNameSpace("navs")

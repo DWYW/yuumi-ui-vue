@@ -16,6 +16,7 @@
 <script lang="ts" setup>
 import { useNameSpace } from "../../../share/useApi"
 import { emptyProps } from "./props"
+import { YuumiIcon } from "../../icon"
 
 defineOptions({ name: "YuumiEmpty" })
 const ns = useNameSpace("empty")

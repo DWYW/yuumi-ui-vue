@@ -25,6 +25,7 @@ import { CascaderProps } from "./props"
 import type { ComputedRef } from "vue"
 import type { CascaderSelection } from "./useSelection"
 import type { CascaderState } from "./useState"
+import { YuumiIcon } from "../../icon"
 
 defineOptions({ name: "YuumiCascaderContent" })
 const emit = defineEmits(["clear"])

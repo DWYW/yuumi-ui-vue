@@ -31,6 +31,7 @@ import type { ComputedRef } from "vue"
 import type { TimePickerSelection } from "./useSelection"
 import type { TimePickerProps } from "./props"
 import type { TimePickerState } from "./useState"
+import { YuumiIcon } from "../../icon"
 
 defineEmits({
   clear: null

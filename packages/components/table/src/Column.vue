@@ -8,13 +8,7 @@
       @change="selectionChanged"
     />
 
-    <slot
-      v-else
-      :row="attrs.data"
-      :row-index="rowIndex"
-      :props="$props"
-      :content="defaultContent"
-    >
+    <slot v-else :row="attrs.data" :row-index="rowIndex" :props="$props" :content="defaultContent">
       {{ defaultContent }}
     </slot>
   </div>
@@ -27,6 +21,7 @@ import { useNameSpace } from "../../../share/useApi"
 import { tableColumnProps } from "./props"
 import { selectionProvideKey } from "./provide"
 import type { TableSelection } from "./useSelection"
+import { YuumiCheckbox } from "../../checkbox"
 
 defineOptions({ name: "YuumiTableColumn", inheritAttrs: false })
 const props = defineProps(tableColumnProps)

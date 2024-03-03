@@ -48,6 +48,7 @@ import { useFormat } from "./useFormat"
 import ContentComponent from "./Content.vue"
 import PickerComponent from "./Picker.vue"
 import { getDisabledHours, getDisabledMinutes, getDisabledSeconds } from "./helper"
+import { YuumiPopper } from "../../popper"
 
 defineOptions({ name: "YuumiDatePicker", inheritAttrs: false })
 const props = defineProps(datePickerProps)

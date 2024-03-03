@@ -81,6 +81,7 @@ import { sliderEmits } from "./emits"
 import { useStyle } from "./useStyle"
 import { useEvent } from "./useEvent"
 import { useTooltip } from "./useTooltip"
+import { YuumiPopper } from "../../popper"
 
 defineOptions({ name: "YuumiSlider" })
 const ns = useNameSpace("slider")

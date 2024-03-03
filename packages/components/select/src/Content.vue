@@ -60,6 +60,7 @@ import type { SelectState } from "./useState"
 import type { SelectProps } from "./props"
 import type { SelectSelection, SelectionItem } from "./useSelection"
 import type { SelectFilterable } from "./useFilterable"
+import { YuumiIcon } from "../../icon"
 
 defineOptions({ name: "YuumiSelectContent" })
 const emit = defineEmits(["itemDeleted", "clear"])

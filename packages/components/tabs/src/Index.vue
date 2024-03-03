@@ -52,6 +52,7 @@ import { tabEmits } from "./emits"
 import { propsProvideKey } from "./provide"
 import { useStyle } from "./useStyle"
 import { YuumiTabItem } from ".."
+import { YuumiIcon } from "../../icon"
 
 defineOptions({ name: "YuumiTabs" })
 onMounted(() => {

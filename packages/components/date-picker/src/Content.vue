@@ -30,6 +30,7 @@ import type { ComputedRef } from "vue"
 import type { DatePickerProps } from "./props"
 import type { DatePickerState } from "./useState"
 import type { DatePickerFormat } from "./useFormat"
+import { YuumiIcon } from "../../icon"
 
 defineEmits({
   clear: null

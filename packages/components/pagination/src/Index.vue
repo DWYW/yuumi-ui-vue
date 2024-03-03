@@ -31,6 +31,8 @@ import { createRange } from "../../../share/helper"
 import { useNameSpace } from "../../../share/useApi"
 import { paginationProps } from "./props"
 import { paginationEmits } from "./emits"
+import { YuumiButton } from "../../button"
+import { YuumiInput } from "../../input"
 
 interface BtnItem {
   type: "btn" | "text"

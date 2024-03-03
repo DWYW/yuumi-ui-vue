@@ -62,6 +62,7 @@ import { useAutoFocus } from "./useAutoFocus"
 import { useClearable } from "./useClearable"
 import type { ComputedRef } from "vue"
 import type { InputProps } from "./props"
+import { YuumiIcon } from "../../icon"
 
 defineOptions({ name: "YuumiInput", inheritAttrs: false })
 const props = defineProps(inputProps)

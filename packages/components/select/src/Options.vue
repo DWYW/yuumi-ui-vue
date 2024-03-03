@@ -32,6 +32,8 @@ import type { ComputedRef, Ref } from "vue"
 import type { SelectProps } from "./props"
 import type { SelectSelection } from "./useSelection"
 import type { SelectState } from "./useState"
+import { YuumiIcon } from "../../icon"
+import { YuumiScrollbar } from "../../scrollbar"
 
 defineOptions({ name: "YuumiSelectOptions" })
 defineProps({

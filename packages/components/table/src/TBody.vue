@@ -63,6 +63,7 @@ import type { ComputedRef, Ref } from "vue"
 import type { TableProps } from "./props"
 import type { ScrollState } from "./useScrollState"
 import type { SticyPosition } from "./useHelper"
+import { YuumiEmpty } from "../../empty"
 
 defineOptions({ name: "YuumiTableBody" })
 const ns = useNameSpace("table")

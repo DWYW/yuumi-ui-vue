@@ -29,6 +29,7 @@ import { inject, computed } from "vue"
 import { checkboxEmits } from "./emits"
 import { checkboxProps } from "./props"
 import { useNameSpace } from "../../../share/useApi"
+import { YuumiIcon } from "../../icon"
 
 defineOptions({ name: "YuumiCheckbox", inheritAttrs: false })
 const props = defineProps(checkboxProps)

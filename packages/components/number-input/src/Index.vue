@@ -54,6 +54,7 @@ import { useState } from "./useState"
 import { useEvent } from "./useEvent"
 import type { ComputedRef } from "vue"
 import type { NumberInputProps } from "./props"
+import { YuumiIcon } from "../../icon"
 
 defineOptions({ name: "YuumiNumberInput" })
 const props = defineProps(numberInputProps)

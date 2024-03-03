@@ -49,6 +49,8 @@ import { useNameSpace } from "../../../share/useApi"
 import { dialogProps } from "./props"
 import { dialogEmits } from "./emits"
 import { useStopPenetrate } from "./useStopPenetrate"
+import { YuumiIcon } from "../../icon"
+import { YuumiButton } from "../../button"
 
 defineOptions({ name: "YuumiDialog", inheritAttrs: false })
 const props = defineProps(dialogProps)

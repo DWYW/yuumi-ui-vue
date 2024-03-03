@@ -81,6 +81,7 @@ import type { ComputedRef, Ref } from "vue"
 import type { ScrollState } from "./useScrollState"
 import type { SticyPosition } from "./useHelper"
 import type { TableSelection } from "./useSelection"
+import { YuumiCheckbox } from "../../checkbox"
 
 defineOptions({ name: "YuumiTableHead" })
 const ns = useNameSpace("table")

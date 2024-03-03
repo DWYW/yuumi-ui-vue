@@ -95,6 +95,8 @@ import type { DatePickerState } from "./useState"
 import type { DatePickerSelection } from "./useSelection"
 import type { DatePickerFormat } from "./useFormat"
 import DateComponent, { type DateItem } from "./Date.vue"
+import { YuumiIcon } from "../../icon"
+import { YuumiTimePicker } from "../../time-picker"
 
 const emit = defineEmits(["update:errMsg"])
 const ns = useNameSpace("datepicker")

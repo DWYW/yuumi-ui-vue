@@ -25,6 +25,7 @@ import { nextTick, ref, watch } from "vue"
 import { useNameSpace } from "../../../share/useApi"
 import { debounce } from "../../../share/helper"
 import type { PropType } from "vue"
+import { YuumiScrollbar } from "../../scrollbar"
 
 export interface ValueItem {
   label: string
