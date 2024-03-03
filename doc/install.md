@@ -8,7 +8,7 @@ npm install yuumi-ui-vue@latest
 
 ```js
 // main.js
-
+import "yuumi-ui-vue/packages/styles/index.scss"
 import YuumiUIVue from "yuumi-ui-vue"
 
 const app = createApp(App)
@@ -19,7 +19,7 @@ app.use(YuumiUIVue)
 
 ```js
 // main.js
-
+import "yuumi-ui-vue/packages/styles/index.scss"
 import {YuumiInput[, ...]} from 'yuumi-ui-vue'
 
 const app = createApp(App)
