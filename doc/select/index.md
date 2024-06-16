@@ -34,6 +34,9 @@ import AsyncOptionsExampleCode from "../../examples/select/async-options.vue?raw
 
 import RemoteOptionsExample from "../../examples/select/remote-options.vue"
 import RemoteOptionsExampleCode from "../../examples/select/remote-options.vue?raw"
+
+import AllowCreateExample from "../../examples/select/allow-create.vue"
+import AllowCreateExampleCode from "../../examples/select/allow-create.vue?raw"
 </script>
 
 ### 基本用法
@@ -108,4 +111,10 @@ import RemoteOptionsExampleCode from "../../examples/select/remote-options.vue?r
 
 <ExamplePreview :code="RemoteOptionsExampleCode">
   <RemoteOptionsExample />
+</ExamplePreview>
+
+### 新建条目
+
+<ExamplePreview :code="AllowCreateExampleCode">
+  <AllowCreateExample />
 </ExamplePreview>

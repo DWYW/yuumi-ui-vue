@@ -24,11 +24,17 @@
         @mouseenter="mouseenterHandler"
         @mouseleave="mouseLeaveHandler"
       >
-        <ContentComponent @itemDeleted="itemDeletedHandler" @clear="clearHandler" />
+        <ContentComponent
+          @itemDeleted="itemDeletedHandler"
+          @clear="clearHandler"
+        />
       </div>
     </template>
     <template #default>
-      <OptionsComponent :min-width="optionsMinWidth" @selected="selectedHandler" />
+      <OptionsComponent
+        :min-width="optionsMinWidth"
+        @selected="selectedHandler"
+      />
     </template>
   </YuumiPopper>
 </template>
@@ -166,12 +172,16 @@ function mouseLeaveHandler() {
   updateState("isCanClear", false)
 }
 
-function selectedHandler() {
+function selectedHandler(data: Record<string, string>) {
   let _modelValue = selection.selections.value.map(item => item.value)
   if (props.multiple) {
     emit("update:modelValue", _modelValue)
   } else {
     emit("update:modelValue", _modelValue[0])
+  }
+
+  if (data.value === "+") {
+    emit("create", data)
   }
 
   nextTick(() => {

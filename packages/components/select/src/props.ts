@@ -51,7 +51,9 @@ export const selectProps = {
   /** @description 远程加载选项 */
   remoteMethod: {
     type: Function as PropType<() => Promise<any>>
-  }
+  },
+  /** @description 是否允许新建 */
+  allowCreate: Boolean
 }
 
 export type SelectProps = ExtractPropTypes<typeof selectProps>
