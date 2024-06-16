@@ -45,7 +45,15 @@ export const selectProps = {
   /** @description 选项过滤函数 */
   filterMethod: Function,
   /** @description 是否可清除 */
-  clearable: Boolean
+  clearable: Boolean,
+  /** @description 是否启用远程加载 */
+  remote: Boolean,
+  /** @description 远程加载选项 */
+  remoteMethod: {
+    type: Function as PropType<() => Promise<any>>
+  },
+  /** @description 是否允许新建 */
+  allowCreate: Boolean
 }
 
 export type SelectProps = ExtractPropTypes<typeof selectProps>

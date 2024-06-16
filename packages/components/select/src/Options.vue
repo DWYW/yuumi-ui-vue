@@ -16,7 +16,20 @@
         <YuumiIcon icon="line-correct" />
       </li>
 
-      <li v-if="!options.length" :class="ns.em('options', 'placeholder')">
+      <li v-if="state.isLoadingRemoteData" :class="ns.em('options', 'placeholder')">
+        {{ rootProps.optionsLoaderPlaceholder }}
+      </li>
+
+      <li
+        v-else-if="rootProps.allowCreate && !options.length && keyword"
+        :class="[ns.eb('options', 'item'), ns.is('_new', true)]"
+        @click="createHandler()"
+      >
+        <span>{{ keyword }}</span>
+        <YuumiIcon icon="line-add" />
+      </li>
+
+      <li v-else-if="!options.length" :class="ns.em('options', 'placeholder')">
         {{ rootProps.optionsEmptyPlaceholder }}
       </li>
     </ul>
@@ -27,11 +40,12 @@
 import { inject, nextTick, ref, watch } from "vue"
 import { useNameSpace } from "../../../share/useApi"
 import { useHelper } from "./useHelper"
-import { optionsProvideKey, propsProvideKey, selectionProvideKey, stateProvideKey } from "./provide"
+import { filterableProvideKey, optionsProvideKey, propsProvideKey, selectionProvideKey, stateProvideKey } from "./provide"
 import type { ComputedRef, Ref } from "vue"
 import type { SelectProps } from "./props"
 import type { SelectSelection } from "./useSelection"
 import type { SelectState } from "./useState"
+import type { SelectFilterable } from "./useFilterable"
 import { YuumiIcon } from "../../icon"
 import { YuumiScrollbar } from "../../scrollbar"
 
@@ -66,13 +80,13 @@ function clickHandler(option: any) {
   }
 
   nextTick(() => {
-    emit("selected", option)
+    emit("selected", item)
   })
 }
 
 // 下拉选项被激活，但还未加载完成
 watch(
-  () => state.value.isLoading,
+  () => state.value.isLoading || state.value.isLoadingRemoteData,
   (value, oldValue) => {
     if (oldValue && !value && state.value.isFocus) {
       initHandler()
@@ -84,5 +98,14 @@ function initHandler() {
   // 定位到选中项
   const scrollbar = _refs.scrollbar.value
   scrollbar.scrollToElement("._selected", { behavior: "smooth" })
+}
+
+// 新增条目
+const { keyword } = inject<SelectFilterable>(filterableProvideKey)!
+
+function createHandler() {
+  const item = { label: keyword.value, value: "+" }
+  selectionAddItem(item)
+  emit("selected", item)
 }
 </script>

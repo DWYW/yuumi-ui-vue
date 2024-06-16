@@ -24,11 +24,17 @@
         @mouseenter="mouseenterHandler"
         @mouseleave="mouseLeaveHandler"
       >
-        <ContentComponent @itemDeleted="itemDeletedHandler" @clear="clearHandler" />
+        <ContentComponent
+          @itemDeleted="itemDeletedHandler"
+          @clear="clearHandler"
+        />
       </div>
     </template>
     <template #default>
-      <OptionsComponent :min-width="optionsMinWidth" @selected="selectedHandler" />
+      <OptionsComponent
+        :min-width="optionsMinWidth"
+        @selected="selectedHandler"
+      />
     </template>
   </YuumiPopper>
 </template>
@@ -146,6 +152,10 @@ watch(
 function beforeEnterHandler() {
   updateState("isFocus", true)
   updateOptionsMinWidth()
+
+  if (_props.value.remote) {
+    loadRemoteData()
+  }
 }
 
 function beforeLeaveHandler() {
@@ -162,16 +172,20 @@ function mouseLeaveHandler() {
   updateState("isCanClear", false)
 }
 
-function selectedHandler() {
-  let _modelValue = selection.selections.value.map(item => item.value)
-  if (props.multiple) {
-    emit("update:modelValue", _modelValue)
-  } else {
-    emit("update:modelValue", _modelValue[0])
+function selectedHandler(data: Record<string, string>) {
+  const prevValue = props.modelValue?.toString()
+  const value = selection.selections.value.map(item => item.value)
+  const nextValue = props.multiple ? value : value[0]
+  emit("update:modelValue", nextValue)
+
+  if (data.value === "+") {
+    emit("create", data)
   }
 
   nextTick(() => {
-    emit("change", props.multiple ? selection.selections.value : selection.selections.value[0])
+    if (nextValue.toString() !== prevValue) {
+      emit("change", props.multiple ? selection.selections.value : selection.selections.value[0])
+    }
   })
 
   if (!props.multiple && _refs.popper.value) {
@@ -206,6 +220,23 @@ function optionsReload() {
     })
     .finally(() => {
       updateState("isLoading", false)
+    })
+}
+
+function loadRemoteData() {
+  if (typeof props.remoteMethod !== "function") return
+  updateState("isLoadingRemoteData", true)
+  options.value = []
+  Promise.resolve(props.remoteMethod())
+    .then((res) => {
+      options.value = res
+      updateSelection()
+      nextTick(() => {
+        _refs.popper.value.updatePopper()
+      })
+    })
+    .finally(() => {
+      updateState("isLoadingRemoteData", false)
     })
 }
 </script>

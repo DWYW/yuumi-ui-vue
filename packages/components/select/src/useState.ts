@@ -4,18 +4,21 @@ export interface SelectState {
   isFocus: boolean
   isCanClear: boolean
   isLoading: boolean
+  isLoadingRemoteData: boolean
 }
 
 export function useState() {
   const isFocus = ref(false)
   const isCanClear = ref(false)
   const isLoading = ref(false)
+  const isLoadingRemoteData = ref(false)
 
   const state = computed<SelectState>(() => {
     return {
       isFocus: isFocus.value,
       isLoading: isLoading.value,
-      isCanClear: isCanClear.value
+      isCanClear: isCanClear.value,
+      isLoadingRemoteData: isLoadingRemoteData.value
     }
   })
 
@@ -31,6 +34,9 @@ export function useState() {
       },
       isLoading: (value: boolean) => {
         isLoading.value = value
+      },
+      isLoadingRemoteData: (value: boolean) => {
+        isLoadingRemoteData.value = value
       }
     }
 
