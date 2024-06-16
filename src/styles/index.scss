@@ -4,6 +4,10 @@ body {
   padding: 0;
 }
 
+html {
+  overflow: hidden;
+}
+
 body {
   font-size: 14px;
   touch-action: manipulation;

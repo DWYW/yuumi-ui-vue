@@ -31,6 +31,9 @@ import EmptyPlaceholderExampleCode from "../../examples/select/empty-placeholder
 
 import AsyncOptionsExample from "../../examples/select/async-options.vue"
 import AsyncOptionsExampleCode from "../../examples/select/async-options.vue?raw"
+
+import RemoteOptionsExample from "../../examples/select/remote-options.vue"
+import RemoteOptionsExampleCode from "../../examples/select/remote-options.vue?raw"
 </script>
 
 ### 基本用法
@@ -99,4 +102,10 @@ import AsyncOptionsExampleCode from "../../examples/select/async-options.vue?raw
 
 <ExamplePreview :code="AsyncOptionsExampleCode">
   <AsyncOptionsExample />
+</ExamplePreview>
+
+### 远程加载
+
+<ExamplePreview :code="RemoteOptionsExampleCode">
+  <RemoteOptionsExample />
 </ExamplePreview>

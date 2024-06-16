@@ -16,7 +16,10 @@
         <YuumiIcon icon="line-correct" />
       </li>
 
-      <li v-if="!options.length" :class="ns.em('options', 'placeholder')">
+      <li v-if="state.isLoadingRemoteData" :class="ns.em('options', 'placeholder')">
+        {{ rootProps.optionsLoaderPlaceholder }}
+      </li>
+      <li v-else-if="!options.length" :class="ns.em('options', 'placeholder')">
         {{ rootProps.optionsEmptyPlaceholder }}
       </li>
     </ul>
@@ -72,7 +75,7 @@ function clickHandler(option: any) {
 
 // 下拉选项被激活，但还未加载完成
 watch(
-  () => state.value.isLoading,
+  () => state.value.isLoading || state.value.isLoadingRemoteData,
   (value, oldValue) => {
     if (oldValue && !value && state.value.isFocus) {
       initHandler()

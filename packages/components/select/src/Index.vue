@@ -146,6 +146,10 @@ watch(
 function beforeEnterHandler() {
   updateState("isFocus", true)
   updateOptionsMinWidth()
+
+  if (_props.value.remote) {
+    loadRemoteData()
+  }
 }
 
 function beforeLeaveHandler() {
@@ -206,6 +210,23 @@ function optionsReload() {
     })
     .finally(() => {
       updateState("isLoading", false)
+    })
+}
+
+function loadRemoteData() {
+  if (typeof props.remoteMethod !== "function") return
+  updateState("isLoadingRemoteData", true)
+  options.value = []
+  Promise.resolve(props.remoteMethod())
+    .then((res) => {
+      options.value = res
+      updateSelection()
+      nextTick(() => {
+        _refs.popper.value.updatePopper()
+      })
+    })
+    .finally(() => {
+      updateState("isLoadingRemoteData", false)
     })
 }
 </script>
