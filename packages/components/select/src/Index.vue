@@ -173,19 +173,19 @@ function mouseLeaveHandler() {
 }
 
 function selectedHandler(data: Record<string, string>) {
-  let _modelValue = selection.selections.value.map(item => item.value)
-  if (props.multiple) {
-    emit("update:modelValue", _modelValue)
-  } else {
-    emit("update:modelValue", _modelValue[0])
-  }
+  const prevValue = props.modelValue?.toString()
+  const value = selection.selections.value.map(item => item.value)
+  const nextValue = props.multiple ? value : value[0]
+  emit("update:modelValue", nextValue)
 
   if (data.value === "+") {
     emit("create", data)
   }
 
   nextTick(() => {
-    emit("change", props.multiple ? selection.selections.value : selection.selections.value[0])
+    if (nextValue.toString() !== prevValue) {
+      emit("change", props.multiple ? selection.selections.value : selection.selections.value[0])
+    }
   })
 
   if (!props.multiple && _refs.popper.value) {
