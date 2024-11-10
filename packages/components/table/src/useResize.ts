@@ -12,7 +12,7 @@ export function useResize(
     const headCols = thead.value.querySelectorAll<HTMLElement>("colgroup col")
     const footCols = tfoot.value ? tfoot.value.querySelectorAll<HTMLElement>("colgroup col") : []
 
-    const itemsWidth = []
+    const itemsWidth: number[] = []
     let itemTotalWidth = 0
     for (let i = 0; i < bodyCols.length; i++) {
       const itemWidth = bodyCols[i].offsetWidth
@@ -42,9 +42,9 @@ export function useResize(
 
   function updateTableWrapperSize() {
     if (!el.value || !thead.value || !tbody.value) return
-    const wrapperHeight = el.value.clientHeight
-    const tableHeadHeight = thead.value.offsetHeight
-    const tableFootHeight = tfoot.value ? tfoot.value.offsetHeight : 0
+    const wrapperHeight = el.value.getBoundingClientRect().height
+    const tableHeadHeight = thead.value.getBoundingClientRect().height
+    const tableFootHeight = tfoot.value ? tfoot.value.getBoundingClientRect().height : 0
     tbody.value.style.maxHeight = `${wrapperHeight - tableHeadHeight - tableFootHeight}px`
   }
 
