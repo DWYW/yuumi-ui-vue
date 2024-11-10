@@ -21,6 +21,7 @@ export function useScrollState() {
   const isScrollY = computed(() => verticalBarWidth.value > 0)
 
   function reset(element: HTMLElement) {
+    if (!element) return
     // fix: 数值不为整数显示问题
     // 使用 getBoundingClientRect 代替 offsetWidth/offsetHeight
     const rect = element.getBoundingClientRect()
