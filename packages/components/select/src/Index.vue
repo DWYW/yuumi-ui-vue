@@ -92,6 +92,10 @@ function updateOptionsMinWidth() {
 
 /** 下拉选项 */
 const options: Ref<any[]> = ref(props.options)
+watch(() => props.options, (value) => {
+  options.value = value
+  updateSelection()
+})
 if (props.optionsLoader) optionsReload()
 
 const filterable = useFilterable()
