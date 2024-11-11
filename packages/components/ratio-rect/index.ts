@@ -3,7 +3,7 @@ import RatioRect from "./src/index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(RatioRect.name, RatioRect)
+    app.component(RatioRect.name!, RatioRect)
   }
 }
 

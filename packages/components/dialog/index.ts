@@ -3,7 +3,7 @@ import Dialog from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(Dialog.name, Dialog)
+    app.component(Dialog.name!, Dialog)
   }
 }
 

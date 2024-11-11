@@ -3,7 +3,7 @@ import Icon from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(Icon.name, Icon)
+    app.component(Icon.name!, Icon)
   }
 }
 

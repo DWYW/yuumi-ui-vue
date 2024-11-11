@@ -3,7 +3,7 @@ import Popper from "./src/index"
 
 export default {
   install: (app: App): void => {
-    app.component(Popper.name, Popper)
+    app.component(Popper.name!, Popper)
   }
 }
 

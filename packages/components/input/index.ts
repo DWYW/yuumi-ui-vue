@@ -3,7 +3,7 @@ import Input from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(Input.name, Input)
+    app.component(Input.name!, Input)
   }
 }
 

@@ -42,7 +42,7 @@ export function createAlert(option?: CreateAlertOption) {
     }
   })
   const vnode = h(_component)
-  pluginMount(vnode, Alert.name)
+  pluginMount(vnode, Alert.name!)
   return vnode
 }
 

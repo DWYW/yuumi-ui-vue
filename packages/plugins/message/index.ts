@@ -70,7 +70,7 @@ export function createMessage(option: CreateMessageOption) {
     }
   })
   const vnode = h(_component)
-  pluginMount(vnode, Message.name)
+  pluginMount(vnode, Message.name!)
   return vnode
 }
 

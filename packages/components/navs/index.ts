@@ -3,7 +3,7 @@ import Menu from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(Menu.name, Menu)
+    app.component(Menu.name!, Menu)
   }
 }
 

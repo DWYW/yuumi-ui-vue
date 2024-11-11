@@ -3,7 +3,7 @@ import NumberInput from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(NumberInput.name, NumberInput)
+    app.component(NumberInput.name!, NumberInput)
   }
 }
 

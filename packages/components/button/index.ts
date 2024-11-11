@@ -3,7 +3,7 @@ import Button from "./src/Index.vue"
 
 export default {
   install: (app: App) => {
-    app.component(Button.name, Button)
+    app.component(Button.name!, Button)
   }
 }
 

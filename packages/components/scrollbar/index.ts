@@ -3,7 +3,7 @@ import Scrollbar from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(Scrollbar.name, Scrollbar)
+    app.component(Scrollbar.name!, Scrollbar)
   }
 }
 

@@ -3,7 +3,7 @@ import Cascader from "./src/Index.vue"
 
 export default {
   install: (app: App) => {
-    app.component(Cascader.name, Cascader)
+    app.component(Cascader.name!, Cascader)
   }
 }
 

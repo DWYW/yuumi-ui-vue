@@ -3,7 +3,7 @@ import TimePicker from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(TimePicker.name, TimePicker)
+    app.component(TimePicker.name!, TimePicker)
   }
 }
 

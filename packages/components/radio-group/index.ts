@@ -3,7 +3,7 @@ import RadioGroup from "./src/index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(RadioGroup.name, RadioGroup)
+    app.component(RadioGroup.name!, RadioGroup)
   }
 }
 

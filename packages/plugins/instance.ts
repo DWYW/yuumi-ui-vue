@@ -33,10 +33,10 @@ function createYuumiPluginApp() {
   const app = createApp(pluginApp)
   app.mount(el)
 
-  app.component(YuumiDialog.name, YuumiDialog)
-  app.component(YuumiButton.name, YuumiButton)
-  app.component(YuumiIcon.name, YuumiIcon)
-  app.component(YuumiWarning.name, YuumiWarning)
+  app.component(YuumiDialog.name!, YuumiDialog)
+  app.component(YuumiButton.name!, YuumiButton)
+  app.component(YuumiIcon.name!, YuumiIcon)
+  app.component(YuumiWarning.name!, YuumiWarning)
 
   document.body.appendChild(el)
   __YUUMI_PLUGIN__.app = app

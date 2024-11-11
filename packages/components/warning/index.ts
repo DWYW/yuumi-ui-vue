@@ -3,7 +3,7 @@ import Warning from "./src/index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(Warning.name, Warning)
+    app.component(Warning.name!, Warning)
   }
 }
 
