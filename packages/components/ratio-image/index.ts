@@ -3,7 +3,7 @@ import RatioImage from "./src/index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(RatioImage.name, RatioImage)
+    app.component(RatioImage.name!, RatioImage)
   }
 }
 

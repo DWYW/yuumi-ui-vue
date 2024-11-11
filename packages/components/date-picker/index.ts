@@ -3,7 +3,7 @@ import DatePicker from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(DatePicker.name, DatePicker)
+    app.component(DatePicker.name!, DatePicker)
   }
 }
 

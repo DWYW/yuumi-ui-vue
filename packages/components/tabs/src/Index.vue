@@ -85,7 +85,7 @@ const {
 
 const slots = useSlots()
 const tabs = computed<any[]>(() => {
-  return useChildrenVNode(slots.default ? slots.default() : [], YuumiTabItem.name)
+  return useChildrenVNode(slots.default ? slots.default() : [], YuumiTabItem.name!)
 })
 
 const activeIndex = computed({

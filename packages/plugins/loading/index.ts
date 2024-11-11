@@ -69,7 +69,7 @@ export function createLoading(option?: CreateLoadingOption) {
     }
   })
   const vnode = h(_component)
-  pluginMount(vnode, Loading.name)
+  pluginMount(vnode, Loading.name!)
   return vnode
 }
 

@@ -3,7 +3,7 @@ import Divider from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(Divider.name, Divider)
+    app.component(Divider.name!, Divider)
   }
 }
 

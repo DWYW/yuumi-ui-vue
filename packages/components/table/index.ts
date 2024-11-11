@@ -4,8 +4,8 @@ import TableColumn from "./src/Column.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(Table.name, Table)
-    app.component(TableColumn.name, TableColumn)
+    app.component(Table.name!, Table)
+    app.component(TableColumn.name!, TableColumn)
   }
 }
 

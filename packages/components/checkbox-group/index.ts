@@ -3,7 +3,7 @@ import CheckboxGroup from "./src/Index.vue"
 
 export default {
   install: (app: App) => {
-    app.component(CheckboxGroup.name, CheckboxGroup)
+    app.component(CheckboxGroup.name!, CheckboxGroup)
   }
 }
 

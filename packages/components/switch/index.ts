@@ -3,7 +3,7 @@ import Switch from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(Switch.name, Switch)
+    app.component(Switch.name!, Switch)
   }
 }
 

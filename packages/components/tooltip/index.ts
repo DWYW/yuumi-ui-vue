@@ -3,7 +3,7 @@ import Tooltip from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(Tooltip.name, Tooltip)
+    app.component(Tooltip.name!, Tooltip)
   }
 }
 

@@ -52,7 +52,7 @@
           :node="item"
           :padding-left="paddingLeft + paddingStep"
         >
-          <template #default="slotProps">
+          <template #default="slotProps: any">
             <slot v-bind="slotProps" />
           </template>
         </YuumiTreeNode>

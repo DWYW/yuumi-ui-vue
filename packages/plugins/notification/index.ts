@@ -74,7 +74,7 @@ export function createNotification(option: CreateNotificationOption) {
     }
   })
   const vnode = h(_component)
-  pluginMount(vnode, Notification.name)
+  pluginMount(vnode, Notification.name!)
   return vnode
 }
 

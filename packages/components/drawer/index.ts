@@ -3,7 +3,7 @@ import Drawer from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(Drawer.name, Drawer)
+    app.component(Drawer.name!, Drawer)
   }
 }
 

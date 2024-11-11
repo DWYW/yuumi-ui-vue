@@ -3,7 +3,7 @@ import Pagination from "./src/Index.vue"
 
 export default {
   install: (app: App): void => {
-    app.component(Pagination.name, Pagination)
+    app.component(Pagination.name!, Pagination)
   }
 }
 

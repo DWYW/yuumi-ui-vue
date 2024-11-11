@@ -22,6 +22,6 @@ provide(propsProvideKey, _props)
 
 const slots = useSlots()
 const steps = computed<any[]>(() => {
-  return useChildrenVNode(slots.default ? slots.default() : [], YuumiStepItem.name)
+  return useChildrenVNode(slots.default ? slots.default() : [], YuumiStepItem.name!)
 })
 </script>

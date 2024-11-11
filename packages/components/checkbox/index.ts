@@ -3,7 +3,7 @@ import Checkbox from "./src/Index.vue"
 
 export default {
   install: (app: App) => {
-    app.component(Checkbox.name, Checkbox)
+    app.component(Checkbox.name!, Checkbox)
   }
 }
 
