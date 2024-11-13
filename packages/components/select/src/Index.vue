@@ -24,17 +24,11 @@
         @mouseenter="mouseenterHandler"
         @mouseleave="mouseLeaveHandler"
       >
-        <ContentComponent
-          @itemDeleted="itemDeletedHandler"
-          @clear="clearHandler"
-        />
+        <ContentComponent @itemDeleted="itemDeletedHandler" @clear="clearHandler" />
       </div>
     </template>
     <template #default>
-      <OptionsComponent
-        :min-width="optionsMinWidth"
-        @selected="selectedHandler"
-      />
+      <OptionsComponent :min-width="optionsMinWidth" @selected="selectedHandler" />
     </template>
   </YuumiPopper>
 </template>
@@ -92,10 +86,13 @@ function updateOptionsMinWidth() {
 
 /** 下拉选项 */
 const options: Ref<any[]> = ref(props.options)
-watch(() => props.options, (value) => {
-  options.value = value
-  updateSelection()
-})
+watch(
+  () => props.options,
+  value => {
+    options.value = value
+    updateSelection()
+  }
+)
 if (props.optionsLoader) optionsReload()
 
 const filterable = useFilterable()
@@ -232,7 +229,7 @@ function loadRemoteData() {
   updateState("isLoadingRemoteData", true)
   options.value = []
   Promise.resolve(props.remoteMethod())
-    .then((res) => {
+    .then(res => {
       options.value = res
       updateSelection()
       nextTick(() => {

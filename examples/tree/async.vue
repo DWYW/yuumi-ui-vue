@@ -32,10 +32,10 @@ export default {
 
       return children
     },
-    loadData(vm) {
+    loadData(parentNode) {
       return new Promise(resolve => {
         setTimeout(() => {
-          Math.random() > 0.5 ? resolve(this.createChildren(vm.nodeLabel)) : resolve(null)
+          Math.random() > 0.5 ? resolve(this.createChildren(parentNode.label)) : resolve(null)
         }, 400)
       })
     },

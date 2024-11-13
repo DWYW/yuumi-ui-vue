@@ -13,7 +13,7 @@ export interface TreeSelection {
 }
 
 export function useSelection(): TreeSelection {
-  let selections: Set<any> | null = new Set()
+  let selections: any[] | null = []
   let listeners: Map<any, any> | null = new Map()
 
   const _dispatch = debounce(() => {
@@ -21,17 +21,22 @@ export function useSelection(): TreeSelection {
   }, 0)
 
   function add(node: any) {
-    selections?.add(node)
+    if (!isSelectedNode(node)) {
+      selections?.push(node)
+    }
     _dispatch()
   }
 
   function remove(node: any) {
-    selections?.delete(node)
+    const index = getNodeIndex(node)
+    if (index > -1) {
+      selections?.splice(index, 1)
+    }
     _dispatch()
   }
 
   function clear() {
-    selections?.clear()
+    selections = []
   }
 
   function getSelections(cb?: (value: any) => any) {
@@ -50,33 +55,32 @@ export function useSelection(): TreeSelection {
     listeners?.delete(node)
   }
 
+  function getNodeIndex(node: any) {
+    return selections ? selections.findIndex(item => item.value === node.value) : -1
+  }
+
   function isSelectedNode(node: any) {
-    return selections ? selections.has(node) : false
+    return getNodeIndex(node) > -1
   }
 
   function getChildrenSelectedState(children: any[]) {
     let res: -1 | 0 | 1 = -1
 
-    for (let i = 0; i < children.length; i++) {
-      if (selections?.has(children[i])) {
-        if (res === -1 && i !== 0) {
-          res = 0
-          break
-        }
-        res = 1
-      } else if (res === 1) {
-        res = 0
-        break
-      }
+    const count = children.reduce((acc, cur) => {
+      return acc + (isSelectedNode(cur) ? 1 : 0)
+    }, 0)
+
+    if (count > 0 && count < children.length) {
+      res = 0
+    } else if (count === children.length) {
+      res = 1
     }
 
     return res
   }
 
   function destory() {
-    selections?.clear()
     selections = null
-
     listeners?.clear()
     listeners = null
   }

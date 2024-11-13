@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUpdated, onBeforeUnmount, computed } from "vue"
+import { ref, onMounted, onUpdated, onBeforeUnmount, computed, nextTick } from "vue"
 import { useNameSpace } from "../../../share/useApi"
 import { getComponentProps } from "../../../share/vueHelper"
 import { scrollbarEmits } from "./emits"
@@ -62,16 +62,18 @@ const { observe, disconnect } = useObserver(_refs.body, () => {
 })
 
 onMounted(() => {
-  updateBodySize(), updateHorizontalBarStyle(), updateVerticalBarStyle()
-  emit("init", exposeOption)
+  nextTick(() => {
+    updateBodySize(), updateHorizontalBarStyle(), updateVerticalBarStyle()
+    emit("init", exposeOption)
 
-  if (_refs.body.value) {
-    _refs.body.value.addEventListener("scroll", onScroll, false)
-  }
+    if (_refs.body.value) {
+      _refs.body.value.addEventListener("scroll", onScroll, false)
+    }
 
-  if (props.dynamic) {
-    observe()
-  }
+    if (props.dynamic) {
+      observe()
+    }
+  })
 })
 
 onBeforeUnmount(() => {

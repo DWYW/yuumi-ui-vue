@@ -40,7 +40,13 @@
 import { inject, nextTick, ref, watch } from "vue"
 import { useNameSpace } from "../../../share/useApi"
 import { useHelper } from "./useHelper"
-import { filterableProvideKey, optionsProvideKey, propsProvideKey, selectionProvideKey, stateProvideKey } from "./provide"
+import {
+  filterableProvideKey,
+  optionsProvideKey,
+  propsProvideKey,
+  selectionProvideKey,
+  stateProvideKey
+} from "./provide"
 import type { ComputedRef, Ref } from "vue"
 import type { SelectProps } from "./props"
 import type { SelectSelection } from "./useSelection"
