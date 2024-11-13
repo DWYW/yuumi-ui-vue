@@ -1,6 +1,6 @@
 {
   "name": "yuumi-ui-vue",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "files": [
     "packages/**/*"
   ],
@@ -12,7 +12,7 @@
     "build:lib": "vue-tsc && vite build --mode lib",
     "preview": "vite preview",
     "lint": "eslint src packages --ext .vue,.js,.ts,.jsx,.tsx --fix",
-    "prettier": "prettier src packages --write",
+    "prettier": "node scripts/prettier.js",
     "formatter": "npm run prettier && npm run lint"
   },
   "peerDependencies": {

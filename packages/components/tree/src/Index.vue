@@ -54,7 +54,8 @@ onBeforeUnmount(() => {
 })
 
 defineExpose({
-  getTreeData: () => _refs.children.value.map((item: any) => item.getNodeData()),
+  getTreeData: () =>
+    _refs.children.value.filter(item => item).map((item: any) => item.getNodeData()),
   getCheckedNodes: () =>
     selection.getSelections(item => ({
       [keys.value.value]: getAttrValue(item, "value"),

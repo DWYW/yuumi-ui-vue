@@ -85,6 +85,7 @@ const props = defineProps({
   paddingLeft: { type: Number, default: 0 },
   paddingStep: { type: Number, default: 1.5 }
 })
+
 const _refs = {
   children: ref<any[]>([])
 }
@@ -99,6 +100,16 @@ const { getAttrValue, keys } = inject<NodeHelper>(nodeHelperProvideKey)!
 const nodeValue = computed(() => getAttrValue<any>(props.node, "value"))
 const nodeLabel = computed(() => getAttrValue<string>(props.node, "label", ""))
 const children = ref(getAttrValue<any[]>(props.node, "children", []))
+
+watch(
+  () => props.node.children?.length || 0,
+  () => {
+    nextTick(() => {
+      children.value = getAttrValue<any[]>(props.node, "children", [])
+      updateCheckedState()
+    })
+  }
+)
 
 watch(
   () => props.node,
@@ -182,13 +193,11 @@ const selection = inject<TreeSelection>(selectionProvideKey)!
 const isChecked = ref(false)
 const isIndeterminate = ref(false)
 
-watch(
-  () => isChecked.value,
-  (value, oldValue) => {
-    if (value === oldValue) return
-    value ? selection.add(props.node) : selection.remove(props.node)
-  }
-)
+function updateCheckedValue(value: boolean) {
+  if (value === isChecked.value) return
+  isChecked.value = value
+  value ? selection.add(props.node) : selection.remove(props.node)
+}
 
 onMounted(() => {
   if (rootProps.value.checkable) {
@@ -215,13 +224,15 @@ onBeforeMount(() => {
  * @param isEmit 是否触发emit
  */
 function checkboxStateUpdate(checked: boolean, isEmit?: boolean) {
-  isChecked.value = checked
+  updateCheckedValue(checked)
 
   // 向下更新选中状态
   if (!isLeafNode.value && isExpand.value) {
-    _refs.children.value.forEach(child => {
-      child.checkboxStateUpdate(checked)
-    })
+    _refs.children.value
+      .filter(child => child)
+      .forEach(child => {
+        child.checkboxStateUpdate(checked)
+      })
   }
 
   if (!isLeafNode.value && !isExpand.value && children.value.length) {
@@ -236,21 +247,22 @@ function checkboxStateUpdate(checked: boolean, isEmit?: boolean) {
 function updateCheckedState() {
   if (isLeafNode.value || !rootProps.value.checkable) {
     isIndeterminate.value = false
-    isChecked.value = selection.isSelectedNode(props.node)
+    updateCheckedValue(selection.isSelectedNode(props.node))
     return
   }
 
   // 如果异步加载未加载完成
   if (typeof rootProps.value.loadData === "function" && loadState.value < LOAD_STATE.LOADED) {
     isIndeterminate.value = false
-    isChecked.value = selection.isSelectedNode(props.node)
+    updateCheckedValue(selection.isSelectedNode(props.node))
   } else {
     const childrenSelectedState = selection.getChildrenSelectedState(children.value)
     // 子节点没有被选中，查看祖孙元素
     const indeterminate =
-      childrenSelectedState === 0 || _refs.children.value.some(child => child.isIndeterminate)
+      childrenSelectedState === 0 ||
+      _refs.children.value.filter(child => child).some(child => child.isIndeterminate)
     isIndeterminate.value = indeterminate
-    isChecked.value = childrenSelectedState === 1
+    updateCheckedValue(childrenSelectedState === 1)
   }
 }
 
@@ -261,14 +273,18 @@ function getNodeData() {
     [keys.value.checked]: isChecked.value,
     [keys.value.disabled]: isDisbled.value,
     [keys.value.expand]: isExpand.value,
-    [keys.value.children]: _refs.children.value.map(child => child.getNodeData()),
+    [keys.value.children]: _refs.children.value
+      .filter(child => child)
+      .map(child => child.getNodeData()),
     isLeaf: isLeafNode.value
   }
 }
 
 defineExpose({
   checkboxStateUpdate,
-  getNodeData
+  getNodeData,
+  updateCheckedValue,
+  isIndeterminate: isIndeterminate
 })
 
 function clickHandler(e: Event) {
