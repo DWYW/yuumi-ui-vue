@@ -6,10 +6,11 @@
       @input="onInput"
       @focus="onFocus"
       @blur="onBlur"
+      style="width: 400px;"
     />
   </div>
   <div>
-    <YuumiNumberInput v-model="value" disabled />
+    <YuumiNumberInput v-model="value" disabled style="width: 400px;"/>
   </div>
 </template>
 

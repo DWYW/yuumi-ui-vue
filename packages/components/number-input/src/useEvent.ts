@@ -13,64 +13,58 @@ export function useEvent(
   const _min = computed(() => props.value.min)
   const _max = computed(() => props.value.max)
 
+  function getAvailableValue(value: number) {
+    if (value < _min.value) return _min.value
+    if (value > _max.value) return _max.value
+    return value
+  }
+
   // 数字精度 0.1 + 0.2 = 0.30000000000000004
   const accuracy = computed(() => {
+    if (!props.value.step) return 0
     const splits = props.value.step.toString().split(".") || ["", ""]
     return (splits[1] || "").length
   })
 
   function decreaseHandler() {
     if (props.value.disabled) return
-    let _value = valueGetter() - props.value.step
-    if (_value < _min.value) {
-      _value = _min.value
-    }
-
+    const _value = getAvailableValue(valueGetter() - (props.value.step || 1))
     valueSetter(+_value.toFixed(accuracy.value))
   }
 
   function increaseHandler() {
     if (props.value.disabled) return
-
-    let _value = valueGetter() + props.value.step
-    if (_value > _max.value) {
-      _value = _max.value
-    }
-
+    const _value = getAvailableValue(valueGetter() + (props.value.step || 1))
     valueSetter(+_value.toFixed(accuracy.value))
   }
 
   function inputHandler(e: Event) {
-    const target = e.target as HTMLInputElement
-    // 检测输入的是否是合法数字
-    if (target.value && !/^-?\d*(\.\d*)?$/.test(target.value)) {
-      target.value = valueGetter().toString()
-    }
-
     emit("input", e)
   }
 
   function changeHandler(e: Event) {
     const target = e.target as HTMLInputElement
-    let res = target.value
-    // 将输入的字符串转为合法的字符串
-    if (target.value === "") {
-      res = "0"
+    let res = target.value || "0"
+
+    // 检测输入的是否是合法数字
+    if (target.value && !/^-?\d*(\.\d*)?$/.test(target.value)) {
+      res = valueGetter().toString()
+    } else {
+      res = res
+        // 去整数前面的多个零
+        .replace(/^(-?)0{1,}(?=\d+)/, "$1")
+        .replace(/^(-?)0*(?=\.)/, "$10")
+        // 去除小数末尾的多个零
+        .replace(/(?<=\.\d*)(0*?)$/, "")
+        .replace(/\.$/, "")
     }
 
-    res = res
-      // 去除负数前面的多个零
-      .replace(/^-0{2,}\./, "-0.")
-      .replace(/^-0{2,}(?=\d+)/, "-")
-      // 去除正数前面的多个零
-      .replace(/^0{2,}\./, "0.")
-      .replace(/^0{2,}(?=\d+)/, "")
-      // 去除小数末尾的多个零
-      .replace(/\.0*$/, "")
-      .replace(/\.(\d+?)0*$/, ".$1")
-    0
-    target.value = (+res).toFixed(accuracy.value)
-    valueSetter(+target.value)
+    // 将输入的字符串转为合法的数字，并保留指定的精度
+    const _value = accuracy.value
+      ? +getAvailableValue(+res).toFixed(accuracy.value)
+      : getAvailableValue(+res)
+    target.value = _value.toString()
+    valueSetter(_value)
   }
 
   function hanlderFocus(e: Event) {

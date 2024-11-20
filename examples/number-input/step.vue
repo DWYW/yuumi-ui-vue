@@ -1,6 +1,6 @@
 <template>
   <div>
-    <YuumiNumberInput v-model="value" :step="0.1" />
+    <YuumiNumberInput v-model="value" :step="0.1"  style="width: 400px;"/>
   </div>
 </template>
 
