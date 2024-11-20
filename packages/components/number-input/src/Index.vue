@@ -4,7 +4,7 @@
       ns.n(),
       ns.m(size),
       ns.bm('placement', btnPlacement),
-      ns.is(ns.m('focus'), isFocus),
+      ns.is(ns.m('focus'), isFocus || isHover),
       ns.is(ns.m('btn-hidden'), hideBtn)
     ]"
   >
@@ -98,6 +98,7 @@ const {
   increaseDisabled,
   decreaseDisabled,
   isFocus,
+  isHover,
   updateFocusState,
   onMouseenter,
   onMouseleave

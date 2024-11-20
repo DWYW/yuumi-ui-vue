@@ -11,6 +11,7 @@ export function useState(props: ComputedRef<NumberInputProps>, currentValue: Ref
   })
 
   const isFocus = ref(false)
+  const isHover = ref(false)
 
   function updateFocusState(value: boolean) {
     isFocus.value = value
@@ -21,18 +22,19 @@ export function useState(props: ComputedRef<NumberInputProps>, currentValue: Ref
     if (type === -1 && decreaseDisabled.value) return
     if (type === 1 && increaseDisabled.value) return
 
-    updateFocusState(true)
+    isHover.value = true
   }
 
   function onMouseleave() {
-    if (!isFocus.value) return
-    updateFocusState(false)
+    if (!isHover.value) return
+    isHover.value = false
   }
 
   return {
     decreaseDisabled,
     increaseDisabled,
     isFocus,
+    isHover,
     updateFocusState,
     onMouseenter,
     onMouseleave
