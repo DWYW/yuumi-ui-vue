@@ -51,8 +51,8 @@ import { TabsProps, tabsProps } from "./props"
 import { tabEmits } from "./emits"
 import { propsProvideKey } from "./provide"
 import { useStyle } from "./useStyle"
-import { YuumiTabItem } from ".."
 import { YuumiIcon } from "../../icon"
+import YuumiTabItem from "./Item.vue"
 
 defineOptions({ name: "YuumiTabs" })
 onMounted(() => {

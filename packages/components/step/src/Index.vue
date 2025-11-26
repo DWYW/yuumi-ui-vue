@@ -12,7 +12,7 @@ import { useChildrenVNode, useNameSpace } from "../../../share/useApi"
 import { getComponentProps } from "../../../share/vueHelper"
 import { StepProps, stepProps } from "./props"
 import { propsProvideKey } from "./provide"
-import { YuumiStepItem } from ".."
+import YuumiStepItem  from "./Item.vue"
 
 defineOptions({ name: "YuumiStep" })
 const ns = useNameSpace("step")

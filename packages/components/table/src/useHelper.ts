@@ -1,7 +1,7 @@
 import { useSlots, type VNode } from "vue"
-import { YuumiTableColumn } from "../index"
 import { getValueByPath } from "../../../share/helper"
 import { isDefined } from "../../../share/validator"
+import YuumiTableColumn from "./Column.vue"
 
 export interface SticyPosition {
   isLast?: boolean
