@@ -36,10 +36,10 @@
     "prettier": "^3.2.4",
     "prismjs": "^1.29.0",
     "sass": "~1.79.0",
-    "typescript": "^5.2.2",
+    "typescript": "~5.2.2",
     "vite": "^4.5.2",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-md": "^0.21.5",
-    "vue-tsc": "^1.8.25"
+    "vue-tsc": "~1.8.25"
   }
 }
