@@ -22,7 +22,7 @@
     @change="onChange"
   >
     <template #suffix>
-      <YuumiButton style="line-height: 0; border: none; border-radius: 0px" type="primary">
+      <YuumiButton style="line-height: 0;border-top-left-radius: 0px; border-bottom-left-radius: 0px;" type="primary" round>
         <YuumiIcon icon="line-search" style="font-size: 16px" />
       </YuumiButton>
     </template>
@@ -53,7 +53,7 @@
     </template>
 
     <template #suffix>
-      <YuumiButton style="border-radius: 0px" type="primary">
+      <YuumiButton style="border-top-left-radius: 0px; border-bottom-left-radius: 0px;" type="primary">
         <YuumiIcon icon="line-search" style="font-size: 16px" />
       </YuumiButton>
     </template>
