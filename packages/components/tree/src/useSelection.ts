@@ -37,6 +37,7 @@ export function useSelection(): TreeSelection {
 
   function clear() {
     selections = []
+    _dispatch()
   }
 
   function getSelections(cb?: (value: any) => any) {

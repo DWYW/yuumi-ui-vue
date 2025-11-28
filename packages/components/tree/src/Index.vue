@@ -63,6 +63,6 @@ defineExpose({
       [keys.value.disabled]: getAttrValue(item, "disabled", false)
     })),
   setSelectedNode: selection.add,
-  clearSelectedNodes: () => selection.clear()
+  clearSelectedNodes: selection.clear
 })
 </script>

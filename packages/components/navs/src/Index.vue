@@ -51,10 +51,10 @@ watch(
   (value, oldValue) => {
     if (value === oldValue) return
     nextTick(() => {
-      if (_refs.tree.value) {
-        _refs.tree.value.clearSelectedNodes()
-        _refs.tree.value.setSelectedNode(value)
-      }
+      if (!_refs.tree.value) return
+
+      _refs.tree.value.clearSelectedNodes()
+      value && _refs.tree.value.setSelectedNode(value)
     })
   },
   { immediate: true }
