@@ -16,6 +16,10 @@ import { useNameSpace } from "../../../share/useApi"
 import { tooltipProps } from "./props"
 import { YuumiPopper } from "../../popper"
 
+defineSlots<{
+  default?: () => any[]
+  content?: () => any[]
+}>()
 defineOptions({ name: "YuumiTooltip", inheritAttrs: false })
 const props = defineProps(tooltipProps)
 const ns = useNameSpace("tooltip")

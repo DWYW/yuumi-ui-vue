@@ -1,23 +1,29 @@
 {
   "name": "yuumi-ui-vue",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "files": [
+    "dist/**/*",
     "packages/**/*"
   ],
-  "main": "packages/index.ts",
+  "main": "dist/index-umd.js",
+  "module": "dist/index-es.js",
+  "unpkg": "dist/index-umd.js",
+  "jsdelivr": "dist/index-umd.js",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "build:lib": "vue-tsc && vite build --mode lib",
+    "build:lib": "vite build --mode lib",
     "preview": "vite preview",
     "lint": "eslint src packages --ext .vue,.js,.ts,.jsx,.tsx --fix",
     "prettier": "node scripts/prettier.js",
-    "formatter": "npm run prettier && npm run lint"
+    "formatter": "npm run prettier && npm run lint",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "changelog:release": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "peerDependencies": {
-    "vue": ">=3.3.1",
-    "sass": ">=1.23.0"
+    "sass": ">=1.23.0",
+    "vue": ">=3.3.1"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.0",
@@ -29,6 +35,7 @@
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
     "@vitejs/plugin-vue": "^4.5.2",
+    "conventional-changelog-cli": "^5.0.0",
     "eslint": "^8.56.0",
     "eslint-plugin-vue": "^9.20.1",
     "markdown-it": "^14.0.0",
@@ -38,6 +45,7 @@
     "sass": "~1.79.0",
     "typescript": "~5.2.2",
     "vite": "^4.5.2",
+    "vite-plugin-dts": "^4.5.4",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-md": "^0.21.5",
     "vue-tsc": "~1.8.25"

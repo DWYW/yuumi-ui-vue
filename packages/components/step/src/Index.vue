@@ -14,6 +14,9 @@ import { StepProps, stepProps } from "./props"
 import { propsProvideKey } from "./provide"
 import YuumiStepItem  from "./Item.vue"
 
+defineSlots<{
+  default?: () => any[]
+}>()
 defineOptions({ name: "YuumiStep" })
 const ns = useNameSpace("step")
 const props = defineProps(stepProps)
