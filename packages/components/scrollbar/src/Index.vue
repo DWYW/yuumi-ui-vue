@@ -29,6 +29,7 @@ import { useEvent } from "./useEvent"
 import { useObserver } from "./useObserver"
 import type { ComputedRef } from "vue"
 import type { ScrollbarProps } from "./props"
+import type { ScrollToOptions, ScrollToElementAlignment } from "./types"
 
 defineOptions({ name: "YuumiScrollbar" })
 const props = defineProps(scrollbarProps)
@@ -92,14 +93,6 @@ onUpdated(() => {
     observe()
   }
 })
-
-interface ScrollToOptions {
-  left?: number
-  top?: number
-  behavior?: "auto" | "instant" | "smooth"
-}
-
-type ScrollToElementAlignment = "start" | "center" | "end"
 
 const exposeOption = {
   refs: _refs,

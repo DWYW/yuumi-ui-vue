@@ -54,6 +54,9 @@ import { useStyle } from "./useStyle"
 import { YuumiIcon } from "../../icon"
 import YuumiTabItem from "./Item.vue"
 
+defineSlots<{
+  default?: () => any[]
+}>()
 defineOptions({ name: "YuumiTabs" })
 onMounted(() => {
   nextTick(resizeHandler)

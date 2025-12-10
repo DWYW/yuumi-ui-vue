@@ -26,6 +26,6 @@
       ]
     },
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "global.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "packages/**/*.ts", "packages/**/*.vue", "global.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
