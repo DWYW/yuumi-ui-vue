@@ -42,6 +42,7 @@ export function useResize(
 
   function updateTableWrapperSize() {
     if (!el.value || !thead.value || !tbody.value) return
+    tbody.value.style.maxHeight = ""
     const wrapperHeight = el.value.getBoundingClientRect().height
     const tableHeadHeight = thead.value.getBoundingClientRect().height
     const tableFootHeight = tfoot.value ? tfoot.value.getBoundingClientRect().height : 0
