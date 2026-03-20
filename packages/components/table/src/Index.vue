@@ -90,7 +90,8 @@ function updateSizes() {
 defineExpose({
   selections: selection.selections,
   toggleRowsSelection: selection.toggleRowsSelection,
-  clearSelection: selection.clearSelection
+  clearSelection: selection.clearSelection,
+  onUpdate: updateSizes
 })
 
 watch(
