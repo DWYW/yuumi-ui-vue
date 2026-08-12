@@ -126,6 +126,11 @@ function updateSelection() {
       selection.selectionAddItem({ label: getLabel(target), value: getValue(target) })
     }
   }
+
+  // fix: 当开启filterable后，数据变化后，keyword在失焦状态下的值不符合预期
+  if (props.filterable && !props.multiple) {
+    filterable.setKeywordValue(getValueByPath(selection, "selections.value[0].label", ""))
+  }
 }
 
 watch(
